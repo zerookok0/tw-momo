@@ -1,0 +1,22 @@
+<script>
+(function(){
+  var K=['utm_source','utm_medium','utm_campaign','utm_term','utm_content',
+         'utm_id','fbclid','ttclid','gclid','adset_id','campaign_id',
+         'sub1','sub2','sub3','sub4','sub5'];
+  function grab(q){var o={},p=(q||'').replace(/^\?/,'').split('&');for(var i=0;i<p.length;i++){
+    var kv=p[i].split('=');if(kv.length<2)continue;try{var k=decodeURIComponent(kv[0]);
+    if(K.indexOf(k)!==-1)o[k]=decodeURIComponent(kv.slice(1).join('='));}catch(e){}}return o;}
+  function load(){try{return JSON.parse(sessionStorage.getItem('bp_utm')||'{}')}catch(e){return {}}}
+  function save(o){try{sessionStorage.setItem('bp_utm',JSON.stringify(o))}catch(e){}
+    try{var d=new Date();d.setTime(d.getTime()+7*864e5);
+    document.cookie='bp_utm='+encodeURIComponent(JSON.stringify(o))+'; expires='+d.toUTCString()+'; path=/; SameSite=Lax';}catch(e){}}
+  var cur=load(),add=false;
+  var m=grab(location.search); for(var a in m){cur[a]=m[a];add=true}
+  try{var n=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];
+    if(n&&n.name){var mm=grab(n.name.split('?')[1]||'');for(var b in mm){cur[b]=mm[b];add=true}}}catch(e){}
+  try{if(document.referrer){var mm2=grab((document.referrer.split('?')[1])||'');
+    for(var c in mm2){if(!cur[c]){cur[c]=mm2[c];add=true}}}}catch(e){}
+  if(add)save(cur);
+  window.__BP_UTM__=cur;
+})();
+</script>

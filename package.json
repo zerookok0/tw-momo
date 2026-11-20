@@ -7,9 +7,14 @@
   "scripts": {
     "start": "node server.mjs",
     "dev": "node server.mjs",
+    "crawl": "node _tools/crawl-catalog.mjs",
+    "catalog": "node _tools/build-catalog.mjs",
     "build:pages": "node _tools/build-pages.mjs",
+    "build:mobile": "node _tools/build-mobile.mjs",
     "build:mirror": "node _tools/mirror.mjs",
-    "build:badges": "node _tools/make-badges.mjs"
+    "build:badges": "node _tools/make-badges.mjs",
+    "verify": "node _tools/verify.mjs",
+    "verify:mobile": "node _tools/verify-mobile.mjs"
   },
   "engines": {
     "node": ">=20"

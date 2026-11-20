@@ -26,6 +26,7 @@
 │  │  ├─ checkout/index.html   #   ★ 訪客結帳（免登入 + 契約六 id）
 │  │  ├─ order/index.html      #   訂單完成
 │  │  └─ assets/css/momo-mobile.css  # 行動版樣式（390 基準）
+│  ├─ data/catalog.json        # ★ 全量商品目录（1154+ 个，动态渲染数据源）
 │  ├─ assets/                  # 原始 CSS / 圖片 / 字型（本地化）
 │  ├─ _partials/               # header / footer 片段（建頁來源）
 │  └─ bp/                      # 我方交付：connector 整套
@@ -37,6 +38,7 @@
 │     ├─ 3ds/img/*             # visa / mastercard / 3d-secure-*
 │     └─ README.md             # 對接說明
 ├─ 对接补丁/                    # 可直接貼進真實站點的逐段補丁
+├─ lib/render.mjs             # ★ 目錄驅動渲染器（桌面 + 行動雙模板 + 分頁器）
 ├─ _ref/                       # 抓取與截圖證據（不參與部署）
 │  ├─ cap/home_dom.html        # 首頁原始渲染 DOM
 │  ├─ shots/*.png              # 各頁截圖（桌面 + 行動）
@@ -48,6 +50,9 @@
    ├─ fixcss.mjs / retry.mjs   # CSS 与漏抓资源补齐
    ├─ build-pages.mjs          # 桌面內頁
    ├─ build-mobile.mjs         # ★ 行動版全站（含訪客結帳）
+   ├─ crawl-catalog.mjs        # ★ 全量商品爬取（斷點續爬 + 編碼回落）
+   ├─ build-catalog.mjs        # ★ 目錄清洗去重
+   ├─ check-images.mjs         # ★ 商品存活校驗（圖片 404 / 無價格剔除）
    ├─ make-badges.mjs          # 生成 3DS 徽章 PNG
    ├─ verify.mjs               # 桌面契約 §9 十項自檢
    ├─ verify-mobile.mjs        # ★ 行動版十一項自檢
@@ -98,6 +103,34 @@ node server.mjs          # http://127.0.0.1:8790
 - 台灣 22 縣市 + 368 鄉鎮區真實聯動資料（`_ref/tw-districts.json`）
 
 行動版自檢（`node _tools/verify-mobile.mjs`）**11/11 全過**。
+
+## 商品目录（全量爬取）
+
+不是只抄首页露出的一屏。目录来自 **Wayback 的 momo 分类列表页快照**（`/category/LgrpCategory.jsp`），每页 ~54 个商品卡，逐页解析 `i_code / 名称 / 价格 / 主图`。
+
+```
+_tools/crawl-catalog.mjs     # 爬 2437 个 l_code → _ref/catalog_raw.jsonl（断点续爬）
+_tools/build-catalog.mjs     # 清洗去重 → site/data/catalog.json
+_tools/check-images.mjs      # 存活校验：丢掉「无价格」和「图片 404」的商品
+```
+
+**数据保真度做了三层校验**（宁可少，不留假数据）：
+
+| 层 | 处理 |
+|---|---|
+| 编码 | 逐页严格 UTF-8 解码，失败回落 Big5（momo 的 JSP 页面编码不统一，直接 `r.text()` 会出 `銆怲` 乱码） |
+| 名称 | 只收 `goodsimg/` 商品图对应的卡；品牌块 / 活动块（如「毛寶」「momo」）直接丢弃 |
+| 存活 | HEAD 校验商品图，404/403 的下架商品剔除；无价格的「售完」商品剔除 |
+
+当前：**1,154 个商品**（图片存活率 80%，价格区间 `$55 ~ $47,300`），爬取仍在继续。
+
+## 目录驱动渲染
+
+2 万个商品不可能生成 4 万个静态 HTML，所以列表/详情页改成**按目录动态渲染**：
+
+- `lib/render.mjs` —— 桌面 + 行动双模板、商品卡、分页器
+- `server.mjs` —— 启动时 `loadCatalog()`，`/product/<code>` 静态页优先、未收录的从目录渲染
+- `/category?page=N&kw=关键词` —— 分页（48/页）+ 站内搜索
 
 ## 接站補丁包
 

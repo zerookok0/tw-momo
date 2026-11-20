@@ -2,6 +2,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadCatalog, getProduct, allItems, renderProductPage, renderCategoryPage } from './lib/render.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE = path.join(__dirname, 'site');
@@ -102,8 +103,7 @@ function json(res, code, body) {
   res.end(buf);
 }
 
-function serveFile(res, filePath) {
-  fs.readFile(filePath, (err, buf) => {
+function serveFile(res, filePath) {  fs.readFile(filePath, (err, buf) => {
     if (err) {
       res.writeHead(404, baseHeaders({ 'Content-Type': 'text/html; charset=utf-8' }));
       return res.end('<h1>404</h1>');
@@ -126,8 +126,51 @@ function safeResolve(urlPath) {
   return p;
 }
 
+function sendHtml(res, html, code = 200) {
+  const buf = Buffer.from(html, 'utf8');
+  res.writeHead(code, baseHeaders({ 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': buf.length, 'Cache-Control': 'no-store' }));
+  res.end(buf);
+}
+
+function notFound(res, msg) {
+  sendHtml(res, `<!doctype html><meta charset="utf-8"><title>404</title>
+<div style="font-family:system-ui;padding:48px;text-align:center;color:#4d4d4d">
+  <h1 style="color:#d62872">404</h1><p>${msg || '找不到頁面'}</p>
+  <p><a href="/" style="color:#d62872">回首頁</a></p>
+</div>`, 404);
+}
+
+const PAGE_SIZE = 48;
+
+/** 分類 / 搜尋：分頁 + 關鍵字，從目錄動態渲染 */
+function renderCategory(req, res, url, kind) {
+  const kw = (url.searchParams.get('kw') || url.searchParams.get('keyword') || '').trim();
+  const page = Math.max(1, Number(url.searchParams.get('page') || 1) || 1);
+
+  let items = allItems();
+  if (kw) {
+    const k = kw.toLowerCase();
+    items = items.filter((i) => i.name.toLowerCase().includes(k) || String(i.code).includes(k));
+  }
+  const total = items.length;
+  const slice = items.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  // 未收录商品（不在 catalog.json 里）时回落到静态页
+  if (!total && !kw) {
+    const f = path.join(SITE, kind === 'mobile' ? 'm' : '', 'category', 'index.html');
+    if (fs.existsSync(f)) return serveFile(res, f);
+  }
+  return sendHtml(res, renderCategoryPage(kind, { items: slice, page, pageSize: PAGE_SIZE, total, kw }));
+}
+
 const server = http.createServer(async (req, res) => {
-  const url = new URL(req.url, BASE);
+  let url;
+  try {
+    url = new URL(req.url, BASE);
+  } catch {
+    // 未編碼的中文 / 特殊字符 query 會讓 URL 解析拋錯，先 encode 再解析
+    try { url = new URL(encodeURI(req.url), BASE); } catch { return notFound(res, '請求網址不合法'); }
+  }
   const p = url.pathname;
 
   // ---------- API ----------
@@ -190,19 +233,27 @@ const server = http.createServer(async (req, res) => {
   if (p === '/m/cart' || p === '/m/cart/' || p === '/m/cart/CartList.jsp') {
     return serveFile(res, path.join(SITE, 'm', 'cart', 'index.html'));
   }
-  if (p === '/m/category' || p === '/m/category/') {
-    return serveFile(res, path.join(SITE, 'm', 'category', 'index.html'));
-  }
   if (/^\/m\/order\/[^/]+\/?$/.test(p)) {
     return serveFile(res, path.join(SITE, 'm', 'order', 'index.html'));
   }
-  if (p === '/m/product' || /^\/m\/product\/(\d+)\/?$/.test(p) || p === '/m/goods.momo') {
-    const code = (p.match(/^\/m\/product\/(\d+)\/?$/) || [])[1] || url.searchParams.get('i_code');
-    const dir = path.join(SITE, 'm', 'product');
-    const f = code ? path.join(dir, code + '.html') : null;
-    if (f && fs.existsSync(f)) return serveFile(res, f);
-    const fallback = fs.readdirSync(dir).filter((x) => x.endsWith('.html'))[0];
-    if (fallback) return serveFile(res, path.join(dir, fallback));
+
+  // 行動版商品詳情：静态优先，未收录的从目录动态渲染
+  if (p === '/m/product' || /^\/m\/product\/[^/]+\/?$/.test(p) || p === '/m/goods.momo') {
+    const code = (p.match(/^\/m\/product\/([^/]+)\/?$/) || [])[1] || url.searchParams.get('i_code');
+    if (code) {
+      const f = path.join(SITE, 'm', 'product', code + '.html');
+      if (fs.existsSync(f)) return serveFile(res, f);
+      const item = getProduct(code);
+      if (item) return sendHtml(res, renderProductPage('mobile', item));
+      return notFound(res, `momo 查無此商品：${code}`);
+    }
+    const first = allItems()[0];
+    if (first) return serveFile(res, path.join(SITE, 'm', 'product', first.code + '.html'));
+  }
+
+  // 行動版分類（支援分頁 + 關鍵字）
+  if (p === '/m/category' || p === '/m/category/' || p === '/m/category.momo') {
+    return renderCategory(req, res, url, 'mobile');
   }
 
   // ---------- pages ----------
@@ -217,21 +268,22 @@ const server = http.createServer(async (req, res) => {
     return serveFile(res, path.join(SITE, 'cart', 'index.html'));
   }
   if (p === '/category' || p === '/category/' || p === '/category/LgrpCategory.jsp') {
-    return serveFile(res, path.join(SITE, 'category', 'index.html'));
+    return renderCategory(req, res, url, 'desktop');
   }
   if (/^\/order\/[^/]+\/?$/.test(p)) return serveFile(res, path.join(SITE, 'order', 'index.html'));
 
   // /product/<code> 或 momo 真实 /goods/GoodsDetail.jsp?i_code=<code>
-  let productCode = null;
-  let mm = p.match(/^\/product\/(\d+)\/?$/);
-  if (mm) productCode = mm[1];
-  if (p === '/goods/GoodsDetail.jsp') productCode = url.searchParams.get('i_code');
-  if (productCode) {
-    const f = path.join(SITE, 'product', productCode + '.html');
-    if (fs.existsSync(f)) return serveFile(res, f);
-    // 未收录的 i_code 落到第一个商品，保证链路不断
-    const fallback = fs.readdirSync(path.join(SITE, 'product')).filter((x) => x.endsWith('.html'))[0];
-    if (fallback) return serveFile(res, path.join(SITE, 'product', fallback));
+  if (/^\/product\/[^/]+\/?$/.test(p) || p === '/goods/GoodsDetail.jsp') {
+    const code = (p.match(/^\/product\/([^/]+)\/?$/) || [])[1] || url.searchParams.get('i_code');
+    if (code) {
+      const f = path.join(SITE, 'product', code + '.html');
+      if (fs.existsSync(f)) return serveFile(res, f);
+      const item = getProduct(code);
+      if (item) return sendHtml(res, renderProductPage('desktop', item));
+      return notFound(res, `momo 查無此商品：${code}`);
+    }
+    const first = allItems()[0];
+    if (first) return serveFile(res, path.join(SITE, 'product', first.code + '.html'));
   }
 
   // ---------- static ----------
@@ -247,7 +299,10 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, HOST, () => {
+  loadCatalog();
   console.log(`momo replica → ${BASE}`);
   console.log(`  checkout : ${BASE}/checkout`);
   console.log(`  cart api : ${BASE}/api/cart`);
+  console.log(`  mobile   : ${BASE}/m`);
+  console.log(`  category : ${BASE}/category?page=1&kw=`);
 });
