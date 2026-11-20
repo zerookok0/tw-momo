@@ -208,11 +208,11 @@ function card(p, i = 0) {
   return `
   <a class="m-card" href="/m/product/${p.code}">
     <div class="m-card__img">
-      <img src="${p.img || PLACEHOLDER}" alt="${esc(p.texts[0])}" loading="lazy">
+      <img src="${p.img || PLACEHOLDER}" alt="${esc((p.name || p.texts[0]))}" loading="lazy">
       <span class="m-card__tag">${tags[i % tags.length]}</span>
     </div>
     <div class="m-card__body">
-      <p class="m-card__name">${esc(p.texts[0] || '')}</p>
+      <p class="m-card__name">${esc((p.name || p.texts[0]) || '')}</p>
       <div class="m-card__price">
         <span class="now"><small>$</small>${Number(p.price).toLocaleString('en-US')}</span>
         <span class="was">$${Math.round(p.price * 1.28).toLocaleString('en-US')}</span>
@@ -324,7 +324,7 @@ ${tabbar('分類')}`;
 
 // ───────────────────────── 商品详情 ─────────────────────────
 function productPage(p) {
-  const name = p.texts[0] || 'momo 嚴選商品';
+  const name = (p.name || p.texts[0]) || 'momo 嚴選商品';
   const price = p.price || 990;
   const was = Math.round(price * 1.28);
   const img = p.img || PLACEHOLDER;
@@ -431,7 +431,7 @@ ${crumb([{ t: '首頁', href: '/m/' }, { t: '商品分類', href: '/m/category' 
 
 // ───────────────────────── 购物车 ─────────────────────────
 function cartPage() {
-  const seed = products.slice(0, 3).map((p) => ({ code: p.code, name: p.texts[0], price: p.price, qty: 1, img: p.img }));
+  const seed = products.slice(0, 3).map((p) => ({ code: p.code, name: (p.name || p.texts[0]), price: p.price, qty: 1, img: p.img }));
   const body = `
 ${header({ showSearch: false, showNav: false, cartCount: 3 })}
 ${crumb([{ t: '首頁', href: '/m/' }, { t: '購物車' }])}

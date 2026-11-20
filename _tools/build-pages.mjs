@@ -80,7 +80,7 @@ const crumb = (items) => `<nav class="crumb">
 const PLACEHOLDER_IMG = '/assets/img1.momoshop.com.tw/ecm/img/online/10/998/00/000/bt_0_245_01/bt_0_245_01_P1_1_e2.png';
 
 function productPage(p) {
-  const name = esc(p.texts[0] || 'momo 嚴選商品');
+  const name = esc((p.name || p.texts[0]) || 'momo 嚴選商品');
   const price = p.price || 990;
   const was = Math.round(price * 1.32);
   const img = p.img || PLACEHOLDER_IMG;
@@ -176,7 +176,7 @@ function productPage(p) {
 <script>
 (function(){
   var price = ${price};
-  var name = ${JSON.stringify(p.texts[0] || 'momo 嚴選商品')};
+  var name = ${JSON.stringify((p.name || p.texts[0]) || 'momo 嚴選商品')};
   var img = ${JSON.stringify(img)};
   var code = ${JSON.stringify(p.code)};
 
@@ -275,7 +275,7 @@ function cartPage() {
 <script>
 (function(){
   var CART_KEY = 'momo_cart';
-  var DEFAULT_CART = ${JSON.stringify(products.slice(0, 3).map((p) => ({ code: p.code, name: p.texts[0], price: p.price, qty: 1, img: p.img })))};
+  var DEFAULT_CART = ${JSON.stringify(products.slice(0, 3).map((p) => ({ code: p.code, name: (p.name || p.texts[0]), price: p.price, qty: 1, img: p.img })))};
 
   function read(){
     try {
@@ -539,7 +539,7 @@ function categoryPage() {
   const cards = products.slice(0, 24).map((p) => `
       <a class="cat-card" href="/product/${p.code}">
         <div class="cat-card__img"><img src="${p.img || PLACEHOLDER_IMG}" alt=""></div>
-        <div class="cat-card__name">${esc(p.texts[0] || '')}</div>
+        <div class="cat-card__name">${esc((p.name || p.texts[0]) || '')}</div>
         <div class="cat-card__price">${fmt(p.price || 0)}</div>
       </a>`).join('');
 
