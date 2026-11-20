@@ -13,3 +13,6 @@ _ref/cap/net/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Pages 构建产物
+dist/

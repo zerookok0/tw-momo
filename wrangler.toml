@@ -1,0 +1,5 @@
+# Cloudflare Pages 配置
+# 把 Pages 项目的「输出目录」指向 dist（本文件会自动告诉 Pages 用哪个目录）
+name = "tw-momo"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-11-01"

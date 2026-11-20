@@ -2,7 +2,8 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadCatalog, getProduct, allItems, renderProductPage, renderCategoryPage } from './lib/render.mjs';
+import { getProduct, allItems, renderProductPage, renderCategoryPage } from './lib/render.mjs';
+import { loadCatalogFromDisk } from './lib/load-node.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE = path.join(__dirname, 'site');
@@ -299,7 +300,7 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, HOST, () => {
-  loadCatalog();
+  loadCatalogFromDisk();
   console.log(`momo replica → ${BASE}`);
   console.log(`  checkout : ${BASE}/checkout`);
   console.log(`  cart api : ${BASE}/api/cart`);
