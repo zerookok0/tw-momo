@@ -16,12 +16,13 @@
 
 ```bash
 npm run build
-# = node _tools/gen-shell.mjs && node _tools/prepare-deploy.mjs
+# = node _tools/gen-shell.mjs && node _tools/relink-home.mjs && node _tools/prepare-deploy.mjs
 #   1. 把 site/_partials/header.html、footer.html、frag-utm.html 打包成 lib/shell.mjs
 #      （Workers 不能 fs 读文件、不能 import .html，只能走 JS 模块）
-#   2. site/ → dist/（剔除 _partials），产出 767 个文件 / 23.7 MB
-#   3. 写入 dist/_headers（契约 §7.1 方案 A 的 CSP 全套）
-#   4. 写入 dist/_routes.json（只让 9 条动态路由走 Functions，静态资源零开销）
+#   2. 首页链接接线：242 个 href="#" 还原成 /product/<code>、/category?kw=、/cart
+#   3. site/ → dist/（剔除 _partials），产出 767 个文件 / 23.7 MB
+#   4. 写入 dist/_headers（契约 §7.1 方案 A 的 CSP 全套）
+#   5. 写入 dist/_routes.json（只让 9 条动态路由走 Functions，静态资源零开销）
 ```
 
 ## 运行时结构

@@ -135,6 +135,25 @@ _tools/check-images.mjs      # 存活校验：丢掉「无价格」和「图片 
 
 站内搜索实测：「除濕機」命中 23 件。
 
+## 首页链接接线
+
+首页是从线上抓的渲染后 DOM，抓取时所有链接被改写成 `href="#" data-orig-href="原 URL"`，结果 **242 个链接全是死链**——页面能看，点不动。
+
+`_tools/relink-home.mjs` 把 `data-orig-href` 还原成站内路由（构建时自动执行）：
+
+| 原始 URL | 站内路由 | 数量 |
+|---|---|---|
+| `GoodsDetail.jsp?i_code=NNN` | `/product/NNN` | 75 |
+| `LgrpCategory.jsp?l_code=` | `/category` | 33 |
+| `searchShop.jsp?keyword=X` | `/category?kw=X` | 23 |
+| `cmmedm.jsp`（活动页） | `/category` | 83 |
+| `cart/CartList.jsp` / `#TopCart` | `/cart` | 1 |
+| 会员 / 客服 / 外部社群 | 保留 `#` | 26 |
+
+另注入搜索交互：首页搜索框回车或点「搜尋」→ `/category?kw=`。
+
+抽检 26 条链接全部返回 200；目录里没有的商品返回 **404「此商品已下架」**，不再拿别的商品顶替。
+
 ## 目录驱动渲染
 
 2 万个商品不可能生成 4 万个静态 HTML，所以列表/详情页改成**按目录动态渲染**：
