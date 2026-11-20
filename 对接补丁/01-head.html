@@ -1,0 +1,52 @@
+<!-- ============================================================
+     ① UTM 捕获：同步内联，必须最先执行，且每个页面都要有
+     位置：<head> 里 <title> 之后、所有其他资源之前
+     契约 §3 ①
+     ============================================================ -->
+<script>
+(function(){
+  var K=['utm_source','utm_medium','utm_campaign','utm_term','utm_content',
+         'utm_id','fbclid','ttclid','gclid','adset_id','campaign_id',
+         'sub1','sub2','sub3','sub4','sub5'];
+  function grab(q){var o={},p=(q||'').replace(/^\?/,'').split('&');for(var i=0;i<p.length;i++){
+    var kv=p[i].split('=');if(kv.length<2)continue;try{var k=decodeURIComponent(kv[0]);
+    if(K.indexOf(k)!==-1)o[k]=decodeURIComponent(kv.slice(1).join('='));}catch(e){}}return o;}
+  function load(){try{return JSON.parse(sessionStorage.getItem('bp_utm')||'{}')}catch(e){return {}}}
+  function save(o){try{sessionStorage.setItem('bp_utm',JSON.stringify(o))}catch(e){}
+    try{var d=new Date();d.setTime(d.getTime()+7*864e5);
+    document.cookie='bp_utm='+encodeURIComponent(JSON.stringify(o))+'; expires='+d.toUTCString()+'; path=/; SameSite=Lax';}catch(e){}}
+  var cur=load(),add=false;
+  var m=grab(location.search); for(var a in m){cur[a]=m[a];add=true}
+  try{var n=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];
+    if(n&&n.name){var mm=grab(n.name.split('?')[1]||'');for(var b in mm){cur[b]=mm[b];add=true}}}catch(e){}
+  try{if(document.referrer){var mm2=grab((document.referrer.split('?')[1])||'');
+    for(var c in mm2){if(!cur[c]){cur[c]=mm2[c];add=true}}}}catch(e){}
+  if(add)save(cur);
+  window.__BP_UTM__=cur;
+})();
+</script>
+
+<!-- ============================================================
+     ② 购物车骨架：必须在 connector.js 之前就存在
+     契约 §3 ② / §5.1 —— 数据到达后「原地 mutate」，不要换新对象
+     ============================================================ -->
+<script>
+  window.__BP_CART__ = {
+    order_number: "", currency: "", total: 0, total_amount: "",
+    items: [], locale: document.documentElement.lang || "en"
+  };
+</script>
+
+<!-- ============================================================
+     ③ connector 资源（站点侧只需放行，不要改）
+     契约 §3 ③ —— 一律绝对路径，不能写 ./bp/
+     ============================================================ -->
+<link rel="stylesheet" href="/bp/connector.css">
+<script defer src="/bp/connector.js"></script>
+
+<!-- ============================================================
+     ⚠️ 检查项
+     - 本页不得出现 <base> 标签（契约 §3 末尾 / §7.3）
+     - 不得注册 Service Worker（契约 §8.5）
+     - <html lang> 如实填（zh-TW / en / de …），connector 用它选表单文案
+     ============================================================ -->

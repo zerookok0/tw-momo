@@ -1,0 +1,17 @@
+{
+  "name": "momo-tw-replica",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "momoshop.com.tw 1:1 静态还原 + /bp 结账接管契约实现",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node server.mjs",
+    "build:pages": "node _tools/build-pages.mjs",
+    "build:mirror": "node _tools/mirror.mjs",
+    "build:badges": "node _tools/make-badges.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

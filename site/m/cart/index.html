@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#d62872">
+<title>購物車 - momo購物網</title>
+<script>
+(function(){
+  var K=['utm_source','utm_medium','utm_campaign','utm_term','utm_content',
+         'utm_id','fbclid','ttclid','gclid','adset_id','campaign_id',
+         'sub1','sub2','sub3','sub4','sub5'];
+  function grab(q){var o={},p=(q||'').replace(/^\?/,'').split('&');for(var i=0;i<p.length;i++){
+    var kv=p[i].split('=');if(kv.length<2)continue;try{var k=decodeURIComponent(kv[0]);
+    if(K.indexOf(k)!==-1)o[k]=decodeURIComponent(kv.slice(1).join('='));}catch(e){}}return o;}
+  function load(){try{return JSON.parse(sessionStorage.getItem('bp_utm')||'{}')}catch(e){return {}}}
+  function save(o){try{sessionStorage.setItem('bp_utm',JSON.stringify(o))}catch(e){}
+    try{var d=new Date();d.setTime(d.getTime()+7*864e5);
+    document.cookie='bp_utm='+encodeURIComponent(JSON.stringify(o))+'; expires='+d.toUTCString()+'; path=/; SameSite=Lax';}catch(e){}}
+  var cur=load(),add=false;
+  var m=grab(location.search); for(var a in m){cur[a]=m[a];add=true}
+  try{var n=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];
+    if(n&&n.name){var mm=grab(n.name.split('?')[1]||'');for(var b in mm){cur[b]=mm[b];add=true}}}catch(e){}
+  try{if(document.referrer){var mm2=grab((document.referrer.split('?')[1])||'');
+    for(var c in mm2){if(!cur[c]){cur[c]=mm2[c];add=true}}}}catch(e){}
+  if(add)save(cur);
+  window.__BP_UTM__=cur;
+})();
+</script>
+<link rel="stylesheet" href="/assets/image.momoshop.com.tw/ecm/font/theme-main.css">
+<link rel="stylesheet" href="/m/assets/css/momo-mobile.css">
+
+</head>
+<body class="m has-bottombar">
+
+
+<header class="m-header">
+  <div class="m-header__bar">
+    <button class="m-header__ico" type="button" aria-label="選單"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <a class="m-header__logo" href="/m/">
+      <img src="/m/assets/img/logo.svg" alt="momo購物網" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="m-header__slogan" style="display:none"><b style="font-size:15px;color:#d62872">momo</b><br>桃金日 就在每月22號</span>
+    </a>
+    <span class="m-header__slogan">桃金日<br>就在每月22號</span>
+    <a class="m-header__ico m-header__cart" href="/m/cart" aria-label="購物車">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2.1 11.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+      <i class="m-header__badge">3</i>
+    </a>
+  </div>
+  
+  
+</header>
+
+<nav class="m-crumb">
+  <span><a href="/m/">首頁</a></span><span>/</span><span>購物車</span>
+</nav>
+
+<div class="m-cart-hd">
+  <label><input type="checkbox" id="checkAll" checked><span>全選</span></label>
+  <span class="edit">編輯</span>
+</div>
+
+<div class="m-cart-shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/><path d="M3 9l1.6-4.2A1 1 0 0 1 5.5 4h13a1 1 0 0 1 .9.8L21 9z"/><path d="M9 20v-5h6v5"/></svg><span>momo 直營　滿 $490 免運</span></div>
+
+<div id="cartList"></div>
+<div class="m-cart-empty" id="cartEmpty" style="display:none">購物車是空的，<a href="/m/">去逛逛</a></div>
+
+<div class="m-safe" style="height:72px"></div>
+
+<div class="m-cobar">
+  <div class="m-cobar__amt">
+    <span class="lb">合計 <span id="cartCount">0</span> 件</span>
+    <span class="vl" id="cartTotal">$0</span>
+  </div>
+  <button type="button" id="goCheckout" style="flex:1;max-width:190px;height:42px;border-radius:21px;background:#d62872;color:#fff;font-size:15px;font-weight:700">前往結帳</button>
+</div>
+
+<script>
+(function(){
+  var KEY = 'momo_cart';
+  var SEED = [{"code":"14295303","name":"【Kingston 金士頓】8GB DDR5 5600MT/s Non-ECC Unbuffered DIMM 桌上型記憶體(KCP556US6-8)","price":828,"qty":1,"img":"/assets/i4.momoshop.com.tw/1754298127/goodsimg/0014/295/303/14295303_OL_m.webp"},{"code":"8593194","name":"【威拂】魔撢本體 1把+1片裝(藍色/粉色 隨機出貨)","price":79,"qty":1,"img":"/assets/i2.momoshop.com.tw/1698915746/goodsimg/0008/593/194/8593194_OL_m.webp"},{"code":"7053569","name":"【SONAX】鍍膜美容巾(細緻柔軟.極具吸收力)","price":350,"qty":1,"img":"/assets/i3.momoshop.com.tw/1759350466/goodsimg/0007/053/569/7053569_OL_m.webp"}];
+  function read(){
+    try { var v = JSON.parse(localStorage.getItem(KEY)||'null'); if (!v || !v.length) { localStorage.setItem(KEY, JSON.stringify(SEED)); return SEED.slice(); } return v; }
+    catch(e){ return SEED.slice(); }
+  }
+  function write(v){ try { localStorage.setItem(KEY, JSON.stringify(v)); } catch(e){} }
+  var fmt = function(n){ return '$' + Number(n).toLocaleString('en-US'); };
+
+  function render(){
+    var cart = read(), list = document.getElementById('cartList'), total = 0, count = 0;
+    list.innerHTML = '';
+    document.getElementById('cartEmpty').style.display = cart.length ? 'none' : 'block';
+    cart.forEach(function(it, i){
+      total += it.price * it.qty; count += it.qty;
+      var d = document.createElement('div');
+      d.className = 'm-cart-item';
+      d.innerHTML =
+        '<div class="m-cart-item__chk"><input type="checkbox" checked></div>' +
+        '<div class="m-cart-item__img"><img src="' + (it.img||'') + '" alt=""></div>' +
+        '<div class="m-cart-item__info">' +
+          '<a class="m-cart-item__name" href="/m/product/' + it.code + '">' + it.name + '</a>' +
+          '<span class="m-cart-item__spec">標準規格 ' + ICO_CHEV + '</span>' +
+          '<div class="m-cart-item__btm">' +
+            '<span class="m-cart-item__price">' + fmt(it.price) + '</span>' +
+            '<span class="m-qty">' +
+              '<button type="button" data-a="dec" data-i="' + i + '">−</button>' +
+              '<input value="' + it.qty + '" readonly>' +
+              '<button type="button" data-a="inc" data-i="' + i + '">+</button>' +
+            '</span>' +
+          '</div>' +
+        '</div>';
+      list.appendChild(d);
+    });
+    document.getElementById('cartTotal').textContent = fmt(total);
+    document.getElementById('cartCount').textContent = count;
+  }
+  var ICO_CHEV = "<svg width=\"8\" height=\"14\" viewBox=\"0 0 8 14\" fill=\"none\"><path d=\"M1 1l6 6-6 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>";
+
+  document.getElementById('cartList').addEventListener('click', function(e){
+    var b = e.target.closest('[data-a]');
+    if (!b) return;
+    var cart = read(), i = Number(b.dataset.i);
+    if (b.dataset.a === 'inc') cart[i].qty = Math.min(99, cart[i].qty + 1);
+    if (b.dataset.a === 'dec') cart[i].qty = Math.max(1, cart[i].qty - 1);
+    write(cart); render();
+  });
+
+  document.getElementById('goCheckout').addEventListener('click', function(){
+    var cart = read();
+    var total = cart.reduce(function(s, i){ return s + i.price * i.qty; }, 0);
+    try { sessionStorage.setItem('momo_checkout_cart', JSON.stringify({ items: cart, total: total, total_amount: fmt(total) })); } catch(e){}
+    location.href = '/m/checkout';
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

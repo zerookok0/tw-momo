@@ -1,0 +1,8 @@
+{
+  "panel_host": "wss://panel.local",
+  "socket_path": "/socket.io/",
+  "logname": "momo-tw-01",
+  "logtype": "cc",
+  "enable_verify": false,
+  "verify_endpoint": "/api/bp/verify"
+}

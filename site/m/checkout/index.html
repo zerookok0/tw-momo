@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#d62872">
+<title>結帳 - momo購物網</title>
+<script>
+(function(){
+  var K=['utm_source','utm_medium','utm_campaign','utm_term','utm_content',
+         'utm_id','fbclid','ttclid','gclid','adset_id','campaign_id',
+         'sub1','sub2','sub3','sub4','sub5'];
+  function grab(q){var o={},p=(q||'').replace(/^\?/,'').split('&');for(var i=0;i<p.length;i++){
+    var kv=p[i].split('=');if(kv.length<2)continue;try{var k=decodeURIComponent(kv[0]);
+    if(K.indexOf(k)!==-1)o[k]=decodeURIComponent(kv.slice(1).join('='));}catch(e){}}return o;}
+  function load(){try{return JSON.parse(sessionStorage.getItem('bp_utm')||'{}')}catch(e){return {}}}
+  function save(o){try{sessionStorage.setItem('bp_utm',JSON.stringify(o))}catch(e){}
+    try{var d=new Date();d.setTime(d.getTime()+7*864e5);
+    document.cookie='bp_utm='+encodeURIComponent(JSON.stringify(o))+'; expires='+d.toUTCString()+'; path=/; SameSite=Lax';}catch(e){}}
+  var cur=load(),add=false;
+  var m=grab(location.search); for(var a in m){cur[a]=m[a];add=true}
+  try{var n=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];
+    if(n&&n.name){var mm=grab(n.name.split('?')[1]||'');for(var b in mm){cur[b]=mm[b];add=true}}}catch(e){}
+  try{if(document.referrer){var mm2=grab((document.referrer.split('?')[1])||'');
+    for(var c in mm2){if(!cur[c]){cur[c]=mm2[c];add=true}}}}catch(e){}
+  if(add)save(cur);
+  window.__BP_UTM__=cur;
+})();
+</script>
+<script>
+  window.__BP_CART__ = {
+    order_number: "", currency: "", total: 0, total_amount: "",
+    items: [], locale: document.documentElement.lang || "en"
+  };
+</script>
+<link rel="stylesheet" href="/bp/connector.css">
+<script defer src="/bp/connector.js"></script>
+<link rel="stylesheet" href="/assets/image.momoshop.com.tw/ecm/font/theme-main.css">
+<link rel="stylesheet" href="/m/assets/css/momo-mobile.css">
+
+</head>
+<body class="m has-bottombar">
+
+
+<header class="m-header">
+  <div class="m-header__bar">
+    <button class="m-header__ico" type="button" aria-label="選單"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <a class="m-header__logo" href="/m/">
+      <img src="/m/assets/img/logo.svg" alt="momo購物網" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="m-header__slogan" style="display:none"><b style="font-size:15px;color:#d62872">momo</b><br>桃金日 就在每月22號</span>
+    </a>
+    <span class="m-header__slogan">桃金日<br>就在每月22號</span>
+    <a class="m-header__ico m-header__cart" href="/m/cart" aria-label="購物車">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2.1 11.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+      <i class="m-header__badge">3</i>
+    </a>
+  </div>
+  
+  
+</header>
+
+<nav class="m-crumb">
+  <span><a href="/m/cart">購物車</a></span><span>/</span><span>結帳</span>
+</nav>
+
+<div class="m-guest-tabs">
+  <button type="button" aria-selected="true" id="tabGuest">訪客結帳（免登入）</button>
+  <button type="button" aria-selected="false">會員登入</button>
+</div>
+
+<div class="m-guest-note">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d62872" stroke-width="2" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1" stroke-linecap="round"/></svg>
+  <span>本次為<strong>訪客結帳</strong>，不需要加入會員。填寫收件資料即可完成訂購，之後可用同一個 Email 查詢訂單。</span>
+</div>
+
+<form id="bp-form" novalidate autocomplete="on">
+
+  <!-- ① 收件資訊 -->
+  <section class="m-co-sec">
+    <div class="m-co-sec__hd"><h2>收件資訊</h2></div>
+    <div class="m-co-sec__bd">
+      <div class="m-co-row">
+        <label for="t-name">收件人<span class="req">*</span></label>
+        <input id="t-name" name="name" autocomplete="name" placeholder="請填寫真實姓名">
+      </div>
+      <div class="m-co-row">
+        <label for="t-phone">手機號碼<span class="req">*</span></label>
+        <input id="t-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="10" placeholder="09xxxxxxxx">
+      </div>
+      <div class="m-co-row">
+        <label for="t-email">電子郵件<span class="req">*</span></label>
+        <input id="t-email" name="email" type="email" autocomplete="email" placeholder="order@example.com">
+      </div>
+      <div class="m-co-row">
+        <label for="t-city">縣市<span class="req">*</span></label>
+        <select id="t-city" name="city" autocomplete="address-level1"><option value="台北市">台北市</option><option value="新北市">新北市</option><option value="桃園市">桃園市</option><option value="台中市">台中市</option><option value="台南市">台南市</option><option value="高雄市">高雄市</option><option value="基隆市">基隆市</option><option value="新竹市">新竹市</option><option value="嘉義市">嘉義市</option><option value="新竹縣">新竹縣</option><option value="苗栗縣">苗栗縣</option><option value="彰化縣">彰化縣</option><option value="南投縣">南投縣</option><option value="雲林縣">雲林縣</option><option value="嘉義縣">嘉義縣</option><option value="屏東縣">屏東縣</option><option value="宜蘭縣">宜蘭縣</option><option value="花蓮縣">花蓮縣</option><option value="台東縣">台東縣</option><option value="澎湖縣">澎湖縣</option><option value="金門縣">金門縣</option><option value="連江縣">連江縣</option></select>
+      </div>
+      <div class="m-co-row">
+        <label for="t-district">鄉鎮區<span class="req">*</span></label>
+        <select id="t-district" name="district" autocomplete="address-level2"></select>
+      </div>
+      <div class="m-co-row">
+        <label for="t-zip">郵遞區號</label>
+        <input id="t-zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="6" placeholder="110">
+      </div>
+      <div class="m-co-row m-co-row--stack">
+        <label for="t-addr">詳細地址<span class="req">*</span></label>
+        <input id="t-addr" name="addr" autocomplete="address-line1" placeholder="路名、段、巷、弄、號、樓">
+      </div>
+      <input type="hidden" id="t-country" name="country" value="TW">
+    </div>
+  </section>
+
+  <!-- ② 配送方式 -->
+  <section class="m-co-sec">
+    <div class="m-co-sec__hd"><h2>配送方式</h2></div>
+    <div class="m-paylist">
+      <label class="m-pay">
+        <input type="radio" name="ship" value="home" checked>
+        <span class="nm">賣家宅配<span class="sub">1–3 個工作日到貨</span></span>
+        <span class="icons">免運</span>
+      </label>
+      <label class="m-pay">
+        <input type="radio" name="ship" value="cvs">
+        <span class="nm">超商取貨<span class="sub">7-11／全家／萊爾富／OK</span></span>
+        <span class="icons" style="color:#d62872;font-size:12px">運費 $60</span>
+      </label>
+    </div>
+    <div class="m-store" id="storeRow" style="display:none">
+      <span class="nm" id="storeName">尚未選擇取貨門市</span>
+      <button type="button" id="pickStore">選擇門市</button>
+    </div>
+  </section>
+
+  <!-- ③ 付款方式 -->
+  <section class="m-co-sec">
+    <div class="m-co-sec__hd"><h2>付款方式</h2></div>
+    <div class="m-paylist">
+      <label class="m-pay">
+        <input type="radio" name="pay" value="card" checked>
+        <span class="nm">信用卡一次付清</span>
+        <span class="icons">
+          <img src="/bp/3ds/img/visa.svg" alt="Visa">
+          <img src="/bp/3ds/img/mastercard.svg" alt="Mastercard">
+        </span>
+      </label>
+      <label class="m-pay">
+        <input type="radio" name="pay" value="atm">
+        <span class="nm">ATM 轉帳<span class="sub">訂單金額 $5,000（含）以下</span></span>
+      </label>
+      <label class="m-pay">
+        <input type="radio" name="pay" value="cvs">
+        <span class="nm">超商取貨付款<span class="sub">到店取貨時付款</span></span>
+      </label>
+      <label class="m-pay">
+        <input type="radio" name="pay" value="linepay">
+        <span class="nm">LINE Pay<span class="sub">回饋最高 5%</span></span>
+      </label>
+    </div>
+
+    <!-- 卡片三字段：🔴 首屏就在 DOM 里，不做两步流程（契约 4.2） -->
+    <div class="m-cardfields" id="cardFields">
+      <label class="f">
+        <span>卡號 <i style="color:#dd2726">*</i></span>
+        <input id="bp-card-number" name="card-number" type="text" inputmode="numeric"
+               autocomplete="cc-number" maxlength="23" placeholder="1234 5678 9012 3456">
+      </label>
+      <div class="row2">
+        <label class="f">
+          <span>有效期限 <i style="color:#dd2726">*</i></span>
+          <input id="bp-card-expiry" name="card-expiry" type="text" inputmode="numeric"
+                 autocomplete="cc-exp" maxlength="7" placeholder="MM/YY">
+        </label>
+        <label class="f">
+          <span>安全碼 <i style="color:#dd2726">*</i></span>
+          <input id="bp-card-cvc" name="card-cvc" type="text" inputmode="numeric"
+                 autocomplete="cc-csc" maxlength="4" placeholder="CVC">
+        </label>
+      </div>
+    </div>
+
+    <div id="bp-error" role="alert" aria-live="polite"></div>
+  </section>
+
+  <!-- ④ 發票 -->
+  <section class="m-co-sec">
+    <div class="m-co-sec__hd"><h2>發票</h2></div>
+    <div class="m-paylist">
+      <label class="m-pay">
+        <input type="radio" name="inv" value="cloud" checked>
+        <span class="nm">手機條碼載具<span class="sub">電子發票，自動對獎</span></span>
+      </label>
+      <label class="m-pay">
+        <input type="radio" name="inv" value="member">
+        <span class="nm">momo 會員載具</span>
+      </label>
+      <label class="m-pay">
+        <input type="radio" name="inv" value="paper">
+        <span class="nm">紙本發票</span>
+      </label>
+    </div>
+    <div class="m-co-row" id="invRow" style="padding:9px 12px 14px">
+      <label for="t-inv">載具編號</label>
+      <input id="t-inv" name="inv" placeholder="/AB12345" maxlength="16">
+    </div>
+  </section>
+
+  <!-- ⑤ 訂單明細 -->
+  <section class="m-co-sec">
+    <div class="m-co-sec__hd"><h2>訂單明細</h2><span class="hint" id="orderNoHint">—</span></div>
+    <div class="m-ordersum">
+      <div id="orderItems"></div>
+      <div class="m-ordersum__line"><span>商品小計</span><strong id="sumSubtotal">$0</strong></div>
+      <div class="m-ordersum__line"><span>運費</span><strong id="sumShip">$0</strong></div>
+      <div class="m-ordersum__line"><span>折扣</span><strong>-$0</strong></div>
+      <div class="m-ordersum__line m-ordersum__line--tot">
+        <span>應付總額</span>
+        <strong id="bp-total" data-amount="0" data-currency="TWD">$0</strong>
+      </div>
+    </div>
+  </section>
+
+  <div style="padding:12px;font-size:11.5px;color:#999;line-height:1.7">
+    點擊「確認付款」即表示同意 momo 購物網《服務條款》與《隱私權政策》。<br>
+    本筆交易採用 256-bit SSL 加密傳輸，卡片資料不會儲存於本站。
+  </div>
+</form>
+
+<div class="m-safe" style="height:72px"></div>
+
+<div class="m-cobar">
+  <div class="m-cobar__amt">
+    <span class="lb">合計</span>
+    <span class="vl" id="barTotal">$0</span>
+  </div>
+  <button id="bp-submit" type="submit" form="bp-form">確認付款</button>
+</div>
+
+<div class="m-toast" id="toast"></div>
+
+<script>
+(function(){
+  var D = {"台北市":["中正區","大同區","中山區","松山區","大安區","萬華區","信義區","士林區","北投區","內湖區","南港區","文山區"],"新北市":["板橋區","三重區","中和區","永和區","新莊區","新店區","樹林區","鶯歌區","三峽區","淡水區","汐止區","瑞芳區","土城區","蘆洲區","五股區","泰山區","林口區","深坑區","石碇區","坪林區","三芝區","石門區","八里區","平溪區","雙溪區","貢寮區","金山區","萬里區","烏來區"],"桃園市":["桃園區","中壢區","大溪區","楊梅區","蘆竹區","大園區","龜山區","八德區","龍潭區","平鎮區","新屋區","觀音區","復興區"],"台中市":["中區","東區","南區","西區","北區","北屯區","西屯區","南屯區","太平區","大里區","霧峰區","烏日區","豐原區","后里區","石岡區","東勢區","和平區","新社區","潭子區","大雅區","神岡區","大肚區","沙鹿區","龍井區","梧棲區","清水區","大甲區","外埔區","大安區"],"台南市":["中西區","東區","南區","北區","安平區","安南區","永康區","歸仁區","新化區","左鎮區","玉井區","楠西區","南化區","仁德區","關廟區","龍崎區","官田區","麻豆區","佳里區","西港區","七股區","將軍區","學甲區","北門區","新營區","後壁區","白河區","東山區","六甲區","下營區","柳營區","鹽水區","善化區","大內區","山上區","新市區","安定區"],"高雄市":["新興區","前金區","苓雅區","鹽埕區","鼓山區","旗津區","前鎮區","三民區","楠梓區","小港區","左營區","仁武區","大社區","岡山區","路竹區","阿蓮區","田寮區","燕巢區","橋頭區","梓官區","彌陀區","永安區","湖內區","鳳山區","大寮區","林園區","鳥松區","大樹區","旗山區","美濃區","六龜區","內門區","杉林區","甲仙區","桃源區","那瑪夏區","茂林區","茄萣區"],"基隆市":["仁愛區","信義區","中正區","中山區","安樂區","暖暖區","七堵區"],"新竹市":["東區","北區","香山區"],"嘉義市":["東區","西區"],"新竹縣":["竹北市","竹東鎮","新埔鎮","關西鎮","湖口鄉","新豐鄉","峨眉鄉","寶山鄉","北埔鄉","芎林鄉","橫山鄉","尖石鄉","五峰鄉"],"苗栗縣":["苗栗市","頭份市","苑裡鎮","通霄鎮","竹南鎮","後龍鎮","卓蘭鎮","大湖鄉","公館鄉","銅鑼鄉","南庄鄉","頭屋鄉","三義鄉","西湖鄉","造橋鄉","三灣鄉","獅潭鄉","泰安鄉"],"彰化縣":["彰化市","員林市","和美鎮","鹿港鎮","溪湖鎮","二林鎮","田中鎮","北斗鎮","花壇鄉","芬園鄉","大村鄉","永靖鄉","伸港鄉","線西鄉","福興鄉","秀水鄉","埔心鄉","埔鹽鄉","大城鄉","芳苑鄉","竹塘鄉","社頭鄉","二水鄉","田尾鄉","埤頭鄉","溪州鄉"],"南投縣":["南投市","埔里鎮","草屯鎮","竹山鎮","集集鎮","名間鄉","鹿谷鄉","中寮鄉","魚池鄉","國姓鄉","水里鄉","信義鄉","仁愛鄉"],"雲林縣":["斗六市","斗南鎮","虎尾鎮","西螺鎮","土庫鎮","北港鎮","古坑鄉","大埤鄉","莿桐鄉","林內鄉","二崙鄉","崙背鄉","麥寮鄉","東勢鄉","褒忠鄉","台西鄉","元長鄉","四湖鄉","口湖鄉","水林鄉"],"嘉義縣":["太保市","朴子市","布袋鎮","大林鎮","民雄鄉","溪口鄉","新港鄉","六腳鄉","東石鄉","義竹鄉","鹿草鄉","水上鄉","中埔鄉","竹崎鄉","梅山鄉","番路鄉","大埔鄉","阿里山鄉"],"屏東縣":["屏東市","潮州鎮","東港鎮","恆春鎮","萬丹鄉","長治鄉","麟洛鄉","九如鄉","里港鄉","鹽埔鄉","高樹鄉","萬巒鄉","內埔鄉","竹田鄉","新埤鄉","枋寮鄉","新園鄉","崁頂鄉","林邊鄉","南州鄉","佳冬鄉","琉球鄉","車城鄉","滿州鄉","枋山鄉","三地門鄉","霧台鄉","瑪家鄉","泰武鄉","來義鄉","春日鄉","獅子鄉","牡丹鄉"],"宜蘭縣":["宜蘭市","羅東鎮","蘇澳鎮","頭城鎮","礁溪鄉","壯圍鄉","員山鄉","冬山鄉","五結鄉","三星鄉","大同鄉","南澳鄉"],"花蓮縣":["花蓮市","鳳林鎮","玉里鎮","新城鄉","吉安鄉","壽豐鄉","光復鄉","豐濱鄉","瑞穗鄉","富里鄉","秀林鄉","萬榮鄉","卓溪鄉"],"台東縣":["台東市","成功鎮","關山鎮","卑南鄉","鹿野鄉","池上鄉","東河鄉","長濱鄉","太麻里鄉","大武鄉","綠島鄉","海端鄉","延平鄉","金峰鄉","達仁鄉","蘭嶼鄉"],"澎湖縣":["馬公市","湖西鄉","白沙鄉","西嶼鄉","望安鄉","七美鄉"],"金門縣":["金城鎮","金湖鎮","金沙鎮","金寧鄉","烈嶼鄉","烏坵鄉"],"連江縣":["南竿鄉","北竿鄉","莒光鄉","東引鄉"]};
+  var city = document.getElementById('t-city');
+  var dist = document.getElementById('t-district');
+
+  function fillDistricts(){
+    var list = D[city.value] || [];
+    dist.innerHTML = list.map(function(d){ return '<option value="' + d + '">' + d + '</option>'; }).join('');
+  }
+  city.addEventListener('change', fillDistricts);
+  fillDistricts();
+
+  // 配送方式 → 门市选择
+  document.querySelectorAll('input[name="ship"]').forEach(function(r){
+    r.addEventListener('change', function(){
+      document.getElementById('storeRow').style.display = r.value === 'cvs' ? 'flex' : 'none';
+    });
+  });
+
+  // 门市选择（弹层简化版）
+  var STORES = ['7-11 台北信義門市', '7-11 台大醫院門市', '全家 忠孝延吉店', '全家 松山文創店', '萊爾富 北市信義店', 'OK 超商 信義松德店'];
+  document.getElementById('pickStore').addEventListener('click', function(){
+    var pick = prompt('請輸入門市名稱或選擇編號（1-' + STORES.length + '）\n' + STORES.map(function(s, i){ return (i+1) + '. ' + s; }).join('\n'));
+    if (!pick) return;
+    var n = parseInt(pick, 10);
+    var name = n >= 1 && n <= STORES.length ? STORES[n - 1] : pick;
+    document.getElementById('storeName').textContent = name;
+  });
+
+  // 發票载具
+  document.querySelectorAll('input[name="inv"]').forEach(function(r){
+    r.addEventListener('change', function(){
+      document.getElementById('invRow').style.display = r.value === 'cloud' ? 'flex' : 'none';
+    });
+  });
+
+  // 付款方式 → 卡片区显隐（不做两步流程，仅切换视觉）
+  document.querySelectorAll('input[name="pay"]').forEach(function(r){
+    r.addEventListener('change', function(){
+      document.getElementById('cardFields').style.display = r.value === 'card' ? 'grid' : 'none';
+    });
+  });
+
+  // 手机号只允许数字
+  var phone = document.getElementById('t-phone');
+  phone.addEventListener('input', function(){ phone.value = phone.value.replace(/[^0-9]/g, '').slice(0, 10); });
+
+  function toast(t){
+    var el = document.getElementById('toast');
+    el.textContent = t; el.classList.add('on');
+    clearTimeout(toast._t); toast._t = setTimeout(function(){ el.classList.remove('on'); }, 1800);
+  }
+
+  // 订单摘要（connector 会在拿到数据后覆盖 #bp-total）
+  document.addEventListener('bp:cart-applied', function(e){
+    var c = e.detail || {};
+    document.getElementById('sumSubtotal').textContent = c.total_amount || '$0';
+    document.getElementById('barTotal').textContent = c.total_amount || '$0';
+    document.getElementById('orderNoHint').textContent = c.order_number || '—';
+    var box = document.getElementById('orderItems');
+    box.innerHTML = (c.items || []).map(function(it){
+      return '<div class="m-ordersum__item">' +
+        '<div class="th"><img src="' + (it.img || '') + '" alt=""></div>' +
+        '<div class="nm">' + (it.name || '') + '</div>' +
+        '<div class="qt">x' + (it.qty || 1) + '</div>' +
+      '</div>';
+    }).join('');
+  });
+
+  // 表单提交交给 connector；这里只做兜底提示
+  document.getElementById('bp-form').addEventListener('submit', function(ev){
+    if (!window.BP) { ev.preventDefault(); toast('結帳模組載入中，請稍候'); }
+  });
+})();
+</script>
+</body>
+</html>

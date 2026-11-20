@@ -1,0 +1,29 @@
+@font-face {
+  font-family: Oxygen;
+  src: url("/assets/image.momoshop.com.tw/ecm/font/Oxygen-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: Oxygen;
+  src: url("/assets/image.momoshop.com.tw/ecm/font/Oxygen-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: Oxygen;
+  src: url("/assets/image.momoshop.com.tw/ecm/font/Oxygen-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+:root {
+  --primary-font-family: "SF Pro TC", "SF Pro Text", "SF Pro Icons", "PingFang TC", Helvetica, Arial, sans-serif, "BlinkMacSystemFont", "Segoe UI", Roboto, "Helvetica Neue", system-ui, -apple-system;
+  --price-font-family: 'Oxygen', "SF Pro TC", "SF Pro Text", "SF Pro Icons", "PingFang TC", sans-serif;
+  --primary-pink: #d62872;
+  --primary-link-color: #027bff;
+  --main-font: Helvetica, sans-serif;
+  --price-font: Century Gothic, sans-serif;
+  --momo-color: #d62872;
+  --momo-blue: #027BFF;
+  --momo-red: #dd2726;
+}

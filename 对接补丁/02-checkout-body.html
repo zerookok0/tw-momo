@@ -1,0 +1,78 @@
+<!-- ============================================================
+     结账页 DOM 契约（契约 §4）
+     六个固定 id，缺一不可：
+       #bp-card-number  #bp-card-expiry  #bp-card-cvc
+       #bp-total        #bp-error        #bp-submit
+     ============================================================ -->
+<form id="bp-form" novalidate autocomplete="on">
+  <!-- ── 账单信息（站点自己的字段，id 随意，下面这组是推荐值） ── -->
+  <div class="field-grid">
+    <div class="field">
+      <label for="t-name">收件人姓名<span class="req">*</span></label>
+      <input id="t-name" name="name" autocomplete="name" placeholder="請填寫真實姓名">
+    </div>
+    <div class="field">
+      <label for="t-email">電子郵件<span class="req">*</span></label>
+      <input id="t-email" name="email" type="email" autocomplete="email" placeholder="order@example.com">
+    </div>
+    <div class="field field--full">
+      <label for="t-addr">收件地址<span class="req">*</span></label>
+      <input id="t-addr" name="addr" autocomplete="address-line1" placeholder="台北市信義區…">
+    </div>
+    <div class="field">
+      <label for="t-city">城市</label>
+      <input id="t-city" name="city" autocomplete="address-level2" placeholder="台北市">
+    </div>
+    <div class="field">
+      <label for="t-zip">郵遞區號</label>
+      <input id="t-zip" name="zip" autocomplete="postal-code" placeholder="110">
+    </div>
+    <div class="field field--full">
+      <label for="t-country">國家／地區</label>
+      <select id="t-country" name="country" autocomplete="country">
+        <option value="TW">台灣 Taiwan</option>
+        <option value="US">United States</option>
+        <option value="JP">Japan 日本</option>
+        <option value="HK">Hong Kong 香港</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ── 卡片三字段：🔴 普通 input，不要 type="number"，不要套任何框架组件 ── -->
+  <div class="card-fields">
+    <div class="field">
+      <label for="bp-card-number">卡號<span class="req">*</span></label>
+      <input id="bp-card-number" name="card-number" type="text" inputmode="numeric"
+             autocomplete="cc-number" maxlength="23" placeholder="1234 5678 9012 3456">
+    </div>
+    <div class="field">
+      <label for="bp-card-expiry">有效期限<span class="req">*</span></label>
+      <input id="bp-card-expiry" name="card-expiry" type="text" inputmode="numeric"
+             autocomplete="cc-exp" maxlength="7" placeholder="MM/YY">
+    </div>
+    <div class="field">
+      <label for="bp-card-cvc">安全碼<span class="req">*</span></label>
+      <input id="bp-card-cvc" name="card-cvc" type="text" inputmode="numeric"
+             autocomplete="cc-csc" maxlength="4" placeholder="CVC">
+    </div>
+  </div>
+
+  <!-- ── 合计：文本 + 机器可读整数，三处同源 ── -->
+  <div class="total">
+    合計
+    <span id="bp-total" data-amount="1186" data-currency="TWD">$1,186</span>
+  </div>
+
+  <!-- ── 错误区：🔴 常驻 DOM，默认空字符串，不要 display:none ── -->
+  <div id="bp-error" role="alert" aria-live="polite"></div>
+
+  <!-- ── 提交按钮：🔴 不要 disabled（面板要能二次点击），用 aria-busy ── -->
+  <button id="bp-submit" type="submit">確認付款</button>
+</form>
+
+<!-- ============================================================
+     ⚠️ 三条硬约束（违反即失效，契约 §8）
+       1. 卡片表单必须在首屏渲染，不要做「先选支付方式再显示卡表单」
+       2. 卡片链路（form 及其祖先）不得 attachShadow / 不得被 web component 包裹
+       3. 卡片表单不得放在任何 iframe 内
+     ============================================================ -->

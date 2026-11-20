@@ -1,0 +1,20 @@
+# 响应头契约（契约 §7.1 方案 A · 推荐）
+# 用法：Cloudflare Pages 直接放仓库根目录；Nginx 见文件末尾的等价配置
+#
+# PANEL_DOMAIN 由我方给出（面板域名，含端口则写 wss://host:port）
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https://PANEL_DOMAIN wss://PANEL_DOMAIN; frame-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: payment=(self), clipboard-write=(self)
+
+# ─────────────────────────────────────────────────────────────
+# 三条铁律（违反必炸，契约 §7.3）
+#   1. script-src 只能有 'unsafe-inline'，绝不能同时出现 nonce-… 或 sha256-…（否则 'unsafe-inline' 被整体忽略 → 验证页内联脚本全被拦 → 白屏）
+#   2. base-uri 必须放行 <base> 将要指向的域（方案 A 下 'self' 就够）
+#   3. 不要加 sandbox、不要加 require-trusted-types-for 'script'、不要发 X-Frame-Options: DENY
+#
+# 方案 B（省事：验证屏资源直接从面板取）
+#   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://PANEL_DOMAIN; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https://PANEL_DOMAIN wss://PANEL_DOMAIN; frame-src 'self' https://PANEL_DOMAIN; base-uri 'self' https://PANEL_DOMAIN; form-action 'self'; object-src 'none'
+# ─────────────────────────────────────────────────────────────

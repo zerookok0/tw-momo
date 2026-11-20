@@ -1,0 +1,15 @@
+# 依赖
+node_modules/
+.pnpm-store/
+
+# 运行时产物
+data/orders.json
+*.log
+
+# 抓取原始网络转储（体积大且与 site/assets 重复）
+_ref/cap/net/
+
+# 系统
+.DS_Store
+Thumbs.db
+desktop.ini

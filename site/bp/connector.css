@@ -1,0 +1,122 @@
+/*!
+ * /bp/connector.css — 结账页接管样式
+ * 契约 v1.0 · 只做「面板接管」相关，不碰站点自身排版
+ *
+ * 禁止项（契约 7.4 / §8）：
+ *   ✗ iframe{display:none} / iframe{visibility:hidden}
+ *   ✗ *{pointer-events:none}
+ *   ✗ document 捕获阶段 pointerdown/click preventDefault
+ */
+
+/* ── 卡片三字段：保证是普通 input 的可读状态 ── */
+#bp-card-number,
+#bp-card-expiry,
+#bp-card-cvc {
+  font-variant-numeric: tabular-nums;
+  font-family: "Oxygen", "SF Pro TC", "PingFang TC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.6px;
+  text-overflow: clip;
+}
+
+#bp-card-number::placeholder,
+#bp-card-expiry::placeholder,
+#bp-card-cvc::placeholder {
+  letter-spacing: 0;
+  color: #b3b3b3;
+}
+
+#bp-card-number:focus,
+#bp-card-expiry:focus,
+#bp-card-cvc:focus {
+  border-color: #d62872;
+  box-shadow: 0 0 0 3px rgba(214, 40, 114, 0.1);
+}
+
+/* 校验失败（面板写 error_code 时由 connector 加 class） */
+#bp-card-number[aria-invalid="true"],
+#bp-card-expiry[aria-invalid="true"],
+#bp-card-cvc[aria-invalid="true"] {
+  border-color: #dd2726;
+  background: #fff7f7;
+}
+
+/* ── 错误区：常驻、不切换可见性（契约 4.1） ── */
+#bp-error {
+  display: block;
+  min-height: 20px;
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #dd2726;
+}
+
+/* ── 提交按钮：不 disabled，只 aria-busy（契约 4.1） ── */
+#bp-submit {
+  position: relative;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+#bp-submit[aria-busy="true"] {
+  opacity: 0.8;
+  cursor: progress;
+}
+
+#bp-submit[aria-busy="true"]::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: bp-spin 0.7s linear infinite;
+}
+
+@keyframes bp-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── 3DS 验证屏：同页 srcdoc iframe（契约 7.4） ── */
+#bp-3ds-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#bp-3ds-layer[data-open="true"] {
+  display: flex;
+}
+
+#bp-3ds-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(1.5px);
+}
+
+#bp-3ds-frame {
+  position: relative;
+  z-index: 1;
+  width: min(480px, 92vw);
+  height: min(620px, 86vh);
+  border: 0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.32);
+  /* 注意：这里只改尺寸，不禁用显示；connector 用 display:flex 控制整层 */
+  display: block;
+}
+
+@media (max-width: 480px) {
+  #bp-3ds-frame {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
