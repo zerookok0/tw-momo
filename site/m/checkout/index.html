@@ -34,6 +34,23 @@
     items: [], locale: document.documentElement.lang || "en"
   };
 </script>
+<!-- 从购物车页带过来的真实商品，覆写骨架（否则会显示服务端兜底购物车） -->
+<script>
+(function(){
+  try {
+    var raw = sessionStorage.getItem('momo_checkout_cart');
+    if (!raw) return;
+    var c = JSON.parse(raw);
+    if (!c || !c.items || !c.items.length) return;
+    var b = window.__BP_CART__;
+    b.items = c.items;
+    b.total = c.total;
+    b.total_amount = c.total_amount;
+    b.currency = 'TWD';
+    b.locale = document.documentElement.lang || 'zh-TW';
+  } catch (e) {}
+})();
+</script>
 <link rel="stylesheet" href="/bp/connector.css">
 <script defer src="/bp/connector.js"></script>
 <link rel="stylesheet" href="/assets/image.momoshop.com.tw/ecm/font/theme-main.css">

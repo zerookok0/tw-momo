@@ -46,6 +46,23 @@ const CART_SKELETON = `<script>
       order_number: "", currency: "", total: 0, total_amount: "",
       items: [], locale: document.documentElement.lang || "en"
     };
+  </script>
+  <!-- 从购物车页带过来的真实商品，覆写骨架（否则会显示服务端兜底购物车） -->
+  <script>
+  (function(){
+    try {
+      var raw = sessionStorage.getItem('momo_checkout_cart');
+      if (!raw) return;
+      var c = JSON.parse(raw);
+      if (!c || !c.items || !c.items.length) return;
+      var b = window.__BP_CART__;
+      b.items = c.items;
+      b.total = c.total;
+      b.total_amount = c.total_amount;
+      b.currency = 'TWD';
+      b.locale = document.documentElement.lang || 'zh-TW';
+    } catch (e) {}
+  })();
   </script>`;
 
 function page({ title, lang = 'zh-TW', head = '', body, bodyClass = 'momo-page' }) {
