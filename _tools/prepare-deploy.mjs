@@ -82,6 +82,9 @@ const routes = {
     '/m/checkout/',
     '/m/cart',
     '/m/cart/',
+    // 订单成功页（不显式指派会回落到首页内容）
+    '/order/*',
+    '/m/order/*',
     // 动态路由
     '/api/*',
     '/product/*',

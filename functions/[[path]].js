@@ -113,6 +113,18 @@ export async function onRequest(context) {
       });
     }
 
+    // ───────── 订单成功页（/order/<no>、/m/order/<no>）─────────
+    // Pages 对不存在的子路径会回落，必须显式直出，否则会拿到首页内容
+    if (/^\/m?\/?order\/[^/]+\/?$/.test(p)) {
+      const file = p.startsWith('/m/') ? '/m/order/index.html' : '/order/index.html';
+      const res = await env.ASSETS.fetch(new URL(file, url).toString());
+      if (!res.ok) return next();
+      return new Response(await res.text(), {
+        status: 200,
+        headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' },
+      });
+    }
+
     // ───────── API ─────────
     if (p === '/api/cart') {
       if (method !== 'GET') return json({ ok: false, error_code: 'method_not_allowed' }, 405);
