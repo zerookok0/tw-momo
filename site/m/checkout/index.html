@@ -46,8 +46,19 @@
     b.items = c.items;
     b.total = c.total;
     b.total_amount = c.total_amount;
-    b.currency = 'TWD';
-    b.locale = document.documentElement.lang || 'zh-TW';
+      var b = window.__BP_CART__;
+      b.items = c.items;
+      b.total = c.total;
+      b.total_amount = c.total_amount;
+      b.currency = 'TWD';
+      b.locale = document.documentElement.lang || 'zh-TW';
+      // 每笔结账生成独立单号，避免多笔订单撞同一个号（契约：单号复用，提交后不换）
+      if (!b.order_number) {
+        var d = new Date();
+        var pad = function (n) { return String(n).padStart(2, '0'); };
+        var rnd = Math.random().toString(36).slice(2, 8).toUpperCase();
+        b.order_number = 'ORD-' + d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + '-' + rnd;
+      }
   } catch (e) {}
 })();
 </script>
