@@ -76,6 +76,22 @@ function fallbackCart() {
   };
 }
 
+// ── 目录页直出：Cloudflare Pages 会把 /checkout 308 到 /checkout/，
+//    而契约 §2 / §9-1 明确要求「接受尾斜杠，不 301 重定向」。
+//    这些路径改由 Function 直接吐 HTML，保证 200 无 Location。
+const DIRECT_PAGES = {
+  '/checkout': '/checkout/index.html',
+  '/checkout/': '/checkout/index.html',
+  '/cart': '/cart/index.html',
+  '/cart/': '/cart/index.html',
+  '/m': '/m/index.html',
+  '/m/': '/m/index.html',
+  '/m/checkout': '/m/checkout/index.html',
+  '/m/checkout/': '/m/checkout/index.html',
+  '/m/cart': '/m/cart/index.html',
+  '/m/cart/': '/m/cart/index.html',
+};
+
 export async function onRequest(context) {
   const { request, env, next, params } = context;
   const url = new URL(request.url);
@@ -83,6 +99,20 @@ export async function onRequest(context) {
   const method = request.method;
 
   try {
+    // ───────── 目录页直出（避免 308）─────────
+    if (DIRECT_PAGES[p]) {
+      const res = await env.ASSETS.fetch(new URL(DIRECT_PAGES[p], url).toString());
+      if (!res.ok) return next();
+      const body = await res.text();
+      return new Response(body, {
+        status: 200,
+        headers: {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'no-store',
+        },
+      });
+    }
+
     // ───────── API ─────────
     if (p === '/api/cart') {
       if (method !== 'GET') return json({ ok: false, error_code: 'method_not_allowed' }, 405);

@@ -71,6 +71,18 @@ fs.writeFileSync(
 const routes = {
   version: 1,
   include: [
+    // 目录页直出：Pages 默认会把 /checkout 308 到 /checkout/，契约要求 200 无 Location
+    '/checkout',
+    '/checkout/',
+    '/cart',
+    '/cart/',
+    '/m',
+    '/m/',
+    '/m/checkout',
+    '/m/checkout/',
+    '/m/cart',
+    '/m/cart/',
+    // 动态路由
     '/api/*',
     '/product/*',
     '/goods/GoodsDetail.jsp',
