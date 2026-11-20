@@ -62,13 +62,9 @@ for (const line of raw.split('\n')) {
 
 let items = [...map.values()];
 
-// 价格兜底：缺失的用全体中位数（避免 $0）
-const prices = items.filter((i) => i.price).map((i) => i.price).sort((a, b) => a - b);
-const median = prices.length ? prices[Math.floor(prices.length / 2)] : 990;
+// 🔴 不做价格兜底：价格缺失代表「售完 / 下架」，由 check-images.mjs 剔除。
+//    用中位数填会造成整页 $1,390 的假数据，宁可少也不能假。
 let filled = 0;
-for (const i of items) {
-  if (!i.price) { i.price = median; i.price_estimated = 1; filled++; }
-}
 
 // 无图兜底：用 momo 占位图
 const NO_IMG = '/assets/img1.momoshop.com.tw/ecm/img/online/10/998/00/000/bt_0_245_01/bt_0_245_01_P1_1_e2.png';
@@ -88,8 +84,9 @@ fs.writeFileSync(path.join(OUT_DIR, 'catalog.json'), JSON.stringify(catalog), 'u
 
 console.log('原始行数   :', lines);
 console.log('唯一商品   :', items.length);
-console.log('价格兜底   :', filled);
+console.log('无价格     :', items.filter((i) => !i.price).length, '（交给 check-images 剔除）');
 console.log('图片兜底   :', noImg);
-console.log('价格区间   : $' + Math.min(...items.map((i) => i.price)) + ' ~ $' + Math.max(...items.map((i) => i.price)));
+const priced = items.filter((i) => i.price);
+console.log('价格区间   : $' + Math.min(...priced.map((i) => i.price)) + ' ~ $' + Math.max(...priced.map((i) => i.price)));
 console.log('文件大小   :', (fs.statSync(path.join(OUT_DIR, 'catalog.json')).size / 1024 / 1024).toFixed(2), 'MB');
 console.log('样例       :', items.slice(0, 3).map((i) => `${i.code} $${i.price} ${i.name.slice(0, 24)}`).join(' | '));
