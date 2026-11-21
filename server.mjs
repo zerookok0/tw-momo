@@ -222,6 +222,8 @@ const PAGE_SIZE = 48;
 /** 分類 / 搜尋：分頁 + 關鍵字，從目錄動態渲染 */
 function renderCategory(req, res, url, kind) {
   const kw = (url.searchParams.get('kw') || url.searchParams.get('keyword') || '').trim();
+  const cat = (url.searchParams.get('cat') || '').trim();
+  const l = (url.searchParams.get('l') || '').trim();
   const page = Math.max(1, Number(url.searchParams.get('page') || 1) || 1);
 
   let items = allItems();
@@ -229,15 +231,24 @@ function renderCategory(req, res, url, kind) {
     const k = kw.toLowerCase();
     items = items.filter((i) => i.name.toLowerCase().includes(k) || String(i.code).includes(k));
   }
+  if (cat) items = items.filter((i) => i.cat === cat);
+  if (l) items = items.filter((i) => i.l === l);
+
+  // 分类统计（供导航条）
+  const tally = {};
+  if (!kw) for (const it of allItems()) tally[it.cat || '其他'] = (tally[it.cat || '其他'] || 0) + 1;
+  const cats = Object.entries(tally).sort((a, b) => b[1] - a[1]).map(([name, count]) => ({ name, count }));
+  const catName = cat || (l ? (cats.find((c) => c.name === l) || {}).name : '');
+
   const total = items.length;
   const slice = items.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   // 未收录商品（不在 catalog.json 里）时回落到静态页
-  if (!total && !kw) {
+  if (!total && !kw && !cat && !l) {
     const f = path.join(SITE, kind === 'mobile' ? 'm' : '', 'category', 'index.html');
     if (fs.existsSync(f)) return serveFile(res, f);
   }
-  return sendHtml(res, renderCategoryPage(kind, { items: slice, page, pageSize: PAGE_SIZE, total, kw }));
+  return sendHtml(res, renderCategoryPage(kind, { items: slice, page, pageSize: PAGE_SIZE, total, kw, cat, l, cats, catName }));
 }
 
 const server = http.createServer(async (req, res) => {
@@ -416,7 +427,7 @@ const server = http.createServer(async (req, res) => {
     if (slug && fs.existsSync(f2)) return serveFile(res, f2);
   }
 
-  if (p === '/category' || p === '/category/' || p === '/category/LgrpCategory.jsp') {
+  if (p === '/category' || p === '/category/' || p === '/category/LgrpCategory.jsp' || p === '/m/category' || p === '/m/category/') {
     return renderCategory(req, res, url, 'desktop');
   }
   if (/^\/order\/[^/]+\/?$/.test(p)) return serveFile(res, path.join(SITE, 'order', 'index.html'));

@@ -595,3 +595,26 @@ ul, li { margin: 0; padding: 0; list-style: none; }
 .m-sku-chip.on { border-color: #d62872; background: #fdf0f6; color: #d62872; }
 /* ---------- 与 /bp/connector.css 共存（行动版结账） ---------- */
 .m-cardfields.bp-card-fields { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 0; }
+/* ---------- 分类导航条 ---------- */
+.cat-bar {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 0 0 16px; margin: 0 0 18px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.cat-tab {
+  display: inline-flex; align-items: baseline; gap: 6px;
+  height: 34px; padding: 0 14px; border-radius: 17px;
+  background: #f7f7f7; color: #4d4d4d;
+  font-size: 13px; line-height: 34px; text-decoration: none;
+  transition: background .15s, color .15s;
+  white-space: nowrap;
+}
+.cat-tab span { font-size: 11px; color: #b3b3b3; }
+.cat-tab:hover { background: #fdf0f6; color: #d62872; }
+.cat-tab.on { background: #d62872; color: #fff; font-weight: 700; }
+.cat-tab.on span { color: rgba(255,255,255,.75); }
+
+@media (max-width: 600px) {
+  .cat-bar { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 12px; -webkit-overflow-scrolling: touch; }
+  .cat-bar::-webkit-scrollbar { display: none; }
+}

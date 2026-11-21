@@ -28,7 +28,9 @@ const MAP = [
   [/oid=coupon/i, '/info/coupons'],
 
   // 分类 / 品牌 / APP
-  [/LgrpCategory\.jsp|DgrpCategory\.jsp/i, '/category'],
+  // 分类页带着 l_code，直接映射到真实分类筛选
+  [/LgrpCategory\.jsp\?l_code=(\d{8,12})/i, '/category?l=%LCODE%'],
+  [/DgrpCategory\.jsp/i, '/category'],
   [/brand\/Main\.jsp/i, '/category'],
   [/appRedirect\.jsp|lpn=Nzpe4YTLgeM/i, '/info/app'],
 
@@ -85,7 +87,10 @@ function targetFor(rawUrl) {
     return '/category?kw=' + encodeURIComponent(kw);
   }
 
-  for (const [re, to] of MAP) if (re.test(u)) return to;
+  for (const [re, to] of MAP) {
+    const m = u.match(re);
+    if (m) return to.replace('%LCODE%', m[1] || '');
+  }
   return null;
 }
 

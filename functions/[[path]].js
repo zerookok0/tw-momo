@@ -451,17 +451,28 @@ h1{color:#d62872;font-size:20px}p{font-size:14px;line-height:1.8}a{display:inlin
 
     if (p === '/category' || p === '/category/' || p === '/m/category' || p === '/m/category/') {
       const kw = (url.searchParams.get('kw') || url.searchParams.get('keyword') || '').trim();
+      const cat = (url.searchParams.get('cat') || '').trim();
+      const l = (url.searchParams.get('l') || '').trim();
       const page = Math.max(1, Number(url.searchParams.get('page') || 1) || 1);
       let items = allItems();
       if (kw) {
         const k = kw.toLowerCase();
         items = items.filter((i) => i.name.toLowerCase().includes(k) || String(i.code).includes(k));
       }
+      if (cat) items = items.filter((i) => i.cat === cat);
+      if (l) items = items.filter((i) => i.l === l);
       // 目录为空（未加载成功）→ 交回静态页
       if (!allItems().length) return next();
+
+      // 分类统计（导航条用）
+      const tally = {};
+      if (!kw) for (const it of allItems()) tally[it.cat || '其他'] = (tally[it.cat || '其他'] || 0) + 1;
+      const cats = Object.entries(tally).sort((a, b) => b[1] - a[1]).map(([name, count]) => ({ name, count }));
+      const catName = cat || '';
+
       const total = items.length;
       const slice = items.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
-      return html(renderCategoryPage(kind, { items: slice, page, pageSize: PAGE_SIZE, total, kw }));
+      return html(renderCategoryPage(kind, { items: slice, page, pageSize: PAGE_SIZE, total, kw, cat, l, cats, catName }));
     }
 
     return next();
