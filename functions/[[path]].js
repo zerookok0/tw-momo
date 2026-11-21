@@ -48,15 +48,53 @@ const MSG = {
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
+    headers: { ...secHeaders(), 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
   });
 }
 
 function html(str, status = 200) {
   return new Response(str, {
     status,
-    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' },
+    headers: { ...secHeaders(), 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' },
   });
+}
+
+// ── 安全响应头（契约 §7.1 方案 A）──
+// 注意：Functions 的响应不经过 dist/_headers，必须在这里自己带
+let PANEL_DOMAIN = '';
+
+async function ensurePanelDomain(env, url) {
+  if (PANEL_DOMAIN) return PANEL_DOMAIN;
+  try {
+    const r = await env.ASSETS.fetch(new URL('/bp/config.json', url).toString());
+    const j = await r.json();
+    PANEL_DOMAIN = String(j.panel_host || '').replace(/^wss?:\/\//, '').replace(/\/.*$/, '') || 'panel.local';
+  } catch {
+    PANEL_DOMAIN = 'panel.local';
+  }
+  return PANEL_DOMAIN;
+}
+
+function secHeaders() {
+  const d = PANEL_DOMAIN || 'panel.local';
+  return {
+    'Content-Security-Policy': [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline'",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https:",
+      "font-src 'self' data: https:",
+      `connect-src 'self' https://${d} wss://${d}`,
+      // 契约 §7.1：验证屏是面板托管的独立页面，frame-src 必须放行面板域
+      `frame-src 'self' https://${d}`,
+      "base-uri 'self'",
+      "form-action 'self'",
+      "object-src 'none'",
+    ].join('; '),
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Permissions-Policy': 'payment=(self), clipboard-write=(self)',
+  };
 }
 
 function fallbackCart() {
@@ -126,12 +164,16 @@ export async function onRequest(context) {
   const method = request.method;
 
   try {
+    // 先拿到面板域，后面所有 HTML/JSON 响应都要用它拼 CSP
+    await ensurePanelDomain(env, url);
+
     // ───────── 目录页直出（避免 308）─────────
     if (DIRECT_PAGES[p]) {
       const res = await env.ASSETS.fetch(new URL(DIRECT_PAGES[p], url).toString());
       if (!res.ok) return next();
       let body = await res.text();
       const headers = {
+        ...secHeaders(),
         'Content-Type': 'text/html; charset=utf-8',
         'Cache-Control': 'no-store',
       };
