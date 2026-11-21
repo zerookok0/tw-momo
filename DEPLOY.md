@@ -81,3 +81,23 @@ BASE=https://你的域名 node _tools/verify-mobile.mjs
 - Variable name: `USERS`
 - 可选再加 `ORDERS`
 - 环境变量 `SESSION_SECRET` 设一个随机串（不设会用内置默认值）
+
+## 购买事件（FB 像素）
+
+connector 新包带 `pixel_*` 配置，默认 `pixel_enabled: true`：
+
+```json
+"pixel_platforms": ["fb"],
+"pixel_event": "Purchase",
+"pixel_dedupe_hours": 24,
+"pixel_value": false
+```
+
+触发时机：点提交且卡片校验通过的那一刻（与面板无关）。去重 key = hash(设备指纹 + 面板返回的 user_ip)，24 小时内不重复；记录双写 localStorage + cookie。
+
+**本站目前没有 FB 像素，所以只记录去重 key、不会真的上报**（`BPConnector.pixel.state()` 会显示 `missing:["fb"]`）。要真的发：
+
+1. 在 `site/checkout/index.html` 的 `<head>` 里加 FB 像素基础代码（含 Pixel ID）
+2. 或在 `<head>` 里随便写 `window.fbq = window.fbq || function(){ (window.fbq.queue = window.fbq.queue || []).push(arguments) }`，再由 GTM 接管
+
+调试：`BPConnector.pixel.state()` / `.fire()` / `.reset()`。

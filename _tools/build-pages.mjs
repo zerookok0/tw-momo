@@ -445,7 +445,7 @@ function checkoutPage() {
         </div>
 
         <div style="margin-top:16px">
-          <div class="card-fields">
+          <div class="card-fields bp-card-fields">
             <div class="field">
               <label for="bp-card-number">卡號<span class="req">*</span></label>
               <input id="bp-card-number" name="card-number" type="text" inputmode="numeric"

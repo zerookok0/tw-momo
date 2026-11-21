@@ -405,3 +405,22 @@ body.momo-page {
 }
 .m-sku-chip i { font-style: normal; font-family: var(--font-price); color: #d62872; font-weight: 700; font-size: 11px; }
 .m-sku-chip.on { border-color: #d62872; background: #fdf0f6; color: #d62872; }
+/* ---------- 与 /bp/connector.css 共存：保住结账页原有布局 ---------- */
+/* connector.css 的 .bp-card-fields 是 2 列，这里用更高特异性覆盖回我们的三列 */
+#bp-form .card-fields.bp-card-fields {
+  display: grid;
+  grid-template-columns: 1fr 100px 90px;
+  gap: 12px;
+  margin: 0;
+}
+.m-cardfields.bp-card-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 0;
+}
+.m-cardfields.bp-card-fields .row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}

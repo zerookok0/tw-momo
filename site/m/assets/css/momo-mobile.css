@@ -593,3 +593,5 @@ ul, li { margin: 0; padding: 0; list-style: none; }
 }
 .m-sku-chip i { font-style: normal; font-family: var(--font-price); color: #d62872; font-weight: 700; font-size: 11px; }
 .m-sku-chip.on { border-color: #d62872; background: #fdf0f6; color: #d62872; }
+/* ---------- 与 /bp/connector.css 共存（行动版结账） ---------- */
+.m-cardfields.bp-card-fields { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 0; }
