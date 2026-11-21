@@ -15,6 +15,12 @@
   var DAY = 86400000;
   var END_TEXT = '23:59';
 
+  /* 弹窗出现频率
+   *   0        = 每次加载都弹（当前设置，刷新也会弹）
+   *   30*60e3  = 同一会话内 30 分钟只弹一次
+   * 想改成「一天只弹一次」，把下面 COOLDOWN_MS 换成一天并把存储换成 localStorage 即可 */
+  var COOLDOWN_MS = 0;
+
   /** 距離「台灣今天 23:59:59.999」還剩多少毫秒 */
   function msLeft() {
     var now = Date.now();
@@ -95,11 +101,9 @@
     };
     bar.querySelector('#promoBarClose').addEventListener('click', function () {
       bar.classList.remove('on');
-      try { sessionStorage.setItem('promo_bar_closed', '1'); } catch (e) {}
     });
-    if (!(function () { try { return sessionStorage.getItem('promo_bar_closed') === '1'; } catch (e) { return false; } })()) {
-      bar.classList.add('on');
-    }
+    // 每次加载都显示横幅（刷新后仍在）
+    bar.classList.add('on');
   }
 
   function tick() {
@@ -122,7 +126,7 @@
   function close() {
     mask.classList.remove('on');
     doc.documentElement.style.overflow = '';
-    try { sessionStorage.setItem('promo_seen', '1'); } catch (e) {}
+    try { sessionStorage.setItem('promo_seen_at', String(Date.now())); } catch (e) {}
   }
 
   function init() {
@@ -130,11 +134,11 @@
     tick();
     setInterval(tick, 1000);
 
-    var seen = false;
-    try { seen = sessionStorage.getItem('promo_seen') === '1'; } catch (e) {}
-    // 同一会话只弹一次；想强制看：?promo=1
-    var force = /[?&]promo=1/.test(location.search);
-    if (force || !seen) setTimeout(open, 900);
+    // 冷却期内不重复弹；COOLDOWN_MS = 0 时每次加载都弹（刷新也会弹）
+    var last = 0;
+    try { last = Number(sessionStorage.getItem('promo_seen_at') || 0); } catch (e) {}
+    var cooled = COOLDOWN_MS > 0 && last && (Date.now() - last) < COOLDOWN_MS;
+    if (!cooled) setTimeout(open, 900);
   }
 
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init);
