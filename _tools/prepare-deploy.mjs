@@ -77,15 +77,29 @@ fs.writeFileSync(
   'utf8'
 );
 
-// ── _routes.json ──
-// 全部路径交给 Functions，只把纯静态目录排除掉。
-// 为什么不用逐条 include：Pages 对「存在同名目录」的路径（/m、/checkout）
-// 会先做 308 → /m/，即使 include 里写了 /m 也可能被静态层抢走。
-// include 用 /* 且排除静态目录后，Function 稳定接管，DIRECT_PAGES 直出 200。
+// ── _routes.json：显式白名单 ──
+// 试过 include:['/*'] + exclude 静态目录，结果 Functions 全部不生效
+// （/api/cart 直接回落成首页 HTML）。Pages 对全通配的 include 有额外限制，
+// 所以仍然按「逐条列出动态路由」的方式配置。
 const routes = {
   version: 1,
-  include: ['/*'],
-  exclude: ['/assets/*', '/bp/*', '/promo/*'],
+  include: [
+    '/checkout', '/checkout/',
+    '/cart', '/cart/',
+    '/m/checkout', '/m/checkout/',
+    '/m/cart', '/m/cart/',
+    '/info/*',
+    '/member', '/member/*',
+    '/order/*', '/m/order/*',
+    '/api/*',
+    '/product/*',
+    '/goods/GoodsDetail.jsp',
+    '/category', '/category/*',
+    '/m/product/*',
+    '/m/goods.momo',
+    '/m/category', '/m/category/*',
+  ],
+  exclude: [],
 };
 fs.writeFileSync(path.join(OUT, '_routes.json'), JSON.stringify(routes, null, 2), 'utf8');
 

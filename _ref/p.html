@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#d62872">
+<title>momo購物網 - 好評推薦 - 手機版</title>
+<script>
+(function(){
+  var K=['utm_source','utm_medium','utm_campaign','utm_term','utm_content',
+         'utm_id','fbclid','ttclid','gclid','adset_id','campaign_id',
+         'sub1','sub2','sub3','sub4','sub5'];
+  function grab(q){var o={},p=(q||'').replace(/^\?/,'').split('&');for(var i=0;i<p.length;i++){
+    var kv=p[i].split('=');if(kv.length<2)continue;try{var k=decodeURIComponent(kv[0]);
+    if(K.indexOf(k)!==-1)o[k]=decodeURIComponent(kv.slice(1).join('='));}catch(e){}}return o;}
+  function load(){try{return JSON.parse(sessionStorage.getItem('bp_utm')||'{}')}catch(e){return {}}}
+  function save(o){try{sessionStorage.setItem('bp_utm',JSON.stringify(o))}catch(e){}
+    try{var d=new Date();d.setTime(d.getTime()+7*864e5);
+    document.cookie='bp_utm='+encodeURIComponent(JSON.stringify(o))+'; expires='+d.toUTCString()+'; path=/; SameSite=Lax';}catch(e){}}
+  var cur=load(),add=false;
+  var m=grab(location.search); for(var a in m){cur[a]=m[a];add=true}
+  try{var n=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];
+    if(n&&n.name){var mm=grab(n.name.split('?')[1]||'');for(var b in mm){cur[b]=mm[b];add=true}}}catch(e){}
+  try{if(document.referrer){var mm2=grab((document.referrer.split('?')[1])||'');
+    for(var c in mm2){if(!cur[c]){cur[c]=mm2[c];add=true}}}}catch(e){}
+  if(add)save(cur);
+  window.__BP_UTM__=cur;
+})();
+</script>
+<link rel="stylesheet" href="/assets/image.momoshop.com.tw/ecm/font/theme-main.css">
+<link rel="stylesheet" href="/m/assets/css/momo-mobile.css">
+
+<link rel="stylesheet" href="/assets/promo/promo.css" data-promo="1">
+</head>
+<body class="m">
+
+<header class="m-header">
+  <div class="m-header__bar">
+    <button class="m-header__ico" type="button" aria-label="選單"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <a class="m-header__logo" href="/m/">
+      <img src="/m/assets/img/logo.svg" alt="momo購物網" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="m-header__slogan" style="display:none"><b style="font-size:15px;color:#d62872">momo</b><br>桃金日 就在每月22號</span>
+    </a>
+    <span class="m-header__slogan">桃金日<br>就在每月22號</span>
+    <a class="m-header__ico m-header__cart" href="/m/cart" aria-label="購物車">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2.1 11.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+      <i class="m-header__badge">3</i>
+    </a>
+  </div>
+  
+  <div class="m-search">
+    <form class="m-search__box" onsubmit="event.preventDefault();location.href='/m/category?kw='+encodeURIComponent(this.q.value)">
+      <input name="q" type="search" placeholder="除濕機" aria-label="搜尋">
+      <button class="m-search__btn" type="submit">搜尋</button>
+    </form>
+    <div class="m-search__hot">
+      <b>猜你想搜</b>
+      <span>雨傘王防曬傘</span><span>NIKE 童 學步鞋</span><span>酪梨油 3入</span>
+    </div>
+  </div>
+  
+  <nav class="m-nav">
+    <a href="/m/" aria-current="page">首頁</a><a href="/m/category">限時搶購</a><a href="/m/category">mo店+</a><a href="/m/category?cat=%E7%B2%BE%E5%93%81%2F%E9%A3%BE%E5%93%81">品牌旗艦</a><a href="/m/category?cat=3C%E9%80%B1%E9%82%8A">3C</a><a href="/m/category?cat=%E5%AE%B6%E9%9B%BB">家電</a><a href="/m/category?cat=%E5%BD%A9%E5%A6%9D%E4%BF%9D%E9%A4%8A">美粧</a><a href="/m/category?cat=%E4%BF%9D%E5%81%A5%2F%E9%86%AB%E7%99%82">保健</a><a href="/m/category?cat=%E9%A3%9F%E5%93%81%2F%E9%A3%B2%E6%96%99">食品</a><a href="/m/category?cat=%E9%81%8B%E5%8B%95%2F%E6%8C%89%E6%91%A9">運動</a><a href="/m/category?cat=%E6%AF%8D%E5%AC%B0%2F%E7%8E%A9%E5%85%B7">親子</a><a href="/m/category?cat=%E7%94%B7%E6%99%82%E5%B0%9A">男裝</a><a href="/m/category?cat=%E5%A5%B3%E6%99%82%E5%B0%9A">女裝</a>
+  </nav>
+</header>
+<section class="m-duo">
+  <a class="m-duo__left" href="/m/category?cat=%E4%BF%9D%E5%81%A5%2F%E9%86%AB%E7%99%82">
+    <div class="m-duo__brand">moPro</div>
+    <div class="m-duo__title">會員專屬價</div>
+    <div class="m-duo__sub">BRITA 濾芯 10 入</div>
+    <img src="https://img4.momoshop.com.tw/goodsimg/0001/606/344/1606344_L.jpg?t=1573047959" alt="">
+    <div class="m-duo__price"><span class="m-duo__stamp">專屬價</span><b>$1,799</b><s>$3,558</s></div>
+  </a>
+  <div class="m-duo__right">
+    <div class="m-duo__rhd">品牌聯盟</div>
+    <div class="m-duo__grid">
+      <a href="/m/category?cat=%E6%89%8B%E6%A9%9F%2F%E7%9B%B8%E6%A9%9F"><img src="https://img4.momoshop.com.tw/1767185221/goodsimg/0002/005/997/2005997_O.jpg" alt=""><span>iPhone<br>登記抽999</span></a>
+      <a href="/m/category?cat=%E5%80%8B%E4%BA%BA%E6%B8%85%E6%BD%94"><img src="https://img1.momoshop.com.tw/goodsimg/0001/915/141/1915141_L.jpg?t=1571314789" alt=""><span>高露潔<br>7折起</span></a>
+      <a href="/m/category?cat=%E4%BF%9D%E5%81%A5%2F%E9%86%AB%E7%99%82"><img src="https://www.momoshop.com.tw/goodsimg/0001/695/388/1695388_L.jpg?t=641548132767" alt=""><span>好好生醫<br>滿額多重送</span></a>
+      <a href="/m/category?cat=%E6%88%B6%E5%A4%96"><img src="https://i1.momoshop.com.tw/1692546547/goodsimg/0003/930/595/3930595_L.webp" alt=""><span>TNF北面<br>全館5折up</span></a>
+    </div>
+  </div>
+</section>
+<section class="m-limit">
+  <div class="m-limit__hd"><b>22</b><span>限定價</span><em>萬下殺</em></div>
+  <div class="m-limit__row">
+    <a href="/m/category?cat=%E5%AE%B6%E5%85%B7%E6%94%B6%E7%B4%8D"><i><img src="https://img2.momoshop.com.tw/1767021601/goodsimg/0000/355/023/355023_OR.jpg" alt=""></i><b>家居生活</b><span>抽iPhone</span></a>
+    <a href="/m/category?cat=%E6%97%85%E9%81%8A%2F%E7%A5%A8%E5%88%B8"><i><img src="https://img1.momoshop.com.tw/1673978207/goodsimg/0002/053/339/2053339_L.jpg" alt=""></i><b>休閒旅遊</b><span>銅板價</span></a>
+    <a href="/m/category?cat=%E6%AF%8D%E5%AC%B0%2F%E7%8E%A9%E5%85%B7"><i><img src="https://i3.momoshop.com.tw/1692573035/goodsimg/0002/268/449/2268449_L.webp" alt=""></i><b>日用婦幼</b><span>抽iPhone</span></a>
+    <a href="/m/category?cat=%E9%A3%9F%E5%93%81%2F%E9%A3%B2%E6%96%99"><i><img src="https://i4.momoshop.com.tw/1762309138/goodsimg/0000/983/653/983653_L.webp" alt=""></i><b>熱銷爆品</b><span>抽年菜</span></a>
+    <a href="/m/category"><i><img src="https://i2.momoshop.com.tw/1714021725/goodsimg/0001/464/755/1464755_L.webp" alt=""></i><b>新品上市</b><span>搶先看</span></a>
+  </div>
+</section>
+<a class="m-taojin" href="/m/category?cat=%E5%AE%B6%E9%9B%BB">
+  <div class="m-taojin__l"><b>moPro</b><span>專屬價48折</span></div>
+  <div class="m-taojin__c"><b>加碼送$1000</b><i>最後一天600</i></div>
+  <div class="m-taojin__r"><b>家電特賣</b><span>加碼送3150</span></div>
+</a>
+<section class="m-two">
+  <a href="/info/member-center"><b>訂閱moPro</b><span>直領<em>$1080</em></span></a>
+  <a href="/m/category?cat=%E9%A3%9F%E5%93%81%2F%E9%A3%B2%E6%96%99"><b>滿額送</b><span>限量電子雞</span></a>
+</section>
+<nav class="m-ico-row">
+  <a href="/info/coupons"><span class="gi" style="color:#FF5A5F"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h13A2.5 2.5 0 0 1 21 8.5v1a2.5 2.5 0 0 0 0 5v1a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 15.5v-1a2.5 2.5 0 0 0 0-5v-1Z"/></svg></span>領券</a>
+  <a href="/m/category"><span class="gi" style="color:#4C8DFF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></span>秒殺</a>
+  <a href="/info/member-center"><span class="gi" style="color:#FF8A3D"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="m9 15 2 2 4-4"/></svg></span>簽到</a>
+  <a href="/m/category?cat=%E5%AE%B6%E9%9B%BB"><span class="gi" style="color:#FFC53D"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></span>限搶</a>
+  <a href="/m/category"><span class="gi" style="color:#8A8A8A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>看更多</a>
+</nav>
+<section class="m-sec">
+  <div class="m-sec__hd"><h2>限時搶購<span class="m-sec__count">02:07:03</span></h2>
+    <a class="more" href="/m/category?cat=%E5%AE%B6%E9%9B%BB">看更多 <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+  <div class="m-goods">
+  <a class="m-card" href="/m/product/1464755">
+    <div class="m-card__img">
+      <img src="https://i2.momoshop.com.tw/1714021725/goodsimg/0001/464/755/1464755_L.webp" alt="【SAMPO聲寶】30公升多功能紫外線殺菌烘碗機(KB-GA30U)" loading="lazy">
+      <span class="m-card__tag">今日限定</span>
+    </div>
+    <div class="m-card__body">
+      <p class="m-card__name">【SAMPO聲寶】30公升多功能紫外線殺菌烘碗機(KB-GA30U)</p>
+      <div class="m-card__price">
+        <span class="now"><small>$</small>1,605</span>
+        <span class="was">$3,210</span>
+      </div>
+      <div class="m-card__meta"><span>已售 74 組</span><i class="dot"></i><span>滿$490免運</span></div>
+      <div class="m-card__buy">馬上買</div>
+    </div>
+  </a>
+  <a class="m-card" href="/m/product/1607993">
+    <div class="m-card__img">
+      <img src="https://i4.momoshop.com.tw/1764354062/goodsimg/0001/607/993/1607993_L.webp" alt="【3M】超濾淨6坪進階版負離子空氣清淨機(適用 3-7.5坪CHIMSPD-01UCRC-1)" loading="lazy">
+      <span class="m-card__tag">滿額登記</span>
+    </div>
+    <div class="m-card__body">
+      <p class="m-card__name">【3M】超濾淨6坪進階版負離子空氣清淨機(適用 3-7.5坪CHIMSPD-01UCRC-1)</p>
+      <div class="m-card__price">
+        <span class="now"><small>$</small>1,495</span>
+        <span class="was">$2,990</span>
+      </div>
+      <div class="m-card__meta"><span>已售 111 組</span><i class="dot"></i><span>滿$490免運</span></div>
+      <div class="m-card__buy">馬上買</div>
+    </div>
+  </a>
+  <a class="m-card" href="/m/product/1840318">
+    <div class="m-card__img">
+      <img src="https://i2.momoshop.com.tw/1714021396/goodsimg/0001/840/318/1840318_OR.jpg" alt="【國際牌】旋轉式電鬍刀(ES-6510)" loading="lazy">
+      <span class="m-card__tag">爆殺</span>
+    </div>
+    <div class="m-card__body">
+      <p class="m-card__name">【國際牌】旋轉式電鬍刀(ES-6510)</p>
+      <div class="m-card__price">
+        <span class="now"><small>$</small>375</span>
+        <span class="was">$749</span>
+      </div>
+      <div class="m-card__meta"><span>已售 148 組</span><i class="dot"></i><span>滿$490免運</span></div>
+      <div class="m-card__buy">馬上買</div>
+    </div>
+  </a>
+  <a class="m-card" href="/m/product/2033281">
+    <div class="m-card__img">
+      <img src="https://i2.momoshop.com.tw/1755147731/goodsimg/0002/033/281/2033281_L.webp" alt="【TECO】直立式吸塵器(XYFXJ060)" loading="lazy">
+      <span class="m-card__tag">免運</span>
+    </div>
+    <div class="m-card__body">
+      <p class="m-card__name">【TECO】直立式吸塵器(XYFXJ060)</p>
+      <div class="m-card__price">
+        <span class="now"><small>$</small>400</span>
+        <span class="was">$799</span>
+      </div>
+      <div class="m-card__meta"><span>已售 185 組</span><i class="dot"></i><span>滿$490免運</span></div>
+      <div class="m-card__buy">馬上買</div>
+    </div>
+  </a>
+  <a class="m-card" href="/m/product/2184546">
+    <div class="m-card__img">
+      <img src="https://i1.momoshop.com.tw/1770738002/goodsimg/0002/184/546/2184546_OR.jpg" alt="【美國Honeywell】抗敏空氣清淨機HPA-100APTW(適用4-8坪★除臭 除菌 去味 抗過敏)" loading="lazy">
+      <span class="m-card__tag">獨家</span>
+    </div>
+    <div class="m-card__body">
+      <p class="m-card__name">【美國Honeywell】抗敏空氣清淨機HPA-100APTW(適用4-8坪★除臭 除菌 去味 抗過敏)</p>
+      <div class="m-card__price">
+        <span class="now"><small>$</small>1,995</span>
+        <span class="was">$3,990</span>
+      </div>
+      <div class="m-card__meta"><span>已售 222 組</span><i class="dot"></i><span>滿$490免運</span></div>
+      <div class="m-card__buy">馬上買</div>
+    </div>
+  </a>
+  <a class="m-card" href="/m/product/2502783">
+    <div class="m-card__img">
+      <img src="https://i4.momoshop.com.tw/1692573383/goodsimg/0002/502/783/2502783_L.webp" alt="【依必朗】柑橘洗潔精1000g+1000g*6組(買3組送3組)" loading="lazy">
+      <span class="m-card__tag">今日限定</span>
+    </div>
+    <div class="m-card__body">
+      <p class="m-card__name">【依必朗】柑橘洗潔精1000g+1000g*6組(買3組送3組)</p>
+      <div class="m-card__price">
+        <span class="now"><small>$</small>300</span>
+        <span class="was">$599</span>
+      </div>
+      <div class="m-card__meta"><span>已售 259 組</span><i class="dot"></i><span>滿$490免運</span></div>
+      <div class="m-card__buy">馬上買</div>
+    </div>
+  </a></div>
+</section>
+<section class="m-sec">
+  <div class="m-sec__hd"><h2>11.11 降價好貨</h2>
+    <a class="more" href="/m/category?cat=%E9%A3%9F%E5%93%81%2F%E9%A3%B2%E6%96%99">看更多 <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+  <div class="m-goods">
+  <a class="m-card" href="/m/product/983653">
+    <div class="m-card__img">
+      <img src="https://i4.momoshop.com.tw/1762309138/goodsimg/0000/983/653/983653_L.webp" alt="【李錦記】舊庄特級蠔油(510g)" loading="lazy">
+      <span class="m-card__tag">今日限定</span>
+    </div>
+    <div class="m-card__body">
+      <p class="m-card__name">【李錦記】舊庄特級蠔油(510g)</p>
+      <div class="m-card__price">
+        <span class="now"><small>$</small>53</span>
+        <span class="was">$105</span>
+      </div>
+      <div class="m-card__meta"><span>已售 74 組</span><i class="dot"></i><span>滿$490免運</span></div>
+      <div class="m-card__buy">馬上買</div>
+    </div>
+  </a>
+  <a class="m-card" href="/m/product/1001748">
+    <div class="m-card__img">
+      <img src="https://i1.momoshop.com.tw/1692176949/goodsimg/0001/001/748/1001748_OR.jpg" alt="【Bull head 牛頭牌】5號麻辣沙茶醬250g" loading="lazy">
+      <span class="m-card__tag">滿額登記</span>
+    </div>
+    <div class="m-card__body">
+      <p class="m-card__name">【Bull head 牛頭牌】5號麻辣沙茶醬250g</p>
+      <div class="m-card__price">
+        <span class="now"><small>$</small>68</span>
+        <span class="was">$135</span>
+      </div>
+      <div class="m-card__meta"><span>已售 111 組</span><i class="dot"></i><span>滿$490免運</span></div>
+      <div class="m-card__buy">馬上買</div>
+    </div>
+  </a>
+  <a class="m-card" href="/m/product/1004620">
+    <div class="m-card__img">
+      <img src="https://i2.momoshop.com.tw/1754697963/goodsimg/0001/004/620/1004620_L.webp" alt="【泰山】八寶粥375g(12入禮盒)" loading="lazy">
+      <span class="m-card__tag">爆殺</span>
+    </div>
+    <div class="m-card__body">
+      <p class="m-card__name">【泰山】八寶粥375g(12入禮盒)</p>
+      <div class="m-card__price">
+        <span class="now"><small>$</small>192</span>
+        <span class="was">$384</span>
+      </div>
+      <div class="m-card__meta"><span>已售 148 組</span><i class="dot"></i><span>滿$490免運</span></div>
+      <div class="m-card__buy">馬上買</div>
+    </div>
+  </a>
+  <a class="m-card" href="/m/product/1010414">
+    <div class="m-card__img">
+      <img src="https://i2.momoshop.com.tw/1692204023/goodsimg/0001/010/414/1010414_OR.jpg" alt="【Bull head 牛頭牌】2號沙茶醬(737g)" loading="lazy">
+      <span class="m-card__tag">免運</span>
+    </div>
+    <div class="m-card__body">
+      <p class="m-card__name">【Bull head 牛頭牌】2號沙茶醬(737g)</p>
+      <div class="m-card__price">
+        <span class="now"><small>$</small>147</span>
+        <span class="was">$293</span>
+      </div>
+      <div class="m-card__meta"><span>已售 185 組</span><i class="dot"></i><span>滿$490免運</span></div>
+      <div class="m-card__buy">馬上買</div>
+    </div>
+  </a>
+  <a class="m-card" href="/m/product/1020754">
+    <div class="m-card__img">
+      <img src="https://i1.momoshop.com.tw/1692214873/goodsimg/0001/020/754/1020754_L.webp" alt="【李錦記】大舊庄蠔油(510g)" loading="lazy">
+      <span class="m-card__tag">獨家</span>
+    </div>
+    <div class="m-card__body">
+      <p class="m-card__name">【李錦記】大舊庄蠔油(510g)</p>
+      <div class="m-card__price">
+        <span class="now"><small>$</small>109</span>
+        <span class="was">$218</span>
+      </div>
+      <div class="m-card__meta"><span>已售 222 組</span><i class="dot"></i><span>滿$490免運</span></div>
+      <div class="m-card__buy">馬上買</div>
+    </div>
+  </a>
+  <a class="m-card" href="/m/product/1025920">
+    <div class="m-card__img">
+      <img src="https://i3.momoshop.com.tw/1692285740/goodsimg/0001/025/920/1025920_L.webp" alt="【青葉】土豆麵筋 170g*3" loading="lazy">
+      <span class="m-card__tag">今日限定</span>
+    </div>
+    <div class="m-card__body">
+      <p class="m-card__name">【青葉】土豆麵筋 170g*3</p>
+      <div class="m-card__price">
+        <span class="now"><small>$</small>50</span>
+        <span class="was">$100</span>
+      </div>
+      <div class="m-card__meta"><span>已售 259 組</span><i class="dot"></i><span>滿$490免運</span></div>
+      <div class="m-card__buy">馬上買</div>
+    </div>
+  </a></div>
+</section>
+<section class="m-sec">
+  <div class="m-sec__hd"><h2>momo熱搜榜</h2><a class="more" href="/m/category">看全部 <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+  <ol class="m-rank">
+    <li><span class="num">1</span><a href="/m/category?kw=iphone%2017">iphone 17</a><span class="hot">熱度2,736萬</span></li>
+    <li><span class="num">2</span><a href="/m/category?kw=%E8%A1%9B%E7%94%9F%E7%B4%99">衛生紙</a><span class="hot">熱度2,339萬</span></li>
+    <li><span class="num">3</span><a href="/m/category?kw=%E8%A1%8C%E5%8B%95%E9%9B%BB%E6%BA%90">行動電源</a><span class="hot">熱度1,942萬</span></li>
+    <li><span class="num">4</span><a href="/m/category?kw=%E9%99%A4%E6%BF%95%E6%A9%9F">除濕機</a><span class="hot">熱度1,545萬</span></li>
+    <li><span class="num">5</span><a href="/m/category?kw=%E9%9D%A2%E8%86%9C">面膜</a><span class="hot">熱度1,148萬</span></li>
+    <li><span class="num">6</span><a href="/m/category?kw=%E6%B4%97%E8%A1%A3%E7%B2%BE">洗衣精</a><span class="hot">熱度751萬</span></li>
+    <li><span class="num">7</span><a href="/m/category?kw=%E7%A9%BA%E6%B0%A3%E6%B8%85%E6%B7%A8%E6%A9%9F">空氣清淨機</a><span class="hot">熱度354萬</span></li>
+    <li><span class="num">8</span><a href="/m/category?kw=%E8%97%8D%E7%89%99%E8%80%B3%E6%A9%9F">藍牙耳機</a><span class="hot">熱度-43萬</span></li>
+  </ol>
+</section>
+<div class="m-safe"></div>
+
+<nav class="m-tabbar">
+  <a href="/m/" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg><span>首頁</span></a><a href="/m/category"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.4"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.4"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.4"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.4"/></svg><span>分類</span></a><a href="/m/category"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/><path d="M3 9l1.6-4.2A1 1 0 0 1 5.5 4h13a1 1 0 0 1 .9.8L21 9z"/><path d="M9 20v-5h6v5"/></svg><span>限時搶購</span></a><a href="/m/cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2.1 11.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg><span>購物車</span></a><a href="/info/member-center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></svg><span>會員</span></a>
+</nav>
+<script defer src="/assets/promo/promo.js" data-promo="1"></script>
+</body>
+</html>
