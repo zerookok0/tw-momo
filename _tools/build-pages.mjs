@@ -6,6 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJ = path.resolve(__dirname, '..');
 const SITE = path.join(PROJ, 'site');
 const products = JSON.parse(fs.readFileSync(path.join(PROJ, '_ref', 'products.json'), 'utf8'));
+import { salePrice, origPrice } from '../lib/pricing.mjs';
 
 const header = fs.readFileSync(path.join(SITE, '_partials', 'header.html'), 'utf8');
 const footer = fs.readFileSync(path.join(SITE, '_partials', 'footer.html'), 'utf8');
@@ -109,8 +110,8 @@ const PLACEHOLDER_IMG = '/assets/img1.momoshop.com.tw/ecm/img/online/10/998/00/0
 
 function productPage(p) {
   const name = esc((p.name || p.texts[0]) || 'momo 嚴選商品');
-  const price = p.price || 990;
-  const was = Math.round(price * 1.32);
+  const price = salePrice(p) || 495;
+  const was = origPrice(p);
   const img = p.img || PLACEHOLDER_IMG;
   const body = `
 <div class="wrap">
@@ -192,8 +193,8 @@ function productPage(p) {
       <h3>規格</h3>
       <table class="spec-table">
         <tr><th>商品編號</th><td>${p.code}</td></tr>
-        <tr><th>建議售價</th><td>${fmt(was)}</td></tr>
-        <tr><th>momo 售價</th><td>${fmt(price)}</td></tr>
+        <tr><th>原價</th><td><s>${fmt(was)}</s></td></tr>
+        <tr><th>5 折價</th><td style="color:#d62872;font-weight:700">${fmt(price)}</td></tr>
         <tr><th>產地</th><td>依原廠標示</td></tr>
         <tr><th>保固</th><td>原廠保固（非人為損壞）</td></tr>
       </table>
@@ -303,7 +304,7 @@ function cartPage() {
 <script>
 (function(){
   var CART_KEY = 'momo_cart';
-  var DEFAULT_CART = ${JSON.stringify(products.slice(0, 3).map((p) => ({ code: p.code, name: (p.name || p.texts[0]), price: p.price, qty: 1, img: p.img })))};
+  var DEFAULT_CART = ${JSON.stringify(products.slice(0, 3).map((p) => ({ code: p.code, name: (p.name || p.texts[0]), price: salePrice(p), qty: 1, img: p.img })))};
 
   function read(){
     try {
@@ -568,7 +569,7 @@ function categoryPage() {
       <a class="cat-card" href="/product/${p.code}">
         <div class="cat-card__img"><img src="${p.img || PLACEHOLDER_IMG}" alt=""></div>
         <div class="cat-card__name">${esc((p.name || p.texts[0]) || '')}</div>
-        <div class="cat-card__price">${fmt(p.price || 0)}</div>
+        <div class="cat-card__price">${fmt(salePrice(p))}<s style="font-family:var(--font-price);font-size:11px;color:#bbb;margin-left:6px">${fmt(origPrice(p))}</s></div>
       </a>`).join('');
 
   const body = `

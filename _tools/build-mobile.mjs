@@ -7,6 +7,7 @@ const PROJ = path.resolve(__dirname, '..');
 const SITE = path.join(PROJ, 'site');
 const M = path.join(SITE, 'm');
 const products = JSON.parse(fs.readFileSync(path.join(PROJ, '_ref', 'products.json'), 'utf8'));
+import { salePrice, origPrice } from '../lib/pricing.mjs';
 const DISTRICTS = JSON.parse(fs.readFileSync(path.join(PROJ, '_ref', 'tw-districts.json'), 'utf8'));
 
 const fmt = (n) => '$' + Number(n).toLocaleString('en-US');
@@ -242,8 +243,8 @@ function card(p, i = 0) {
     <div class="m-card__body">
       <p class="m-card__name">${esc((p.name || p.texts[0]) || '')}</p>
       <div class="m-card__price">
-        <span class="now"><small>$</small>${Number(p.price).toLocaleString('en-US')}</span>
-        <span class="was">$${Math.round(p.price * 1.28).toLocaleString('en-US')}</span>
+        <span class="now"><small>$</small>${salePrice(p).toLocaleString('en-US')}</span>
+        <span class="was">$${origPrice(p).toLocaleString('en-US')}</span>
       </div>
       <div class="m-card__meta"><span>已售 ${(i * 37 + 54) % 900 + 20} 組</span><i class="dot"></i><span>滿$490免運</span></div>
       <div class="m-card__buy">馬上買</div>
@@ -353,8 +354,8 @@ ${tabbar('分類')}`;
 // ───────────────────────── 商品详情 ─────────────────────────
 function productPage(p) {
   const name = (p.name || p.texts[0]) || 'momo 嚴選商品';
-  const price = p.price || 990;
-  const was = Math.round(price * 1.28);
+  const price = salePrice(p) || 495;
+  const was = origPrice(p);
   const img = p.img || PLACEHOLDER;
   const body = `
 ${header({ showSearch: false, showNav: false, cartCount: 3 })}
@@ -403,8 +404,8 @@ ${crumb([{ t: '首頁', href: '/m/' }, { t: '商品分類', href: '/m/category' 
   <h3>商品規格</h3>
   <table class="spec">
     <tr><th>商品編號</th><td>${p.code}</td></tr>
-    <tr><th>建議售價</th><td>${fmt(was)}</td></tr>
-    <tr><th>momo 售價</th><td>${fmt(price)}</td></tr>
+    <tr><th>原價</th><td><s>${fmt(was)}</s></td></tr>
+    <tr><th>5 折價</th><td style="color:#d62872;font-weight:700">${fmt(price)}</td></tr>
     <tr><th>產地</th><td>依原廠標示</td></tr>
     <tr><th>保固</th><td>原廠保固（非人為損壞）</td></tr>
     <tr><th>退換貨</th><td>10 天猶豫期，商品需完整包裝</td></tr>
@@ -459,7 +460,7 @@ ${crumb([{ t: '首頁', href: '/m/' }, { t: '商品分類', href: '/m/category' 
 
 // ───────────────────────── 购物车 ─────────────────────────
 function cartPage() {
-  const seed = products.slice(0, 3).map((p) => ({ code: p.code, name: (p.name || p.texts[0]), price: p.price, qty: 1, img: p.img }));
+  const seed = products.slice(0, 3).map((p) => ({ code: p.code, name: (p.name || p.texts[0]), price: salePrice(p), qty: 1, img: p.img }));
   const body = `
 ${header({ showSearch: false, showNav: false, cartCount: 3 })}
 ${crumb([{ t: '首頁', href: '/m/' }, { t: '購物車' }])}

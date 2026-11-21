@@ -99,9 +99,9 @@ function secHeaders() {
 
 function fallbackCart() {
   const items = [
-    { name: '【Kingston 金士頓】8GB DDR5 5600MT/s Non-ECC 記憶體', qty: 1, price: 828, img: '/assets/i4.momoshop.com.tw/1754298127/goodsimg/0014/295/303/14295303_OL_m.webp' },
-    { name: '【威拂】魔撢本體 1把+1片裝(藍色/粉色 隨機出貨)', qty: 1, price: 59, img: '/assets/i2.momoshop.com.tw/1698915746/goodsimg/0008/593/194/8593194_OL_m.webp' },
-    { name: '【SONAX】鍍膜美容巾(細緻柔軟.極具吸收力)', qty: 1, price: 299, img: '/assets/i3.momoshop.com.tw/1759350466/goodsimg/0007/053/569/7053569_OL_m.webp' },
+    { name: '【Kingston 金士頓】8GB DDR5 5600MT/s Non-ECC 記憶體', qty: 1, price: 414, img: '/assets/i4.momoshop.com.tw/1754298127/goodsimg/0014/295/303/14295303_OL_m.webp' },
+    { name: '【威拂】魔撢本體 1把+1片裝(藍色/粉色 隨機出貨)', qty: 1, price: 30, img: '/assets/i2.momoshop.com.tw/1698915746/goodsimg/0008/593/194/8593194_OL_m.webp' },
+    { name: '【SONAX】鍍膜美容巾(細緻柔軟.極具吸收力)', qty: 1, price: 150, img: '/assets/i3.momoshop.com.tw/1759350466/goodsimg/0007/053/569/7053569_OL_m.webp' },
   ];
   const total = items.reduce((s, i) => s + i.price * i.qty, 0);
   return {
