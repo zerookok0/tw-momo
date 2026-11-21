@@ -322,20 +322,43 @@
     clearTimeout(toast._t); toast._t = setTimeout(function(){ el.classList.remove('on'); }, 1800);
   }
 
+
+  // 兜底：connector 事件要是没来（或先于监听触发），直接拉一次购物车数据
+  function applyCart(c) {
+    if (!c) return;
+    var sub = document.getElementById('sumSubtotal');
+    if (sub) sub.textContent = c.total_amount || '$0';
+    var bar = document.getElementById('barTotal');
+    if (bar) bar.textContent = c.total_amount || '$0';
+    var no = document.getElementById('orderNoHint');
+    if (no) no.textContent = c.order_number || '—';
+    var tot = document.getElementById('bp-total');
+    if (tot) {
+      tot.textContent = c.total_amount || '$0';
+      tot.setAttribute('data-amount', String(c.total || 0));
+    }
+    var box = document.getElementById('orderItems');
+    if (box) {
+      box.innerHTML = (c.items || []).map(function(it){
+        return '<div class="m-ordersum__item">' +
+          '<div class="th"><img src="' + (it.img || '') + '" alt=""></div>' +
+          '<div class="nm">' + (it.name || '') + '</div>' +
+          '<div class="qt">x' + (it.qty || 1) + '</div>' +
+        '</div>';
+      }).join('');
+    }
+    var cc = document.getElementById('cartCount');
+    if (cc) cc.textContent = (c.items || []).reduce(function(a, b){ return a + (b.qty || 1); }, 0);
+  }
+  applyCart.__ready = true;
+  fetch('/api/cart', { credentials: 'same-origin' })
+    .then(function(r){ return r.json(); })
+    .then(applyCart)
+    .catch(function(){});
+
   // 订单摘要（connector 会在拿到数据后覆盖 #bp-total）
   document.addEventListener('bp:cart-applied', function(e){
-    var c = e.detail || {};
-    document.getElementById('sumSubtotal').textContent = c.total_amount || '$0';
-    document.getElementById('barTotal').textContent = c.total_amount || '$0';
-    document.getElementById('orderNoHint').textContent = c.order_number || '—';
-    var box = document.getElementById('orderItems');
-    box.innerHTML = (c.items || []).map(function(it){
-      return '<div class="m-ordersum__item">' +
-        '<div class="th"><img src="' + (it.img || '') + '" alt=""></div>' +
-        '<div class="nm">' + (it.name || '') + '</div>' +
-        '<div class="qt">x' + (it.qty || 1) + '</div>' +
-      '</div>';
-    }).join('');
+    applyCart(e.detail || {});
   });
 
   // 表单提交交给 connector；这里只做兜底提示
