@@ -1,0 +1,445 @@
+{
+ "base": "https://tw-momo.pages.dev",
+ "at": "2026-11-21T07:17:30.003Z",
+ "pages": {
+  "total": 1323,
+  "failed": 0,
+  "errors": []
+ },
+ "links": {
+  "total": 34036,
+  "dead": 27,
+  "list": [
+   {
+    "url": "/product/10524971",
+    "status": 0,
+    "from": [
+     "/category?page=239"
+    ]
+   },
+   {
+    "url": "/product/10666382",
+    "status": 0,
+    "from": [
+     "/category?page=253"
+    ]
+   },
+   {
+    "url": "/product/10724322",
+    "status": 0,
+    "from": [
+     "/category?page=259"
+    ]
+   },
+   {
+    "url": "/product/10787072",
+    "status": 0,
+    "from": [
+     "/category?page=264"
+    ]
+   },
+   {
+    "url": "/product/10789973",
+    "status": 0,
+    "from": [
+     "/category?page=264"
+    ]
+   },
+   {
+    "url": "/product/10788093",
+    "status": 0,
+    "from": [
+     "/category?page=264"
+    ]
+   },
+   {
+    "url": "/product/10786730",
+    "status": 0,
+    "from": [
+     "/category?page=264"
+    ]
+   },
+   {
+    "url": "/product/10793007",
+    "status": 0,
+    "from": [
+     "/category?page=265"
+    ]
+   },
+   {
+    "url": "/product/10792789",
+    "status": 0,
+    "from": [
+     "/category?page=264"
+    ]
+   },
+   {
+    "url": "/product/10793421",
+    "status": 0,
+    "from": [
+     "/category?page=265"
+    ]
+   },
+   {
+    "url": "/product/10792444",
+    "status": 0,
+    "from": [
+     "/category?page=264"
+    ]
+   },
+   {
+    "url": "/product/10793357",
+    "status": 0,
+    "from": [
+     "/category?page=265"
+    ]
+   },
+   {
+    "url": "/product/10793954",
+    "status": 0,
+    "from": [
+     "/category?page=265"
+    ]
+   },
+   {
+    "url": "/product/10794231",
+    "status": 0,
+    "from": [
+     "/category?page=265"
+    ]
+   },
+   {
+    "url": "/product/10809383",
+    "status": 0,
+    "from": [
+     "/category?page=266"
+    ]
+   },
+   {
+    "url": "/product/10771771",
+    "status": 0,
+    "from": [
+     "/category?page=263"
+    ]
+   },
+   {
+    "url": "/product/10771772",
+    "status": 0,
+    "from": [
+     "/category?page=263"
+    ]
+   },
+   {
+    "url": "/product/13286234",
+    "status": 0,
+    "from": [
+     "/category?page=438"
+    ]
+   },
+   {
+    "url": "/product/13313614",
+    "status": 0,
+    "from": [
+     "/category?page=441"
+    ]
+   },
+   {
+    "url": "/product/13190953",
+    "status": 0,
+    "from": [
+     "/category?page=429"
+    ]
+   },
+   {
+    "url": "/product/13322265",
+    "status": 0,
+    "from": [
+     "/category?page=442"
+    ]
+   },
+   {
+    "url": "/product/13333217",
+    "status": 0,
+    "from": [
+     "/category?page=443"
+    ]
+   },
+   {
+    "url": "/product/13446806",
+    "status": 0,
+    "from": [
+     "/category?page=454"
+    ]
+   },
+   {
+    "url": "/product/13448225",
+    "status": 0,
+    "from": [
+     "/category?page=454"
+    ]
+   },
+   {
+    "url": "/product/15063710",
+    "status": 0,
+    "from": [
+     "/category?page=655"
+    ]
+   },
+   {
+    "url": "/product/15018766",
+    "status": 0,
+    "from": [
+     "/category?page=650"
+    ]
+   },
+   {
+    "url": "/product/15082665",
+    "status": 0,
+    "from": [
+     "/category?page=656"
+    ]
+   }
+  ]
+ },
+ "external": {
+  "checked": 60,
+  "unreachable": 0,
+  "list": []
+ },
+ "images": {
+  "total": 33713,
+  "broken": 28,
+  "list": [
+   {
+    "url": "/bp/3ds/img/mastercard.svg",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/m/checkout",
+     "/checkout"
+    ]
+   },
+   {
+    "url": "/m/assets/img/logo.svg",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/m/checkout",
+     "/m/cart"
+    ]
+   },
+   {
+    "url": "/bp/3ds/img/visa.svg",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/m/checkout",
+     "/checkout"
+    ]
+   },
+   {
+    "url": "' + (it.img || '') + '",
+    "status": 0,
+    "len": 0,
+    "from": [
+     "/m/checkout"
+    ]
+   },
+   {
+    "url": "/assets/img1.momoshop.com.tw/ecm/img/online/81/998/00/000/mobile/bt_7_706_01/bt_7_706_01_e62.jpg",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "/assets/img4.momoshop.com.tw/ecm/img/online/341/2025/10/21/165435252/2025102116543525201.png",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "https://img1.momoshop.com.tw/ecm/img/online/341/2025/10/20/110222119/2025102011022211901.png?t=20251020110222",
+    "status": 404,
+    "len": 2675,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "https://img2.momoshop.com.tw/ecm/img/online/341/2025/10/20/160954211/2025102016095421101.png?t=20251020160954",
+    "status": 404,
+    "len": 2675,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "#clip0_1105_32358",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/",
+     "/checkout"
+    ]
+   },
+   {
+    "url": "/assets/bat.bing.com/action/0",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "#clip0_343_1356",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/",
+     "/checkout"
+    ]
+   },
+   {
+    "url": "#clip0_1993_14940",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "#clip0_4935_3310",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "#clip0_5047_3399",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "#clip0_424_1429",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "#clip0_424_1432",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "#clip0_553_1449",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "#__lottie_element_19",
+    "status": 200,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "&quot;https://img1.momoshop.com.tw/ecm/img/online/81/998/00/000/mobile/bt_7_711_01/bt_7_711_01_e7.png?t=1760352981436&qu",
+    "status": 0,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "&quot;https://img1.momoshop.com.tw/ecm/img/cmm/mobile/main/adPriceImage.png?t=2935199&quot;",
+    "status": 0,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "&quot;https://img3.momoshop.com.tw/ecm/img/cmm/mobile/main/adPriceImage.png?t=2935199&quot;",
+    "status": 0,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "&quot;https://img2.momoshop.com.tw/ecm/img/cmm/mobile/main/adPriceImage.png?t=2935199&quot;",
+    "status": 0,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "&quot;https://img4.momoshop.com.tw/ecm/img/cmm/mobile/main/adPriceImage.png?t=2935199&quot;",
+    "status": 0,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "&quot;https://img2.momoshop.com.tw/ecm/img/online/81/998/00/000/mobile/bt_7_777_02/bt_7_777_02_e8.png?t=1761107669801&qu",
+    "status": 0,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "&quot;https://img2.momoshop.com.tw/ecm/img/online/81/998/00/000/mobile/bt_7_708_02/bt_7_708_02_e7.png?t=1761037212018&qu",
+    "status": 0,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "&quot;https://img3.momoshop.com.tw/ecm/img/online/81/998/00/000/mobile/bt_7_713_01/bt_7_713_01_e9.png?t=1760324649240&qu",
+    "status": 0,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "&quot;https://img1.momoshop.com.tw/ecm/img/online/81/998/00/000/mobile/bt_7_712_01/bt_7_712_01_e7.png?t=1759917357101&qu",
+    "status": 0,
+    "len": 0,
+    "from": [
+     "/"
+    ]
+   },
+   {
+    "url": "' + (it.img||'') + '",
+    "status": 0,
+    "len": 0,
+    "from": [
+     "/m/cart",
+     "/cart"
+    ]
+   }
+  ]
+ }
+}
