@@ -77,40 +77,15 @@ fs.writeFileSync(
   'utf8'
 );
 
-// ── _routes.json：只让动态路由走 Functions，静态资源零开销 ──
+// ── _routes.json ──
+// 全部路径交给 Functions，只把纯静态目录排除掉。
+// 为什么不用逐条 include：Pages 对「存在同名目录」的路径（/m、/checkout）
+// 会先做 308 → /m/，即使 include 里写了 /m 也可能被静态层抢走。
+// include 用 /* 且排除静态目录后，Function 稳定接管，DIRECT_PAGES 直出 200。
 const routes = {
   version: 1,
-  include: [
-    // 目录页直出：Pages 默认会把 /checkout 308 到 /checkout/，契约要求 200 无 Location
-    '/checkout',
-    '/checkout/',
-    '/cart',
-    '/cart/',
-    '/m',
-    '/m/',
-    '/m/checkout',
-    '/m/checkout/',
-    '/m/cart',
-    '/m/cart/',
-    // 站内实体页（关于我们 / 隐私权 / FAQ …）
-    '/info/*',
-    '/member',
-    '/member/*',
-    // 订单成功页（不显式指派会回落到首页内容）
-    '/order/*',
-    '/m/order/*',
-    // 动态路由
-    '/api/*',
-    '/product/*',
-    '/goods/GoodsDetail.jsp',
-    '/category',
-    '/category/*',
-    '/m/product/*',
-    '/m/goods.momo',
-    '/m/category',
-    '/m/category/*',
-  ],
-  exclude: [],
+  include: ['/*'],
+  exclude: ['/assets/*', '/bp/*', '/promo/*'],
 };
 fs.writeFileSync(path.join(OUT, '_routes.json'), JSON.stringify(routes, null, 2), 'utf8');
 
