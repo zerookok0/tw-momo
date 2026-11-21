@@ -38,7 +38,12 @@ for (const line of raw.split('\n')) {
     .replace(/&#39;/g, "'")
     .replace(/\s+/g, ' ')
     .trim();
-  if (!/^\d+$/.test(code) || name.length < 2) continue;
+  // 只收真实商品码（momo i_code 是 5–9 位数字）；
+  // EDM 页里的区块 id（0008/0012/14）不是商品
+  if (!/^[1-9]\d{4,8}$/.test(code)) continue;
+  if (name.length < 4) continue;
+  // 纯促销文案不是商品名
+  if (/^(贈|領卷|領券|登記|下殺|限時|破盤|加碼|抽|送|滿額|免運|今日|週|月)+/.test(name) && name.length < 12) continue;
 
   let img = it.img ? String(it.img) : '';
   if (img.startsWith('//')) img = 'https:' + img;
