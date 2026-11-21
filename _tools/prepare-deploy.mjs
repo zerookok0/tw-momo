@@ -126,6 +126,23 @@ const SLASH_FIX = [
 })(OUT);
 console.log('  链接规范 : 目录页链接统一带斜杠');
 
+// ── _redirects：Functions 不可用时的静态兜底 ──
+// Pages 的 200 重写：每条请求都原地返回目标文件，地址栏不变。
+// 商品页 / 分类页 / 订单页 全部交给静态页 + 浏览器端渲染。
+const REDIRECTS = [
+  '/product/*    /app-product.html   200',
+  '/m/product/*  /app-product.html   200',
+  '/goods/GoodsDetail.jsp  /app-product.html  200',
+  '/category      /category/index.html  200',
+  '/category/     /category/index.html  200',
+  '/m/category    /m/category/index.html  200',
+  '/m/category/   /m/category/index.html  200',
+  '/order/*      /order/index.html   200',
+  '/m/order/*    /m/order/index.html   200',
+].join('\n');
+fs.writeFileSync(path.join(OUT, '_redirects'), REDIRECTS + '\n', 'utf8');
+console.log('  重写规则 : dist/_redirects 已写入');
+
 // ── api/cart 静态兜底 ──
 // Pages Functions 偶发整体不生效（/api/* 回落到 index.html），
 // 这时结账页金额会变 $0。这里放一份静态 JSON 兜底：
