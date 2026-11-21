@@ -885,5 +885,4 @@ write('category/index.html', categoryPage());
 write('cart/index.html', cartPage());
 write('checkout/index.html', checkoutPage());
 write('order/index.html', orderPage());
-for (const p of products) write(`product/${p.code}.html`, productPage(p));
 console.log('done. products:', products.length);
