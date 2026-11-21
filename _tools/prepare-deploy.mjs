@@ -89,6 +89,27 @@ const routes = {
 };
 fs.writeFileSync(path.join(OUT, '_routes.json'), JSON.stringify(routes, null, 2), 'utf8');
 
+// ── 链接规范化 ──
+// Pages 对「存在同名静态目录」的路径会 308 → 带斜杠版本（/m → /m/、/checkout → /checkout/）。
+// 站内链接直接写成带斜杠的形式，用户点击时少一跳，也不会在浏览器地址栏出现重定向。
+const SLASH_FIX = [
+  [/(?<=href=")\/m(?=")/g, '/m/'],
+  [/(?<=href=")\/checkout(?=")/g, '/checkout/'],
+  [/(?<=href=")\/cart(?=")/g, '/cart/'],
+];
+(function walk(dir) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) { walk(p); continue; }
+    if (!e.name.endsWith('.html')) continue;
+    let html = fs.readFileSync(p, 'utf8');
+    const before = html;
+    for (const [re, to] of SLASH_FIX) html = html.replace(re, to);
+    if (html !== before) fs.writeFileSync(p, html, 'utf8');
+  }
+})(OUT);
+console.log('  链接规范 : 目录页链接统一带斜杠');
+
 // ── 统计 ──
 let files = 0;
 let bytes = 0;
