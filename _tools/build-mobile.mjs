@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { renderHome } from './mobile-home.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -279,84 +280,10 @@ const gridNavHTML = () => GRID_NAV.map(function (g) {
 
 // ───────────────────────── 首页 ─────────────────────────
 function homePage() {
-  const banners = BANNERS;
-  const gridNav = ['領券', '簽到', '必買', '限搶', '秒殺', 'mo店+', '今日特賣', '品牌', '折價券', '更多'];
-  const body = `
-${header({ navCurrent: '首頁', cartCount: 3 })}
-
-<section class="m-hero">
-  <div class="m-hero__track" id="heroTrack">
-    ${banners.map((src) => `<a href="/m/category"><img src="${src}" alt="活動"></a>`).join('')}
-  </div>
-  <div class="m-hero__dots" id="heroDots">${banners.map((_, i) => `<i class="${i === 0 ? 'on' : ''}"></i>`).join('')}</div>
-</section>
-
-
-
-<nav class="m-grid-nav">
-  ${gridNavHTML()}
-</nav>
-
-${FLOORS.map((f) => `
-<section class="m-sec">
-  <div class="m-sec__hd">
-    <h2>${f.title}</h2>
-    <a class="more" href="/m/category">看更多 ${ICO.chev}</a>
-  </div>
-  <div class="m-promo m-promo--${f.layout || 'cards'}" style="margin:0">
-    ${f.imgs.map((src) => `<a href="/m/category"><img src="${src}" alt="${f.title}" loading="lazy"></a>`).join('')}
-  </div>
-</section>`).join('')}
-
-<section class="m-sec">
-  <div class="m-sec__hd">
-    <h2>限時搶購<span class="m-sec__count">02:07:03</span></h2>
-    <a class="more" href="/m/category">看更多 ${ICO.chev}</a>
-  </div>
-  <div class="m-goods">
-    ${products.slice(5, 15).map((p, i) => card(p, i)).join('')}
-  </div>
-</section>
-
-<section class="m-sec">
-  <div class="m-sec__hd">
-    <h2><em>11.11</em> 降價好貨</h2>
-    <a class="more" href="/m/category">看更多 ${ICO.chev}</a>
-  </div>
-  <div class="m-goods">
-    ${products.slice(15, 25).map((p, i) => card(p, i + 3)).join('')}
-  </div>
-</section>
-
-<section class="m-sec">
-  <div class="m-sec__hd">
-    <h2>momo熱搜榜</h2>
-    <a class="more" href="/m/category">看全部 ${ICO.chev}</a>
-  </div>
-  <ol style="padding:4px 12px 14px;display:grid;gap:9px">
-    ${['iphone 17', '寢室好物', '行李箱', '洗衣機', '即期品', '衛生紙', '小米手環', '氣炸鍋'].map((t, i) => `
-      <li style="display:flex;align-items:center;gap:8px;font-size:13px">
-        <b style="width:16px;color:${i < 3 ? '#dd2726' : '#999'};font-family:var(--font-price)">${i + 1}</b>
-        <span style="flex:1">${t}</span>
-        <small style="color:#bbb;font-size:11px">熱度${1400 + i * 97}萬</small>
-      </li>`).join('')}
-  </ol>
-</section>
-
-<div class="m-safe"></div>
-${tabbar('首頁')}
-
-<script>
-(function(){
-  var t = document.getElementById('heroTrack');
-  var dots = [...document.getElementById('heroDots').children];
-  t.addEventListener('scroll', function(){
-    var i = Math.round(t.scrollLeft / t.clientWidth);
-    dots.forEach(function(d, k){ d.className = k === i ? 'on' : ''; });
-  }, { passive: true });
-})();
-</script>`;
-  return shell({ title: 'momo購物網 - 好評推薦 - 手機版', head: UTM_SCRIPT, body });
+  return renderHome({
+    header, tabbar, shell, mCard: card, ICO, UTM_SCRIPT,
+    catalog: JSON.parse(fs.readFileSync(path.join(PROJ, 'site', 'data', 'catalog.json'), 'utf8')),
+  });
 }
 
 // ───────────────────────── 分类页 ─────────────────────────
