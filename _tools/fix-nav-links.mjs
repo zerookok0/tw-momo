@@ -127,6 +127,24 @@ function fixFile(rel) {
   html = html.replace(/href="\/info\/coffee"/g, 'href="/info/carbon"');
   if (html !== before) changed++;
 
+  // ③b 被抓成静态资源的第三方页面 → 改指站内页或真实外链
+  //     （/assets/corp.momo.com.tw/... 是抓下来的裸 HTML，没有样式，点开是残页）
+  const ASSET_MAP = [
+    [/^\/assets\/corp\.momo\.com\.tw\/supplier/i, '/info/supplier'],
+    [/^\/assets\/corp\.momo\.com\.tw/i, '/info/about'],
+    [/^\/assets\/www\.104\.com\.tw/i, 'https://www.104.com.tw/company/ckkyqvc'],
+    [/^\/assets\/www\.instagram\.com/i, 'https://www.instagram.com/momoshopping_/'],
+    [/^\/assets\/line\.me/i, 'https://line.me/ti/p/@momoshop'],
+    [/^\/assets\/www\.momo5188\.com/i, 'https://www.momo5188.com/'],
+    [/^\/assets\/www\.facebook\.com/i, 'https://www.facebook.com/momofans'],
+  ];
+  html = html.replace(/(?<![-\w])href="(\/assets\/[^"]+)"/g, (full, u) => {
+    for (const [re, to] of ASSET_MAP) {
+      if (re.test(u)) { changed++; return `href="${to}"`; }
+    }
+    return full;
+  });
+
   if (changed) fs.writeFileSync(f, html, 'utf8');
   console.log(`  ${rel.replace(/\\/g, '/')}: 接线 ${changed} 个${miss.length ? `，未映射 ${miss.length}` : ''}`);
   if (miss.length) console.log('    未映射样例:', [...new Set(miss)].slice(0, 6));
