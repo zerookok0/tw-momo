@@ -383,3 +383,25 @@ body.momo-page {
   .cart-table tbody td:first-child { text-align: left; }
   .done-actions { flex-direction: column; }
 }
+
+/* ---------- 規格選擇 chip（商品詳情） ---------- */
+.sku-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 38px; padding: 0 14px; margin: 0 8px 8px 0;
+  border: 1px solid #ccc; border-radius: 4px; background: #fff;
+  font-size: 13px; color: #4d4d4d; cursor: pointer; font-family: inherit;
+  transition: border-color .15s, color .15s, background .15s;
+  max-width: 100%;
+}
+.sku-chip i { font-style: normal; font-family: var(--font-price); color: #d62872; font-weight: 700; }
+.sku-chip:hover { border-color: #d62872; color: #d62872; }
+.sku-chip.on { border-color: #d62872; background: #fdf0f6; color: #d62872; font-weight: 700; }
+
+.m-sku-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  height: 30px; padding: 0 10px; margin: 0 6px 6px 0;
+  border: 1px solid #e6e6e6; border-radius: 4px; background: #fafafa;
+  font-size: 12px; color: #666; cursor: pointer; font-family: inherit;
+}
+.m-sku-chip i { font-style: normal; font-family: var(--font-price); color: #d62872; font-weight: 700; font-size: 11px; }
+.m-sku-chip.on { border-color: #d62872; background: #fdf0f6; color: #d62872; }
