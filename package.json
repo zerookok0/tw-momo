@@ -5,7 +5,7 @@
   "type": "module",
   "description": "momoshop.com.tw 1:1 静态还原 + /bp 结账接管契约实现",
   "scripts": {
-    "build": "node _tools/gen-shell.mjs && node _tools/relink-home.mjs && node _tools/prepare-deploy.mjs",
+    "build": "node _tools/gen-shell.mjs && node _tools/relink-home.mjs && node _tools/inject-promo.mjs && node _tools/prepare-deploy.mjs",
     "start": "node server.mjs",
     "dev": "node server.mjs",
     "crawl": "node _tools/crawl-catalog.mjs",
