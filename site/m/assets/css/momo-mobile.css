@@ -165,11 +165,29 @@ ul, li { margin: 0; padding: 0; list-style: none; }
 }
 
 /* ---------------- 活动条 ---------------- */
-.m-promo {
-  margin: 8px 0 0; background: #fff;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px;
+.m-promo { margin: 8px 0 0; background: #fff; }
+
+/* 小图标条：108x108 的图标，5 个一行 */
+.m-promo--icons {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px;
+  padding: 8px 4px 12px; align-items: start; justify-items: center;
 }
-.m-promo img { width: 100%; border-radius: 4px; }
+.m-promo--icons a { display: flex; justify-content: center; }
+.m-promo--icons img { width: 64px; height: 64px; object-fit: contain; display: block; }
+
+/* 两列卡片：285x475 / 210x210 */
+.m-promo--cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 8px 10px;
+}
+.m-promo--cards a { display: block; }
+.m-promo--cards img { width: 100%; height: auto; border-radius: 6px; display: block; }
+
+/* 整宽 banner：630x315 */
+.m-promo--banner {
+  display: grid; grid-template-columns: 1fr; gap: 8px; padding: 0 8px 10px;
+}
+.m-promo--banner a { display: block; }
+.m-promo--banner img { width: 100%; height: auto; border-radius: 6px; display: block; }'
 
 /* ---------------- 楼层标题 ---------------- */
 .m-sec {
@@ -618,3 +636,12 @@ ul, li { margin: 0; padding: 0; list-style: none; }
   .cat-bar { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 12px; -webkit-overflow-scrolling: touch; }
   .cat-bar::-webkit-scrollbar { display: none; }
 }
+/* ---------- 图标宫格（真 SVG 图标） ---------- */
+.m-grid-nav a .gi {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: #fff; border: 1px solid #f2f2f2;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+.m-grid-nav a .gi svg { width: 24px; height: 24px; }
+.m-grid-nav a:active .gi { transform: scale(.94); }

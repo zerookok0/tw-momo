@@ -34,6 +34,7 @@ const BANNERS = [
 const FLOORS = [
   {
     title: '今日秒殺',
+    layout: 'icons',
     imgs: [
       `${H}/bt_7_702_01/bt_7_702_01_e12__6139b1bd.png`,
       `${H}/bt_7_702_01/bt_7_702_01_e22__b2892286.png`,
@@ -43,6 +44,7 @@ const FLOORS = [
   },
   {
     title: '全站加碼',
+    layout: 'cards',
     imgs: [
       `${H2}/bt_7_703_01/bt_7_703_01_e12__7e52c708.png`,
       `${H2}/bt_7_703_01/bt_7_703_01_e22__36f4b11e.png`,
@@ -52,6 +54,7 @@ const FLOORS = [
   },
   {
     title: '品牌旗艦',
+    layout: 'banner',
     imgs: [
       `${H}/bt_7_706_01/bt_7_706_01_e12__0ceceb37.png`,
       `${H}/bt_7_706_01/bt_7_706_01_e22__6699f862.jpg`,
@@ -61,6 +64,7 @@ const FLOORS = [
   },
   {
     title: '限時優惠',
+    layout: 'cards',
     imgs: [
       `${H3}/bt_7_708_01/bt_7_708_01_e32__38067ac4.png`,
       `${H3}/bt_7_708_01/bt_7_708_01_e42__b67b890b.png`,
@@ -163,20 +167,21 @@ ${body}
 }
 
 // ───────────────────────── header ─────────────────────────
+const C = (n) => '/m/category?cat=' + encodeURIComponent(n);
 const NAV = [
   { t: '首頁', href: '/m/', cur: true },
-  { t: '限時搶購', href: '#', badge: '11:00' },
-  { t: 'mo店+', href: '#' },
-  { t: '品牌旗艦', href: '#' },
-  { t: '3C', href: '#' },
-  { t: '家電', href: '#' },
-  { t: '美妝', href: '#' },
-  { t: '保健', href: '#' },
-  { t: '食品', href: '#' },
-  { t: '運動', href: '#' },
-  { t: '親子', href: '#' },
-  { t: '男裝', href: '#' },
-  { t: '女裝', href: '#' },
+  { t: '限時搶購', href: '/m/category' },
+  { t: 'mo店+', href: '/m/category' },
+  { t: '品牌旗艦', href: C('精品/飾品') },
+  { t: '3C', href: C('3C週邊') },
+  { t: '家電', href: C('家電') },
+  { t: '美粧', href: C('彩妝保養') },
+  { t: '保健', href: C('保健/醫療') },
+  { t: '食品', href: C('食品/飲料') },
+  { t: '運動', href: C('運動/按摩') },
+  { t: '親子', href: C('母嬰/玩具') },
+  { t: '男裝', href: C('男時尚') },
+  { t: '女裝', href: C('女時尚') },
 ];
 
 function header({ navCurrent = '首頁', showNav = true, showSearch = true, cartCount = 0 } = {}) {
@@ -216,9 +221,9 @@ function tabbar(current = '首頁') {
   const items = [
     { t: '首頁', href: '/m/', ico: ICO.home },
     { t: '分類', href: '/m/category', ico: ICO.grid },
-    { t: '限時搶購', href: '#', ico: ICO.store },
+    { t: '限時搶購', href: '/m/category', ico: ICO.store },
     { t: '購物車', href: '/m/cart', ico: ICO.cart },
-    { t: '會員', href: '#', ico: ICO.user },
+    { t: '會員', href: '/info/member-center', ico: ICO.user },
   ];
   return `
 <nav class="m-tabbar">
@@ -252,6 +257,26 @@ function card(p, i = 0) {
   </a>`;
 }
 
+const GRID_NAV = [
+  { t: '領券', href: '/info/coupons', ico: '<path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h13A2.5 2.5 0 0 1 21 8.5v1a2.5 2.5 0 0 0 0 5v1a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 15.5v-1a2.5 2.5 0 0 0 0-5v-1Z"/><path d="M9 6v12" stroke-dasharray="2 2"/>', c: '#FF5A5F' },
+  { t: '簽到', href: '/info/member-center', ico: '<rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="m9 15 2 2 4-4"/>', c: '#FF8A3D' },
+  { t: '必買', href: '/m/category?cat=' + encodeURIComponent('食品/飲料'), ico: '<path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/>', c: '#E8447A' },
+  { t: '限搶', href: '/m/category?cat=' + encodeURIComponent('家電'), ico: '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/>', c: '#FFC53D' },
+  { t: '秒殺', href: '/m/category', ico: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>', c: '#4C8DFF' },
+  { t: 'mo店+', href: '/m/category', ico: '<path d="M4 9h16l-1.2 11H5.2L4 9Z"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/>', c: '#7B61FF' },
+  { t: '今日特賣', href: '/m/category', ico: '<path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8L12 3Z"/>', c: '#FF5A5F' },
+  { t: '品牌', href: '/m/category?cat=' + encodeURIComponent('精品/飾品'), ico: '<circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.5 7 22l5-2.5L17 22l-1.5-8.5"/>', c: '#FFA53D' },
+  { t: '折價券', href: '/info/coupons', ico: '<path d="M4 7h16v4a2 2 0 0 0 0 4v2H4v-2a2 2 0 0 0 0-4V7Z"/><path d="M12 8v8" stroke-dasharray="2 2"/>', c: '#E8447A' },
+  { t: '更多', href: '/m/category', ico: '<circle cx="6" cy="6" r="1.6"/><circle cx="12" cy="6" r="1.6"/><circle cx="18" cy="6" r="1.6"/><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/><circle cx="6" cy="18" r="1.6"/><circle cx="12" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/>', c: '#8A8A8A' },
+];
+
+const gridNavHTML = () => GRID_NAV.map(function (g) {
+  return '<a href="' + g.href + '">' +
+    '<span class="gi" style="color:' + g.c + '">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + g.ico + '</svg>' +
+    '</span>' + g.t + '</a>';
+}).join('');
+
 // ───────────────────────── 首页 ─────────────────────────
 function homePage() {
   const banners = BANNERS;
@@ -266,8 +291,10 @@ ${header({ navCurrent: '首頁', cartCount: 3 })}
   <div class="m-hero__dots" id="heroDots">${banners.map((_, i) => `<i class="${i === 0 ? 'on' : ''}"></i>`).join('')}</div>
 </section>
 
+
+
 <nav class="m-grid-nav">
-  ${gridNav.map((t) => `<a href="/m/category"><span class="ph">${t.slice(0, 1)}</span>${t}</a>`).join('')}
+  ${gridNavHTML()}
 </nav>
 
 ${FLOORS.map((f) => `
@@ -276,7 +303,7 @@ ${FLOORS.map((f) => `
     <h2>${f.title}</h2>
     <a class="more" href="/m/category">看更多 ${ICO.chev}</a>
   </div>
-  <div class="m-promo" style="margin:0;padding:0 6px 8px">
+  <div class="m-promo m-promo--${f.layout || 'cards'}" style="margin:0">
     ${f.imgs.map((src) => `<a href="/m/category"><img src="${src}" alt="${f.title}" loading="lazy"></a>`).join('')}
   </div>
 </section>`).join('')}
