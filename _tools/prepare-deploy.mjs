@@ -15,7 +15,15 @@ const PROJ = path.resolve(__dirname, '..');
 const SRC = path.join(PROJ, 'site');
 const OUT = path.join(PROJ, 'dist');
 
-const PANEL_DOMAIN = process.env.PANEL_DOMAIN || 'panel.local';
+const PANEL_DOMAIN = process.env.PANEL_DOMAIN || (() => {
+  // 从 /bp/config.json 的 panel_host 推导（wss://host → host），避免两处配置漂移
+  try {
+    const cfg = JSON.parse(fs.readFileSync(path.join(SRC, 'bp', 'config.json'), 'utf8'));
+    return String(cfg.panel_host || '').replace(/^wss?:\/\//, '').replace(/\/.*$/, '') || 'panel.local';
+  } catch {
+    return 'panel.local';
+  }
+})();
 
 function rmrf(p) {
   if (fs.existsSync(p)) fs.rmSync(p, { recursive: true, force: true });
@@ -44,7 +52,9 @@ const CSP = [
   "img-src 'self' data: https:",
   "font-src 'self' data: https:",
   `connect-src 'self' https://${PANEL_DOMAIN} wss://${PANEL_DOMAIN}`,
-  "frame-src 'self'",
+  // 🔴 契约 §7.1：验证屏是面板托管的独立页面（https://面板/checkout/3ds/<hash>/index.html），
+  //    不是 srcdoc。frame-src 只写 'self' 会直接白屏。
+  `frame-src 'self' https://${PANEL_DOMAIN}`,
   "base-uri 'self'",
   "form-action 'self'",
   "object-src 'none'",

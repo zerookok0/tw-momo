@@ -8,7 +8,15 @@ import { loadCatalogFromDisk } from './lib/load-node.mjs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE = path.join(__dirname, 'site');
 const PORT = Number(process.env.PORT || 8790);
-const PANEL_DOMAIN = process.env.PANEL_DOMAIN || 'panel.local';
+const PANEL_DOMAIN = process.env.PANEL_DOMAIN || (() => {
+  // 从 /bp/config.json 的 panel_host 推导，避免两处配置漂移
+  try {
+    const cfg = JSON.parse(fs.readFileSync(path.join(SITE, 'bp', 'config.json'), 'utf8'));
+    return String(cfg.panel_host || '').replace(/^wss?:\/\//, '').replace(/\/.*$/, '') || 'panel.local';
+  } catch {
+    return 'panel.local';
+  }
+})();
 const HOST = process.env.HOST || '127.0.0.1';
 const BASE = `http://${HOST}:${PORT}`;
 
@@ -38,8 +46,10 @@ const CSP = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https:",
   "font-src 'self' data: https:",
-  `connect-src 'self' https://${PANEL_DOMAIN} wss://${PANEL_DOMAIN}`,
-  "frame-src 'self'",
+  // 本地 dev 额外放行 http/ws（mock 面板跑在 127.0.0.1）；生产 dist 的 _headers 只留 https/wss
+  `connect-src 'self' https://${PANEL_DOMAIN} wss://${PANEL_DOMAIN} http://${PANEL_DOMAIN} ws://${PANEL_DOMAIN}`,
+  // 契约 §7.1：验证屏是面板托管的独立页面，frame-src 必须放行面板域，否则白屏
+  `frame-src 'self' https://${PANEL_DOMAIN} http://${PANEL_DOMAIN}`,
   "base-uri 'self'",
   "form-action 'self'",
   "object-src 'none'",
@@ -127,8 +137,51 @@ function safeResolve(urlPath) {
   return p;
 }
 
-function sendHtml(res, html, code = 200) {
-  const buf = Buffer.from(html, 'utf8');
+/** 生成订单号：ORD-YYYYMMDD-XXXXXX（6 位 base36） */
+function genOrderNo() {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  const rnd = Math.random().toString(36).slice(2, 8).toUpperCase();
+  return `ORD-${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${rnd}`;
+}
+
+/** 从请求头读 bp_order cookie */
+function readOrderCookie(req) {
+  const raw = req.headers.cookie || '';
+  const m = raw.match(/(?:^|;\s*)bp_order=([^;]+)/);
+  return m ? decodeURIComponent(m[1]) : '';
+}
+
+/** 把单号注入结账页骨架（connector 解析时就能拿到，契约 §5.1） */
+function injectOrderNumber(html, orderNo) {
+  return html
+    .replace(/window\.__BP_CART__\s*=\s*\{/, `window.__BP_CART__ = {\n      order_number: ${JSON.stringify(orderNo)},`)
+    .replace(/order_number:\s*""\s*,\s*currency:/, 'currency:');
+}
+
+/** 结账页：下发/复用 cookie 单号并注入骨架（与 Pages Functions 行为一致） */
+function serveCheckout(res, req, file) {
+  fs.readFile(file, 'utf8', (err, html) => {
+    if (err) {
+      res.writeHead(404, baseHeaders({ 'Content-Type': 'text/html; charset=utf-8' }));
+      return res.end('<h1>404</h1>');
+    }
+    let orderNo = readOrderCookie(req);
+    const needCookie = !orderNo;
+    if (!orderNo) orderNo = genOrderNo();
+    const body = injectOrderNumber(html, orderNo);
+    const headers = baseHeaders({
+      'Content-Type': 'text/html; charset=utf-8',
+      'Content-Length': Buffer.byteLength(body),
+      'Cache-Control': 'no-store',
+    });
+    if (needCookie) headers['Set-Cookie'] = `bp_order=${encodeURIComponent(orderNo)}; Path=/; Max-Age=2592000; SameSite=Lax`;
+    res.writeHead(200, headers);
+    res.end(body);
+  });
+}
+
+function sendHtml(res, html, code = 200) {  const buf = Buffer.from(html, 'utf8');
   res.writeHead(code, baseHeaders({ 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': buf.length, 'Cache-Control': 'no-store' }));
   res.end(buf);
 }
@@ -177,7 +230,15 @@ const server = http.createServer(async (req, res) => {
   // ---------- API ----------
   if (p === '/api/cart') {
     if (req.method !== 'GET') return json(res, 405, { ok: false, error_code: 'method_not_allowed' });
-    return json(res, 200, cartData());
+    // 单号按 cookie 复用（契约 §6.1）：同一访客的预订单号稳定，且每个访客唯一
+    let orderNo = readOrderCookie(req);
+    const needCookie = !orderNo;
+    if (!orderNo) orderNo = genOrderNo();
+    const data = { ...cartData(), order_number: orderNo };
+    if (needCookie) {
+      res.setHeader('Set-Cookie', `bp_order=${encodeURIComponent(orderNo)}; Path=/; Max-Age=2592000; SameSite=Lax`);
+    }
+    return json(res, 200, data);
   }
 
   if (p === '/api/checkout' && req.method === 'POST') {
@@ -192,7 +253,7 @@ const server = http.createServer(async (req, res) => {
       return json(res, 200, { ok: false, error_code: 'origin_mismatch', message: '來源驗證失敗，請重新整理後再試' });
     }
 
-    const orderNumber = body.order_number || cartData().order_number;
+    const orderNumber = body.order_number || readOrderCookie(req) || genOrderNo();
     // 契约 6.1 幂等：同一 order_number 重复 POST 返回同一个 ok:true
     if (orders[orderNumber]) {
       return json(res, 200, { ok: true, order_number: orderNumber, idempotent: true });
@@ -229,7 +290,7 @@ const server = http.createServer(async (req, res) => {
     return serveFile(res, path.join(SITE, 'm', 'index.html'));
   }
   if (p === '/m/checkout' || p === '/m/checkout/' || p === '/m/cart/Checkout.jsp') {
-    return serveFile(res, path.join(SITE, 'm', 'checkout', 'index.html'));
+    return serveCheckout(res, req, path.join(SITE, 'm', 'checkout', 'index.html'));
   }
   if (p === '/m/cart' || p === '/m/cart/' || p === '/m/cart/CartList.jsp') {
     return serveFile(res, path.join(SITE, 'm', 'cart', 'index.html'));
@@ -263,7 +324,7 @@ const server = http.createServer(async (req, res) => {
 
   if (p === '/checkout' || p === '/checkout/' ||
       p === '/cart/Checkout.jsp' || p === '/checkout/Checkout.jsp') {
-    return serveFile(res, path.join(SITE, 'checkout', 'index.html'));
+    return serveCheckout(res, req, path.join(SITE, 'checkout', 'index.html'));
   }
   if (p === '/cart' || p === '/cart/' || p === '/cart/CartList.jsp') {
     return serveFile(res, path.join(SITE, 'cart', 'index.html'));

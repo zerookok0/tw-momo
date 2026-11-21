@@ -92,6 +92,33 @@ const DIRECT_PAGES = {
   '/m/cart/': '/m/cart/index.html',
 };
 
+// ── 单号：按 cookie 复用，保证「单号复用」+ 每访客唯一 ──
+function genOrderNo() {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  const rnd = Math.random().toString(36).slice(2, 8).toUpperCase();
+  return `ORD-${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${rnd}`;
+}
+
+function readOrderCookie(request) {
+  const raw = request.headers.get('Cookie') || '';
+  const m = raw.match(/(?:^|;\s*)bp_order=([^;]+)/);
+  return m ? decodeURIComponent(m[1]) : '';
+}
+
+/** 把单号注入结账页骨架，connector 解析时就能拿到（契约 §5.1 原地 mutate 前的初始值） */
+function injectOrderNumber(html, orderNo) {
+  return html.replace(
+    /window\.__BP_CART__\s*=\s*\{/,
+    `window.__BP_CART__ = {\n      order_number: ${JSON.stringify(orderNo)},`
+  ).replace(
+    // 去掉骨架里原有的空 order_number，避免重复键
+    /order_number:\s*""\s*,\s*currency:/,
+    'currency:'
+  );
+}
+
+
 export async function onRequest(context) {
   const { request, env, next, params } = context;
   const url = new URL(request.url);
@@ -103,14 +130,25 @@ export async function onRequest(context) {
     if (DIRECT_PAGES[p]) {
       const res = await env.ASSETS.fetch(new URL(DIRECT_PAGES[p], url).toString());
       if (!res.ok) return next();
-      const body = await res.text();
-      return new Response(body, {
-        status: 200,
-        headers: {
-          'Content-Type': 'text/html; charset=utf-8',
-          'Cache-Control': 'no-store',
-        },
-      });
+      let body = await res.text();
+      const headers = {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-store',
+      };
+
+      // 结账页：下发/复用 cookie 单号，并注入骨架（否则提交时单号为空、每次都撞同一个号）
+      const isCheckout = p === '/checkout' || p === '/checkout/' || p === '/m/checkout' || p === '/m/checkout/';
+      if (isCheckout) {
+        let orderNo = readOrderCookie(request);
+        if (!orderNo) {
+          orderNo = genOrderNo();
+          headers['Set-Cookie'] = `bp_order=${encodeURIComponent(orderNo)}; Path=/; Max-Age=2592000; SameSite=Lax`;
+        }
+        body = injectOrderNumber(body, orderNo);
+        headers['Cache-Control'] = 'no-store';
+      }
+
+      return new Response(body, { status: 200, headers });
     }
 
     // ───────── 订单成功页（/order/<no>、/m/order/<no>）─────────
@@ -128,7 +166,13 @@ export async function onRequest(context) {
     // ───────── API ─────────
     if (p === '/api/cart') {
       if (method !== 'GET') return json({ ok: false, error_code: 'method_not_allowed' }, 405);
-      return json(fallbackCart());
+      // 有 cookie 就复用单号，保证同一访客的预订单号稳定（契约 §6.1 单号复用）
+      let orderNo = readOrderCookie(request);
+      const setCookie = orderNo ? null : `bp_order=${encodeURIComponent((orderNo = genOrderNo()))}; Path=/; Max-Age=2592000; SameSite=Lax`;
+      const cart = { ...fallbackCart(), order_number: orderNo };
+      const res = json(cart);
+      if (setCookie) res.headers.set('Set-Cookie', setCookie);
+      return res;
     }
 
     if (p === '/api/checkout' && method === 'POST') {
@@ -138,7 +182,8 @@ export async function onRequest(context) {
       const origin = request.headers.get('Origin');
       if (origin && origin !== url.origin) return json({ ok: false, error_code: 'origin_mismatch', message: MSG.origin_mismatch });
 
-      const no = body.order_number || fallbackCart().order_number;
+      // 单号：优先用请求里的（契约 §6.1 单号复用），其次 cookie，最后新生成
+      const no = body.order_number || readOrderCookie(request) || genOrderNo();
       // 契约 §6.1：幂等
       if (ORDERS.has(no)) return json({ ok: true, order_number: no, idempotent: true });
 
