@@ -61,13 +61,55 @@ const USERS = {
 
 const SESSION_SECRET_OF = (env) => (env && env.SESSION_SECRET) || 'momo-replica-demo-secret-2026';
 
+/* 订单兜底：未绑 KV 时把最近 10 笔订单摘要签名后放进 cookie bp_orders，
+   否则会员中心跨 isolate 就看不到自己的单。 */
+const ORDER_COOKIE = 'bp_orders';
+const ORDER_TTL = 30 * 86400000;
+
+function orderCookie(token) {
+  return `${ORDER_COOKIE}=${token}; Path=/; Max-Age=${ORDER_TTL / 1000}; HttpOnly; SameSite=Lax`;
+}
+async function getCookieOrders(request, env) {
+  const t = readCookie(request.headers.get('Cookie') || '', ORDER_COOKIE);
+  if (!t) return [];
+  const p = await verifySession(t, SESSION_SECRET_OF(env));
+  return (p && Array.isArray(p.list)) ? p.list : [];
+}
+
+/* 账号存储兜底：Pages 默认无 KV，内存跨 isolate 不共享。
+   未绑 KV 时，把账号记录（含 salt/hash）签名后放进 HttpOnly cookie bp_user，
+   保证「注册后能立刻登录 / 刷新不掉线」，跨设备登录需绑 KV。 */
+const USER_COOKIE = 'bp_user';
+const USER_TTL = 30 * 86400000;
+
+function userCookie(token) {
+  return `${USER_COOKIE}=${token}; Path=/; Max-Age=${USER_TTL / 1000}; HttpOnly; SameSite=Lax`;
+}
+function clearUserCookie() {
+  return `${USER_COOKIE}=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax`;
+}
+async function getUserFromCookie(request, env) {
+  const t = readCookie(request.headers.get('Cookie') || '', USER_COOKIE);
+  if (!t) return null;
+  return await verifySession(t, SESSION_SECRET_OF(env));
+}
+
+/** 取账号记录：KV → cookie 兜底 */
+async function findUser(env, request, phone) {
+  const fromStore = await USERS.get(env, phone);
+  if (fromStore) return fromStore;
+  const ck = await getUserFromCookie(request, env);
+  if (ck && ck.u && String(ck.u.phone) === String(phone)) return ck.u;
+  return null;
+}
+
 async function currentUser(context) {
   const { request, env } = context;
   const token = readCookie(request.headers.get('Cookie') || '', COOKIE_NAME);
   if (!token) return null;
   const payload = await verifySession(token, SESSION_SECRET_OF(env));
   if (!payload) return null;
-  const u = await USERS.get(env, payload.phone);
+  const u = await findUser(env, request, payload.phone);
   if (!u) return null;
   return { uid: u.uid, phone: u.phone, name: u.name || '', email: u.email || '' };
 }
@@ -292,7 +334,15 @@ export async function onRequest(context) {
         created_at: new Date().toISOString(),
       });
       // 契约 §6.1：永远 200 + JSON，单号复用，不 302
-      return json({ ok: true, order_number: no });
+      const res = json({ ok: true, order_number: no });
+      if (me0 && me0.phone) {
+        const prev = await getCookieOrders(request, env);
+        const list = [{ order_number: no, amount, currency: body.currency || 'TWD', phone: me0.phone, created_at: new Date().toISOString() },
+          ...prev.filter((x) => x.order_number !== no)].slice(0, 10);
+        const tok = await signSession({ list, exp: Date.now() + ORDER_TTL }, SESSION_SECRET_OF(env));
+        res.headers.append('Set-Cookie', orderCookie(tok));
+      }
+      return res;
     }
 
     if (p.startsWith('/api/order/')) {
@@ -326,8 +376,10 @@ export async function onRequest(context) {
       await USERS.put(env, phone, rec);
 
       const token = await signSession({ phone, uid: rec.uid, exp: Date.now() + SESSION_TTL }, SESSION_SECRET_OF(env));
+      const uck = await signSession({ u: rec, exp: Date.now() + USER_TTL }, SESSION_SECRET_OF(env));
       const res = json({ ok: true, user: { uid: rec.uid, phone, name: rec.name, email: rec.email } });
-      res.headers.set('Set-Cookie', sessionCookie(token));
+      res.headers.append('Set-Cookie', sessionCookie(token));
+      res.headers.append('Set-Cookie', userCookie(uck));
       return res;
     }
 
@@ -335,27 +387,32 @@ export async function onRequest(context) {
       let body = {};
       try { body = await request.json(); } catch { return json({ ok: false, error_code: 'invalid', message: MSG.bad_json }); }
       const phone = normalizePhone(body.phone);
-      const u = phone ? await USERS.get(env, phone) : null;
+      const u = phone ? await findUser(env, request, phone) : null;
       if (!u || !(await verifyPassword(body.password, u))) {
         return json({ ok: false, error_code: 'bad_credential', message: '手機號碼或密碼不正確' });
       }
       const token = await signSession({ phone, uid: u.uid, exp: Date.now() + SESSION_TTL }, SESSION_SECRET_OF(env));
+      const uck = await signSession({ u, exp: Date.now() + USER_TTL }, SESSION_SECRET_OF(env));
       const res = json({ ok: true, user: { uid: u.uid, phone, name: u.name || '', email: u.email || '' } });
-      res.headers.set('Set-Cookie', sessionCookie(token));
+      res.headers.append('Set-Cookie', sessionCookie(token));
+      res.headers.append('Set-Cookie', userCookie(uck));
       return res;
     }
 
     if (p === '/api/auth/logout' && method === 'POST') {
+      // 只清会话；bp_user（账号记录）保留，保证同一浏览器登出后还能再登录
       const res = json({ ok: true });
-      res.headers.set('Set-Cookie', clearCookie());
+      res.headers.append('Set-Cookie', clearCookie());
       return res;
     }
 
     if (p === '/api/member/orders' && method === 'GET') {
       const me = await currentUser(context);
       if (!me) return json({ ok: false, error_code: 'not_login', message: '請先登入' });
-      const list = [...ORDERS.values()]
-        .filter((o) => o.phone === me.phone)
+      const fromMem = [...ORDERS.values()].filter((o) => o.phone === me.phone);
+      const seen = new Set(fromMem.map((o) => o.order_number));
+      const fromCookie = (await getCookieOrders(request, env)).filter((o) => o.phone === me.phone && !seen.has(o.order_number));
+      const list = [...fromMem, ...fromCookie]
         .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
       return json({ ok: true, orders: list, total: list.length });
     }

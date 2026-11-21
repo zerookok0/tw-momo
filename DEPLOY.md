@@ -63,3 +63,21 @@ node server.mjs                    # 纯 Node 跑法（等同 Pages 行为）
 BASE=https://你的域名 node _tools/verify.mjs
 BASE=https://你的域名 node _tools/verify-mobile.mjs
 ```
+
+## 会员账号与订单的存储
+
+| 环境 | 账号 | 订单 |
+|---|---|---|
+| 本地 Node (`node server.mjs`) | `data/users.json`（持久） | `data/orders.json`（持久） |
+| Cloudflare Pages | 绑了 KV (`env.USERS`) → KV；没绑 → 签名 cookie `bp_user` | 绑了 KV → KV；没绑 → 签名 cookie `bp_orders`（最近 10 笔） |
+
+**没绑 KV 时的限制**（Demo 够用，生产要绑）：
+- 同一浏览器可注册 / 登录 / 登出 / 再登录，刷新不掉线
+- 换设备登录不了（账号记录只在本机 cookie 里）
+- 会员中心只显示最近 10 笔订单
+- 页面重部署后 cookie 仍有效（签名密钥固定），但换 `SESSION_SECRET` 会全部失效
+
+**要变成真正持久化**，在 Pages 控制台 → Settings → Functions → KV namespace bindings 加一个绑定：
+- Variable name: `USERS`
+- 可选再加 `ORDERS`
+- 环境变量 `SESSION_SECRET` 设一个随机串（不设会用内置默认值）
