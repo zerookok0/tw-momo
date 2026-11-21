@@ -23,5 +23,6 @@
   ],
   "pixel_event": "Purchase",
   "pixel_dedupe_hours": 24,
-  "pixel_value": false
+  "pixel_value": false,
+  "pixel_id": ""
 }

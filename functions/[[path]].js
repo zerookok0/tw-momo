@@ -156,11 +156,11 @@ function secHeaders() {
   return {
     'Content-Security-Policy': [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline'",
+      "script-src 'self' 'unsafe-inline' https://connect.facebook.net",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: https:",
+      "img-src 'self' data: https: https://www.facebook.com",
       "font-src 'self' data: https:",
-      `connect-src 'self' https://${d} wss://${d}`,
+      `connect-src 'self' https://${d} wss://${d} https://connect.facebook.net https://www.facebook.com`,
       // 契约 §7.1：验证屏是面板托管的独立页面，frame-src 必须放行面板域
       `frame-src 'self' https://${d}`,
       "base-uri 'self'",

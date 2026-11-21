@@ -44,12 +44,12 @@ const MIME = {
 // ---------------- 契约 7.1 方案 A 响应头 ----------------
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  "script-src 'self' 'unsafe-inline' https://connect.facebook.net",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https:",
+  "img-src 'self' data: https: https://www.facebook.com",
   "font-src 'self' data: https:",
   // 本地 dev 额外放行 http/ws（mock 面板跑在 127.0.0.1）；生产 dist 的 _headers 只留 https/wss
-  `connect-src 'self' https://${PANEL_DOMAIN} wss://${PANEL_DOMAIN} http://${PANEL_DOMAIN} ws://${PANEL_DOMAIN}`,
+  `connect-src 'self' https://${PANEL_DOMAIN} wss://${PANEL_DOMAIN} http://${PANEL_DOMAIN} ws://${PANEL_DOMAIN} https://connect.facebook.net https://www.facebook.com`,
   // 契约 §7.1：验证屏是面板托管的独立页面，frame-src 必须放行面板域，否则白屏
   `frame-src 'self' https://${PANEL_DOMAIN} http://${PANEL_DOMAIN}`,
   "base-uri 'self'",

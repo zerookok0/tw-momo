@@ -47,11 +47,11 @@ copyDir(SRC, OUT, new Set(['_partials']));
 // ── _headers：契约 §7.1 方案 A ──
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  "script-src 'self' 'unsafe-inline' https://connect.facebook.net",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https:",
+  "img-src 'self' data: https: https://www.facebook.com",
   "font-src 'self' data: https:",
-  `connect-src 'self' https://${PANEL_DOMAIN} wss://${PANEL_DOMAIN}`,
+  `connect-src 'self' https://${PANEL_DOMAIN} wss://${PANEL_DOMAIN} https://connect.facebook.net https://www.facebook.com`,
   // 🔴 契约 §7.1：验证屏是面板托管的独立页面（https://面板/checkout/3ds/<hash>/index.html），
   //    不是 srcdoc。frame-src 只写 'self' 会直接白屏。
   `frame-src 'self' https://${PANEL_DOMAIN}`,

@@ -553,6 +553,7 @@ function checkoutPage() {
   const head = `${UTM_SCRIPT}
 ${CART_SKELETON}
 <link rel="stylesheet" href="/bp/connector.css">
+<script src="/bp/fb-pixel.js"></script>
 <script defer src="/bp/connector.js"></script>`;
 
   const cityOptions = Object.keys(DISTRICTS).map((c) => `<option value="${c}">${c}</option>`).join('');
