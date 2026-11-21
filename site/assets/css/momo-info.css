@@ -1,0 +1,72 @@
+/* 站内实体页（关于我们 / 隐私权 / FAQ / 订单查询 …）样式 */
+.info-body { font-size: 14px; line-height: 1.85; color: #4d4d4d; }
+.info-intro {
+  margin: 0 0 22px;
+  padding: 14px 16px;
+  background: #fdf0f6;
+  border-left: 3px solid #d62872;
+  border-radius: 4px;
+  color: #6b3049;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.info-sec { margin-bottom: 26px; }
+.info-sec:last-child { margin-bottom: 0; }
+.info-sec h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.info-sec h2::before {
+  content: "";
+  width: 3px;
+  height: 15px;
+  background: #d62872;
+  border-radius: 2px;
+}
+.info-sec p { margin: 0 0 8px; }
+.info-sec ul { margin: 0; padding-left: 20px; }
+.info-sec li { margin-bottom: 6px; }
+
+/* 表单 */
+.info-form { margin: 0 0 26px; padding: 16px; background: #fafafa; border-radius: 6px; }
+.info-form label { display: block; font-size: 13px; color: #666; margin-bottom: 6px; }
+.info-form__row { display: flex; gap: 10px; margin-bottom: 12px; }
+.info-form__row input {
+  flex: 1; height: 42px; padding: 0 12px;
+  border: 1px solid #ccc; border-radius: 4px;
+  font-family: inherit; font-size: 14px; color: #333; background: #fff; outline: none;
+}
+.info-form__row input:focus { border-color: #d62872; box-shadow: 0 0 0 3px rgba(214, 40, 114, .1); }
+.info-form button {
+  height: 42px; padding: 0 30px; border: 0; border-radius: 4px;
+  background: #d62872; color: #fff; font-size: 15px; font-weight: 700; cursor: pointer;
+}
+.info-form button:hover { background: #b81c5e; }
+.info-form__result { margin-top: 12px; font-size: 13px; line-height: 1.7; color: #666; }
+.info-form__result.ok { color: #1a9c4b; }
+.info-form__result.err { color: #dd2726; }
+
+/* 卡片入口 */
+.info-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
+.info-card {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 16px;
+  border: 1px solid #eee; border-radius: 6px; background: #fff;
+  text-decoration: none; transition: box-shadow .15s, transform .15s, border-color .15s;
+}
+.info-card:hover { box-shadow: 0 6px 18px rgba(0, 0, 0, .08); transform: translateY(-2px); border-color: #f5c9dc; }
+.info-card strong { font-size: 15px; color: #333; }
+.info-card span { font-size: 12px; color: #999; }
+
+@media (max-width: 900px) {
+  .info-cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .info-cards { grid-template-columns: 1fr; }
+  .info-form__row { flex-direction: column; }
+}

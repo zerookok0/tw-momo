@@ -92,6 +92,10 @@ const routes = {
     '/m/checkout/',
     '/m/cart',
     '/m/cart/',
+    // 站内实体页（关于我们 / 隐私权 / FAQ …）
+    '/info/*',
+    '/member',
+    '/member/*',
     // 订单成功页（不显式指派会回落到首页内容）
     '/order/*',
     '/m/order/*',

@@ -128,6 +128,8 @@ const DIRECT_PAGES = {
   '/m/checkout/': '/m/checkout/index.html',
   '/m/cart': '/m/cart/index.html',
   '/m/cart/': '/m/cart/index.html',
+  '/member': '/info/member-center.html',
+  '/member/': '/info/member-center.html',
 };
 
 // ── 单号：按 cookie 复用，保证「单号复用」+ 每访客唯一 ──
@@ -166,6 +168,18 @@ export async function onRequest(context) {
   try {
     // 先拿到面板域，后面所有 HTML/JSON 响应都要用它拼 CSP
     await ensurePanelDomain(env, url);
+
+    // ───────── 站内实体页 /info/<slug>（关于我们 / 隐私权 / FAQ / 订单查询 …）─────────
+    if (p.startsWith('/info/') && !/\.[a-z0-9]+$/i.test(p)) {
+      const slug = p.slice('/info/'.length).replace(/\/+$/, '');
+      if (!slug) return next();
+      const res = await env.ASSETS.fetch(new URL(`/info/${slug}.html`, url).toString());
+      if (!res.ok) return next();
+      return new Response(await res.text(), {
+        status: 200,
+        headers: { ...secHeaders(), 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' },
+      });
+    }
 
     // ───────── 目录页直出（避免 308）─────────
     if (DIRECT_PAGES[p]) {

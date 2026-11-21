@@ -329,6 +329,14 @@ const server = http.createServer(async (req, res) => {
   if (p === '/cart' || p === '/cart/' || p === '/cart/CartList.jsp') {
     return serveFile(res, path.join(SITE, 'cart', 'index.html'));
   }
+  // 站内实体页 /info/<slug> 与 /member
+  if (p === '/member' || p === '/member/') return serveFile(res, path.join(SITE, 'info', 'member-center.html'));
+  if (p.startsWith('/info/') && !/\.[a-z0-9]+$/i.test(p)) {
+    const slug = p.slice('/info/'.length).replace(/\/+$/, '');
+    const f2 = path.join(SITE, 'info', slug + '.html');
+    if (slug && fs.existsSync(f2)) return serveFile(res, f2);
+  }
+
   if (p === '/category' || p === '/category/' || p === '/category/LgrpCategory.jsp') {
     return renderCategory(req, res, url, 'desktop');
   }
