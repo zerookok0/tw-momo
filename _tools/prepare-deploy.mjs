@@ -124,6 +124,29 @@ const SLASH_FIX = [
 })(OUT);
 console.log('  链接规范 : 目录页链接统一带斜杠');
 
+// ── api/cart 静态兜底 ──
+// Pages Functions 偶发整体不生效（/api/* 回落到 index.html），
+// 这时结账页金额会变 $0。这里放一份静态 JSON 兜底：
+//  - Functions 正常时：_routes.json 的 /api/* 让 Function 优先，静态文件不会被用到
+//  - Functions 挂了时：Pages 直接把这份 JSON 当静态资源返回，页面金额仍然正确
+const FALLBACK_CART = {
+  order_number: 'ORD-' + new Date().toISOString().slice(0, 10).replace(/-/g, '') + '-DEMO01',
+  currency: 'TWD',
+  total: 594,
+  total_amount: '$594',
+  items: [
+    { name: '【Kingston 金士頓】8GB DDR5 5600MT/s Non-ECC 記憶體', qty: 1, price: 414, img: '/assets/i4.momoshop.com.tw/1754298127/goodsimg/0014/295/303/14295303_OL_m.webp' },
+    { name: '【威拂】魔撢本體 1把+1片裝(藍色/粉色 隨機出貨)', qty: 1, price: 30, img: '/assets/i2.momoshop.com.tw/1698915746/goodsimg/0008/593/194/8593194_OL_m.webp' },
+    { name: '【SONAX】鍍膜美容巾(細緻柔軟.極具吸收力)', qty: 1, price: 150, img: '/assets/i3.momoshop.com.tw/1759350466/goodsimg/0007/053/569/7053569_OL_m.webp' },
+  ],
+  locale: 'zh-TW',
+  fallback: true,
+};
+const apiDir = path.join(OUT, 'api');
+fs.mkdirSync(apiDir, { recursive: true });
+fs.writeFileSync(path.join(apiDir, 'cart'), JSON.stringify(FALLBACK_CART), 'utf8');
+console.log('  api 兜底 : dist/api/cart 已写入');
+
 // ── 统计 ──
 let files = 0;
 let bytes = 0;
