@@ -130,15 +130,15 @@ console.log('  链接规范 : 目录页链接统一带斜杠');
 // Pages 的 200 重写：每条请求都原地返回目标文件，地址栏不变。
 // 商品页 / 分类页 / 订单页 全部交给静态页 + 浏览器端渲染。
 const REDIRECTS = [
-  '/product/*    /app-product.html   200',
-  '/m/product/*  /app-product.html   200',
-  '/goods/GoodsDetail.jsp  /app-product.html  200',
-  '/category      /category/index.html  200',
-  '/category/     /category/index.html  200',
-  '/m/category    /m/category/index.html  200',
-  '/m/category/   /m/category/index.html  200',
-  '/order/*      /order/index.html   200',
-  '/m/order/*    /m/order/index.html   200',
+  // 目标写「不带 .html」的形式：Pages 会先把 /xxx.html 规范化成 /xxx 并 308，
+  // 直接写 /xxx 才会被当成 200 重写
+  '/product/*    /app-product   200',
+  '/m/product/*  /app-product   200',
+  '/goods/GoodsDetail.jsp  /app-product  200',
+  '/category      /category/   200',
+  '/m/category    /m/category/  200',
+  '/order/*      /order/   200',
+  '/m/order/*    /m/order/  200',
 ].join('\n');
 fs.writeFileSync(path.join(OUT, '_redirects'), REDIRECTS + '\n', 'utf8');
 console.log('  重写规则 : dist/_redirects 已写入');
