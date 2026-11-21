@@ -4,6 +4,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getProduct, allItems, renderProductPage, renderCategoryPage } from './lib/render.mjs';
 import { loadCatalogFromDisk } from './lib/load-node.mjs';
+import { hashPassword, verifyPassword, signSession, verifySession, normalizePhone, validateRegister, SESSION_TTL, COOKIE_NAME, sessionCookie, clearCookie, readCookie, newUserId } from './lib/auth.mjs';
+import { getUser, putUser, loadUsers } from './lib/users-node.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE = path.join(__dirname, 'site');
@@ -71,6 +73,27 @@ fs.mkdirSync(DATA_DIR, { recursive: true });
 const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 let orders = {};
 try { orders = JSON.parse(fs.readFileSync(ORDERS_FILE, 'utf8')); } catch { orders = {}; }
+// ---------- 会员认证（模块级，避免 const 的 TDZ 问题）----------
+const SESSION_SECRET = process.env.SESSION_SECRET || 'momo-replica-demo-secret-2026';
+const SESSION_SECRET_RESOLVED = SESSION_SECRET;
+
+async function currentUser(req) {
+  const token = readCookie(req.headers.cookie, COOKIE_NAME);
+  if (!token) return null;
+  const payload = await verifySession(token, SESSION_SECRET_RESOLVED);
+  if (!payload) return null;
+  const u = getUser(payload.phone);
+  if (!u) return null;
+  return { uid: u.uid, phone: u.phone, name: u.name || '', email: u.email || '', created_at: u.created_at };
+}
+
+/** 读取 JSON body（用于 auth 接口） */
+async function readJson(req) {
+  const chunks = [];
+  for await (const c of req) chunks.push(c);
+  try { return JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}'); } catch { return {}; }
+}
+
 function saveOrders() {
   try { fs.writeFileSync(ORDERS_FILE, JSON.stringify(orders, null, 2), 'utf8'); } catch {}
 }
@@ -271,6 +294,7 @@ const server = http.createServer(async (req, res) => {
       locale: body.locale || 'zh-TW',
       utm: body.utm || {},
       customer: body.customer || {},
+      phone: (await currentUser(req))?.phone || '',
       created_at: new Date().toISOString(),
     };
     saveOrders();
@@ -281,6 +305,61 @@ const server = http.createServer(async (req, res) => {
     const no = decodeURIComponent(p.slice('/api/order/'.length));
     if (!orders[no]) return json(res, 200, { ok: false, error_code: 'not_found' });
     return json(res, 200, { ok: true, order: orders[no] });
+  }
+
+
+  if (p === '/api/auth/me' && req.method === 'GET') {
+    const me = await currentUser(req);
+    return json(res, 200, me ? { ok: true, user: me } : { ok: false, error_code: 'not_login' });
+  }
+
+  if (p === '/api/auth/register' && req.method === 'POST') {
+    const body = await readJson(req);
+    const err = validateRegister(body);
+    if (err) return json(res, 200, { ok: false, error_code: 'invalid', message: err });
+    const phone = normalizePhone(body.phone);
+    if (getUser(phone)) return json(res, 200, { ok: false, error_code: 'exists', message: '此手機號碼已註冊，請直接登入' });
+
+    const { salt, hash } = await hashPassword(body.password);
+    const rec = {
+      uid: newUserId(),
+      phone,
+      name: String(body.name || '').trim(),
+      email: String(body.email || '').trim(),
+      salt, hash,
+      created_at: new Date().toISOString(),
+    };
+    putUser(phone, rec);
+
+    const token = await signSession({ phone, uid: rec.uid, exp: Date.now() + SESSION_TTL }, SESSION_SECRET);
+    res.setHeader('Set-Cookie', sessionCookie(token));
+    return json(res, 200, { ok: true, user: { uid: rec.uid, phone, name: rec.name, email: rec.email } });
+  }
+
+  if (p === '/api/auth/login' && req.method === 'POST') {
+    const body = await readJson(req);
+    const phone = normalizePhone(body.phone);
+    const u = phone ? getUser(phone) : null;
+    if (!u || !(await verifyPassword(body.password, u))) {
+      return json(res, 200, { ok: false, error_code: 'bad_credential', message: '手機號碼或密碼不正確' });
+    }
+    const token = await signSession({ phone, uid: u.uid, exp: Date.now() + SESSION_TTL }, SESSION_SECRET);
+    res.setHeader('Set-Cookie', sessionCookie(token));
+    return json(res, 200, { ok: true, user: { uid: u.uid, phone, name: u.name || '', email: u.email || '' } });
+  }
+
+  if (p === '/api/auth/logout' && req.method === 'POST') {
+    res.setHeader('Set-Cookie', clearCookie());
+    return json(res, 200, { ok: true });
+  }
+
+  if (p === '/api/member/orders' && req.method === 'GET') {
+    const me = await currentUser(req);
+    if (!me) return json(res, 200, { ok: false, error_code: 'not_login', message: '請先登入' });
+    const list = Object.values(orders)
+      .filter((o) => o.phone === me.phone)
+      .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+    return json(res, 200, { ok: true, orders: list, total: list.length });
   }
 
   if (p.startsWith('/api/')) return json(res, 200, { ok: false, error_code: 'not_found' });

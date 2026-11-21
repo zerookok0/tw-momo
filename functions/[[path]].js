@@ -13,6 +13,11 @@
  * 契约：§4 六个固定 id、§5 /api/cart、§6 200+JSON 幂等、§7 响应头由 _headers 提供。
  */
 import { setCatalog, getProduct, allItems, renderProductPage, renderCategoryPage, catalogCount } from '../lib/render.mjs';
+import {
+  hashPassword, verifyPassword, signSession, verifySession,
+  normalizePhone, validateRegister, SESSION_TTL, COOKIE_NAME,
+  sessionCookie, clearCookie, readCookie, newUserId,
+} from '../lib/auth.mjs';
 
 const PAGE_SIZE = 48;
 
@@ -37,6 +42,35 @@ async function ensureCatalog(env, request) {
 
 // ── 订单存储：Pages 无状态，内存兜底；生产建议绑 KV ──
 const ORDERS = new Map();
+
+// ── 会员账号：优先 KV（env.USERS），否则内存（同 isolate 有效）──
+const MEM_USERS = new Map();
+const USERS = {
+  async get(env, phone) {
+    if (env && env.USERS) {
+      const raw = await env.USERS.get('u:' + phone);
+      return raw ? JSON.parse(raw) : null;
+    }
+    return MEM_USERS.get(phone) || null;
+  },
+  async put(env, phone, rec) {
+    if (env && env.USERS) await env.USERS.put('u:' + phone, JSON.stringify(rec));
+    else MEM_USERS.set(phone, rec);
+  },
+};
+
+const SESSION_SECRET_OF = (env) => (env && env.SESSION_SECRET) || 'momo-replica-demo-secret-2026';
+
+async function currentUser(context) {
+  const { request, env } = context;
+  const token = readCookie(request.headers.get('Cookie') || '', COOKIE_NAME);
+  if (!token) return null;
+  const payload = await verifySession(token, SESSION_SECRET_OF(env));
+  if (!payload) return null;
+  const u = await USERS.get(env, payload.phone);
+  if (!u) return null;
+  return { uid: u.uid, phone: u.phone, name: u.name || '', email: u.email || '' };
+}
 
 const MSG = {
   invalid_amount: '金額異常，請回到購物車重新結帳',
@@ -246,6 +280,7 @@ export async function onRequest(context) {
       const amount = Number(body.amount);
       if (!Number.isFinite(amount) || amount <= 0) return json({ ok: false, error_code: 'invalid_amount', message: MSG.invalid_amount });
 
+      const me0 = await currentUser(context);   // 已登录则把订单挂在会员名下
       ORDERS.set(no, {
         order_number: no,
         amount,
@@ -253,6 +288,7 @@ export async function onRequest(context) {
         locale: body.locale || 'zh-TW',
         utm: body.utm || {},
         customer: body.customer || {},
+        phone: (me0 && me0.phone) || '',
         created_at: new Date().toISOString(),
       });
       // 契约 §6.1：永远 200 + JSON，单号复用，不 302
@@ -263,6 +299,65 @@ export async function onRequest(context) {
       const no = decodeURIComponent(p.slice('/api/order/'.length));
       const o = ORDERS.get(no);
       return o ? json({ ok: true, order: o }) : json({ ok: false, error_code: 'not_found' });
+    }
+
+    // ───────── 会员认证 ─────────
+    if (p === '/api/auth/me' && method === 'GET') {
+      const me = await currentUser(context);
+      return json(me ? { ok: true, user: me } : { ok: false, error_code: 'not_login' });
+    }
+
+    if (p === '/api/auth/register' && method === 'POST') {
+      let body = {};
+      try { body = await request.json(); } catch { return json({ ok: false, error_code: 'invalid', message: MSG.bad_json }); }
+      const err = validateRegister(body);
+      if (err) return json({ ok: false, error_code: 'invalid', message: err });
+
+      const phone = normalizePhone(body.phone);
+      if (await USERS.get(env, phone)) return json({ ok: false, error_code: 'exists', message: '此手機號碼已註冊，請直接登入' });
+
+      const { salt, hash } = await hashPassword(body.password);
+      const rec = {
+        uid: newUserId(), phone,
+        name: String(body.name || '').trim(),
+        email: String(body.email || '').trim(),
+        salt, hash, created_at: new Date().toISOString(),
+      };
+      await USERS.put(env, phone, rec);
+
+      const token = await signSession({ phone, uid: rec.uid, exp: Date.now() + SESSION_TTL }, SESSION_SECRET_OF(env));
+      const res = json({ ok: true, user: { uid: rec.uid, phone, name: rec.name, email: rec.email } });
+      res.headers.set('Set-Cookie', sessionCookie(token));
+      return res;
+    }
+
+    if (p === '/api/auth/login' && method === 'POST') {
+      let body = {};
+      try { body = await request.json(); } catch { return json({ ok: false, error_code: 'invalid', message: MSG.bad_json }); }
+      const phone = normalizePhone(body.phone);
+      const u = phone ? await USERS.get(env, phone) : null;
+      if (!u || !(await verifyPassword(body.password, u))) {
+        return json({ ok: false, error_code: 'bad_credential', message: '手機號碼或密碼不正確' });
+      }
+      const token = await signSession({ phone, uid: u.uid, exp: Date.now() + SESSION_TTL }, SESSION_SECRET_OF(env));
+      const res = json({ ok: true, user: { uid: u.uid, phone, name: u.name || '', email: u.email || '' } });
+      res.headers.set('Set-Cookie', sessionCookie(token));
+      return res;
+    }
+
+    if (p === '/api/auth/logout' && method === 'POST') {
+      const res = json({ ok: true });
+      res.headers.set('Set-Cookie', clearCookie());
+      return res;
+    }
+
+    if (p === '/api/member/orders' && method === 'GET') {
+      const me = await currentUser(context);
+      if (!me) return json({ ok: false, error_code: 'not_login', message: '請先登入' });
+      const list = [...ORDERS.values()]
+        .filter((o) => o.phone === me.phone)
+        .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+      return json({ ok: true, orders: list, total: list.length });
     }
 
     if (p.startsWith('/api/')) return json({ ok: false, error_code: 'not_found' }, 404);

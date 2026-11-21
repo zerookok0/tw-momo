@@ -208,31 +208,90 @@ const PAGES = {
   'member-center': {
     title: '會員中心',
     intro: '這裡可以管理您的帳號、訂單、折價券與收件地址。',
-    cards: [
-      { t: '訂單查詢', d: '查看訂單狀態與配送進度', href: '/info/orders' },
-      { t: '追蹤清單', d: '降價與補貨通知', href: '/info/wishlist' },
-      { t: '折價券', d: '查看可用折價券', href: '/info/coupons' },
-      { t: '更改配送地址', d: '修改收件資訊', href: '/info/address' },
-      { t: '取消訂單／退貨', d: '申請退換貨', href: '/info/returns' },
-      { t: '聯絡客服', d: '0800-777-616', href: '/info/contact' },
-    ],
+    custom: 'member',
   },
   login: {
     title: '登入 / 註冊',
-    intro: '本站為示範站，會員系統未串接；以下為 momo 實際登入流程示意。',
-    form: 'login',
-    sections: [
-      { h: '登入方式', ul: ['手機號碼 + 密碼', 'Facebook / Google / LINE 快速登入', '簡訊驗證碼登入'] },
-      { h: '註冊需要', p: ['手機號碼、驗證簡訊、設定密碼。完成後即可使用折價券與會員價。'] },
-    ],
+    intro: '使用手機號碼與密碼登入；沒有帳號可直接註冊（本站為示範站，帳號僅存於本站）。',
+    custom: 'login',
   },
 };
 
 // ── 渲染 ──
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
+const LOGIN_HTML = `
+<div class="auth">
+  <div class="auth__tabs">
+    <button type="button" data-tab="login" class="on">登入</button>
+    <button type="button" data-tab="register">註冊新帳號</button>
+  </div>
+
+  <div class="auth__pane" data-pane="login">
+    <label>手機號碼</label>
+    <input id="loginPhone" inputmode="numeric" maxlength="10" placeholder="09xxxxxxxx" autocomplete="username">
+    <label>密碼</label>
+    <input id="loginPwd" type="password" placeholder="請輸入密碼" autocomplete="current-password">
+    <button type="button" class="auth__btn" id="doLogin">登入</button>
+  </div>
+
+  <div class="auth__pane" data-pane="register" hidden>
+    <label>手機號碼 <i>*</i></label>
+    <input id="regPhone" inputmode="numeric" maxlength="10" placeholder="09xxxxxxxx" autocomplete="username">
+    <label>密碼 <i>*</i>（至少 6 碼）</label>
+    <input id="regPwd" type="password" placeholder="設定密碼" autocomplete="new-password">
+    <label>姓名</label>
+    <input id="regName" placeholder="選填" autocomplete="name">
+    <label>電子郵件</label>
+    <input id="regEmail" type="email" placeholder="選填" autocomplete="email">
+    <button type="button" class="auth__btn" id="doRegister">註冊並登入</button>
+  </div>
+
+  <div id="authMsg" class="auth__msg"></div>
+
+  <p class="auth__hint">本站為 momo 復刻示範站，帳號資料僅儲存於本站，不會外傳。</p>
+</div>
+`;
+
+const MEMBER_HTML = `
+<div class="member" id="memberBox" hidden>
+  <div class="member__hd">
+    <div class="member__avatar" id="mAvatar">m</div>
+    <div class="member__who">
+      <strong id="mName">—</strong>
+      <span id="mPhone">—</span>
+    </div>
+    <button type="button" class="member__logout" id="doLogout">登出</button>
+  </div>
+
+  <div class="info-cards">
+    <a class="info-card" href="/info/orders"><strong>訂單查詢</strong><span>用單號查配送進度</span></a>
+    <a class="info-card" href="/info/wishlist"><strong>追蹤清單</strong><span>降價與補貨通知</span></a>
+    <a class="info-card" href="/info/coupons"><strong>折價券</strong><span>查看可用折價券</span></a>
+    <a class="info-card" href="/info/address"><strong>更改配送地址</strong><span>修改收件資訊</span></a>
+    <a class="info-card" href="/info/returns"><strong>取消／退貨</strong><span>申請退換貨</span></a>
+    <a class="info-card" href="/info/contact"><strong>聯絡客服</strong><span>0800-777-616</span></a>
+  </div>
+
+  <section class="info-sec">
+    <h2>我的訂單</h2>
+    <div id="myOrders" class="member__orders">載入中…</div>
+  </section>
+</div>
+
+<div class="member member--guest" id="guestBox" hidden>
+  <p class="member__guestline">您尚未登入，登入後即可查看訂單與會員資料。</p>
+  <a class="auth__btn" href="/info/login">前往登入 / 註冊</a>
+</div>
+`;
+
+function renderCustom(kind) {
+  return kind === 'login' ? LOGIN_HTML : MEMBER_HTML;
+}
+
 function renderSections(pg) {
   let out = '';
+  if (pg.custom) out += renderCustom(pg.custom);   // 登录 / 会员中心：真表单
   if (pg.form === 'order') {
     out += `
     <div class="info-form">
@@ -242,17 +301,6 @@ function renderSections(pg) {
         <button type="button" id="orderQuery">查詢</button>
       </div>
       <div id="orderResult" class="info-form__result"></div>
-    </div>`;
-  }
-  if (pg.form === 'login') {
-    out += `
-    <div class="info-form">
-      <label for="loginPhone">手機號碼</label>
-      <div class="info-form__row"><input id="loginPhone" inputmode="numeric" placeholder="09xxxxxxxx"></div>
-      <label for="loginPwd">密碼</label>
-      <div class="info-form__row"><input id="loginPwd" type="password" placeholder="請輸入密碼"></div>
-      <button type="button" id="loginBtn">登入</button>
-      <div id="loginResult" class="info-form__result"></div>
     </div>`;
   }
   if (pg.cards) {
@@ -325,6 +373,81 @@ ${footer}
       box.className = 'info-form__result err';
       box.textContent = '示範站未串接會員系統；可直接前往結帳（訪客結帳免登入）';
     });
+  }
+
+  // ── 登入 / 註冊 ──
+  if ($('authMsg')) {
+    var msg = $('authMsg');
+    function say(t, ok) { msg.textContent = t || ''; msg.className = 'auth__msg' + (ok ? ' ok' : t ? ' err' : ''); }
+    document.querySelectorAll('.auth__tabs button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        document.querySelectorAll('.auth__tabs button').forEach(function (x) { x.classList.remove('on'); });
+        b.classList.add('on');
+        document.querySelectorAll('.auth__pane').forEach(function (p) {
+          p.hidden = p.getAttribute('data-pane') !== b.getAttribute('data-tab');
+        });
+        say('');
+      });
+    });
+    function post(url, body) {
+      return fetch(url, { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(function (r) { return r.json(); });
+    }
+    if ($('doLogin')) {
+      $('doLogin').addEventListener('click', function () {
+        var phone = $('loginPhone').value, pwd = $('loginPwd').value;
+        if (!phone || !pwd) return say('請輸入手機號碼與密碼');
+        say('登入中…');
+        post('/api/auth/login', { phone: phone, password: pwd }).then(function (j) {
+          if (j && j.ok) { say('登入成功，正在前往會員中心…', true); setTimeout(function () { location.href = '/info/member-center'; }, 500); }
+          else say((j && j.message) || '登入失敗');
+        }).catch(function () { say('網路異常，請重試'); });
+      });
+    }
+    if ($('doRegister')) {
+      $('doRegister').addEventListener('click', function () {
+        var body = { phone: $('regPhone').value, password: $('regPwd').value, name: $('regName').value, email: $('regEmail').value };
+        say('註冊中…');
+        post('/api/auth/register', body).then(function (j) {
+          if (j && j.ok) { say('註冊成功，正在前往會員中心…', true); setTimeout(function () { location.href = '/info/member-center'; }, 500); }
+          else say((j && j.message) || '註冊失敗');
+        }).catch(function () { say('網路異常，請重試'); });
+      });
+    }
+    // 已登录直接跳会员中心
+    fetch('/api/auth/me', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (j) {
+      if (j && j.ok) setTimeout(function () { location.href = '/info/member-center'; }, 300);
+    }).catch(function () {});
+  }
+
+  // ── 会员中心 ──
+  if ($('memberBox')) {
+    fetch('/api/auth/me', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (j) {
+      if (!j || !j.ok) { $('guestBox').hidden = false; return; }
+      var u = j.user;
+      $('memberBox').hidden = false;
+      $('mName').textContent = u.name || 'momo 會員';
+      $('mPhone').textContent = u.phone ? u.phone.replace(/^([0-9]{4})[0-9]{3}([0-9]{3})$/, '$1***$2') : '';
+      $('mAvatar').textContent = (u.name || 'm').trim().charAt(0) || 'm';
+
+      fetch('/api/member/orders', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (o) {
+        var box = $('myOrders');
+        if (!o || !o.ok) { box.textContent = '訂單載入失敗'; return; }
+        if (!o.orders.length) { box.innerHTML = '<p class="member__empty">還沒有訂單，<a href="/category">去逛逛</a></p>'; return; }
+        box.innerHTML = o.orders.map(function (od) {
+          return '<div class="member__order">' +
+            '<div><b>' + od.order_number + '</b><span>' + new Date(od.created_at).toLocaleString('zh-TW') + '</span></div>' +
+            '<div class="member__order-amt">$' + Number(od.amount).toLocaleString('en-US') + '</div>' +
+            '<a href="/order/' + encodeURIComponent(od.order_number) + '">查看</a>' +
+            '</div>';
+        }).join('');
+      });
+    }).catch(function () { $('guestBox').hidden = false; });
+
+    if ($('doLogout')) {
+      $('doLogout').addEventListener('click', function () {
+        fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' }).then(function () { location.reload(); });
+      });
+    }
   }
 })();
 </script>

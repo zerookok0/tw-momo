@@ -20,3 +20,4 @@ dist/
 # 自写 connector 备份（已由官方包替换）
 _ref/bp-mine/
 _ref/bp-official/
+data/users.json
