@@ -604,3 +604,126 @@
 /* 地址类字段允许换行，不要挤成一条 */
 .m-co-row .m-co-inline { display: flex; gap: 8px; }
 .m-co-row .m-co-inline > * { flex: 1; min-width: 0; }
+/* ================= 手机商品页（对真站 m 版） ================= */
+.r-hd--pdp { gap: 4px; }
+.r-hd__logo { font-size: 15px; font-weight: 800; color: #d6006e; letter-spacing: -.5px; }
+
+.r-crumb2 {
+  display: flex; align-items: center; gap: 5px;
+  padding: 8px 12px; background: #fff; font-size: 12px; color: #666;
+  overflow-x: auto; white-space: nowrap;
+}
+.r-crumb2::-webkit-scrollbar { display: none; }
+.r-crumb2 a { color: #666; text-decoration: none; }
+.r-crumb2 i { font-style: normal; color: #bbb; }
+
+.r-pdp__idx {
+  position: absolute; right: 10px; bottom: 10px;
+  background: rgba(0,0,0,.5); color: #fff; font-size: 11px;
+  padding: 1px 8px; border-radius: 10px;
+}
+
+.r-pdp__promo {
+  display: flex; align-items: center; gap: 8px;
+  background: #fff2f5; padding: 8px 12px;
+  border-bottom: 1px solid #fde6ee;
+}
+.r-pdp__promo-tag {
+  background: #c8102e; color: #fff; font-size: 13px; font-weight: 800;
+  padding: 3px 10px; border-radius: 4px; flex: none;
+}
+.r-pdp__promo-txt { font-size: 13px; color: #c8102e; }
+.r-pdp__promo-txt em { font-style: normal; font-size: 19px; font-weight: 800; }
+
+.r-pdp__info { background: #fff; padding: 10px 12px 12px; }
+.r-pdp__slogan { display: flex; justify-content: space-between; font-size: 12px; color: #e2125b; }
+.r-pdp__slogan .code { color: #999; }
+.r-pdp__name {
+  margin: 6px 0 8px; font-size: 15px; line-height: 1.45; font-weight: 700; color: #1a56c4;
+}
+.r-pdp__priceline { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.r-pdp__priceline .now { font-size: 30px; font-weight: 800; color: #e2125b; font-family: var(--font-price, sans-serif); }
+.r-pdp__priceline .now small { font-size: 16px; }
+.r-pdp__priceline .tag {
+  background: #e2125b; color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 3px;
+}
+.r-pdp__priceline .sold { margin-left: auto; font-size: 11px; color: #999; }
+.r-pdp__wasline { display: flex; gap: 14px; font-size: 12px; color: #888; margin-top: 4px; }
+.r-pdp__wasline b { color: #e2125b; font-weight: 400; }
+.r-pdp__discount {
+  display: flex; align-items: center; gap: 6px; margin-top: 10px;
+  font-size: 12px;
+}
+.r-pdp__discount .chip { background: #e2125b; color: #fff; font-size: 10px; padding: 1px 5px; border-radius: 3px; }
+.r-pdp__discount .txt { color: #c8102e; border: 1px solid #f7c8da; border-radius: 3px; padding: 1px 6px; }
+.r-pdp__discount .more { margin-left: auto; color: #e2125b; text-decoration: none; }
+.r-pdp__rank {
+  display: flex; align-items: center; gap: 6px; margin-top: 10px;
+  background: #fdeef3; border-radius: 6px; padding: 8px 10px;
+  font-size: 12px; color: #8a4b66; text-decoration: none;
+}
+.r-pdp__rank em { margin-left: auto; font-style: normal; color: #e2125b; }
+
+.r-pdp__rows { background: #fff; margin-top: 8px; padding: 0 12px; }
+.r-pdp__row {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 11px 0; border-bottom: 1px solid #f5f5f5; font-size: 12.5px;
+}
+.r-pdp__row:last-child { border-bottom: 0; }
+.r-pdp__row .k { flex: none; width: 74px; color: #999; }
+.r-pdp__row .v { flex: 1; color: #444; line-height: 1.6; }
+.r-pdp__row .pink { color: #e2125b; }
+
+.r-pdp__detail { background: #fff; margin-top: 8px; padding: 12px; }
+.r-pdp__detail h3 { margin: 0 0 8px; font-size: 14px; font-weight: 700; color: #333; position: relative; padding-left: 9px; }
+.r-pdp__detail h3::before { content: ""; position: absolute; left: 0; top: 3px; bottom: 3px; width: 3px; border-radius: 2px; background: #e2125b; }
+.r-pdp__detail p { margin: 0 0 10px; font-size: 12.5px; line-height: 1.8; color: #666; }
+.r-pdp__imgs { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.r-pdp__imgs img { width: 100%; display: block; border-radius: 4px; }
+
+.r-pdp__ship {
+  margin: 8px 0 0; padding: 9px 12px;
+  background: #ff8c1a; color: #fff; font-size: 12.5px; text-align: center;
+}
+
+.r-buybar--pdp { gap: 4px; }
+.r-buybar__mini {
+  flex: none; width: 46px; display: flex; flex-direction: column; align-items: center;
+  gap: 1px; font-size: 10px; color: #666; text-decoration: none;
+}
+.r-buybar__mini svg { width: 19px; height: 19px; }
+.r-buybar--pdp .r-buybar__add { flex: 1; height: 40px; border-radius: 4px; }
+.r-buybar--pdp .r-buybar__buy { flex: 1; height: 40px; border-radius: 4px; }
+/* 手机商品页 Tab 栏 */
+.r-pdp__tabs {
+  position: sticky; top: 40px; z-index: 90;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  background: #fff; border-bottom: 1px solid #f0f0f0;
+  margin-top: 8px;
+}
+.r-pdp__tabs a {
+  padding: 11px 0; text-align: center; font-size: 13px; color: #666;
+  text-decoration: none; position: relative;
+}
+.r-pdp__tabs a.on { color: #e2125b; font-weight: 700; }
+.r-pdp__tabs a.on::after {
+  content: ""; position: absolute; left: 50%; bottom: 0; width: 26px; height: 2px;
+  margin-left: -13px; background: #e2125b; border-radius: 2px;
+}
+
+/* 評價 */
+.r-pdp__rate { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+.r-pdp__rate .score { font-size: 26px; font-weight: 800; color: #e2125b; }
+.r-pdp__rate .stars { color: #ffab00; font-size: 13px; letter-spacing: 1px; }
+.r-pdp__rate .cnt { font-size: 11.5px; color: #999; }
+.r-pdp__review { border-top: 1px solid #f5f5f5; padding: 9px 0; }
+.r-pdp__review b { font-size: 12px; color: #333; margin-right: 6px; }
+.r-pdp__review .stars { color: #ffab00; font-size: 11px; }
+.r-pdp__review p { margin: 4px 0 0; font-size: 12px; color: #666; line-height: 1.7; }
+
+/* 推薦 */
+.r-pdp__recs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.r-pdp__rec { text-decoration: none; }
+.r-pdp__rec img { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #fafafa; border-radius: 4px; display: block; }
+.r-pdp__rec b { display: block; font-size: 10.5px; color: #444; line-height: 1.3; margin-top: 4px; height: 27px; overflow: hidden; font-weight: 400; }
+.r-pdp__rec span { display: block; font-size: 12px; color: #e2125b; font-weight: 700; }

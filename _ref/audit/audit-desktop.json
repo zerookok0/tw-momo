@@ -1,95 +1,23 @@
 {
  "mode": "desktop",
  "base": "https://tw-momo.pages.dev",
- "at": "2026-11-22T20:51:19.944Z",
+ "at": "2026-11-22T23:33:54.011Z",
  "pages": [
   {
    "page": "/",
    "url": "https://tw-momo.pages.dev/",
    "status": "ok",
-   "docW": 1425,
+   "docW": 1440,
    "vw": 1440,
    "badLinks": [],
    "brokenImgs": [],
-   "deadButtons": [
-    "✕",
-    "首頁",
-    "結帳"
+   "deadButtons": [],
+   "clickProbe": [
+    "✕"
    ],
    "overflowX": false,
-   "overflowBy": -15,
-   "offside": [
-    {
-     "tag": "DIV",
-     "cls": "flex-shrink-0",
-     "left": 1377,
-     "right": 1681,
-     "t": ""
-    },
-    {
-     "tag": "A",
-     "cls": "",
-     "left": 1377,
-     "right": 1681,
-     "t": ""
-    },
-    {
-     "tag": "IMG",
-     "cls": "aspect-[466/634] object-cover object-cen",
-     "left": 1377,
-     "right": 1681,
-     "t": ""
-    },
-    {
-     "tag": "DIV",
-     "cls": "flex-shrink-0",
-     "left": 1691,
-     "right": 1996,
-     "t": ""
-    },
-    {
-     "tag": "A",
-     "cls": "",
-     "left": 1691,
-     "right": 1996,
-     "t": ""
-    },
-    {
-     "tag": "IMG",
-     "cls": "aspect-[466/634] object-cover object-cen",
-     "left": 1691,
-     "right": 1996,
-     "t": ""
-    },
-    {
-     "tag": "DIV",
-     "cls": "flex-shrink-0",
-     "left": 2006,
-     "right": 2310,
-     "t": ""
-    },
-    {
-     "tag": "A",
-     "cls": "",
-     "left": 2006,
-     "right": 2310,
-     "t": ""
-    },
-    {
-     "tag": "IMG",
-     "cls": "aspect-[466/634] object-cover object-cen",
-     "left": 2006,
-     "right": 2310,
-     "t": ""
-    },
-    {
-     "tag": "DIV",
-     "cls": "flex-shrink-0",
-     "left": 2320,
-     "right": 2625,
-     "t": ""
-    }
-   ]
+   "overflowBy": 0,
+   "offside": []
   },
   {
    "page": "/category",
@@ -100,8 +28,10 @@
    "badLinks": [],
    "brokenImgs": [],
    "deadButtons": [
-    "購物車 (0)"
+    "‹",
+    "›"
    ],
+   "clickProbe": [],
    "overflowX": false,
    "overflowBy": -15,
    "offside": []
@@ -115,15 +45,15 @@
    "badLinks": [],
    "brokenImgs": [],
    "deadButtons": [
-    "購物車 (0)",
-    "標準規格",
+    "▼更多",
     "−",
-    "+",
-    "加入購物車",
-    "直接結帳",
-    "商品詳情",
-    "規格說明",
-    "退換貨須知"
+    "＋",
+    "直接購買",
+    "放入購物車",
+    "♡ 加入追蹤"
+   ],
+   "clickProbe": [
+    "更多"
    ],
    "overflowX": false,
    "overflowBy": -15,
@@ -137,16 +67,11 @@
    "vw": 1440,
    "badLinks": [],
    "brokenImgs": [],
-   "deadButtons": [
-    "購物車 (0)",
+   "deadButtons": [],
+   "clickProbe": [
     "−",
     "+",
-    "刪除",
-    "−",
-    "+",
-    "刪除",
-    "繼續購物",
-    "前往結帳"
+    "刪除"
    ],
    "overflowX": false,
    "overflowBy": -15,
@@ -160,9 +85,8 @@
    "vw": 1440,
    "badLinks": [],
    "brokenImgs": [],
-   "deadButtons": [
-    "購物車 (0)"
-   ],
+   "deadButtons": [],
+   "clickProbe": [],
    "overflowX": false,
    "overflowBy": -15,
    "offside": []
@@ -175,9 +99,8 @@
    "vw": 1440,
    "badLinks": [],
    "brokenImgs": [],
-   "deadButtons": [
-    "購物車 (0)"
-   ],
+   "deadButtons": [],
+   "clickProbe": [],
    "overflowX": false,
    "overflowBy": -15,
    "offside": []
@@ -190,9 +113,8 @@
    "vw": 1440,
    "badLinks": [],
    "brokenImgs": [],
-   "deadButtons": [
-    "購物車 (0)"
-   ],
+   "deadButtons": [],
+   "clickProbe": [],
    "overflowX": false,
    "overflowBy": -15,
    "offside": []
@@ -205,9 +127,8 @@
    "vw": 1440,
    "badLinks": [],
    "brokenImgs": [],
-   "deadButtons": [
-    "購物車 (0)"
-   ],
+   "deadButtons": [],
+   "clickProbe": [],
    "overflowX": false,
    "overflowBy": -15,
    "offside": []
@@ -220,9 +141,8 @@
    "vw": 1440,
    "badLinks": [],
    "brokenImgs": [],
-   "deadButtons": [
-    "購物車 (0)"
-   ],
+   "deadButtons": [],
+   "clickProbe": [],
    "overflowX": false,
    "overflowBy": -15,
    "offside": []
