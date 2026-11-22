@@ -520,3 +520,40 @@ body.momo-page {
   .pdp2__side { display: none; }
   .pdp2__main { grid-template-columns: 1fr; }
 }
+/* ================= 桌面分类页（对真站） ================= */
+.catpage-pills {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  background: #fff; border-radius: 6px; padding: 18px 24px; margin-bottom: 14px;
+}
+.catpage-pills .pill {
+  height: 40px; line-height: 40px; padding: 0 26px;
+  border: 1px solid #e6e6e6; border-radius: 20px;
+  font-size: 14px; color: #444; text-decoration: none; white-space: nowrap;
+  background: #fff;
+}
+.catpage-pills .pill:hover { border-color: #d62872; color: #d62872; }
+.catpage-pills .pill.on { background: #fdeef3; border-color: #f7c8da; color: #d62872; font-weight: 700; }
+
+.catpage-banner {
+  position: relative; background: #fff; border-radius: 6px; padding: 20px 60px; margin-bottom: 14px;
+}
+.catpage-banner__view { height: 292px; display: flex; align-items: center; justify-content: center; }
+.catpage-banner__view img { max-height: 292px; max-width: 100%; object-fit: contain; }
+.catpage-banner__nav {
+  position: absolute; top: 50%; margin-top: -20px;
+  width: 34px; height: 40px; border: 0; border-radius: 4px;
+  background: #f2f2f2; color: #666; font-size: 20px; cursor: pointer;
+}
+.catpage-banner__nav.prev { left: 12px; }
+.catpage-banner__nav.next { right: 12px; }
+
+.catpage-kw { background: #f7ecf9; border-radius: 6px; padding: 16px 20px 20px; margin-bottom: 14px; }
+.catpage-kw h2 { margin: 0 0 14px; font-size: 22px; color: #333; font-weight: 700; }
+.catpage-kw__row { display: flex; gap: 18px; overflow-x: auto; padding-bottom: 4px; }
+.catpage-kw__row a { flex: none; width: 92px; text-align: center; text-decoration: none; }
+.catpage-kw__row i {
+  display: flex; align-items: center; justify-content: center;
+  width: 92px; height: 92px; border-radius: 50%; background: #fff; overflow: hidden;
+}
+.catpage-kw__row img { width: 76px; height: 76px; object-fit: contain; }
+.catpage-kw__row b { display: block; font-size: 12px; color: #555; margin-top: 6px; font-weight: 400; }

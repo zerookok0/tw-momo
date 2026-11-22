@@ -22,6 +22,20 @@ h = h.replace(re, (all, href, orig, text) => {
 });
 
 fs.writeFileSync(F, h, 'utf8');
+
+// 同步修 _partials/header.html（动态页头部用的是它）
+const HF = 'site/_partials/header.html';
+if (fs.existsSync(HF)) {
+  let hh = fs.readFileSync(HF, 'utf8');
+  let j = 0;
+  hh = hh.replace(re, () => {
+    const kw = KWS[j % KWS.length]; j++;
+    const enc = encodeURIComponent(kw);
+    return `<a href="/category?kw=${enc}" data-orig-href="https://www.momoshop.com.tw/search/searchShop.jsp?keyword=${enc}" class="inline-flex h-[24px] overflow-hidden whitespace-nowrap px-1 text-ec-sm leading-[24px] text-momo-pink">${kw}</a>`;
+  });
+  fs.writeFileSync(HF, hh, 'utf8');
+  console.log('header 关键词已修:', j);
+}
 console.log('已重写', i, '个关键词链接');
 const check = [...h.matchAll(re)].map((m) => m[3]);
 console.log('现在:', check.join(' | '));
