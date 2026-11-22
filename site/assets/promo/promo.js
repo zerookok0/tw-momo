@@ -138,7 +138,9 @@
     var last = 0;
     try { last = Number(sessionStorage.getItem('promo_seen_at') || 0); } catch (e) {}
     var cooled = COOLDOWN_MS > 0 && last && (Date.now() - last) < COOLDOWN_MS;
-    if (!cooled) setTimeout(open, 900);
+    // ?nopromo=1 或 ?promo=0 时不弹（自检截图/内部预览用）
+    var suppressed = /[?&](nopromo=1|promo=0)/.test(location.search);
+    if (!cooled && !suppressed) setTimeout(open, 900);
   }
 
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init);

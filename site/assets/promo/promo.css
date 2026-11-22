@@ -250,8 +250,17 @@
   #promoBar.on ~ header { padding-top: 0 !important; }
 }
 
-/* 桌面：横膈固定占 40px，把站点 header 的预留空间从 40px 提到 80px，避免logo被盖 */
-#promoBar.on ~ header { padding-top: 80px !important; }
+/* 桌面专用：横膈固定占 40px，给站点 header 预留 80px，避免 logo 被盖。
+   必须限定 >1260px —— 手机版的 .r-hd 同样是 <header>，不限定会多出 80px 空白 */
+@media (min-width: 1261px) {
+  #promoBar.on ~ header { padding-top: 80px !important; }
+}
+/* 窄屏/手机：横膈已在文档流里，header 不需要任何预留 */
+#promoBar.on ~ .r-hd,
+#promoBar.on ~ .m-header {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
 
 @media (max-width: 480px) {
   #promoMask { padding: 12px; }
