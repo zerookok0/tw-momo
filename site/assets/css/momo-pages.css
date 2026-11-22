@@ -449,3 +449,74 @@ body.momo-page {
 }
 /* 购物车无图占位 */
 .cart-item__ph { display: block; width: 100%; height: 100%; background: #f5f5f5; border-radius: 4px; }
+/* ================= 桌面商品页 pdp2（对真站两栏布局） ================= */
+.pdp2-wrap { padding-bottom: 30px; }
+.pdp2 { display: grid; grid-template-columns: 268px 1fr; gap: 16px; margin-top: 8px; align-items: start; }
+
+/* 左侧分类树 */
+.pdp2__side { background: #fff; border: 1px solid #eee; border-radius: 4px; overflow: hidden; }
+.pdp2__sidehd {
+  background: #4a78c8; color: #fff; font-size: 14px; font-weight: 700;
+  padding: 9px 12px;
+}
+.pdp2__sidelist { list-style: none; margin: 0; padding: 6px 0; border-bottom: 1px solid #f2f2f2; }
+.pdp2__sidelist:last-child { border-bottom: 0; }
+.pdp2__sidelist li {
+  font-size: 13px; color: #444; line-height: 30px; padding: 0 14px; cursor: pointer;
+}
+.pdp2__sidelist li:hover { color: #d62872; }
+.pdp2__sidelist li.on { color: #d62872; font-weight: 700; }
+.pdp2__sidelist li.more { color: #999; text-align: right; }
+
+/* 右侧主区 */
+.pdp2__main { display: grid; grid-template-columns: 420px 1fr; gap: 22px; background: #fff; border: 1px solid #eee; border-radius: 4px; padding: 16px; }
+.pdp2__gallery { display: flex; flex-direction: column; gap: 10px; }
+.pdp2__imgbox { border: 1px solid #f0f0f0; border-radius: 4px; }
+.pdp2__imgbox img { width: 100%; aspect-ratio: 1/1; object-fit: contain; display: block; }
+.pdp2__thumbs { display: flex; gap: 8px; }
+.pdp2__thumbs button { width: 62px; height: 62px; padding: 0; border: 2px solid transparent; background: #fff; border-radius: 4px; cursor: pointer; }
+.pdp2__thumbs button[aria-selected="true"] { border-color: #d62872; }
+.pdp2__thumbs img { width: 100%; height: 100%; object-fit: contain; }
+
+.pdp2__info { min-width: 0; }
+.pdp2__slogan { margin: 0 0 6px; font-size: 13px; color: #c8102e; }
+.pdp2__title { margin: 0 0 10px; font-size: 20px; line-height: 1.4; color: #1a56c4; font-weight: 700; }
+.pdp2__promo { border-left: 3px solid #c8102e; padding-left: 10px; margin-bottom: 10px; }
+.pdp2__promoline { font-size: 15px; color: #c8102e; font-weight: 700; }
+.pdp2__promoline span { color: #c8102e; }
+.pdp2__promoline2 { font-size: 12.5px; color: #c8102e; margin-top: 2px; }
+.pdp2__promoline2 em { font-style: normal; color: #888; font-size: 11px; }
+.pdp2__sell { margin: 0 0 6px; padding-left: 18px; font-size: 12.5px; color: #666; line-height: 1.9; }
+.pdp2__code { text-align: right; font-size: 12px; color: #999; }
+
+.pdp2__prices { border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding: 12px 0; margin: 8px 0 12px; }
+.pdp2__prices .row1 { display: flex; align-items: baseline; gap: 6px; }
+.pdp2__prices .lb { font-size: 13px; color: #666; }
+.pdp2__prices .big { font-size: 32px; font-weight: 800; color: #d62872; font-family: var(--font-price, sans-serif); }
+.pdp2__prices .unit { font-size: 13px; color: #666; }
+.pdp2__prices .vip { margin-left: auto; font-size: 11px; color: #fff; background: #c8102e; padding: 1px 6px; border-radius: 3px; }
+.pdp2__prices .row2 { display: flex; gap: 20px; font-size: 12.5px; color: #888; margin-top: 6px; }
+.pdp2__prices .row2 b { color: #c8102e; font-weight: 400; }
+.pdp2__prices .row2 s { color: #aaa; }
+
+.pdp2__attrs { display: grid; grid-template-columns: 92px 1fr; gap: 10px 0; margin: 0 0 14px; font-size: 12.5px; }
+.pdp2__attrs dt { color: #999; }
+.pdp2__attrs dd { margin: 0; color: #444; line-height: 1.7; }
+.pdp2__attrs .pink { color: #d62872; }
+.pdp2__attrs .more { color: #027bff; font-size: 11.5px; margin-left: 6px; text-decoration: none; }
+.pdp2__attrs .fav { font-style: normal; color: #d62872; }
+.pdp2__sel { height: 26px; border: 1px solid #ddd; border-radius: 3px; font-size: 12px; padding: 0 4px; font-family: inherit; }
+.pdp2__attrs .qty { display: inline-flex; align-items: center; border: 1px solid #ddd; border-radius: 3px; overflow: hidden; }
+.pdp2__attrs .qty button { width: 28px; height: 26px; border: 0; background: #fafafa; font-size: 14px; cursor: pointer; }
+.pdp2__attrs .qty input { width: 44px; height: 26px; border: 0; text-align: center; font-size: 13px; font-family: inherit; }
+
+.pdp2__actions { display: flex; gap: 10px; }
+.pdp2__actions .btn { flex: 1; height: 46px; font-size: 15px; border-radius: 4px; }
+.btn--blue { background: #1a56c4; color: #fff; border: 0; }
+
+/* 右侧悬浮快捷 */
+@media (max-width: 1260px) {
+  .pdp2 { grid-template-columns: 1fr; }
+  .pdp2__side { display: none; }
+  .pdp2__main { grid-template-columns: 1fr; }
+}
