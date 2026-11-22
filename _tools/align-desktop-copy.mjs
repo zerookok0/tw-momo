@@ -77,6 +77,20 @@ h = h.replace(/(熱度)(\d+)(萬)/g, (m, a, num, c) => {
   return a + heat + c;
 });
 
+// 4.5) 主导航补「生活超市」（真站有，我们缺）
+if (!h.includes('生活超市')) {
+  const gi = h.indexOf('綠色生活');
+  if (gi > 0) {
+    const ds = h.lastIndexOf('<div class="shrink-0">', gi);
+    const de = h.indexOf('</div>', gi) + 6;
+    const block2 = h.slice(ds, de);
+    const clone = block2.replace(/綠色生活/g, '生活超市')
+      .replace(/\/category"/, '/category?cat=' + encodeURIComponent('食品/飲料') + '"');
+    h = h.slice(0, de) + clone + h.slice(de);
+    n++;
+  }
+}
+
 // 5) 底部关键词横滑
 const BOTTOM_KW = ['葛瑪蘭之星飯店', '瞬熱飲水機', '廚房紙巾', '美食餐券', 'lush 嵐舒', '前開式行李箱', 'kao 花王', '麥當勞餐券', '烘被機', '大童運動鞋'];
 let bi = 0;
