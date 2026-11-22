@@ -340,5 +340,5 @@ export function renderHome(deps) {
   </section>`;
   }
 
-  return shell({ title: 'momo購物網 - 好評推薦 - 手機版', head: UTM_SCRIPT, body });
+  return shell({ title: 'momo購物網 - 好評推薦 - ' + new Date().getFullYear() + '年' + (new Date().getMonth() + 1) + '月', head: UTM_SCRIPT, body });
 }

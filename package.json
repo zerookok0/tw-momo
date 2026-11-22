@@ -5,7 +5,7 @@
   "type": "module",
   "description": "momoshop.com.tw 1:1 静态还原 + /bp 结账接管契约实现",
   "scripts": {
-    "build": "node _tools/restore-home.mjs && node _tools/align-desktop-copy.mjs && node _tools/fix-keywords.mjs && node _tools/add-desktop-floors.mjs && node _tools/patch-catalog-from-home.mjs && node _tools/build-skus.mjs && node _tools/build-categories.mjs && node _tools/fix-nav-links.mjs && node _tools/gen-shell.mjs && node _tools/build-pages.mjs && node _tools/relink-home.mjs && node _tools/inject-promo.mjs && node _tools/build-info-pages.mjs && node _tools/prepare-deploy.mjs",
+    "build": "node _tools/restore-home.mjs && node _tools/align-desktop-copy.mjs && node _tools/fix-keywords.mjs && node _tools/add-desktop-floors.mjs && node _tools/patch-catalog-from-home.mjs && node _tools/build-skus.mjs && node _tools/build-categories.mjs && node _tools/fix-nav-links.mjs && node _tools/gen-shell.mjs && node _tools/build-pages.mjs && node _tools/build-mobile.mjs && node _tools/relink-home.mjs && node _tools/inject-promo.mjs && node _tools/build-info-pages.mjs && node _tools/prepare-deploy.mjs",
     "start": "node server.mjs",
     "dev": "node server.mjs",
     "crawl": "node _tools/crawl-catalog.mjs",

@@ -338,7 +338,7 @@ ${crumb([{ t: '首頁', href: '/m/' }, { t: '全部商品' }])}
 </section>
 <div class="m-safe"></div>
 ${tabbar('分類')}`;
-  return shell({ title: '商品分類 - momo購物網', head: UTM_SCRIPT, body });
+  return shell({ title: '商品分類 - momo購物網 - 好評推薦 - ' + new Date().getFullYear() + '年' + (new Date().getMonth() + 1) + '月', head: UTM_SCRIPT, body });
 }
 
 // ───────────────────────── 商品详情 ─────────────────────────
@@ -535,7 +535,7 @@ ${crumb([{ t: '首頁', href: '/m/' }, { t: '購物車' }])}
   render();
 })();
 </script>`;
-  return shell({ title: '購物車 - momo購物網', head: UTM_SCRIPT, body: body, bodyClass: 'm has-bottombar' });
+  return shell({ title: '購物車 - momo購物網 - 好評推薦 - ' + new Date().getFullYear() + '年' + (new Date().getMonth() + 1) + '月', head: UTM_SCRIPT, body: body, bodyClass: 'm has-bottombar' });
 }
 
 // ───────────────────────── 结算页（访客 + 契约） ─────────────────────────
@@ -868,7 +868,7 @@ ${crumb([{ t: '購物車', href: '/m/cart' }, { t: '結帳' }])}
   });
 })();
 </script>`;
-  return shell({ title: '結帳 - momo購物網', head, body, bodyClass: 'm has-bottombar' });
+  return shell({ title: '結帳 - momo購物網 - 好評推薦 - ' + new Date().getFullYear() + '年' + (new Date().getMonth() + 1) + '月', head, body, bodyClass: 'm has-bottombar' });
 }
 
 // ───────────────────────── 订单完成 ─────────────────────────
@@ -924,7 +924,7 @@ ${rTabbar('首頁')}
   });
 })();
 </script>`;
-  return shell({ title: '訂單完成 - momo購物網', head: UTM_SCRIPT, body });
+  return shell({ title: '訂單完成 - momo購物網 - 好評推薦 - ' + new Date().getFullYear() + '年' + (new Date().getMonth() + 1) + '月', head: UTM_SCRIPT, body });
 }
 
 // ───────────────────────── 写盘 ─────────────────────────

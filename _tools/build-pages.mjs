@@ -372,7 +372,7 @@ function cartPage() {
   render();
 })();
 </script>`;
-  return page({ title: '購物車 - momo購物網', body });
+  return page({ title: '購物車 - momo購物網 - 好評推薦 - ' + new Date().getFullYear() + '年' + (new Date().getMonth() + 1) + '月', body });
 }
 
 // ============================================================
@@ -537,7 +537,7 @@ function checkoutPage() {
 })();
 </script>
 </div>`;
-  return page({ title: '結帳 - momo購物網', head, body });
+  return page({ title: '結帳 - momo購物網 - 好評推薦 - ' + new Date().getFullYear() + '年' + (new Date().getMonth() + 1) + '月', head, body });
 }
 
 // 头部缺 href 的锚点补齐（TopCart / 登入 / 首頁 / 結帳）
@@ -607,7 +607,7 @@ function orderPage() {
   });
 })();
 </script>`;
-  return page({ title: '訂單完成 - momo購物網', body });
+  return page({ title: '訂單完成 - momo購物網 - 好評推薦 - ' + new Date().getFullYear() + '年' + (new Date().getMonth() + 1) + '月', body });
 }
 
 // ============================================================
@@ -642,7 +642,7 @@ function categoryPage() {
   @media (max-width: 1100px) { .cat-grid { grid-template-columns: repeat(4, 1fr); } }
   @media (max-width: 720px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>`;
-  return page({ title: '商品分類 - momo購物網', body });
+  return page({ title: '商品分類 - momo購物網 - 好評推薦 - ' + new Date().getFullYear() + '年' + (new Date().getMonth() + 1) + '月', body });
 }
 
 // ============================================================
