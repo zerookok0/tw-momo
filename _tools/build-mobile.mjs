@@ -159,6 +159,7 @@ function shell({ title, head = '', bodyClass = 'm', body, extraHead = '' }) {
 ${head}
 <link rel="stylesheet" href="/assets/image.momoshop.com.tw/ecm/font/theme-main.css">
 <link rel="stylesheet" href="/m/assets/css/momo-mobile.css">
+<link rel="stylesheet" href="/m/assets/css/mobile-home.css">
 ${extraHead}
 </head>
 <body class="${bodyClass}">

@@ -1,0 +1,24 @@
+{
+ "header": {
+  "w": 387,
+  "h": 40,
+  "fs": "16px",
+  "fw": "400",
+  "color": "rgb(0, 0, 0)",
+  "bg": "rgba(0, 0, 0, 0)",
+  "bgImg": "none",
+  "pad": "0px",
+  "rad": "0px",
+  "gap": "normal",
+  "cols": "none",
+  "lh": "24px",
+  "pos": "sticky"
+ },
+ "nav": null,
+ "navA": [],
+ "seckillRow": null,
+ "tabbar": null,
+ "tabA": [],
+ "titleRank": null,
+ "scrollW": 387
+}

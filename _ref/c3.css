@@ -1,0 +1,339 @@
+/* deploy-probe 20261122-0548 */
+/* ============================================================
+   momo 首頁 · 今日限定 5 折起 促銷彈窗 + 頂部倒數橫幅
+   倒數以【台灣時間】計算，固定到當天 23:59:59
+   ============================================================ */
+:root {
+  --promo-pink: #d62872;
+  --promo-pink-dark: #b81c5e;
+  --promo-yellow: #ffd83d;
+  --promo-red: #dd2726;
+}
+
+/* ---------- 彈窗 ---------- */
+#promoMask {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, .62);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+#promoMask.on { opacity: 1; visibility: visible; }
+
+#promoBox {
+  position: relative;
+  width: min(460px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow: hidden auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .45);
+  transform: translateY(16px) scale(.97);
+  transition: transform .28s cubic-bezier(.2, .9, .3, 1.2);
+  font-family: var(--font-ui, "PingFang TC", "Microsoft JhengHei", sans-serif);
+}
+#promoMask.on #promoBox { transform: translateY(0) scale(1); }
+
+#promoBox .pm-img { display: block; width: 100%; height: auto; }
+
+#promoBox .pm-body {
+  padding: 18px 20px 20px;
+  text-align: center;
+  background: linear-gradient(180deg, #fff 0%, #fff5f9 100%);
+}
+
+#promoBox .pm-kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 14px;
+  background: linear-gradient(90deg, #ff4d94, var(--promo-pink));
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(214, 40, 114, .3);
+}
+
+#promoBox .pm-title {
+  margin: 0 0 6px;
+  font-size: 21px;
+  line-height: 1.35;
+  font-weight: 900;
+  color: #2b0b17;
+  letter-spacing: -.3px;
+}
+#promoBox .pm-title em {
+  font-style: normal;
+  color: var(--promo-pink);
+  font-size: 26px;
+}
+#promoBox .pm-sub {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: #8a5c6e;
+}
+
+/* 倒數 */
+#promoBox .pm-cd-label {
+  font-size: 12px;
+  color: #8a5c6e;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+#promoBox .pm-cd {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+#promoBox .pm-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+#promoBox .pm-num {
+  min-width: 74px;
+  padding: 10px 6px;
+  background: linear-gradient(180deg, #2b0b17, #4a1024);
+  color: #fff;
+  font-family: var(--font-price, "Oxygen", "Century Gothic", sans-serif);
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 10px;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .35);
+}
+#promoBox .pm-tag {
+  font-size: 11px;
+  color: #8a5c6e;
+  letter-spacing: 1px;
+}
+#promoBox .pm-colon {
+  font-family: var(--font-price, sans-serif);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--promo-pink);
+  line-height: 1;
+  padding-top: 12px;
+}
+#promoBox .pm-note {
+  margin: 6px 0 16px;
+  font-size: 11px;
+  color: #b08d9c;
+}
+
+#promoBox .pm-cta {
+  display: block;
+  width: 100%;
+  height: 48px;
+  border: 0;
+  border-radius: 24px;
+  background: linear-gradient(90deg, #ff5fa2, var(--promo-pink));
+  color: #fff;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(214, 40, 114, .35);
+  text-decoration: none;
+  line-height: 48px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+#promoBox .pm-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(214, 40, 114, .45); }
+#promoBox .pm-cta:active { transform: translateY(0); }
+
+#promoClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .45);
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+#promoClose:hover { background: rgba(0, 0, 0, .65); }
+
+/* ---------- 頂部倒數橫幅 ---------- */
+#promoBar {
+  position: fixed;
+  /* 站点顶部工具条是 fixed 高 40px，横膈贴在它下面 */
+  top: 40px;
+  left: 0;
+  right: 0;
+  z-index: 9997;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 40px 0 12px;
+  background: linear-gradient(90deg, #ff5fa2, var(--promo-pink) 55%, #ff7a2f);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#promoBar.on { display: flex; }
+#promoBar .pb-txt { overflow: hidden; text-overflow: ellipsis; }
+#promoBar .pb-txt b { color: var(--promo-yellow); font-weight: 900; }
+#promoBar .pb-cd {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-price, "Oxygen", sans-serif);
+  font-variant-numeric: tabular-nums;
+}
+#promoBar .pb-cd i {
+  font-style: normal;
+  padding: 1px 6px;
+  background: rgba(0, 0, 0, .28);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+}
+#promoBar .pb-cta {
+  flex: none;
+  padding: 4px 12px;
+  background: var(--promo-yellow);
+  color: #7a102e;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  text-decoration: none;
+}
+#promoBarClose {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .22);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 1260px) {
+  /* 窄屏时站点顶栏已改成 static：横膈回到文档流最上面，不再固定 */
+  #promoBar {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+  }
+  #promoBar.on ~ header { padding-top: 0 !important; }
+}
+
+/* 桌面：横膈固定占 40px，把站点 header 的预留空间从 40px 提到 80px，避免logo被盖 */
+#promoBar.on ~ header { padding-top: 80px !important; }
+
+@media (max-width: 480px) {
+  #promoMask { padding: 12px; }
+  #promoBox .pm-title { font-size: 18px; }
+  #promoBox .pm-title em { font-size: 22px; }
+  #promoBox .pm-num { min-width: 62px; font-size: 30px; padding: 8px 4px; }
+  #promoBox .pm-colon { font-size: 24px; padding-top: 10px; }
+  #promoBar { font-size: 11.5px; gap: 6px; height: 36px; }
+  #promoBar .pb-cd i { font-size: 12px; padding: 1px 4px; }
+  #promoBar .pb-cta { padding: 3px 8px; font-size: 11px; }
+}
+
+/* ================= 手机版弹窗（≤600px） ================= */
+@media (max-width: 600px) {
+  /* 遮罩内边距收紧，弹窗不再顶满屏 */
+  #promoMask { padding: 14px 14px 18px; align-items: center; }
+
+  #promoBox {
+    width: min(340px, 92vw);
+    border-radius: 14px;
+    max-height: calc(100dvh - 48px);
+    overflow: hidden auto;
+    box-shadow: 0 12px 38px rgba(0, 0, 0, .42);
+  }
+
+  /* 顶部大图按比例缩到弹窗宽度，不再撑满屏高 */
+  #promoBox .pm-img { width: 100%; height: auto; display: block; }
+
+  #promoBox .pm-body { padding: 12px 14px 14px; }
+
+  #promoBox .pm-kicker {
+    font-size: 11px;
+    padding: 3px 10px;
+    margin-bottom: 8px;
+  }
+
+  #promoBox .pm-title { font-size: 17px; line-height: 1.35; }
+  #promoBox .pm-title em { font-size: 21px; }
+
+  #promoBox .pm-sub { font-size: 11.5px; margin: 5px 0 10px; }
+
+  /* 倒计时：小一号，占宽不超过弹窗 */
+  #promoBox .pm-clock { gap: 4px; margin: 0 auto 6px; }
+  #promoBox .pm-num {
+    min-width: 50px;
+    padding: 7px 4px;
+    font-size: 24px;
+    border-radius: 7px;
+  }
+  #promoBox .pm-colon { font-size: 18px; padding-top: 8px; }
+  #promoBox .pm-tag { font-size: 9.5px; }
+  #promoBox .pm-note { font-size: 10px; margin: 5px 0 11px; }
+
+  #promoBox .pm-cta {
+    height: 42px;
+    font-size: 14.5px;
+    border-radius: 21px;
+  }
+
+  #promoBox .pm-close {
+    width: 26px; height: 26px;
+    top: 8px; right: 8px;
+    font-size: 15px;
+  }
+
+  /* 顶部横条在手机上也紧凑一点 */
+  #promoBar {
+    height: 34px;
+    font-size: 11px;
+    gap: 5px;
+    padding: 0 10px;
+  }
+  #promoBar .pb-cd { gap: 2px; }
+  #promoBar .pb-cd i { font-size: 11px; padding: 1px 3px; min-width: 20px; }
+  #promoBar .pb-cta { padding: 2px 8px; font-size: 10.5px; height: 22px; line-height: 22px; }
+}
+
+/* 超窄屏（≤360px）再收一档 */
+@media (max-width: 360px) {
+  #promoBox { width: 94vw; }
+  #promoBox .pm-num { min-width: 44px; font-size: 21px; }
+  #promoBox .pm-title { font-size: 15.5px; }
+  #promoBox .pm-title em { font-size: 19px; }
+}

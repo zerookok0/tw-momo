@@ -1,0 +1,32 @@
+﻿import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const OUT = path.resolve(__dirname, "..", "_ref", "real-mobile");
+fs.mkdirSync(OUT, { recursive: true });
+const PORT = 9222, W = 402, H = 874;
+const list = await (await fetch(`http://127.0.0.1:${PORT}/json/list`)).json();
+const page = list.find(t => t.type === "page");
+const ws = new WebSocket(page.webSocketDebuggerUrl);
+await new Promise((r,j)=>{ ws.onopen=r; ws.onerror=j; });
+let id=0; const pending=new Map();
+ws.onmessage = e => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } };
+const send = (method, params={}) => new Promise((res,rej)=>{ const mid=++id; pending.set(mid, m => m.error ? rej(new Error(method+": "+m.error.message)) : res(m.result)); ws.send(JSON.stringify({id:mid,method,params})); });
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const ev = async (expr) => { const r = await send("Runtime.evaluate", { expression: expr, returnByValue: true }); return r.result && r.result.value; };
+
+await send("Page.enable"); await send("Runtime.enable");
+await send("Emulation.setDeviceMetricsOverride", { width: W, height: H, deviceScaleFactor: 2, mobile: true, screenWidth: W, screenHeight: H });
+await send("Emulation.setUserAgentOverride", { userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1", platform: "iPhone" });
+await send("Page.navigate", { url: "https://m.momoshop.com.tw/main.momo" });
+await sleep(8000);
+
+const info = await ev(`JSON.stringify({t:document.title,u:location.href,h:document.documentElement.scrollHeight,w:innerWidth})`);
+console.log("页面信息:", info);
+const html = await ev("document.documentElement.outerHTML");
+fs.writeFileSync(path.join(OUT, "page.html"), html || "", "utf8");
+console.log("DOM 长度:", (html||"").length);
+const shot = await send("Page.captureScreenshot", { format: "png" });
+fs.writeFileSync(path.join(OUT, "shot-viewport.png"), Buffer.from(shot.data, "base64"));
+console.log("已存首屏截图");
+ws.close(); process.exit(0);
