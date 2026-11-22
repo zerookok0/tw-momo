@@ -233,6 +233,41 @@ function tabbar(current = '首頁') {
 </nav>`;
 }
 
+/* ── 手机版统一外壳（与首页 r-* 一致） ── */
+function rHeader({ back = false, cartCount = 3, showSearch = false, title = '' } = {}) {
+  const left = back
+    ? '<a class="r-hd__menu" href="/m/" aria-label="返回"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></a>'
+    : '<button class="r-hd__menu" type="button" aria-label="選單"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>';
+  const mid = title
+    ? '<span class="r-hd__title">' + title + '</span>'
+    : '<span class="r-hd__tag">新品<em>🔥</em></span>' +
+      '<form class="r-hd__search" onsubmit="event.preventDefault();location.href=\'/m/category?kw=\'+encodeURIComponent(this.q.value)"><input name="q" type="search" placeholder="除濕機" aria-label="搜尋"></form>';
+  return `
+<header class="r-hd">
+  ${left}
+  ${mid}
+  <a class="r-hd__ico" href="/m/cart" aria-label="購物車">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h2l2.2 10.2a1 1 0 0 0 1 .8h8.4a1 1 0 0 0 1-.8L19.5 8H6"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg>
+    ${cartCount ? '<i class="r-hd__badge">' + cartCount + '</i>' : ''}
+  </a>
+</header>`;
+}
+
+function rTabbar(current = '首頁') {
+  const items = [
+    { t: '首頁', href: '/m/', ico: ICO.home },
+    { t: '逛逛', href: '/m/category', ico: ICO.grid },
+    { t: '追蹤清單', href: '/m/info/wishlist', ico: 'h' },
+    { t: '購物車', href: '/m/cart', ico: ICO.cart },
+    { t: '會員中心', href: '/m/info/member-center', ico: ICO.user },
+  ];
+  const heartSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.6-7-9.2A3.8 3.8 0 0 1 12 8a3.8 3.8 0 0 1 7 2.8C19 15.4 12 20 12 20Z"/></svg>';
+  return '<nav class="r-tab">' + items.map((i) => {
+    const ico = i.ico === 'h' ? heartSvg : i.ico;
+    return `<a href="${i.href}"${i.t === current ? ' class="on"' : ''}>${ico}<span>${i.t}</span></a>`;
+  }).join('') + '</nav>';
+}
+
 const crumb = (items) => `
 <nav class="m-crumb">
   ${items.map((i, idx) => `${idx ? '<span>/</span>' : ''}<span>${i.href ? `<a href="${i.href}">${i.t}</a>` : i.t}</span>`).join('')}
@@ -313,7 +348,7 @@ function productPage(p) {
   const was = origPrice(p);
   const img = p.img || PLACEHOLDER;
   const body = `
-${header({ showSearch: false, showNav: false, cartCount: 3 })}
+${rHeader({ back: true, cartCount: 3 })}
 ${crumb([{ t: '首頁', href: '/m/' }, { t: '商品分類', href: '/m/category' }, { t: name }])}
 
 <section class="m-pdp__hero">
@@ -417,7 +452,7 @@ ${crumb([{ t: '首頁', href: '/m/' }, { t: '商品分類', href: '/m/category' 
 function cartPage() {
   const seed = products.slice(0, 3).map((p) => ({ code: p.code, name: (p.name || p.texts[0]), price: salePrice(p), qty: 1, img: p.img }));
   const body = `
-${header({ showSearch: false, showNav: false, cartCount: 3 })}
+${rHeader({ back: true, cartCount: 3 })}
 ${crumb([{ t: '首頁', href: '/m/' }, { t: '購物車' }])}
 
 <div class="m-cart-hd">
@@ -514,7 +549,7 @@ ${CART_SKELETON}
   const cityOptions = Object.keys(DISTRICTS).map((c) => `<option value="${c}">${c}</option>`).join('');
 
   const body = `
-${header({ showSearch: false, showNav: false, cartCount: 3 })}
+${rHeader({ back: true, cartCount: 3 })}
 ${crumb([{ t: '購物車', href: '/m/cart' }, { t: '結帳' }])}
 
 <div class="m-guest-tabs">
@@ -797,7 +832,7 @@ ${crumb([{ t: '購物車', href: '/m/cart' }, { t: '結帳' }])}
 // ───────────────────────── 订单完成 ─────────────────────────
 function orderPage() {
   const body = `
-${header({ showSearch: false, showNav: false })}
+${rHeader({ back: true, cartCount: 0 })}
 ${crumb([{ t: '購物車', href: '/m/cart' }, { t: '結帳', href: '/m/checkout' }, { t: '完成訂購' }])}
 
 <section class="m-done">
@@ -828,7 +863,7 @@ ${crumb([{ t: '購物車', href: '/m/cart' }, { t: '結帳', href: '/m/checkout'
 </div>
 
 <div class="m-safe"></div>
-${tabbar('首頁')}
+${rTabbar('首頁')}
 
 <script>
 (function(){

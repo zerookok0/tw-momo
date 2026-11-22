@@ -73,21 +73,13 @@
 <body class="m has-bottombar">
 
 
-<header class="m-header">
-  <div class="m-header__bar">
-    <button class="m-header__ico" type="button" aria-label="選單"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
-    <a class="m-header__logo" href="/m/">
-      <img src="/m/assets/img/logo.svg" alt="momo購物網" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <span class="m-header__slogan" style="display:none"><b style="font-size:15px;color:#d62872">momo</b><br>桃金日 就在每月22號</span>
-    </a>
-    <span class="m-header__slogan">桃金日<br>就在每月22號</span>
-    <a class="m-header__ico m-header__cart" href="/m/cart" aria-label="購物車">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2.1 11.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
-      <i class="m-header__badge">3</i>
-    </a>
-  </div>
-  
-  
+<header class="r-hd">
+  <a class="r-hd__menu" href="/m/" aria-label="返回"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></a>
+  <span class="r-hd__tag">新品<em>🔥</em></span><form class="r-hd__search" onsubmit="event.preventDefault();location.href='/m/category?kw='+encodeURIComponent(this.q.value)"><input name="q" type="search" placeholder="除濕機" aria-label="搜尋"></form>
+  <a class="r-hd__ico" href="/m/cart" aria-label="購物車">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h2l2.2 10.2a1 1 0 0 0 1 .8h8.4a1 1 0 0 0 1-.8L19.5 8H6"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg>
+    <i class="r-hd__badge">3</i>
+  </a>
 </header>
 
 <nav class="m-crumb">
