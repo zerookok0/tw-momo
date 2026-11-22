@@ -421,6 +421,13 @@ const server = http.createServer(async (req, res) => {
   }
   // 站内实体页 /info/<slug> 与 /member
   if (p === '/member' || p === '/member/') return serveFile(res, path.join(SITE, 'info', 'member-center.html'));
+  // 手机版站内页 /m/info/<slug>
+  if (p.startsWith('/m/info/') && !/\.[a-z0-9]+$/i.test(p)) {
+    const slug = p.slice('/m/info/'.length).replace(/\/+$/, '');
+    const f3 = path.join(SITE, 'm', 'info', slug + '.html');
+    if (slug && fs.existsSync(f3)) return serveFile(res, f3);
+  }
+
   if (p.startsWith('/info/') && !/\.[a-z0-9]+$/i.test(p)) {
     const slug = p.slice('/info/'.length).replace(/\/+$/, '');
     const f2 = path.join(SITE, 'info', slug + '.html');

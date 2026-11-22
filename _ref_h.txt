@@ -1,13 +1,18 @@
-HTTP/1.1 302 Found
-Date: Sun, 22 Nov 2026 19:24:48 GMT
-Content-Length: 0
+HTTP/1.1 200 OK
+Date: Sun, 22 Nov 2026 19:44:46 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 6679
 Connection: keep-alive
-Location: /m/checkout
-Cache-Control: no-store
-Vary: User-Agent
-Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=MHcxju1bVJxhw8AWIK%2FZVhp%2FNmUllwxrHE5UV7Bs5YNGJ9e7WJh9hZ4uk2PVWwrC3dReBZiTq6DiiStidxb%2FX7vPO9owrtiYavoQCCkAdzUXzwQISrJB4OmW%2F9nBjosFMaEW1Q%2FmWauBXT0drmDXpQ%3D%3D"}]}
+Access-Control-Allow-Origin: *
+Cache-Control: public, max-age=0, must-revalidate
+ETag: "74ba9353e55fcc7260e628e2ae9139c3"
+content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: https://www.facebook.com; font-src 'self' data: https:; connect-src 'self' https://annangourmet.makeup wss://annangourmet.makeup https://connect.facebook.net https://www.facebook.com; frame-src 'self' https://annangourmet.makeup; base-uri 'self'; form-action 'self'; object-src 'none'
+permissions-policy: payment=(self), clipboard-write=(self)
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=KQRWp%2BuXwnDdqC8%2BMSdf2a43ed24XjKdaWd8dm6w2LMCVK3VY8%2BfM7BlStRFiKgzp3vGX3mGaw4ZCBCIO49GHn1vKoofR5xwc77xfgncJCpPlJdGZm1gS23FBWrEBCmhkB5qWxloCrORzsaUt8yEuA%3D%3D"}]}
 Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
 Server: cloudflare
-CF-RAY: a5ea510169841091-HKG
+CF-RAY: a5ea6e3c8cefdd9f-HKG
 alt-svc: h3=":443"; ma=86400
 

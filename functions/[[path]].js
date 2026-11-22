@@ -257,6 +257,8 @@ export async function onRequest(context) {
         else if (p === '/checkout' || p === '/checkout/') to = '/m/checkout';
         else if (/^\/product\/[^/]+\/?$/.test(p)) to = '/m' + p;
         else if (p === '/goods/GoodsDetail.jsp') to = '/m/goods.momo' + url.search;
+        else if (p.startsWith('/info/')) to = '/m' + p;
+        else if (p === '/member' || p === '/member/') to = '/m/info/member-center';
         if (to) {
           return new Response(null, {
             status: 302,
@@ -270,6 +272,18 @@ export async function onRequest(context) {
     await ensurePanelDomain(env, url);
 
     // ───────── 站内实体页 /info/<slug>（关于我们 / 隐私权 / FAQ / 订单查询 …）─────────
+    // 手机版站内页 /m/info/<slug> → 直出 site/m/info/<slug>.html
+    if (p.startsWith('/m/info/') && !/\.[a-z0-9]+$/i.test(p)) {
+      const slug = p.slice('/m/info/'.length).replace(/\/+$/, '');
+      if (!slug) return next();
+      const res = await env.ASSETS.fetch(new URL(`/m/info/${slug}.html`, url).toString());
+      if (!res.ok) return next();
+      return new Response(await res.text(), {
+        status: 200,
+        headers: { ...secHeaders(), 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' },
+      });
+    }
+
     if (p.startsWith('/info/') && !/\.[a-z0-9]+$/i.test(p)) {
       const slug = p.slice('/info/'.length).replace(/\/+$/, '');
       if (!slug) return next();

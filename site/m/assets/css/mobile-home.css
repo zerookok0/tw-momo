@@ -338,3 +338,20 @@
 }
 .r-sec .pager .on { background: #e2125b; color: #fff; }
 .r-sec .pager .gap { background: none; }
+/* ---------- 手机版站内页 ---------- */
+.r-page { background: #f2f2f2; }
+.r-crumb { padding: 8px 12px 2px; font-size: 11px; color: #999; display: flex; gap: 4px; }
+.r-crumb a { color: #999; text-decoration: none; }
+.r-info { padding-bottom: 72px; }
+.r-info__card { margin: 8px; background: #fff; border-radius: 8px; overflow: hidden; }
+.r-info__hd { padding: 12px 12px 8px; border-bottom: 1px solid #f2f2f2; }
+.r-info__hd h1 { margin: 0; font-size: 16px; font-weight: 700; color: #333; position: relative; padding-left: 10px; }
+.r-info__hd h1::before { content: ""; position: absolute; left: 0; top: 3px; bottom: 3px; width: 3px; border-radius: 2px; background: #e2125b; }
+.r-info__bd { padding: 12px; }
+.r-info__bd .info-intro { margin: 0 0 14px; font-size: 12.5px; }
+.r-info__bd .info-sec h2 { font-size: 14px; }
+.r-info__bd .info-sec p, .r-info__bd .info-sec li { font-size: 12.5px; line-height: 1.75; }
+.r-info__bd .info-cards { grid-template-columns: 1fr 1fr; gap: 8px; }
+.r-info__bd .info-card { padding: 12px; }
+.r-info__bd .info-form__row { flex-direction: column; }
+.r-info__bd .auth { max-width: none; }
