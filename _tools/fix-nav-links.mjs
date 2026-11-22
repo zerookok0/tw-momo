@@ -17,6 +17,41 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJ = path.resolve(__dirname, '..');
 const SITE = path.join(PROJ, 'site');
 
+
+// ── 文案锚点补 href ──
+const TEXTLINKS = [
+  [/^登入$/, '/info/login'],
+  [/^註冊$/, '/info/login'],
+  [/^會員中心$/, '/info/member-center'],
+  [/^查訂單$/, '/info/orders'],
+  [/^追蹤清單$/, '/info/wishlist'],
+  [/^折價券$/, '/info/coupons'],
+  [/^客服回覆$/, '/info/contact'],
+  [/^購物車/, '/cart'],
+  [/^首頁$/, '/'],
+];
+
+function linkifyTextAnchors(html) {
+  return html.replace(/<a\b([^>]*)>([^<]{1,8})<\/a>/g, (all, attrs, text) => {
+    if (/\bhref=/.test(attrs)) return all;
+    const t = text.trim();
+    for (const [re, to] of TEXTLINKS) {
+      if (re.test(t)) return '<a' + attrs + ' href="' + to + '">' + text + '</a>';
+    }
+    return all;
+  });
+}
+
+// ── 搜索按钮接线（原本没有 form，点了没反应）──
+function wireSearchButton(html) {
+  return html.replace(/<button\b([^>]*)>搜尋<\/button>/g, (all, attrs) => {
+    if (/onclick=/.test(attrs)) return all;
+    const fn = "var w=this.parentElement.querySelector('input[name=search-input],input[type=text],input');" +
+               "if(w&&w.value.trim()){location.href='/category?kw='+encodeURIComponent(w.value.trim())}";
+    return '<button' + attrs + ' onclick="' + fn + '">搜尋</button>';
+  });
+}
+
 // ── 原始 URL → 目标 ──
 const MAP = [
   // 会员 / 账号
@@ -74,6 +109,7 @@ const BUTTONS = [
   [/包裝減量標章/, '/info/packaging'],
   [/碳足跡/, '/info/carbon'],
   [/防詐騙宣導/, '/info/anti-fraud'],
+  [/碳足跡標籤/, '/info/carbon'],
 ];
 
 function targetFor(rawUrl) {
@@ -116,6 +152,18 @@ function fixFile(rel) {
     changed++;
     return `href="${to}"`;   // 锚点已带 data-orig-href 的不再重复追加
   });
+
+  // href="" 视为空链接，按文案补
+  html = html.replace(/<a\b([^>]*?)\bhref=""([^>]*)>/g, (all, a, b) => {
+    const seg = all;
+    if (/首頁/.test(seg)) return '<a' + a + ' href="/"' + b + '>';
+    if (/購物車/.test(seg)) return '<a' + a + ' href="/cart/"' + b + '>';
+    if (/結帳/.test(seg)) return '<a' + a + ' href="/checkout/"' + b + '>';
+    return all;
+  });
+
+  html = linkifyTextAnchors(html);
+  html = wireSearchButton(html);
 
   // ② 页脚里没 href 的 button → 变成链接
   for (const [re, to] of BUTTONS) {

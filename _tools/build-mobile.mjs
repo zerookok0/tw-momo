@@ -496,7 +496,7 @@ ${crumb([{ t: '首頁', href: '/m/' }, { t: '購物車' }])}
       d.className = 'm-cart-item';
       d.innerHTML =
         '<div class="m-cart-item__chk"><input type="checkbox" checked></div>' +
-        '<div class="m-cart-item__img"><img src="' + (it.img||'') + '" alt=""></div>' +
+        '<div class="m-cart-item__img">' + (it.img ? '<img src="' + it.img + '" alt="">' : '<span class="cart-item__ph"></span>') + '</div>' +
         '<div class="m-cart-item__info">' +
           '<a class="m-cart-item__name" href="/m/product/' + it.code + '">' + it.name + '</a>' +
           '<span class="m-cart-item__spec">標準規格 ' + ICO_CHEV + '</span>' +
@@ -800,7 +800,7 @@ ${crumb([{ t: '購物車', href: '/m/cart' }, { t: '結帳' }])}
     if (box) {
       box.innerHTML = (c.items || []).map(function(it){
         return '<div class="m-ordersum__item">' +
-          '<div class="th"><img src="' + (it.img || '') + '" alt=""></div>' +
+          '<div class="th">' + (it.img ? '<img src="' + it.img + '" alt="">' : '<span class="cart-item__ph"></span>') + '</div>' +
           '<div class="nm">' + (it.name || '') + '</div>' +
           '<div class="qt">x' + (it.qty || 1) + '</div>' +
         '</div>';

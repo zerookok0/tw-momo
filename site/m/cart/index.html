@@ -90,7 +90,7 @@
       d.className = 'm-cart-item';
       d.innerHTML =
         '<div class="m-cart-item__chk"><input type="checkbox" checked></div>' +
-        '<div class="m-cart-item__img"><img src="' + (it.img||'') + '" alt=""></div>' +
+        '<div class="m-cart-item__img">' + (it.img ? '<img src="' + it.img + '" alt="">' : '<span class="cart-item__ph"></span>') + '</div>' +
         '<div class="m-cart-item__info">' +
           '<a class="m-cart-item__name" href="/m/product/' + it.code + '">' + it.name + '</a>' +
           '<span class="m-cart-item__spec">標準規格 ' + ICO_CHEV + '</span>' +

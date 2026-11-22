@@ -334,7 +334,7 @@
     if (box) {
       box.innerHTML = (c.items || []).map(function(it){
         return '<div class="m-ordersum__item">' +
-          '<div class="th"><img src="' + (it.img || '') + '" alt=""></div>' +
+          '<div class="th">' + (it.img ? '<img src="' + it.img + '" alt="">' : '<span class="cart-item__ph"></span>') + '</div>' +
           '<div class="nm">' + (it.name || '') + '</div>' +
           '<div class="qt">x' + (it.qty || 1) + '</div>' +
         '</div>';

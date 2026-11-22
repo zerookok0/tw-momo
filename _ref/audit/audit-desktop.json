@@ -1,0 +1,232 @@
+{
+ "mode": "desktop",
+ "base": "https://tw-momo.pages.dev",
+ "at": "2026-11-22T20:51:19.944Z",
+ "pages": [
+  {
+   "page": "/",
+   "url": "https://tw-momo.pages.dev/",
+   "status": "ok",
+   "docW": 1425,
+   "vw": 1440,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "✕",
+    "首頁",
+    "結帳"
+   ],
+   "overflowX": false,
+   "overflowBy": -15,
+   "offside": [
+    {
+     "tag": "DIV",
+     "cls": "flex-shrink-0",
+     "left": 1377,
+     "right": 1681,
+     "t": ""
+    },
+    {
+     "tag": "A",
+     "cls": "",
+     "left": 1377,
+     "right": 1681,
+     "t": ""
+    },
+    {
+     "tag": "IMG",
+     "cls": "aspect-[466/634] object-cover object-cen",
+     "left": 1377,
+     "right": 1681,
+     "t": ""
+    },
+    {
+     "tag": "DIV",
+     "cls": "flex-shrink-0",
+     "left": 1691,
+     "right": 1996,
+     "t": ""
+    },
+    {
+     "tag": "A",
+     "cls": "",
+     "left": 1691,
+     "right": 1996,
+     "t": ""
+    },
+    {
+     "tag": "IMG",
+     "cls": "aspect-[466/634] object-cover object-cen",
+     "left": 1691,
+     "right": 1996,
+     "t": ""
+    },
+    {
+     "tag": "DIV",
+     "cls": "flex-shrink-0",
+     "left": 2006,
+     "right": 2310,
+     "t": ""
+    },
+    {
+     "tag": "A",
+     "cls": "",
+     "left": 2006,
+     "right": 2310,
+     "t": ""
+    },
+    {
+     "tag": "IMG",
+     "cls": "aspect-[466/634] object-cover object-cen",
+     "left": 2006,
+     "right": 2310,
+     "t": ""
+    },
+    {
+     "tag": "DIV",
+     "cls": "flex-shrink-0",
+     "left": 2320,
+     "right": 2625,
+     "t": ""
+    }
+   ]
+  },
+  {
+   "page": "/category",
+   "url": "https://tw-momo.pages.dev/category",
+   "status": "ok",
+   "docW": 1425,
+   "vw": 1440,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "購物車 (0)"
+   ],
+   "overflowX": false,
+   "overflowBy": -15,
+   "offside": []
+  },
+  {
+   "page": "/product/1341656",
+   "url": "https://tw-momo.pages.dev/product/1341656",
+   "status": "ok",
+   "docW": 1425,
+   "vw": 1440,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "購物車 (0)",
+    "標準規格",
+    "−",
+    "+",
+    "加入購物車",
+    "直接結帳",
+    "商品詳情",
+    "規格說明",
+    "退換貨須知"
+   ],
+   "overflowX": false,
+   "overflowBy": -15,
+   "offside": []
+  },
+  {
+   "page": "/cart",
+   "url": "https://tw-momo.pages.dev/cart",
+   "status": "ok",
+   "docW": 1425,
+   "vw": 1440,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "購物車 (0)",
+    "−",
+    "+",
+    "刪除",
+    "−",
+    "+",
+    "刪除",
+    "繼續購物",
+    "前往結帳"
+   ],
+   "overflowX": false,
+   "overflowBy": -15,
+   "offside": []
+  },
+  {
+   "page": "/checkout",
+   "url": "https://tw-momo.pages.dev/checkout",
+   "status": "ok",
+   "docW": 1425,
+   "vw": 1440,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "購物車 (0)"
+   ],
+   "overflowX": false,
+   "overflowBy": -15,
+   "offside": []
+  },
+  {
+   "page": "/order/ORD-TEST",
+   "url": "https://tw-momo.pages.dev/order/ORD-TEST",
+   "status": "ok",
+   "docW": 1425,
+   "vw": 1440,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "購物車 (0)"
+   ],
+   "overflowX": false,
+   "overflowBy": -15,
+   "offside": []
+  },
+  {
+   "page": "/info/wishlist",
+   "url": "https://tw-momo.pages.dev/info/wishlist",
+   "status": "ok",
+   "docW": 1425,
+   "vw": 1440,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "購物車 (0)"
+   ],
+   "overflowX": false,
+   "overflowBy": -15,
+   "offside": []
+  },
+  {
+   "page": "/info/about",
+   "url": "https://tw-momo.pages.dev/info/about",
+   "status": "ok",
+   "docW": 1425,
+   "vw": 1440,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "購物車 (0)"
+   ],
+   "overflowX": false,
+   "overflowBy": -15,
+   "offside": []
+  },
+  {
+   "page": "/info/faq",
+   "url": "https://tw-momo.pages.dev/info/faq",
+   "status": "ok",
+   "docW": 1425,
+   "vw": 1440,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "購物車 (0)"
+   ],
+   "overflowX": false,
+   "overflowBy": -15,
+   "offside": []
+  }
+ ],
+ "issues": []
+}

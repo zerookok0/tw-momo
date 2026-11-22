@@ -78,7 +78,7 @@ const CART_SKELETON = `<script>
   </script>`;
 
 function page({ title, lang = 'zh-TW', head = '', body, bodyClass = 'momo-page' }) {
-  return `<!doctype html>
+  return fixHead(`<!doctype html>
 <html lang="${lang}">
 <head>
 <meta charset="utf-8">
@@ -92,7 +92,7 @@ ${header}
 ${body}
 ${footer}
 </body>
-</html>`;
+</html>`);
 }
 
 const fmt = (n) => '$' + n.toLocaleString('en-US');
@@ -330,7 +330,7 @@ function cartPage() {
       var tr = document.createElement('tr');
       tr.innerHTML =
         '<td><div class="cart-item">' +
-          '<div class="cart-item__img"><img src="' + (it.img||'') + '" alt=""></div>' +
+          '<div class="cart-item__img">' + (it.img ? '<img src="' + it.img + '" alt="">' : '<span class="cart-item__ph"></span>') + '</div>' +
           '<div><a class="cart-item__name" href="/product/' + it.code + '">' + it.name + '</a>' +
           '<div class="cart-item__meta">商品編號 ' + it.code + '｜可分期 0 利率</div></div>' +
         '</div></td>' +
@@ -525,6 +525,15 @@ function checkoutPage() {
 </script>
 </div>`;
   return page({ title: '結帳 - momo購物網', head, body });
+}
+
+// 头部缺 href 的锚点补齐（TopCart / 登入 / 首頁 / 結帳）
+function fixHead(html) {
+  return html
+    .replace(/<a([^>]*)\bid="TopCart"([^>]*)>/g, (all, a, b) => (/\bhref=/.test(all) ? all : '<a id="TopCart"' + a.replace(/\bid="TopCart"/, "") + b + ' href="/cart">'))
+    .replace(/<a([^>]*)>購物車 \(0\)<\/a>/g, (all, attrs) => (/\bhref=/.test(attrs) ? all : '<a' + attrs + ' href="/cart">購物車 (0)</a>'))
+    .replace(/<a([^>]*)>首頁<\/a>/g, (all, attrs) => (/\bhref=/.test(attrs) ? all : '<a' + attrs + ' href="/">首頁</a>'))
+    .replace(/<a([^>]*)>結帳<\/a>/g, (all, attrs) => (/\bhref=/.test(attrs) ? all : '<a' + attrs + ' href="/checkout/">結帳</a>'));
 }
 
 // ============================================================
