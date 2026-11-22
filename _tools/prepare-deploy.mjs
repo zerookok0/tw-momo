@@ -101,9 +101,8 @@ const routes = {
   ],
   exclude: [],
 };
-// 暂时不写 _routes.json：诊断发现写了之后 Functions 反而不生效。
-// Pages 默认行为就是「非静态资源请求交给 Functions」，先回归默认。
-try { fs.unlinkSync(path.join(OUT, '_routes.json')); } catch {}
+// 写回 _routes.json（白名单）：让 Pages 明确知道哪些路径归 Functions
+fs.writeFileSync(path.join(OUT, '_routes.json'), JSON.stringify(routes, null, 2), 'utf8');
 
 // ── 链接规范化 ──
 // Pages 对「存在同名静态目录」的路径会 308 → 带斜杠版本（/m → /m/、/checkout → /checkout/）。

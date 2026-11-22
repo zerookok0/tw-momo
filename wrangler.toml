@@ -1,5 +1,19 @@
-# Cloudflare Pages 配置
-# 把 Pages 项目的「输出目录」指向 dist（本文件会自动告诉 Pages 用哪个目录）
+# Cloudflare Worker 配置（静态资源 + 动态路由）
+#
+# 背景：原 Pages 项目里 functions/ 上传后从不执行（连 12 行的 /api/ping 都返回首页 HTML）。
+#      改成 Worker + Assets 绑定后，Worker 能跑（POST /api/checkout 返回真实单号），
+#      但默认「静态资源优先」，dist/api/cart 这类文件会把动态路由抢走。
+#      所以必须开 run_worker_first，让 Worker 先处理，再按需回落到静态资源。
+
 name = "tw-momo"
-pages_build_output_dir = "dist"
+main = "worker.js"
 compatibility_date = "2026-11-01"
+
+[assets]
+directory = "dist"
+binding = "ASSETS"
+# 关键：先跑 Worker，未命中再交给静态资源（next() → env.ASSETS.fetch）
+run_worker_first = true
+
+# Pages 构建配置（Git 集成仍需要）
+pages_build_output_dir = "dist"
