@@ -1,0 +1,119 @@
+{
+ "title": "",
+ "url": "https://www.momoshop.com.tw/ecm/js/err404/EC404.html",
+ "vw": 1440,
+ "vh": 900,
+ "docH": 900,
+ "prices": [],
+ "buttons": [
+  {
+   "t": "回首頁",
+   "href": "javascript:go_home()"
+  }
+ ],
+ "imgs": [
+  {
+   "src": "https://m.momoshop.com.tw/img/momoActionLogo.png?t=201405080001",
+   "w": 110,
+   "h": 17
+  },
+  {
+   "src": "https://www.momoshop.com.tw/ecm/js/err404/img/errorpage.png",
+   "w": 600,
+   "h": 258
+  }
+ ],
+ "blocks": [
+  {
+   "tag": "HEADER",
+   "cls": "",
+   "x": 0,
+   "y": 0,
+   "w": 1440,
+   "h": 44,
+   "t": ""
+  },
+  {
+   "tag": "TABLE",
+   "cls": "",
+   "x": 0,
+   "y": 0,
+   "w": 1440,
+   "h": 44,
+   "t": ""
+  },
+  {
+   "tag": "TBODY",
+   "cls": "",
+   "x": 0,
+   "y": 0,
+   "w": 1440,
+   "h": 44,
+   "t": ""
+  },
+  {
+   "tag": "TR",
+   "cls": "",
+   "x": 0,
+   "y": 0,
+   "w": 1440,
+   "h": 44,
+   "t": ""
+  },
+  {
+   "tag": "TH",
+   "cls": "",
+   "x": 0,
+   "y": 0,
+   "w": 1440,
+   "h": 44,
+   "t": ""
+  },
+  {
+   "tag": "DIV",
+   "cls": "errorpage",
+   "x": 0,
+   "y": 270,
+   "w": 1440,
+   "h": 436,
+   "t": "很抱歉，這個網頁不存在! 回首頁"
+  },
+  {
+   "tag": "IMG",
+   "cls": "",
+   "x": 420,
+   "y": 270,
+   "w": 600,
+   "h": 258,
+   "t": ""
+  },
+  {
+   "tag": "DIV",
+   "cls": "",
+   "x": 0,
+   "y": 837,
+   "w": 1440,
+   "h": 63,
+   "t": "富邦媒體科技股份有限公司"
+  },
+  {
+   "tag": "FOOTER",
+   "cls": "",
+   "x": 0,
+   "y": 837,
+   "w": 1440,
+   "h": 63,
+   "t": "富邦媒體科技股份有限公司"
+  },
+  {
+   "tag": "ARTICLE",
+   "cls": "basicInformation",
+   "x": 10,
+   "y": 837,
+   "w": 1420,
+   "h": 63,
+   "t": "富邦媒體科技股份有限公司"
+  }
+ ],
+ "bodyText": "body {display: block; background-color:#F2F2F2; -webkit-overflow-scrolling:touch; margin: 0; padding:0} header {height:44px; overflow:hidden; position:relative; z-index:4 } header table th, header table td {text-align:center; height:44px; position:relative} header table td {background-color:#D62872} header table th {background-color:#D62872; position:relative} header table th .logo {position:relative; z-index:2; text-align: center} header table th .logo img {position:relative; top:0px; z-index:2} header table td img {position:relative; top:2px} header table .shoppingCart {cursor:pointer} header table .shoppingCart img {position:relative; top:5px} header table .shoppingCart span {background-color:#E5047E; width:17px; height:17px; text-align:center; font:12px/16px Myriad Pro; color:#FFFFFF; border-radius:8px; position:absolute; right:6px; top:5px} header table th a {background-color:#D62872; margin:0px; padding:0px; font:bold 26px/44px Century Gothic; color:#FFFFFF; position:relative; z-index:1} header table .wishList a {background:transparent url(/img/wishListIcon.png) no-repeat center 5px; background-size:20px auto; width:40px; height:44px; font:13px/65px Helvetica; color:#FFFFFF; display:inline-block; cursor:pointer} header table .topBrowseFoot a {display: inline-block; width: 50px; height:44px; background: transparent url(\"https://image.momoshop.com.tw/ecm/img/cmm/mobile/topBrowseFootIconBk_01.png\") no-repeat center 5px/40px auto;} header table .topBrowseFoot a.selected {background: #FFFFFF url(\"//image.momoshop.com.tw/ecm/img/cmm/mobile/topBrowseFootIconBk_02.png\") no-repeat center 5px/40px auto;} header table .topBrowseFoot .selected {background-color:#FFFFFF; background-position:center -31px; color:#E5047E} header table .classification {float:left; background:transparent url(https://m.momoshop.com.tw/img/classificationImg.png) no-repeat center center; background-size:31% auto; width:50px; height:44px; display:inline-block; text-align:center; cursor:pointer} header .returnAttributesListAreaNextPage {display:none} header .returnAttributesListAreaNextPage .returnBtn {background:transparent url(/img/returnIcon.png) no-repeat center center; background-size:20%; width:50px; height:44px; display:inline-block; position:absolute; top:0px; right:0px; cursor:pointer} header .returnAttributesListAreaNextPage .returnBtn {background-position:3px center} header .returnAttributesListAreaNextPage .returnBtn::after {width:60px; height:44px; font:15px/44px Helvetica; color:#FFFFFF; content:'完成'; position:absolute; top:0px; left:0px} header .noWording .returnBtn {background-position:center} header .noWording .returnBtn::after {display:none} header table .topSearch a{background-image: url(\"http://image.momoshop.com.tw/ecm/img/cmm/mobile/header_search_01.png\"); background-repeat:no-repeat; background-position: center 5px; background-size:auto 40px; display: inline-block; width: 40px; height:100%;} footer .basicInformation {background-color:transparent; border:0px; box-shadow:0px 0px 0px; margin:0px 10px; text-align:center; padding:20px 0px; box-sizing:border-box;} footer .basicInformation dl, footer .basicInformation dt, footer .basicInformation dd {font:13px/20px Helvetica; color:#484848; margin:0px; padding:0px} footer .basicInformation dl {display:inline-block} footer .basicInformation dd {float:left} footer .basicInformation a {font:13px/20px Helvetica; color:#484848; text-decoration:none; border-left:1px solid #484848; margin:0px 0px; padding:0px 10px} footer .basicInformation dd:first-child a {border:0px} footer .basicInformation dt {clear:both} #momoFooter {background-color:#eee; bottom: 0; width:100%; position: fixed;} .errorpage{position: absolute; top: 30%; margin: 0 auto; width: 100%; padding: 0 30px 60px 30px; box-sizing: border-box; text-align: center;} .errorpage img{max-width: 600px; margin: 0 auto; display: block;} .errorpage p{display: block; width: 100%; font:20px/20px Microsoft JhengHei, sans-serif;} .errorpage a {background"
+}

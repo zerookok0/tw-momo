@@ -296,8 +296,8 @@ function cartPage() {
       <span class="cart-summary__label">應付金額</span>
       <span class="cart-summary__total" id="cart-total">$0</span>
     </div>
-    <button type="button" class="btn btn--gray">繼續購物</button>
-    <button type="button" class="btn btn--primary btn--lg" id="go-checkout">前往結帳</button>
+    <a class="btn btn--gray" href="/">繼續購物</a>
+    <a class="btn btn--primary btn--lg" href="/checkout/" id="go-checkout">前往結帳</a>
   </div>
 </div>
 
@@ -514,6 +514,19 @@ function checkoutPage() {
     if (tot) { tot.textContent = c.amount; tot.setAttribute('data-amount', String(c.total)); }
     var sub = document.getElementById('sum-subtotal');
     if (sub) sub.textContent = c.amount;
+    // 同步「訂單摘要」里的三行金额（商品小計 / 運費 / 折扣）
+    try {
+      var sub = document.getElementById('sum-subtotal');
+      if (sub) sub.textContent = c.amount;
+      var lines = document.querySelectorAll('.order-line');
+      for (var i = 0; i < lines.length; i++) {
+        var lb = (lines[i].querySelector('span') || {}).textContent || '';
+        var val = lines[i].querySelector('strong');
+        if (!val) continue;
+        if (lb.indexOf('運費') >= 0) val.textContent = c.total >= 490 ? '$0' : '$80';
+        if (lb.indexOf('折扣') >= 0) val.textContent = '-$0';
+      }
+    } catch (e) {} // sumRowsFix
     var cnt = document.getElementById('sum-count');
     if (cnt) cnt.textContent = c.items.reduce(function (a, b) { return a + Number(b.qty || 1); }, 0) + ' 件';
   }
