@@ -189,7 +189,7 @@ export function renderHome(deps) {
   <section class="r-live">
     <div class="r-live__row">
       <a class="r-live__card" href="/m/category">
-        <div class="r-live__img"><img src="${img('女時尚', 2)}" alt=""><span class="r-live__tag">LIVE</span></div>
+        <div class="r-live__img"><img src="${img('家電', 2)}" alt=""><span class="r-live__tag">LIVE</span></div>
         <b>【火熱榜單大公開】偷看大家的購物車</b>
         <span class="r-live__cta">精選搶購</span>
       </a>
@@ -265,7 +265,7 @@ export function renderHome(deps) {
     <div class="r-sec__hd"><h2>猜你想搜</h2><a href="/m/category">看更多 ${ICO.chev}</a></div>
     <div class="r-brands">
       ${['LUSH 嵐舒', '歐舒丹護手霜', 'Aesop', '雅詩蘭黛', '蘭蔻', '資生堂'].map((t, i) => `
-        <a href="/m/category?kw=${encodeURIComponent(t)}"><i><img src="${img(['彩妝保養','個人清潔','保健/醫療'][i % 3], i + 1)}" alt=""></i><b>${t}</b></a>
+        <a href="/m/category?kw=${encodeURIComponent(t)}"><i><img src="${img(['家電','3C週邊','食品/飲料'][i % 3], i + 1)}" alt=""></i><b>${t}</b></a>
       `).join('')}
     </div>
   </section>
