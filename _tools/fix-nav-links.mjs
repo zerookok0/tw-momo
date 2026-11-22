@@ -154,13 +154,15 @@ function fixFile(rel) {
   });
 
   // href="" 视为空链接，按文案补
-  html = html.replace(/<a\b([^>]*?)\bhref=""([^>]*)>/g, (all, a, b) => {
-    const seg = all;
-    if (/首頁/.test(seg)) return '<a' + a + ' href="/"' + b + '>';
-    if (/購物車/.test(seg)) return '<a' + a + ' href="/cart/"' + b + '>';
-    if (/結帳/.test(seg)) return '<a' + a + ' href="/checkout/"' + b + '>';
+    // href="" 视为空链接：用「锚点内的文案」判断目标
+  html = html.replace(/<a\b([^>]*?)\bhref=""([^>]*)>([\s\S]{0,40}?)<\/a>/g, (all, a, b, inner) => {
+    const t = inner.replace(/<[^>]+>/g, '').trim();
+    if (/^首頁$/.test(t)) return '<a' + a + ' href="/"' + b + '>' + inner + '</a>';
+    if (/^購物車/.test(t)) return '<a' + a + ' href="/cart/"' + b + '>' + inner + '</a>';
+    if (/^結帳$/.test(t)) return '<a' + a + ' href="/checkout/"' + b + '>' + inner + '</a>';
+    if (/^登入$/.test(t)) return '<a' + a + ' href="/info/login"' + b + '>' + inner + '</a>';
     return all;
-  });
+  }); // __hrefEmptyFixed
 
   html = linkifyTextAnchors(html);
   html = wireSearchButton(html);
