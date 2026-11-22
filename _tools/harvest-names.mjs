@@ -63,10 +63,24 @@ await send('Emulation.setUserAgentOverride', { userAgent: 'Mozilla/5.0 (Windows 
 await send('Page.navigate', { url: 'https://www.momoshop.com.tw/category/LgrpCategory.jsp?l_code=' + codes[0][0] });
 await sleep(7000);
 
+const DONE = path.join(ROOT, '_ref', 'harvest-done.txt');
+const done = new Set(fs.existsSync(DONE) ? fs.readFileSync(DONE, 'utf8').split('\n').filter(Boolean) : []);
+const doneFd = fs.openSync(DONE, 'a');
+console.log('已完成类目:', done.size);
+
+await send('Network.enable');
+let callCount = 0;
+async function refreshSession(lcode) {
+  try { await send('Network.clearBrowserCookies'); } catch (e) {}
+  await send('Page.navigate', { url: 'https://www.momoshop.com.tw/category/LgrpCategory.jsp?l_code=' + lcode });
+  await sleep(6000);
+}
+
 const fd = fs.openSync(OUT, 'a');
 let total = 0;
 
 for (const [lcode, cnt] of codes) {
+  if (done.has(lcode)) { console.log(`跳过 ${lcode}（已完成）`); continue; }
   let pages = 0, got = 0;
   for (let p = 1; p <= MAX_PAGES; p++) {
     const js = `(async () => {
@@ -76,23 +90,30 @@ for (const [lcode, cnt] of codes) {
       const list = (j.rtnGoodsData && j.rtnGoodsData.goodsInfoList) || [];
       return JSON.stringify({ max: Number(j.maxPage||0), list: list.map(g => ({ c: String(g.goodsCode||''), n: g.goodsName || '', p: g.price || '', i: g.imgUrl || '' })) });
     })()`;
+    callCount++;
+    if (callCount % 50 === 0) await refreshSession(lcode);
     const raw = await ev(js, true);
     if (!raw) { await sleep(600); continue; }
     let o;
     try { o = JSON.parse(raw); } catch { continue; }
     pages = o.max || pages;
-    if (!o.list.length) break;
+    if (!o.list.length) {
+      if (p === 1) { await refreshSession(lcode); continue; }
+      break;
+    }
     for (const g of o.list) {
-      if (g.c && g.n) { fs.writeSync(fd, JSON.stringify(g) + '\n'); got++; }
+      if (g.c && g.n) { fs.writeSync(fd, JSON.stringify({ ...g, l: lcode }) + '\n'); got++; }
     }
     total += o.list.length;
     if (p >= pages) break;
-    await sleep(250);
+    await sleep(2000);
   }
+  if (got > 0) fs.writeSync(doneFd, lcode + '\n');
   console.log(`l_code ${lcode} (目录${cnt}件)  抓到 ${got} 条，共 ${pages} 页`);
 }
 
 fs.closeSync(fd);
+fs.closeSync(doneFd);
 console.log(`\n完成，累计写入 ${total} 条 → ${OUT}`);
 ws.close();
 process.exit(0);

@@ -91,6 +91,10 @@ if (!h.includes('生活超市')) {
   }
 }
 
+// 4.6) 头部迷你购物车「結帳」按钮接线（原本是 button 无事件）
+h = h.replace(/<button type="button" class="flex w-full justify-center bg-\[#d62872\] py-1 text-white">/g,
+  '<button type="button" class="flex w-full justify-center bg-[#d62872] py-1 text-white" onclick="location.href=\'/checkout/\'">'); // 結帳按鈕接线
+
 // 5) 底部关键词横滑
 const BOTTOM_KW = ['葛瑪蘭之星飯店', '瞬熱飲水機', '廚房紙巾', '美食餐券', 'lush 嵐舒', '前開式行李箱', 'kao 花王', '麥當勞餐券', '烘被機', '大童運動鞋'];
 let bi = 0;
