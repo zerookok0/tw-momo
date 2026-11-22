@@ -577,3 +577,30 @@
 .r-wall__price { display: flex; align-items: baseline; gap: 4px; margin-top: 4px; font-size: 10px; color: #e2125b; }
 .r-wall__price em { font-style: normal; font-size: 18px; font-weight: 800; font-family: var(--font-price, sans-serif); }
 .r-wall__price s { font-size: 10px; color: #b3b3b3; }
+/* ================= 手机结账：字段改上下堆叠（真机版式） ================= */
+.m-co-row {
+  display: flex; flex-direction: column; align-items: stretch; gap: 5px;
+  padding: 10px 0; border-bottom: 1px solid #f5f5f5;
+}
+.m-co-row:last-child { border-bottom: 0; }
+.m-co-row > label {
+  font-size: 13px; color: #666; line-height: 1.4;
+}
+.m-co-row > label .req { color: #e2125b; margin-left: 2px; }
+.m-co-row > input,
+.m-co-row > select,
+.m-co-row > textarea {
+  width: 100% !important; box-sizing: border-box;
+  height: 42px; padding: 0 12px;
+  border: 1px solid #e0e0e0; border-radius: 6px;
+  font-size: 14px; color: #333; background: #fff;
+  font-family: inherit;
+}
+.m-co-row > textarea { height: 84px; padding: 10px 12px; resize: vertical; }
+.m-co-row > input:focus,
+.m-co-row > select:focus,
+.m-co-row > textarea:focus { border-color: #e2125b; outline: none; }
+
+/* 地址类字段允许换行，不要挤成一条 */
+.m-co-row .m-co-inline { display: flex; gap: 8px; }
+.m-co-row .m-co-inline > * { flex: 1; min-width: 0; }
