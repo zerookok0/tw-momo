@@ -242,6 +242,20 @@ export async function onRequest(context) {
   const method = request.method;
 
   try {
+    // ───────── 手机 UA 访问桌面首页 → 302 到 /m/ ─────────
+    // 真站点 m.momoshop.com.tw 就是这么做的；否则手机上看到的是 1260px 宽的
+    // 桌面版，只会露出左边一条，右边全是空白。
+    if (method === 'GET' && (p === '/' || p === '/index.html')) {
+      const ua = request.headers.get('User-Agent') || '';
+      const isMobile = /iPhone|iPod|Android.*Mobile|Windows Phone|BlackBerry|Opera Mini|IEMobile/i.test(ua);
+      if (isMobile) {
+        return new Response(null, {
+          status: 302,
+          headers: { Location: '/m/', 'Cache-Control': 'no-store', Vary: 'User-Agent' },
+        });
+      }
+    }
+
     // 先拿到面板域，后面所有 HTML/JSON 响应都要用它拼 CSP
     await ensurePanelDomain(env, url);
 
