@@ -3,11 +3,14 @@
  "url": "https://tw-momo.pages.dev/product/10978110",
  "vw": 1440,
  "vh": 900,
- "docH": 2398,
+ "docH": 4005,
  "prices": [
   "$1,344",
   "1,404",
   "$2,687",
+  "10978110",
+  "$2,687",
+  "$1,344",
   "$2,680",
   "$990",
   "$528",
@@ -79,16 +82,16 @@
    "href": ""
   },
   {
-   "t": "雨傘王防曬傘",
-   "href": "/category?kw=%E9%9B%A8%E5%82%98%E7%8E%8B%E9%98%B2%E6%9B%AC%E5%82%98"
+   "t": "皮卡丘",
+   "href": "/category?kw=%E7%9A%AE%E5%8D%A1%E4%B8%98"
   },
   {
-   "t": "NIKE 童 學步鞋",
-   "href": "/category?kw=NIKE%20%E7%AB%A5%20%E5%AD%B8%E6%AD%A5%E9%9E%8B"
+   "t": "不鏽鋼炒鍋",
+   "href": "/category?kw=%E4%B8%8D%E9%8F%BD%E9%8B%BC%E7%82%92%E9%8D%8B"
   },
   {
-   "t": "酪梨油 3入",
-   "href": "/category?kw=%E9%85%AA%E6%A2%A8%E6%B2%B9%203%E5%85%A5"
+   "t": "小米行動電源",
+   "href": "/category?kw=%E5%B0%8F%E7%B1%B3%E8%A1%8C%E5%8B%95%E9%9B%BB%E6%BA%90"
   },
   {
    "t": "首頁",
@@ -368,6 +371,21 @@
    "h": 58
   },
   {
+   "src": "https://img1.momoshop.com.tw/goodsimg/0010/978/110/10978110_L.jpg?t=567955556183",
+   "w": 320,
+   "h": 320
+  },
+  {
+   "src": "https://img1.momoshop.com.tw/goodsimg/0010/978/110/10978110_L.jpg?t=567955556183",
+   "w": 320,
+   "h": 320
+  },
+  {
+   "src": "https://img1.momoshop.com.tw/goodsimg/0010/978/110/10978110_L.jpg?t=567955556183",
+   "w": 320,
+   "h": 320
+  },
+  {
    "src": "https://tw-momo.pages.dev/assets/img2.momoshop.com.tw/ecm/img/online/10/002/00/000/bt_0_203_01/bt_0_203_01_P1_1_e2__30343c36.jpg",
    "w": 100,
    "h": 100
@@ -381,7 +399,7 @@
    "y": 21,
    "w": 1425,
    "h": 160,
-   "t": "回首頁momo富立保險APP下載點點賺書店登入註冊會員中心查訂單追蹤清單折價券購物車 (0)登記活動搜尋猜你想搜 >雨傘"
+   "t": "回首頁momo富立保險APP下載點點賺書店登入註冊會員中心查訂單追蹤清單折價券購物車 (0)登記活動搜尋猜你想搜 >皮卡"
   },
   {
    "tag": "DIV",
@@ -435,7 +453,7 @@
    "y": 61,
    "w": 1425,
    "h": 120,
-   "t": "搜尋猜你想搜 >雨傘王防曬傘NIKE 童 學步鞋酪梨油 3入"
+   "t": "搜尋猜你想搜 >皮卡丘不鏽鋼炒鍋小米行動電源"
   },
   {
    "tag": "DIV",
@@ -462,7 +480,7 @@
    "y": 61,
    "w": 1220,
    "h": 120,
-   "t": "搜尋猜你想搜 >雨傘王防曬傘NIKE 童 學步鞋酪梨油 3入"
+   "t": "搜尋猜你想搜 >皮卡丘不鏽鋼炒鍋小米行動電源"
   },
   {
    "tag": "A",
@@ -489,7 +507,7 @@
    "y": 61,
    "w": 569,
    "h": 120,
-   "t": "搜尋猜你想搜 >雨傘王防曬傘NIKE 童 學步鞋酪梨油 3入"
+   "t": "搜尋猜你想搜 >皮卡丘不鏽鋼炒鍋小米行動電源"
   },
   {
    "tag": "DIV",
@@ -943,12 +961,12 @@
   },
   {
    "tag": "SECTION",
-   "cls": "card pdp2__rel",
+   "cls": "card pdp2__detail",
    "x": 0,
    "y": 942,
    "w": 1425,
-   "h": 853,
-   "t": "推薦商品看更多 › 5折 FUSIN 摺疊車20吋 $1,340$2,680 5折 古寶無患子 活膚晶24入 $495$"
+   "h": 1594,
+   "t": "商品詳情 葛瑪蘭風呂會館 標準雙人房含早，momo 購物網正式授權經銷，商品皆為台灣公司貨，享原廠保固與售後服務。 商品"
   },
   {
    "tag": "DIV",
@@ -957,143 +975,143 @@
    "y": 942,
    "w": 1425,
    "h": 57,
-   "t": "推薦商品看更多 ›"
+   "t": "商品詳情"
   },
   {
    "tag": "DIV",
-   "cls": "card__bd",
+   "cls": "card__bd pdp2__detailbd",
    "x": 0,
    "y": 999,
    "w": 1425,
-   "h": 796,
-   "t": "5折 FUSIN 摺疊車20吋 $1,340$2,680 5折 古寶無患子 活膚晶24入 $495$990 5折 濃韻-"
+   "h": 1537,
+   "t": "葛瑪蘭風呂會館 標準雙人房含早，momo 購物網正式授權經銷，商品皆為台灣公司貨，享原廠保固與售後服務。 商品特色 原廠"
   },
   {
-   "tag": "DIV",
-   "cls": "cat-grid",
+   "tag": "P",
+   "cls": "pdp2__lead",
    "x": 20,
-   "y": 1019,
+   "y": 1015,
    "w": 1385,
-   "h": 756,
-   "t": "5折 FUSIN 摺疊車20吋 $1,340$2,680 5折 古寶無患子 活膚晶24入 $495$990 5折 濃韻-"
+   "h": 25,
+   "t": "葛瑪蘭風呂會館 標準雙人房含早，momo 購物網正式授權經銷，商品皆為台灣公司貨，享原廠保固與售後服務。"
   },
   {
-   "tag": "A",
-   "cls": "cat-card",
+   "tag": "UL",
+   "cls": "pdp2__feat",
    "x": 20,
-   "y": 1019,
+   "y": 1091,
    "w": 1385,
-   "h": 63,
-   "t": "5折 FUSIN 摺疊車20吋 $1,340$2,680"
+   "h": 108,
+   "t": "原廠公司貨，附發票與保固卡 嚴選品質，出貨前逐件品檢 支援多元付款：信用卡、ATM、超商取貨付款 全館滿 $490 免運"
   },
   {
-   "tag": "DIV",
-   "cls": "cat-card__body",
-   "x": 20,
-   "y": 1040,
-   "w": 1385,
-   "h": 42,
-   "t": "FUSIN 摺疊車20吋 $1,340$2,680"
+   "tag": "LI",
+   "cls": "",
+   "x": 40,
+   "y": 1091,
+   "w": 1365,
+   "h": 27,
+   "t": "原廠公司貨，附發票與保固卡"
   },
   {
-   "tag": "A",
-   "cls": "cat-card",
-   "x": 20,
-   "y": 1082,
-   "w": 1385,
-   "h": 63,
-   "t": "5折 古寶無患子 活膚晶24入 $495$990"
+   "tag": "LI",
+   "cls": "",
+   "x": 40,
+   "y": 1118,
+   "w": 1365,
+   "h": 27,
+   "t": "嚴選品質，出貨前逐件品檢"
   },
   {
-   "tag": "DIV",
-   "cls": "cat-card__body",
-   "x": 20,
-   "y": 1103,
-   "w": 1385,
-   "h": 42,
-   "t": "古寶無患子 活膚晶24入 $495$990"
-  },
-  {
-   "tag": "A",
-   "cls": "cat-card",
-   "x": 20,
+   "tag": "LI",
+   "cls": "",
+   "x": 40,
    "y": 1145,
-   "w": 1385,
-   "h": 63,
-   "t": "5折 濃韻- 600mlx24入/箱 $264$528"
+   "w": 1365,
+   "h": 27,
+   "t": "支援多元付款：信用卡、ATM、超商取貨付款"
+  },
+  {
+   "tag": "LI",
+   "cls": "",
+   "x": 40,
+   "y": 1172,
+   "w": 1365,
+   "h": 27,
+   "t": "全館滿 $490 免運，未滿收取運費 $80"
   },
   {
    "tag": "DIV",
-   "cls": "cat-card__body",
+   "cls": "pdp2__detailimgs",
    "x": 20,
-   "y": 1166,
+   "y": 1213,
    "w": 1385,
-   "h": 42,
-   "t": "濃韻- 600mlx24入/箱 $264$528"
-  },
-  {
-   "tag": "A",
-   "cls": "cat-card",
-   "x": 20,
-   "y": 1208,
-   "w": 1385,
-   "h": 63,
-   "t": "5折 蕾黛絲∥ 獨家買2送3 $640$1,280"
+   "h": 980,
+   "t": ""
   },
   {
    "tag": "DIV",
-   "cls": "cat-card__body",
-   "x": 20,
-   "y": 1229,
-   "w": 1385,
-   "h": 42,
-   "t": "蕾黛絲∥ 獨家買2送3 $640$1,280"
+   "cls": "pdp2__detailimg",
+   "x": 553,
+   "y": 1213,
+   "w": 320,
+   "h": 320,
+   "t": ""
   },
   {
-   "tag": "A",
-   "cls": "cat-card",
-   "x": 20,
-   "y": 1271,
-   "w": 1385,
-   "h": 63,
-   "t": "5折 景岳生技 樂亦纖3盒 $552$1,104"
-  },
-  {
-   "tag": "DIV",
-   "cls": "cat-card__body",
-   "x": 20,
-   "y": 1292,
-   "w": 1385,
-   "h": 42,
-   "t": "景岳生技 樂亦纖3盒 $552$1,104"
-  },
-  {
-   "tag": "A",
-   "cls": "cat-card",
-   "x": 20,
-   "y": 1334,
-   "w": 1385,
-   "h": 63,
-   "t": "5折 奧莉薇閣∥ 24吋行李箱 $1,790$3,580"
+   "tag": "IMG",
+   "cls": "",
+   "x": 553,
+   "y": 1213,
+   "w": 320,
+   "h": 320,
+   "t": ""
   },
   {
    "tag": "DIV",
-   "cls": "cat-card__body",
-   "x": 20,
-   "y": 1355,
-   "w": 1385,
-   "h": 42,
-   "t": "奧莉薇閣∥ 24吋行李箱 $1,790$3,580"
+   "cls": "pdp2__detailimg",
+   "x": 553,
+   "y": 1543,
+   "w": 320,
+   "h": 320,
+   "t": ""
   },
   {
-   "tag": "A",
-   "cls": "cat-card",
+   "tag": "IMG",
+   "cls": "",
+   "x": 553,
+   "y": 1543,
+   "w": 320,
+   "h": 320,
+   "t": ""
+  },
+  {
+   "tag": "DIV",
+   "cls": "pdp2__detailimg",
+   "x": 553,
+   "y": 1873,
+   "w": 320,
+   "h": 320,
+   "t": ""
+  },
+  {
+   "tag": "IMG",
+   "cls": "",
+   "x": 553,
+   "y": 1873,
+   "w": 320,
+   "h": 320,
+   "t": ""
+  },
+  {
+   "tag": "TABLE",
+   "cls": "spec-table",
    "x": 20,
-   "y": 1397,
+   "y": 2243,
    "w": 1385,
-   "h": 63,
-   "t": "5折 4-6坪五級定頻右吹窗型 $8,640$17,280"
+   "h": 271,
+   "t": "商品編號10978110 商品分類其他 原價$2,687 5 折價$1,344 產地依原廠標示 保固原廠保固（非人為損壞"
   }
  ],
- "bodyText": "回首頁momo富立保險APP下載點點賺書店登入註冊會員中心查訂單追蹤清單折價券購物車 (0)登記活動搜尋猜你想搜 >雨傘王防曬傘NIKE 童 學步鞋酪梨油 3入 首頁/商品分類/其他/葛瑪蘭風呂會館 標準雙人房含早 其他 館長推薦 本週新品 折價券熱銷 本館熱銷TOP 電視熱銷商品 更多 本月主打 ★冬日剎手必敗★ ★假日不加價★ ★買1晚送1晚★ ★運動旅遊★ ★線上訂房★ ★國內旅遊精選★ 主題特區 ★親子住宿★ ★窮遊營★ ★大自然之旅★ ★絕美泳池飯店★ ★精選貼心住宿★ 享受療癒美人湯的輕旅度假 葛瑪蘭風呂會館 標準雙人房含早 10/31~11/30 11月限定▼再降價 滿1件折121元 (說明) 免費體驗溫泉魚泡腳 加贈溫泉套票550折價券 距離礁溪轉運站走路五分鐘 品號：10978110 限時折後價$1,344元貴賓通鑑 促銷價 1,404 元市售價 $2,687 元 品牌名稱momo ♡ 結帳方式信用卡／無卡分期／行動支付／超商付款／ATM／銀聯卡刷mo卡享3%，回饋上限翻倍至2千 分期/紅利24期12期6期 每期 $56 元 更多 保固資訊10天保固期 ▼更多 配送方式 廠商宅配 數量−＋ 折價券特惠商品，不適用折價券 直接購買 放入購物車 ♡ 加入追蹤 推薦商品看更多 › 5折 FUSIN 摺疊車20吋 $1,340$2,680 5折 古寶無患子 活膚晶24入 $495$990 5折 濃韻- 600mlx24入/箱 $264$528 5折 蕾黛絲∥ 獨家買2送3 $640$1,280 5折 景岳生技 樂亦纖3盒 $552$1,104 5折 奧莉薇閣∥ 24吋行李箱 $1,790$3,580 5折 4-6坪五級定頻右吹窗型 $8,640$17,280 5折 3-5坪五級定頻左吹窗型 $7,020$14,040 5折 統一生機 亞麻仁籽粉 $272$543 5折 鮮採家 綜合蔬果箱 $339$678 5折 【 樂蘭】 立體聲擴大音箱 $10,493$20,985 5折 【樂事】九州岩燒海苔味洋芋片34gX12包 $120$239 (function(){ var price=1344, code=\"10978110\", name=\"葛瑪蘭風呂會館 標準雙人房含早\", img=\"https://img1.momoshop.com.tw/goodsimg/0010/978/110/10978110_L.jpg?t=567955556183\"; var SKUS=[], cur=0; (function(){ for(var i=0;i<SKUS.length;i++) if(SKUS[i].code===code) cur=i; })(); function applySku(i){ if(!SKUS.length) return; cur=i; var s=SKUS[i]; code=s.code; name=s.name; price=Math.round(Number(s.price)/2); if(s.img) img=s.img; var chips=document.querySelectorAll('#pdpSkus .sku-chip'); for(var k=0;k<chips.length;k++) chips[k].classList.toggle('on', Number(chips[k].getAttribute('data-i'))===i); var valEl=document.querySelector('.price-box .val'); if(valEl) valEl.textContent=price.toLocaleString('en-US'); var wasEl=document.querySelector('.price-box .was'); if(wasEl) wasEl.textContent='$'+Number(s.price).toLocaleString('en-US'); var imgEl=document.querySelector('.pdp__main img'); if(imgEl && s.img) imgEl.src=s.img; // 规格表里的原价/5折价/商品编号跟着变 document.querySelectorAll('.spec-table tr').forEach(function(tr){ var th=tr.querySelector('th'), td=tr.querySelector('td'); if(!th||!td) return; var t=th.textContent.trim(); if(t==='原價') td.innerHTML='<s>$'+Number(s.price).toLocaleString('en-US')+'</s>'; if(t==='5 折價') td.textContent='$'+price.toLocaleString('en-US'); if(t==='商品編號') td.textContent=s.code; }); } document.querySelectorAll('#pdpSkus .sku-chip').forEach(function(b){ b.addEventListener('click',function(){ applySku(Number(b.getAttribute('data-i'))); }); }); document.querySelectorAll('.pdp__thumbs button').forEach(function(b){ b.addEventListener('click',function(){ document.querySelectorAll('.pdp__thumbs button').forEach(function(x){x.setAttribute('aria-selected','false')}); b.setAttribute('aria-selected','true'); }); }); var qty=document.getElementById('pdp-qty'); document.querySelectorAll('[data-qty]').forEach(function(b){ b.addEventListener('click',function(){ qty.value=Math.max(1,Math.min(99,(parseInt(qty.value,10)||1)+Number(b.dataset.qty))); }); }); qty.addEventListener('input',function(){ qty.value=qty.value.replace(/[^0-9]/g,''); }); var KEY='momo_cart'; function read(){ try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []} } function write(v){ try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){} } function add(){ var n=Math.max(1,parseInt(qty.value,10)||1); var c=read(); var h=c.filter(function(i){return i.code===code})[0]; if(h)h.qty+=n; else c.push({code:code,name:name,price:price,qty:n,img:img}); write(c); return n; } document.getElementById('btn-add-cart').addEventListener('click',function(){ var n=add(); this.textContent='已加入 '+n+' 件'; var s=this; setTimeout(function(){s.textContent='加入購物車'},1200); }); document.getElementById('btn-buy-now').addEventListener('click',function(){ add(); location.href='/cart'; }); })(); 防詐騙提醒：momo絕不會以電話或簡訊通知訂單/分期出錯、或變更付款方式，更不會要您前往ATM進行任何操作！不應在momo以外的任何地方輸入momo帳密(例如非政府官方的電子發票app)，以免權益受損！關於我們momo官網招商專區人才招募特色服務大宗採購方案異業合作momo幣企業採購會員權益客戶隱私權政策客戶權利義務網路安全標章包裝減量標章防詐騙宣導碳足跡標籤系列網站momoFB粉絲團momo好物交流社團momo官方IGmomo富立保險客戶服務訂單/配送進度查詢取消訂單/退貨更改配送地址追蹤清單快速到貨服務折價券說明FAQ常見問題聯絡我們行動購物APP關於我們人才招募招商專區電腦版手機版Facebook加入LINEInstagram富邦媒體科技股份有限公司 統"
+ "bodyText": "回首頁momo富立保險APP下載點點賺書店登入註冊會員中心查訂單追蹤清單折價券購物車 (0)登記活動搜尋猜你想搜 >皮卡丘不鏽鋼炒鍋小米行動電源 首頁/商品分類/其他/葛瑪蘭風呂會館 標準雙人房含早 其他 館長推薦 本週新品 折價券熱銷 本館熱銷TOP 電視熱銷商品 更多 本月主打 ★冬日剎手必敗★ ★假日不加價★ ★買1晚送1晚★ ★運動旅遊★ ★線上訂房★ ★國內旅遊精選★ 主題特區 ★親子住宿★ ★窮遊營★ ★大自然之旅★ ★絕美泳池飯店★ ★精選貼心住宿★ 享受療癒美人湯的輕旅度假 葛瑪蘭風呂會館 標準雙人房含早 10/31~11/30 11月限定▼再降價 滿1件折121元 (說明) 免費體驗溫泉魚泡腳 加贈溫泉套票550折價券 距離礁溪轉運站走路五分鐘 品號：10978110 限時折後價$1,344元貴賓通鑑 促銷價 1,404 元市售價 $2,687 元 品牌名稱momo ♡ 結帳方式信用卡／無卡分期／行動支付／超商付款／ATM／銀聯卡刷mo卡享3%，回饋上限翻倍至2千 分期/紅利24期12期6期 每期 $56 元 更多 保固資訊10天保固期 ▼更多 配送方式 廠商宅配 數量−＋ 折價券特惠商品，不適用折價券 直接購買 放入購物車 ♡ 加入追蹤 商品詳情 葛瑪蘭風呂會館 標準雙人房含早，momo 購物網正式授權經銷，商品皆為台灣公司貨，享原廠保固與售後服務。 商品特色 原廠公司貨，附發票與保固卡 嚴選品質，出貨前逐件品檢 支援多元付款：信用卡、ATM、超商取貨付款 全館滿 $490 免運，未滿收取運費 $80 規格說明 商品編號10978110 商品分類其他 原價$2,687 5 折價$1,344 產地依原廠標示 保固原廠保固（非人為損壞） 退換貨10 天猶豫期，商品需完整包裝 推薦商品看更多 › 5折 FUSIN 摺疊車20吋 $1,340$2,680 5折 古寶無患子 活膚晶24入 $495$990 5折 濃韻- 600mlx24入/箱 $264$528 5折 蕾黛絲∥ 獨家買2送3 $640$1,280 5折 景岳生技 樂亦纖3盒 $552$1,104 5折 奧莉薇閣∥ 24吋行李箱 $1,790$3,580 5折 4-6坪五級定頻右吹窗型 $8,640$17,280 5折 3-5坪五級定頻左吹窗型 $7,020$14,040 5折 統一生機 亞麻仁籽粉 $272$543 5折 鮮採家 綜合蔬果箱 $339$678 5折 【 樂蘭】 立體聲擴大音箱 $10,493$20,985 5折 【樂事】九州岩燒海苔味洋芋片34gX12包 $120$239 (function(){ var price=1344, code=\"10978110\", name=\"葛瑪蘭風呂會館 標準雙人房含早\", img=\"https://img1.momoshop.com.tw/goodsimg/0010/978/110/10978110_L.jpg?t=567955556183\"; var SKUS=[], cur=0; (function(){ for(var i=0;i<SKUS.length;i++) if(SKUS[i].code===code) cur=i; })(); function applySku(i){ if(!SKUS.length) return; cur=i; var s=SKUS[i]; code=s.code; name=s.name; price=Math.round(Number(s.price)/2); if(s.img) img=s.img; var chips=document.querySelectorAll('#pdpSkus .sku-chip'); for(var k=0;k<chips.length;k++) chips[k].classList.toggle('on', Number(chips[k].getAttribute('data-i'))===i); var valEl=document.querySelector('.price-box .val'); if(valEl) valEl.textContent=price.toLocaleString('en-US'); var wasEl=document.querySelector('.price-box .was'); if(wasEl) wasEl.textContent='$'+Number(s.price).toLocaleString('en-US'); var imgEl=document.querySelector('.pdp__main img'); if(imgEl && s.img) imgEl.src=s.img; // 规格表里的原价/5折价/商品编号跟着变 document.querySelectorAll('.spec-table tr').forEach(function(tr){ var th=tr.querySelector('th'), td=tr.querySelector('td'); if(!th||!td) return; var t=th.textContent.trim(); if(t==='原價') td.innerHTML='<s>$'+Number(s.price).toLocaleString('en-US')+'</s>'; if(t==='5 折價') td.textContent='$'+price.toLocaleString('en-US'); if(t==='商品編號') td.textContent=s.code; }); } document.querySelectorAll('#pdpSkus .sku-chip').forEach(function(b){ b.addEventListener('click',function(){ applySku(Number(b.getAttribute('data-i'))); }); }); document.querySelectorAll('.pdp__thumbs button').forEach(function(b){ b.addEventListener('click',function(){ document.querySelectorAll('.pdp__thumbs button').forEach(function(x){x.setAttribute('aria-selected','false')}); b.setAttribute('aria-selected','true'); }); }); var qty=document.getElementById('pdp-qty'); document.querySelectorAll('[data-qty]').forEach(function(b){ b.addEventListener('click',function(){ qty.value=Math.max(1,Math.min(99,(parseInt(qty.value,10)||1)+Number(b.dataset.qty))); }); }); qty.addEventListener('input',function(){ qty.value=qty.value.replace(/[^0-9]/g,''); }); var KEY='momo_cart'; function read(){ try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []} } function write(v){ try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){} } function add(){ var n=Math.max(1,parseInt(qty.value,10)||1); var c=read(); var h=c.filter(function(i){return i.code===code})[0]; if(h)h.qty+=n; else c.push({code:code,name:name,price:price,qty:n,img:img}); write(c); return n; } document.getElementById('btn-add-cart').addEventListener('click',function(){ var n=add(); this.textContent='已加入 '+n+' 件'; var s=this; setTimeout(function(){s.textContent='加入購物車'},1200); }); document.getElementById('btn-buy-now').addEventListener('click',function(){ add(); location.href='/cart'; }); })(); 防詐騙提醒：momo絕不會以電話或簡訊通知訂單/分期出錯、或變更付款方式，更不會要您前往ATM進行任何操作！不應在momo以外的任何地方輸入momo帳密(例如非政府官方的電子發票app)，以免權益受損！關於我們momo官網招商專區人才招募特色"
 }

@@ -98,6 +98,20 @@ for (const p of PAGES) {
       return false;
     }).map(el => (el.textContent || '').replace(/\\s+/g, ' ').trim().slice(0, 18)).filter(Boolean).slice(0, 20);
 
+    // 真点击探针：对疑似死按钮点一下，看 DOM/URL/滚动是否变化
+    out.clickProbe = [];
+    for (const label of out.deadButtons.slice(0, 4)) {
+      const el = [...document.querySelectorAll('a,button,[role="button"]')]
+        .find(e => (e.textContent || '').replace(/\\s+/g, ' ').trim().slice(0, 18) === label);
+      if (!el) continue;
+      document.querySelectorAll('[style]').forEach((e,i)=>{ if(/translateX|display/.test(e.getAttribute('style')||'')) e.setAttribute('data-t','1') }); const snapBefore = document.documentElement.outerHTML.length + '|' + location.href + '|' + scrollY + '|' + (document.body.getAttribute('data-t') || 0);
+      try { el.click(); } catch (e) {}
+      await new Promise(r => setTimeout(r, 250));
+      const snapAfter = document.documentElement.outerHTML.length + '|' + location.href + '|' + scrollY + '|' + (document.body.getAttribute('data-t') || 0);
+      if (snapBefore !== snapAfter) out.clickProbe.push(label);
+    }
+    out.deadButtons = out.deadButtons.filter(l => !out.clickProbe.includes(l));
+
     // 4) 错版：横向溢出 / 元素越界
     out.overflowX = document.documentElement.scrollWidth > innerWidth + 1;
     out.overflowBy = document.documentElement.scrollWidth - innerWidth;
@@ -105,7 +119,7 @@ for (const p of PAGES) {
       let p = el.parentElement;
       while (p) {
         const cs = getComputedStyle(p);
-        if (/(auto|scroll)/.test(cs.overflowX)) return true;
+        if (/(auto|scroll|hidden)/.test(cs.overflowX)) return true;
         p = p.parentElement;
       }
       return false;
