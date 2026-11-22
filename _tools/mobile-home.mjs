@@ -270,9 +270,10 @@ export function renderHome(deps) {
     </div>
   </section>
 
-  ${floor('限時搶購', '家電', plat('家電'), '<span class="r-sec__cd">02:07:03</span>', 20)}
+  ${seckillWall()}
   ${floor('11.11 降價好貨', '食品/飲料', plat('食品/飲料'), '', 20)}
   ${floor('熱銷 3C', '3C週邊', plat('3C週邊'), '', 12)}
+  ${floor('人氣推薦', '家具收納', plat('家具收納'), '', 12)}
 
 </main>
 
@@ -284,6 +285,40 @@ export function renderHome(deps) {
   <a href="/info/member-center">${ICO.user}<span>會員中心</span></a>
 </nav>
 `;
+
+
+  /** 真站那种粉底商品墙：倒计时 + 角标 + 促销条 + 播放按钮 */
+  function seckillWall() {
+    const list = pick('家電', 20);
+    if (!list.length) return '';
+    const badges = ['東芝官方<br>NO.1 好評熱銷', '限時售完<br>-55折', '今日爆款<br>TOP 1', '限時特惠<br>-42折'];
+    const promos = ['升級QLED★省$1,989', '買60ml送126ml', '登記抽$1,000', '滿$990折$100'];
+    const tags = ['今日限定', '11/23限定', '今日限定', '11/23限定'];
+    return `
+  <section class="r-wall">
+    <div class="r-wall__hd">
+      <h2>🔥 限時搶購</h2>
+      <span class="r-wall__cd"><i>04</i>:<i>24</i>:<i>24</i></span>
+      <a class="r-wall__more" href="${plat('家電')}">${ICO.chev}</a>
+    </div>
+    <div class="r-wall__grid">
+      ${list.map((p, i) => {
+        const s2 = sale(p.price);
+        return `<a class="r-wall__card" href="${P(p.code)}">
+        <span class="r-wall__badge">${badges[i % 4]}</span>
+        <div class="r-wall__img">
+          <img src="${p.img}" alt="" loading="lazy">
+          <span class="r-wall__play"></span>
+          <span class="r-wall__tag">${tags[i % 4]}</span>
+        </div>
+        <span class="r-wall__promo">${promos[i % 4]}</span>
+        <b>${p.name.slice(0, 22)}</b>
+        <span class="r-wall__price">限搶價<em>${fmt(s2)}</em><s>${fmt(p.price)}</s></span>
+      </a>`;
+      }).join('')}
+    </div>
+  </section>`;
+  }
 
   function floor(title, cat, link, badge, count = 6) {
     const list = pick(cat, count);

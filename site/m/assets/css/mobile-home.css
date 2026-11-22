@@ -527,3 +527,53 @@
 .r-brands i { display: flex; align-items: center; justify-content: center; width: 76px; height: 76px; background: #fafafa; border-radius: 8px; overflow: hidden; }
 .r-brands img { width: 64px; height: 64px; object-fit: contain; }
 .r-brands b { display: block; font-size: 10px; color: #555; margin-top: 4px; font-weight: 400; }
+/* ================= 限時搶購 · 粉底商品墙（对真站） ================= */
+.r-wall { background: #fff2f7; padding: 10px 0 14px; margin-top: 6px; }
+.r-wall__hd {
+  display: flex; align-items: center; gap: 8px; padding: 0 12px 10px;
+}
+.r-wall__hd h2 { margin: 0; font-size: 17px; font-weight: 800; color: #e2125b; }
+.r-wall__cd { display: flex; align-items: center; gap: 2px; }
+.r-wall__cd i {
+  font-style: normal; background: #e2125b; color: #fff; font-size: 11px; font-weight: 700;
+  padding: 2px 4px; border-radius: 3px; font-family: var(--font-price, sans-serif);
+}
+.r-wall__cd i:nth-child(2)::before, .r-wall__cd i:nth-child(3)::before { content: ""; }
+.r-wall__more { margin-left: auto; color: #e2125b; display: flex; align-items: center; }
+.r-wall__more svg { width: 16px; height: 16px; }
+
+.r-wall__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 8px; }
+.r-wall__card {
+  position: relative; display: block; background: #fff; border-radius: 8px;
+  padding: 8px 8px 10px; text-decoration: none; overflow: hidden;
+}
+.r-wall__badge {
+  position: absolute; left: 0; top: 0; z-index: 2;
+  background: #e2125b; color: #fff; font-size: 9px; line-height: 1.2;
+  padding: 3px 6px; border-radius: 8px 0 8px 0;
+}
+.r-wall__img { position: relative; }
+.r-wall__img img { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #fafafa; border-radius: 6px; display: block; }
+.r-wall__play {
+  position: absolute; left: 50%; top: 50%; width: 34px; height: 34px; margin: -17px 0 0 -17px;
+  border-radius: 50%; background: rgba(0,0,0,.45);
+}
+.r-wall__play::after {
+  content: ""; position: absolute; left: 13px; top: 10px;
+  border-left: 12px solid #fff; border-top: 7px solid transparent; border-bottom: 7px solid transparent;
+}
+.r-wall__tag {
+  position: absolute; left: 6px; bottom: 6px;
+  background: #e2125b; color: #fff; font-size: 9px; padding: 1px 5px; border-radius: 3px;
+}
+.r-wall__promo {
+  display: block; margin-top: 6px; background: #fdeef3; color: #e2125b;
+  font-size: 10px; padding: 2px 6px; border-radius: 3px;
+}
+.r-wall__card b {
+  display: block; margin-top: 5px; font-size: 12px; line-height: 1.35; color: #333;
+  font-weight: 400; height: 32px; overflow: hidden;
+}
+.r-wall__price { display: flex; align-items: baseline; gap: 4px; margin-top: 4px; font-size: 10px; color: #e2125b; }
+.r-wall__price em { font-style: normal; font-size: 18px; font-weight: 800; font-family: var(--font-price, sans-serif); }
+.r-wall__price s { font-size: 10px; color: #b3b3b3; }
