@@ -497,6 +497,32 @@ function checkoutPage() {
       </div>
     </aside>
   </div>
+<script>
+(function(){
+  // 与 /cart 同一份 localStorage，保证「购物车金额 = 结账金额」
+  function deskLocalCart() {
+    var list = [];
+    try { list = JSON.parse(localStorage.getItem('momo_cart') || '[]'); } catch (e) {}
+    if (!list.length) return null;
+    var total = list.reduce(function (a, b) { return a + Number(b.price || 0) * Number(b.qty || 1); }, 0);
+    return { total: total, amount: '$' + total.toLocaleString('en-US'), items: list };
+  }
+  function paint() {
+    var c = deskLocalCart();
+    if (!c) return;
+    var tot = document.getElementById('bp-total');
+    if (tot) { tot.textContent = c.amount; tot.setAttribute('data-amount', String(c.total)); }
+    var sub = document.getElementById('sum-subtotal');
+    if (sub) sub.textContent = c.amount;
+    var cnt = document.getElementById('sum-count');
+    if (cnt) cnt.textContent = c.items.reduce(function (a, b) { return a + Number(b.qty || 1); }, 0) + ' 件';
+  }
+  paint();
+  document.addEventListener('bp:cart-applied', paint);
+  setTimeout(paint, 1200);
+  setTimeout(paint, 3000);
+})();
+</script>
 </div>`;
   return page({ title: '結帳 - momo購物網', head, body });
 }

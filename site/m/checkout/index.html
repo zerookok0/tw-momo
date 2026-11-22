@@ -344,15 +344,57 @@
     if (cc) cc.textContent = (c.items || []).reduce(function(a, b){ return a + (b.qty || 1); }, 0);
   }
   applyCart.__ready = true;
-  fetch('/api/cart', { credentials: 'same-origin' })
-    .then(function(r){ return r.json(); })
-    .then(applyCart)
-    .catch(function(){});
 
-  // 订单摘要（connector 会在拿到数据后覆盖 #bp-total）
-  document.addEventListener('bp:cart-applied', function(e){
-    applyCart(e.detail || {});
+  // 优先用本地购物车（与 /m/cart 同一份 localStorage），保证「购物车看到的金额 = 结账金额」
+  function fromLocal() {
+    var list = [];
+    try { list = JSON.parse(localStorage.getItem('momo_cart') || '[]'); } catch (e) {}
+    if (!list.length) return null;
+    var total = list.reduce(function (a, b) { return a + Number(b.price || 0) * Number(b.qty || 1); }, 0);
+    return {
+      items: list.map(function (i) { return { name: i.name, price: i.price, qty: i.qty || 1, img: i.img }; }),
+      total: total,
+      total_amount: '$' + total.toLocaleString('en-US'),
+      order_number: '',
+    };
+  }
+
+  var localCart = fromLocal();
+  if (localCart) {
+    applyCart(localCart);
+    fetch('/api/cart', { credentials: 'same-origin' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        var no = document.getElementById('orderNoHint');
+        if (no && j) no.textContent = j.order_number || '—';
+      })
+      .catch(function () {});
+  } else {
+    fetch('/api/cart', { credentials: 'same-origin' })
+      .then(function (r) { return r.json(); })
+      .then(applyCart)
+      .catch(function () {});
+  }
+
+  // 订单摘要：connector 会用 /api/cart 覆盖 #bp-total，
+  // 只要有本地购物车，就以本地为准（保证与 /m/cart 金额一致）
+  function reassertLocal(extra) {
+    if (!localCart) return;
+    var merged = Object.assign({}, localCart);
+    if (extra && extra.order_number) merged.order_number = extra.order_number;
+    applyCart(merged);
+  }
+  document.addEventListener('bp:cart-applied', function (e) {
+    var d = e.detail || {};
+    if (localCart) {
+      reassertLocal(d);
+      return;
+    }
+    applyCart(d);
   });
+  // connector 的 fetch 可能在事件之后才回来，补两次兜底
+  setTimeout(function () { reassertLocal(); }, 1200);
+  setTimeout(function () { reassertLocal(); }, 3000);
 
   // 表单提交交给 connector；这里只做兜底提示
   document.getElementById('bp-form').addEventListener('submit', function(ev){

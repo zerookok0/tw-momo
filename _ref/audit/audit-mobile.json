@@ -1,0 +1,144 @@
+{
+ "mode": "mobile",
+ "base": "https://tw-momo.pages.dev",
+ "at": "2026-11-22T20:26:31.622Z",
+ "pages": [
+  {
+   "page": "/m/",
+   "url": "https://tw-momo.pages.dev/m/",
+   "status": "ok",
+   "docW": 402,
+   "vw": 402,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "✕",
+    "✕"
+   ],
+   "overflowX": false,
+   "overflowBy": 0,
+   "offside": []
+  },
+  {
+   "page": "/m/category",
+   "url": "https://tw-momo.pages.dev/m/category",
+   "status": "ok",
+   "docW": 402,
+   "vw": 402,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [],
+   "overflowX": false,
+   "overflowBy": 0,
+   "offside": []
+  },
+  {
+   "page": "/m/product/1341656",
+   "url": "https://tw-momo.pages.dev/m/product/1341656",
+   "status": "ok",
+   "docW": 402,
+   "vw": 402,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "−",
+    "＋",
+    "加入購物車",
+    "立即購買"
+   ],
+   "overflowX": false,
+   "overflowBy": 0,
+   "offside": []
+  },
+  {
+   "page": "/m/cart",
+   "url": "https://tw-momo.pages.dev/m/cart",
+   "status": "ok",
+   "docW": 402,
+   "vw": 402,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "−",
+    "+",
+    "−",
+    "+",
+    "−",
+    "+",
+    "前往結帳"
+   ],
+   "overflowX": false,
+   "overflowBy": 0,
+   "offside": []
+  },
+  {
+   "page": "/m/checkout",
+   "url": "https://tw-momo.pages.dev/m/checkout",
+   "status": "ok",
+   "docW": 402,
+   "vw": 402,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [
+    "訪客結帳（免登入）",
+    "會員登入"
+   ],
+   "overflowX": false,
+   "overflowBy": 0,
+   "offside": []
+  },
+  {
+   "page": "/m/order/ORD-TEST",
+   "url": "https://tw-momo.pages.dev/m/order/ORD-TEST",
+   "status": "ok",
+   "docW": 402,
+   "vw": 402,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [],
+   "overflowX": false,
+   "overflowBy": 0,
+   "offside": []
+  },
+  {
+   "page": "/m/info/wishlist",
+   "url": "https://tw-momo.pages.dev/m/info/wishlist",
+   "status": "ok",
+   "docW": 402,
+   "vw": 402,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [],
+   "overflowX": false,
+   "overflowBy": 0,
+   "offside": []
+  },
+  {
+   "page": "/m/info/member-center",
+   "url": "https://tw-momo.pages.dev/m/info/member-center",
+   "status": "ok",
+   "docW": 402,
+   "vw": 402,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [],
+   "overflowX": false,
+   "overflowBy": 0,
+   "offside": []
+  },
+  {
+   "page": "/m/info/faq",
+   "url": "https://tw-momo.pages.dev/m/info/faq",
+   "status": "ok",
+   "docW": 402,
+   "vw": 402,
+   "badLinks": [],
+   "brokenImgs": [],
+   "deadButtons": [],
+   "overflowX": false,
+   "overflowBy": 0,
+   "offside": []
+  }
+ ],
+ "issues": []
+}
