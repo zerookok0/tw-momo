@@ -245,14 +245,24 @@ export async function onRequest(context) {
     // ───────── 手机 UA 访问桌面首页 → 302 到 /m/ ─────────
     // 真站点 m.momoshop.com.tw 就是这么做的；否则手机上看到的是 1260px 宽的
     // 桌面版，只会露出左边一条，右边全是空白。
-    if (method === 'GET' && (p === '/' || p === '/index.html')) {
+    if (method === 'GET') {
       const ua = request.headers.get('User-Agent') || '';
       const isMobile = /iPhone|iPod|Android.*Mobile|Windows Phone|BlackBerry|Opera Mini|IEMobile/i.test(ua);
       if (isMobile) {
-        return new Response(null, {
-          status: 302,
-          headers: { Location: '/m/', 'Cache-Control': 'no-store', Vary: 'User-Agent' },
-        });
+        // 手机访问桌面路径 → 跳到对应的手机版，避免看到 1260px 桌面布局
+        let to = '';
+        if (p === '/' || p === '/index.html') to = '/m/';
+        else if (p === '/category' || p === '/category/') to = '/m/category' + url.search;
+        else if (p === '/cart' || p === '/cart/') to = '/m/cart';
+        else if (p === '/checkout' || p === '/checkout/') to = '/m/checkout';
+        else if (/^\/product\/[^/]+\/?$/.test(p)) to = '/m' + p;
+        else if (p === '/goods/GoodsDetail.jsp') to = '/m/goods.momo' + url.search;
+        if (to) {
+          return new Response(null, {
+            status: 302,
+            headers: { Location: to, 'Cache-Control': 'no-store', Vary: 'User-Agent' },
+          });
+        }
       }
     }
 

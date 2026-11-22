@@ -84,6 +84,8 @@ fs.writeFileSync(
 const routes = {
   version: 1,
   include: [
+    // 首页也要走 Function：手机 UA 需要 302 到 /m/
+    '/', '/index.html',
     '/checkout', '/checkout/',
     '/cart', '/cart/',
     '/m/checkout', '/m/checkout/',

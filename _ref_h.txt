@@ -1,0 +1,13 @@
+HTTP/1.1 302 Found
+Date: Sun, 22 Nov 2026 19:24:48 GMT
+Content-Length: 0
+Connection: keep-alive
+Location: /m/checkout
+Cache-Control: no-store
+Vary: User-Agent
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=MHcxju1bVJxhw8AWIK%2FZVhp%2FNmUllwxrHE5UV7Bs5YNGJ9e7WJh9hZ4uk2PVWwrC3dReBZiTq6DiiStidxb%2FX7vPO9owrtiYavoQCCkAdzUXzwQISrJB4OmW%2F9nBjosFMaEW1Q%2FmWauBXT0drmDXpQ%3D%3D"}]}
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Server: cloudflare
+CF-RAY: a5ea510169841091-HKG
+alt-svc: h3=":443"; ma=86400
+
