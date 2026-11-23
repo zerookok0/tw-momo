@@ -3,34 +3,34 @@
  "url": "https://tw-momo.pages.dev/category",
  "vw": 1440,
  "vh": 900,
- "docH": 4114,
+ "docH": 3918,
  "prices": [
   "33,179",
-  "4,735",
-  "4,446",
-  "2,704",
-  "2,486",
-  "2,061",
-  "1,636",
-  "1,623",
-  "1,264",
+  "4,659",
+  "4,445",
+  "2,734",
+  "2,487",
+  "2,067",
+  "1,643",
+  "1,632",
+  "1,271",
   "1,210",
-  "1,026",
-  "984",
-  "967",
-  "912",
-  "867",
-  "782",
-  "736",
-  "655",
-  "607",
+  "1,027",
+  "983",
+  "966",
+  "915",
+  "873",
+  "783",
+  "735",
+  "657",
+  "611",
   "557",
-  "444",
+  "447",
   "442",
   "410",
+  "391",
   "390",
-  "389",
-  "384",
+  "382",
   "238",
   "224",
   "$2,699",
@@ -248,35 +248,35 @@
    "href": "/category"
   },
   {
-   "t": "其他4,735",
+   "t": "其他4,659",
    "href": "/category?cat=%E5%85%B6%E4%BB%96"
   },
   {
-   "t": "女時尚4,446",
+   "t": "女時尚4,445",
    "href": "/category?cat=%E5%A5%B3%E6%99%82%E5%B0%9A"
   },
   {
-   "t": "食品/飲料2,704",
+   "t": "食品/飲料2,734",
    "href": "/category?cat=%E9%A3%9F%E5%93%81%2F%E9%A3%B2%E6%96%99"
   },
   {
-   "t": "家電2,486",
+   "t": "家電2,487",
    "href": "/category?cat=%E5%AE%B6%E9%9B%BB"
   },
   {
-   "t": "保健/醫療2,061",
+   "t": "保健/醫療2,067",
    "href": "/category?cat=%E4%BF%9D%E5%81%A5%2F%E9%86%AB%E7%99%82"
   },
   {
-   "t": "餐廚1,636",
+   "t": "餐廚1,643",
    "href": "/category?cat=%E9%A4%90%E5%BB%9A"
   },
   {
-   "t": "3C週邊1,623",
+   "t": "3C週邊1,632",
    "href": "/category?cat=3C%E9%80%B1%E9%82%8A"
   },
   {
-   "t": "家具收納1,264",
+   "t": "家具收納1,271",
    "href": "/category?cat=%E5%AE%B6%E5%85%B7%E6%94%B6%E7%B4%8D"
   },
   {
@@ -284,39 +284,39 @@
    "href": "/category?cat=%E9%9B%BB%E8%85%A6%2F%E7%B5%84%E4%BB%B6"
   },
   {
-   "t": "母嬰/玩具1,026",
+   "t": "母嬰/玩具1,027",
    "href": "/category?cat=%E6%AF%8D%E5%AC%B0%2F%E7%8E%A9%E5%85%B7"
   },
   {
-   "t": "手機/相機984",
+   "t": "手機/相機983",
    "href": "/category?cat=%E6%89%8B%E6%A9%9F%2F%E7%9B%B8%E6%A9%9F"
   },
   {
-   "t": "精品/飾品967",
+   "t": "精品/飾品966",
    "href": "/category?cat=%E7%B2%BE%E5%93%81%2F%E9%A3%BE%E5%93%81"
   },
   {
-   "t": "傢飾寢具912",
+   "t": "傢飾寢具915",
    "href": "/category?cat=%E5%82%A2%E9%A3%BE%E5%AF%A2%E5%85%B7"
   },
   {
-   "t": "運動/按摩867",
+   "t": "運動/按摩873",
    "href": "/category?cat=%E9%81%8B%E5%8B%95%2F%E6%8C%89%E6%91%A9"
   },
   {
-   "t": "個人清潔782",
+   "t": "個人清潔783",
    "href": "/category?cat=%E5%80%8B%E4%BA%BA%E6%B8%85%E6%BD%94"
   },
   {
-   "t": "戶外736",
+   "t": "戶外735",
    "href": "/category?cat=%E6%88%B6%E5%A4%96"
   },
   {
-   "t": "圖書655",
+   "t": "圖書657",
    "href": "/category?cat=%E5%9C%96%E6%9B%B8"
   },
   {
-   "t": "生鮮607",
+   "t": "生鮮611",
    "href": "/category?cat=%E7%94%9F%E9%AE%AE"
   },
   {
@@ -324,7 +324,7 @@
    "href": "/category?cat=%E8%97%9D%E8%A1%93%E5%AE%97%E6%95%99"
   },
   {
-   "t": "彩妝保養444",
+   "t": "彩妝保養447",
    "href": "/category?cat=%E5%BD%A9%E5%A6%9D%E4%BF%9D%E9%A4%8A"
   },
   {
@@ -336,15 +336,15 @@
    "href": "/category?cat=%E4%BF%AE%E7%B9%95%E5%9C%92%E8%97%9D"
   },
   {
-   "t": "車類390",
+   "t": "車類391",
    "href": "/category?cat=%E8%BB%8A%E9%A1%9E"
   },
   {
-   "t": "寵物389",
+   "t": "寵物390",
    "href": "/category?cat=%E5%AF%B5%E7%89%A9"
   },
   {
-   "t": "文具樂器384",
+   "t": "文具樂器382",
    "href": "/category?cat=%E6%96%87%E5%85%B7%E6%A8%82%E5%99%A8"
   },
   {
@@ -354,6 +354,26 @@
   {
    "t": "男時尚224",
    "href": "/category?cat=%E7%94%B7%E6%99%82%E5%B0%9A"
+  },
+  {
+   "t": "館長推薦",
+   "href": "#"
+  },
+  {
+   "t": "月銷量",
+   "href": "#"
+  },
+  {
+   "t": "新上市",
+   "href": "#"
+  },
+  {
+   "t": "價格",
+   "href": "#"
+  },
+  {
+   "t": "評價",
+   "href": "#"
   },
   {
    "t": "5折 東稻MIT獨立筒床 $1,350$",
@@ -416,7 +436,7 @@
    "href": "/product/1134183"
   },
   {
-   "t": "5折 禎祥食品 A級毛豆 $287$57",
+   "t": "5折 【禎祥食品】外銷日本A級鹽味毛豆(",
    "href": "/product/1184951"
   },
   {
@@ -448,7 +468,7 @@
    "href": "/product/1341656"
   },
   {
-   "t": "5折 【桂格】養氣人蔘雞精禮盒68ml*",
+   "t": "5折 【QUAKER 桂格】養氣人蔘雞精",
    "href": "/product/1407982"
   },
   {
@@ -666,26 +686,6 @@
   {
    "t": "人才招募",
    "href": "https://www.104.com.tw/company/ckkyqvc"
-  },
-  {
-   "t": "招商專區",
-   "href": "/info/supplier"
-  },
-  {
-   "t": "電腦版",
-   "href": "/"
-  },
-  {
-   "t": "手機版",
-   "href": "/m"
-  },
-  {
-   "t": "Facebook",
-   "href": "https://www.facebook.com/momofans"
-  },
-  {
-   "t": "加入LINE",
-   "href": "https://line.me/ti/p/@momoshop"
   }
  ],
  "imgs": [
@@ -716,6 +716,16 @@
   },
   {
    "src": "https://img2.momoshop.com.tw/1767021601/goodsimg/0000/355/023/355023_OR.jpg",
+   "w": 292,
+   "h": 292
+  },
+  {
+   "src": "https://i3.momoshop.com.tw/1692285740/goodsimg/0001/025/920/1025920_L.webp",
+   "w": 292,
+   "h": 292
+  },
+  {
+   "src": "https://img4.momoshop.com.tw/goodsimg/0001/341/656/1341656_L.jpg?t=1589380098",
    "w": 292,
    "h": 292
   },
@@ -771,243 +781,243 @@
   },
   {
    "src": "https://img2.momoshop.com.tw/1767021601/goodsimg/0000/355/023/355023_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i1.momoshop.com.tw/1692549623/goodsimg/0000/434/548/434548_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img1.momoshop.com.tw/1759887545/goodsimg/0000/606/292/606292_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img2.momoshop.com.tw/goodsimg/0000/780/063/780063_L.jpg?t=1608050162",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i4.momoshop.com.tw/1762309138/goodsimg/0000/983/653/983653_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i2.momoshop.com.tw/1693166147/goodsimg/0000/990/152/990152_OL.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i1.momoshop.com.tw/1692176949/goodsimg/0001/001/748/1001748_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i2.momoshop.com.tw/1754697963/goodsimg/0001/004/620/1004620_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i2.momoshop.com.tw/1692204023/goodsimg/0001/010/414/1010414_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img1.momoshop.com.tw/goodsimg/0001/014/885/1014885_L.jpg?t=1500636601",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i1.momoshop.com.tw/1692214873/goodsimg/0001/020/754/1020754_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i3.momoshop.com.tw/1692285740/goodsimg/0001/025/920/1025920_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img1.momoshop.com.tw/1744960717/goodsimg/0001/031/652/1031652_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i1.momoshop.com.tw/1692300349/goodsimg/0001/038/984/1038984_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i2.momoshop.com.tw/1709615139/goodsimg/0001/134/183/1134183_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img2.momoshop.com.tw/1692571617/goodsimg/0001/184/951/1184951_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i3.momoshop.com.tw/1692571548/goodsimg/0001/194/966/1194966_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img1.momoshop.com.tw/goodsimg/0001/214/887/1214887_L.jpg?t=988028533262",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i1.momoshop.com.tw/1719887270/goodsimg/0001/233/208/1233208_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img1.momoshop.com.tw/1672047364/goodsimg/0001/237/196/1237196_O.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i2.momoshop.com.tw/1692571578/goodsimg/0001/262/702/1262702_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img1.momoshop.com.tw/goodsimg/0001/287/585/1287585_L.jpg?t=513053453286",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img4.momoshop.com.tw/goodsimg/0001/341/656/1341656_L.jpg?t=1589380098",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i3.momoshop.com.tw/1692571793/goodsimg/0001/407/982/1407982_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i2.momoshop.com.tw/1714021725/goodsimg/0001/464/755/1464755_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img4.momoshop.com.tw/1783953302/goodsimg/0001/502/346/1502346_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i1.momoshop.com.tw/1749099653/goodsimg/0001/512/730/1512730_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i3.momoshop.com.tw/1692571907/goodsimg/0001/519/445/1519445_OL.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img2.momoshop.com.tw/1692571978/goodsimg/0001/554/209/1554209_O.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img4.momoshop.com.tw/goodsimg/0001/606/344/1606344_L.jpg?t=1573047959",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i4.momoshop.com.tw/1764354062/goodsimg/0001/607/993/1607993_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i3.momoshop.com.tw/1770759002/goodsimg/0001/652/074/1652074_OL.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img1.momoshop.com.tw/goodsimg/0001/695/388/1695388_L.jpg?t=641548132767",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img2.momoshop.com.tw/goodsimg/0001/735/284/1735284_L.jpg?t=1588065152",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i2.momoshop.com.tw/1747307299/goodsimg/0001/761/708/1761708_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img4.momoshop.com.tw/1739509319/goodsimg/0001/792/617/1792617_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img1.momoshop.com.tw/goodsimg/0001/795/779/1795779_L.jpg?t=978434584422",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i2.momoshop.com.tw/1714021396/goodsimg/0001/840/318/1840318_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i2.momoshop.com.tw/1764931261/goodsimg/0001/886/561/1886561_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i4.momoshop.com.tw/1692572016/goodsimg/0001/898/090/1898090_OR.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img1.momoshop.com.tw/1625810575/goodsimg/0001/901/998/1901998_L.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i1.momoshop.com.tw/1761957242/goodsimg/0001/905/940/1905940_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i3.momoshop.com.tw/1692572096/goodsimg/0001/908/115/1908115_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img1.momoshop.com.tw/goodsimg/0001/915/141/1915141_L.jpg?t=1571314789",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i1.momoshop.com.tw/1721797562/goodsimg/0001/917/422/1917422_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img4.momoshop.com.tw/1673953564/goodsimg/0001/935/038/1935038_O.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://i3.momoshop.com.tw/1769097602/goodsimg/0001/935/045/1935045_L.webp",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://img3.momoshop.com.tw/1617989366/goodsimg/0001/955/643/1955643_L.jpg",
-   "w": 180,
-   "h": 180
+   "w": 141,
+   "h": 141
   },
   {
    "src": "https://tw-momo.pages.dev/assets/img2.momoshop.com.tw/ecm/img/online/10/002/00/000/bt_0_203_01/bt_0_203_01_P1_1_e2__30343c36.jpg",
@@ -1202,7 +1212,7 @@
    "x": 113,
    "y": 181,
    "w": 1200,
-   "h": 3330,
+   "h": 3134,
    "t": "首頁/商品分類 館長推薦 ☆雙11最優惠看這週☆ mo幣加碼專區 找價一目了然 品牌(A-G) 品牌(H-O) 品牌(P"
   },
   {
@@ -1229,7 +1239,7 @@
    "x": 113,
    "y": 367,
    "w": 1200,
-   "h": 332,
+   "h": 348,
    "t": "‹ ›"
   },
   {
@@ -1238,6 +1248,42 @@
    "x": 173,
    "y": 387,
    "w": 1080,
+   "h": 292,
+   "t": ""
+  },
+  {
+   "tag": "DIV",
+   "cls": "catpage-banner__track",
+   "x": -601,
+   "y": 387,
+   "w": 876,
+   "h": 292,
+   "t": ""
+  },
+  {
+   "tag": "DIV",
+   "cls": "catpage-banner__slide",
+   "x": -601,
+   "y": 387,
+   "w": 876,
+   "h": 292,
+   "t": ""
+  },
+  {
+   "tag": "IMG",
+   "cls": "",
+   "x": -309,
+   "y": 387,
+   "w": 292,
+   "h": 292,
+   "t": ""
+  },
+  {
+   "tag": "DIV",
+   "cls": "catpage-banner__slide",
+   "x": 275,
+   "y": 387,
+   "w": 876,
    "h": 292,
    "t": ""
   },
@@ -1251,10 +1297,28 @@
    "t": ""
   },
   {
+   "tag": "DIV",
+   "cls": "catpage-banner__slide",
+   "x": 1151,
+   "y": 387,
+   "w": 876,
+   "h": 292,
+   "t": ""
+  },
+  {
+   "tag": "IMG",
+   "cls": "",
+   "x": 1443,
+   "y": 387,
+   "w": 292,
+   "h": 292,
+   "t": ""
+  },
+  {
    "tag": "SECTION",
    "cls": "catpage-kw",
    "x": 113,
-   "y": 713,
+   "y": 729,
    "w": 1200,
    "h": 203,
    "t": "音訊關鍵字 耳塞式 耳罩式 真無線 藍牙喇叭 運動耳機 降噪耳機 電競耳機 有線耳機 麥克風 收音"
@@ -1263,7 +1327,7 @@
    "tag": "H2",
    "cls": "",
    "x": 133,
-   "y": 729,
+   "y": 745,
    "w": 1160,
    "h": 33,
    "t": "音訊關鍵字"
@@ -1272,7 +1336,7 @@
    "tag": "DIV",
    "cls": "catpage-kw__row",
    "x": 133,
-   "y": 776,
+   "y": 792,
    "w": 1160,
    "h": 120,
    "t": "耳塞式 耳罩式 真無線 藍牙喇叭 運動耳機 降噪耳機 電競耳機 有線耳機 麥克風 收音"
@@ -1281,16 +1345,16 @@
    "tag": "DIV",
    "cls": "card",
    "x": 113,
-   "y": 930,
+   "y": 946,
    "w": 1200,
-   "h": 2581,
+   "h": 2369,
    "t": "全部商品共 33,179 件 .cat-bar{display:flex;flex-wrap:wrap;gap:8px;"
   },
   {
    "tag": "DIV",
    "cls": "card__hd",
    "x": 113,
-   "y": 930,
+   "y": 946,
    "w": 1200,
    "h": 57,
    "t": "全部商品共 33,179 件"
@@ -1299,34 +1363,115 @@
    "tag": "DIV",
    "cls": "card__bd",
    "x": 113,
-   "y": 987,
+   "y": 1003,
    "w": 1200,
-   "h": 2524,
+   "h": 2312,
    "t": ".cat-bar{display:flex;flex-wrap:wrap;gap:8px;padding:0 0 16p"
   },
   {
    "tag": "DIV",
    "cls": "cat-bar",
    "x": 133,
-   "y": 1007,
+   "y": 1023,
    "w": 1160,
    "h": 135,
-   "t": "全部33,179其他4,735女時尚4,446食品/飲料2,704家電2,486保健/醫療2,061餐廚1,6363C週"
+   "t": "全部33,179其他4,659女時尚4,445食品/飲料2,734家電2,487保健/醫療2,067餐廚1,6433C週"
+  },
+  {
+   "tag": "DIV",
+   "cls": "catflt",
+   "x": 133,
+   "y": 1176,
+   "w": 1160,
+   "h": 2055,
+   "t": "品牌 李錦記 (2) 泰山 (2) 施巴 (2) 勤逸軒 (1) BH (1) Tiamo (1) 開運陶源 (1) 青"
+  },
+  {
+   "tag": "ASIDE",
+   "cls": "catflt__side",
+   "x": 133,
+   "y": 1176,
+   "w": 216,
+   "h": 595,
+   "t": "品牌 李錦記 (2) 泰山 (2) 施巴 (2) 勤逸軒 (1) BH (1) Tiamo (1) 開運陶源 (1) 青"
+  },
+  {
+   "tag": "DIV",
+   "cls": "catflt__grp",
+   "x": 134,
+   "y": 1177,
+   "w": 214,
+   "h": 285,
+   "t": "品牌 李錦記 (2) 泰山 (2) 施巴 (2) 勤逸軒 (1) BH (1) Tiamo (1) 開運陶源 (1) 青"
+  },
+  {
+   "tag": "DIV",
+   "cls": "catflt__grp",
+   "x": 134,
+   "y": 1462,
+   "w": 214,
+   "h": 207,
+   "t": "類型 有線 (16) 無線 (12) 藍芽 (10) 多合一 (8) 其他 (7)選更多"
+  },
+  {
+   "tag": "DIV",
+   "cls": "catflt__grp",
+   "x": 134,
+   "y": 1668,
+   "w": 214,
+   "h": 102,
+   "t": "其他選項功能材質容量尺寸顏色款式"
+  },
+  {
+   "tag": "DIV",
+   "cls": "catflt__main",
+   "x": 365,
+   "y": 1176,
+   "w": 928,
+   "h": 2055,
+   "t": "館長推薦月銷量新上市價格評價確認momo速配廠商出貨跨境現折活動折價券快速到貨展開 ⌄ 5折 東稻MIT獨立筒床 $1,"
+  },
+  {
+   "tag": "DIV",
+   "cls": "catflt__sort",
+   "x": 365,
+   "y": 1176,
+   "w": 928,
+   "h": 85,
+   "t": "館長推薦月銷量新上市價格評價確認momo速配廠商出貨跨境現折活動折價券快速到貨展開 ⌄"
+  },
+  {
+   "tag": "DIV",
+   "cls": "catflt__sortl",
+   "x": 380,
+   "y": 1187,
+   "w": 898,
+   "h": 30,
+   "t": "館長推薦月銷量新上市價格評價"
+  },
+  {
+   "tag": "DIV",
+   "cls": "catflt__chips",
+   "x": 380,
+   "y": 1217,
+   "w": 898,
+   "h": 33,
+   "t": "確認momo速配廠商出貨跨境現折活動折價券快速到貨展開 ⌄"
   },
   {
    "tag": "DIV",
    "cls": "cat-grid",
-   "x": 133,
-   "y": 1160,
-   "w": 1160,
-   "h": 2267,
+   "x": 365,
+   "y": 1273,
+   "w": 928,
+   "h": 1958,
    "t": "5折 東稻MIT獨立筒床 $1,350$2,699 5折 【勤逸軒】富士龍感熱傳真紙A4 210mmx30m外感 足米("
   },
   {
    "tag": "DIV",
    "cls": "pager",
    "x": 133,
-   "y": 3427,
+   "y": 3231,
    "w": 1160,
    "h": 64,
    "t": "123…692下一頁 ›"
@@ -1335,7 +1480,7 @@
    "tag": "FOOTER",
    "cls": "footer",
    "x": 0,
-   "y": 3544,
+   "y": 3348,
    "w": 1425,
    "h": 534,
    "t": "防詐騙提醒：momo絕不會以電話或簡訊通知訂單/分期出錯、或變更付款方式，更不會要您前往ATM進行任何操作！不應在mom"
@@ -1344,7 +1489,7 @@
    "tag": "DIV",
    "cls": "bg-[#09355D]",
    "x": 0,
-   "y": 3544,
+   "y": 3348,
    "w": 1425,
    "h": 410,
    "t": "防詐騙提醒：momo絕不會以電話或簡訊通知訂單/分期出錯、或變更付款方式，更不會要您前往ATM進行任何操作！不應在mom"
@@ -1353,7 +1498,7 @@
    "tag": "DIV",
    "cls": "relative mx-auto w-content pt-[50px]",
    "x": 103,
-   "y": 3544,
+   "y": 3348,
    "w": 1220,
    "h": 410,
    "t": "防詐騙提醒：momo絕不會以電話或簡訊通知訂單/分期出錯、或變更付款方式，更不會要您前往ATM進行任何操作！不應在mom"
@@ -1362,7 +1507,7 @@
    "tag": "DIV",
    "cls": "w-desktop mx-auto flex",
    "x": 103,
-   "y": 3594,
+   "y": 3398,
    "w": 1220,
    "h": 360,
    "t": "防詐騙提醒：momo絕不會以電話或簡訊通知訂單/分期出錯、或變更付款方式，更不會要您前往ATM進行任何操作！不應在mom"
@@ -1371,7 +1516,7 @@
    "tag": "DIV",
    "cls": "flex flex-wrap content-start items-start pb-[50px] pl-[26px]",
    "x": 103,
-   "y": 3594,
+   "y": 3398,
    "w": 1220,
    "h": 360,
    "t": "防詐騙提醒：momo絕不會以電話或簡訊通知訂單/分期出錯、或變更付款方式，更不會要您前往ATM進行任何操作！不應在mom"
@@ -1380,7 +1525,7 @@
    "tag": "DIV",
    "cls": "mb-2.5 w-full rounded-lg border-[3px] border-[#53D6DF] p-3.5 text-left text-ec-b",
    "x": 129,
-   "y": 3594,
+   "y": 3398,
    "w": 1194,
    "h": 74,
    "t": "防詐騙提醒：momo絕不會以電話或簡訊通知訂單/分期出錯、或變更付款方式，更不會要您前往ATM進行任何操作！不應在mom"
@@ -1389,7 +1534,7 @@
    "tag": "DIV",
    "cls": "mx-auto w-content",
    "x": 103,
-   "y": 3954,
+   "y": 3758,
    "w": 1220,
    "h": 124,
    "t": "關於我們人才招募招商專區電腦版手機版Facebook加入LINEInstagram富邦媒體科技股份有限公司 統編：273"
@@ -1398,7 +1543,7 @@
    "tag": "UL",
    "cls": "flex w-full justify-center py-5 text-[13px]",
    "x": 103,
-   "y": 3954,
+   "y": 3758,
    "w": 1220,
    "h": 60,
    "t": "關於我們人才招募招商專區電腦版手機版Facebook加入LINEInstagram"
@@ -1407,7 +1552,7 @@
    "tag": "DIV",
    "cls": "mb-9 pt-1 text-center text-[13px] leading-5 text-neutral-400",
    "x": 103,
-   "y": 4014,
+   "y": 3818,
    "w": 1220,
    "h": 64,
    "t": "富邦媒體科技股份有限公司 統編：27365925 台北市 114 內湖區洲子街 96 號 4 樓 富邦momo通過ISO"
@@ -1416,11 +1561,11 @@
    "tag": "P",
    "cls": "",
    "x": 103,
-   "y": 4018,
+   "y": 3822,
    "w": 1220,
    "h": 40,
    "t": "富邦媒體科技股份有限公司 統編：27365925 台北市 114 內湖區洲子街 96 號 4 樓 富邦momo通過ISO"
   }
  ],
- "bodyText": "回首頁momo富立保險APP下載點點賺書店登入註冊會員中心查訂單追蹤清單折價券購物車 (0)登記活動搜尋猜你想搜 >皮卡丘不鏽鋼炒鍋小米行動電源 首頁/商品分類 館長推薦 ☆雙11最優惠看這週☆ mo幣加碼專區 找價一目了然 品牌(A-G) 品牌(H-O) 品牌(P-Z) 專業電競★玩家體驗 關鍵字 ‹ › 音訊關鍵字 耳塞式 耳罩式 真無線 藍牙喇叭 運動耳機 降噪耳機 電競耳機 有線耳機 麥克風 收音 全部商品共 33,179 件 .cat-bar{display:flex;flex-wrap:wrap;gap:8px;padding:0 0 16px;margin:0 0 18px;border-bottom:1px solid #f0f0f0} .cat-tab{display:inline-flex;align-items:baseline;gap:6px;height:34px;padding:0 14px;border-radius:17px;background:#f7f7f7;color:#4d4d4d;font-size:13px;line-height:34px;text-decoration:none;white-space:nowrap;transition:background .15s,color .15s} .cat-tab span{font-size:11px;color:#b3b3b3} .cat-tab:hover{background:#fdf0f6;color:#d62872} .cat-tab.on{background:#d62872;color:#fff;font-weight:700} .cat-tab.on span{color:rgba(255,255,255,.75)} @media(max-width:600px){.cat-bar{flex-wrap:nowrap;overflow-x:auto;padding-bottom:12px}.cat-bar::-webkit-scrollbar{display:none}} 全部33,179其他4,735女時尚4,446食品/飲料2,704家電2,486保健/醫療2,061餐廚1,6363C週邊1,623家具收納1,264電腦/組件1,210母嬰/玩具1,026手機/相機984精品/飾品967傢飾寢具912運動/按摩867個人清潔782戶外736圖書655生鮮607藝術宗教557彩妝保養444日用/紙品442修繕園藝410車類390寵物389文具樂器384旅遊/票券238男時尚224 5折 東稻MIT獨立筒床 $1,350$2,699 5折 【勤逸軒】富士龍感熱傳真紙A4 210mmx30m外感 足米(24捲/台灣製造) $1,115$2,230 5折 精緻手工獨立筒床 $1,593$3,186 5折 【BH】H919C SB3 磁控飛輪健身車 $15,000$29,999 5折 【李錦記】舊庄特級蠔油(510g) $53$105 5折 【Tiamo】515 方型速拆義式摩卡壺-三杯份(HA2275) $1,800$3,600 5折 【Bull head 牛頭牌】5號麻辣沙茶醬250g $68$135 5折 【泰山】八寶粥375g(12入禮盒) $192$384 5折 【Bull head 牛頭牌】2號沙茶醬(737g) $147$293 5折 【開運陶源】小麒麟踩八卦一對 $324$648 5折 【李錦記】大舊庄蠔油(510g) $109$218 5折 【青葉】土豆麵筋 170g*3 $50$100 5折 【光泉】 調味奶保久乳200mlx24入/箱(巧克力/果汁/高鈣/低脂高鈣/蘋果/麥芽) $144$288 5折 【妙管家】超強漂白水加侖桶(4L) $45$89 5折 【可樂果x卡迪那x滿天星】休閒綜合量販包(6大包/袋) $45$90 5折 禎祥食品 A級毛豆 $287$573 5折 【美味大師】大蒜麵包醬-強味(470g) $42$84 5折 華歌爾｜ 夜間型生理褲 $210$420 5折 【泰山】八寶粥375g(6入/組) $84$168 5折 【黑丸】 招牌嫩仙草4桶組 $250$499 5折 【京都念慈菴】蜜煉枇杷膏隨身包x6盒(15gx5包/盒) $148$295 5折 【象印】 不鏽鋼真空燜燒杯500ml $394$788 5折 【素天堂】愛爾蘭海藻鈣-精萃單方膜衣錠(3瓶分享組) $690$1,380 5折 【桂格】養氣人蔘雞精禮盒68ml*18入 $410$819 5折 【SAMPO聲寶】30公升多功能紫外線殺菌烘碗機(KB-GA30U) $1,605$3,210 5折 彈簧床墊-雙人 $9,595$19,189 5折 【多益得】生物酵素清潔劑3785ml(濃縮原液) $550$1,099 5折 【康健生機】Vita素香鬆300g $75$149 5折 蚵仔麵線(300g) $37$73 5折 【草本之家】青梅酵素60粒3盒入 $395$790 5折 【3M】超濾淨6坪進階版負離子空氣清淨機(適用 3-7.5坪CHIMSPD-01UCRC-1) $1,495$2,990 5折 【OP】生物分解保鮮膜(600尺) $84$167 5折 白蘭氏 雙認證雞精禮盒 $392$784 5折 【美國培恩】葡萄糖胺液3入組(946ml/瓶) $442$884 5折 【BLADEZ】InStep 企鵝踏步機(專業版) $1,000$1,999 5折 按壓保溫壺4000ml $1,495$2,990 5折 3M 大童防蹣枕-附枕套 $345$690 5折 【國際牌】旋轉式電鬍刀(ES-6510) $375$749 5折 【船井burner倍熱】超代謝咖啡6盒(共60包 宋芸樺愛用推薦) $872$1,744 5折 【自然本舖】手作鮮泡菜 3罐組(原味/辣味/水果任選) $474$947 5折 【BASSO 巴碩】 BASSO義大利純天然玄米油-超值組 $635$1,270 5折 【李時珍】青木瓜四物飲48瓶 $1,140$2,280 5折 【賽凡絲】安格拉毛保暖長襪套 九分襪(3雙超值組) $282$564 5折 【BIONEO 德國百妮】白金極緻抗皺眼霜*4(美魔女特惠組) $615$1,229 5折 【Yamaha 山葉音樂】F310 民謠木吉他(附贈背帶彈片以及原廠吉他琴袋) $2,100$4,200 5折 【施巴】 泡泡露x2+乳液x1 $394$788 5折 【施巴】嬰兒柔護洗沐超值組(快速到貨) $415$829 5折 【德國Heilusan好立善】鎂發泡錠20錠(幫助入睡) $60$120 123…692下一頁 › .cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px} .cat-card{display:block;border:1px solid #eee;border-radius:4px;overflow:hidden;background:#fff;transition:box-shadow .15s,transform .15s} .cat-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.1);transform:translateY(-2px)} .cat-card__img{aspect-ratio:1/1;background:#fafafa;display:flex;align-items:center;justify-content:center} .cat-card__img img{width:100%;height:100%;object-fit:contain} .cat-card__name{padding:8px 8px 4px;font-size:13px;line-height:1.4;height:54px;overflow:hidden;color:#4d4d4d} .cat-card__price{padding:0 8px 10px;font-family:var(--font-price);font-size:17px;font-weight:700;color:#d62872;display:flex;align-items:baseline;gap:6px} .cat-card__price s{font-family:var(--font-price);font-size:11px;font-weight:400;color:#bbb} .cat-card__off{position:absolute;left:0;top:0;background:#dd2726;color:#fff;font-size:11px;font-weight:700;padding:2px 6px;border-radius:0 0 4px 0;z-index:1} .cat-card__img{position:relative} .pager{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:20px 0 8px} .pager a,.pager span{min-width:36px;height:36px;padding:0 10px;display:inline-flex;a"
+ "bodyText": "回首頁momo富立保險APP下載點點賺書店登入註冊會員中心查訂單追蹤清單折價券購物車 (0)登記活動搜尋猜你想搜 >皮卡丘不鏽鋼炒鍋小米行動電源 首頁/商品分類 館長推薦 ☆雙11最優惠看這週☆ mo幣加碼專區 找價一目了然 品牌(A-G) 品牌(H-O) 品牌(P-Z) 專業電競★玩家體驗 關鍵字 ‹ › 音訊關鍵字 耳塞式 耳罩式 真無線 藍牙喇叭 運動耳機 降噪耳機 電競耳機 有線耳機 麥克風 收音 全部商品共 33,179 件 .cat-bar{display:flex;flex-wrap:wrap;gap:8px;padding:0 0 16px;margin:0 0 18px;border-bottom:1px solid #f0f0f0} .cat-tab{display:inline-flex;align-items:baseline;gap:6px;height:34px;padding:0 14px;border-radius:17px;background:#f7f7f7;color:#4d4d4d;font-size:13px;line-height:34px;text-decoration:none;white-space:nowrap;transition:background .15s,color .15s} .cat-tab span{font-size:11px;color:#b3b3b3} .cat-tab:hover{background:#fdf0f6;color:#d62872} .cat-tab.on{background:#d62872;color:#fff;font-weight:700} .cat-tab.on span{color:rgba(255,255,255,.75)} @media(max-width:600px){.cat-bar{flex-wrap:nowrap;overflow-x:auto;padding-bottom:12px}.cat-bar::-webkit-scrollbar{display:none}} 全部33,179其他4,659女時尚4,445食品/飲料2,734家電2,487保健/醫療2,067餐廚1,6433C週邊1,632家具收納1,271電腦/組件1,210母嬰/玩具1,027手機/相機983精品/飾品966傢飾寢具915運動/按摩873個人清潔783戶外735圖書657生鮮611藝術宗教557彩妝保養447日用/紙品442修繕園藝410車類391寵物390文具樂器382旅遊/票券238男時尚224 品牌 李錦記 (2) 泰山 (2) 施巴 (2) 勤逸軒 (1) BH (1) Tiamo (1) 開運陶源 (1) 青葉 (1)選更多類型 有線 (16) 無線 (12) 藍芽 (10) 多合一 (8) 其他 (7)選更多其他選項功能材質容量尺寸顏色款式館長推薦月銷量新上市價格評價確認momo速配廠商出貨跨境現折活動折價券快速到貨展開 ⌄ 5折 東稻MIT獨立筒床 $1,350$2,699 5折 【勤逸軒】富士龍感熱傳真紙A4 210mmx30m外感 足米(24捲/台灣製造) $1,115$2,230 5折 精緻手工獨立筒床 $1,593$3,186 5折 【BH】H919C SB3 磁控飛輪健身車 $15,000$29,999 5折 【李錦記】舊庄特級蠔油(510g) $53$105 5折 【Tiamo】515 方型速拆義式摩卡壺-三杯份(HA2275) $1,800$3,600 5折 【Bull head 牛頭牌】5號麻辣沙茶醬250g $68$135 5折 【泰山】八寶粥375g(12入禮盒) $192$384 5折 【Bull head 牛頭牌】2號沙茶醬(737g) $147$293 5折 【開運陶源】小麒麟踩八卦一對 $324$648 5折 【李錦記】大舊庄蠔油(510g) $109$218 5折 【青葉】土豆麵筋 170g*3 $50$100 5折 【光泉】 調味奶保久乳200mlx24入/箱(巧克力/果汁/高鈣/低脂高鈣/蘋果/麥芽) $144$288 5折 【妙管家】超強漂白水加侖桶(4L) $45$89 5折 【可樂果x卡迪那x滿天星】休閒綜合量販包(6大包/袋) $45$90 5折 【禎祥食品】外銷日本A級鹽味毛豆(300g/包 共10包) $287$573 5折 【美味大師】大蒜麵包醬-強味(470g) $42$84 5折 華歌爾｜ 夜間型生理褲 $210$420 5折 【泰山】八寶粥375g(6入/組) $84$168 5折 【黑丸】 招牌嫩仙草4桶組 $250$499 5折 【京都念慈菴】蜜煉枇杷膏隨身包x6盒(15gx5包/盒) $148$295 5折 【象印】 不鏽鋼真空燜燒杯500ml $394$788 5折 【素天堂】愛爾蘭海藻鈣-精萃單方膜衣錠(3瓶分享組) $690$1,380 5折 【QUAKER 桂格】養氣人蔘雞精禮盒68ml×18入×1盒(共18入 送禮推薦/中秋禮盒) $410$819 5折 【SAMPO聲寶】30公升多功能紫外線殺菌烘碗機(KB-GA30U) $1,605$3,210 5折 彈簧床墊-雙人 $9,595$19,189 5折 【多益得】生物酵素清潔劑3785ml(濃縮原液) $550$1,099 5折 【康健生機】Vita素香鬆300g $75$149 5折 蚵仔麵線(300g) $37$73 5折 【草本之家】青梅酵素60粒3盒入 $395$790 5折 【3M】超濾淨6坪進階版負離子空氣清淨機(適用 3-7.5坪CHIMSPD-01UCRC-1) $1,495$2,990 5折 【OP】生物分解保鮮膜(600尺) $84$167 5折 白蘭氏 雙認證雞精禮盒 $392$784 5折 【美國培恩】葡萄糖胺液3入組(946ml/瓶) $442$884 5折 【BLADEZ】InStep 企鵝踏步機(專業版) $1,000$1,999 5折 按壓保溫壺4000ml $1,495$2,990 5折 3M 大童防蹣枕-附枕套 $345$690 5折 【國際牌】旋轉式電鬍刀(ES-6510) $375$749 5折 【船井burner倍熱】超代謝咖啡6盒(共60包 宋芸樺愛用推薦) $872$1,744 5折 【自然本舖】手作鮮泡菜 3罐組(原味/辣味/水果任選) $474$947 5折 【BASSO 巴碩】 BASSO義大利純天然玄米油-超值組 $635$1,270 5折 【李時珍】青木瓜四物飲48瓶 $1,140$2,280 5折 【賽凡絲】安格拉毛保暖長襪套 九分襪(3雙超值組) $282$564 5折 【BIONEO 德國百妮】白金極緻抗皺眼霜*4(美魔女特惠組) $615$1,229 5折 【Yamaha 山葉音樂】F310 民謠木吉他(附贈背帶彈片以及原廠吉他琴袋) $2,100$4,200 5折 【施巴】 泡泡露x2+乳液x1 $394$788 5折 【施巴】嬰兒柔護洗沐超值組(快速到貨) $415$829 5折 【德國Heilusan好立善】鎂發泡錠20錠(幫助入睡) $60$120 123…692下一頁 › .cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px} .cat-card{display:block;border:1px solid #eee;border-radius:4px;overflow:hidden;background:#fff;transition:box-shadow .15s,transform .15s} .cat-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.1);transform:translateY(-2px)} .cat-card__img{aspect-ratio:1/1;background:#fafafa;display:flex;align-items:center;justify-content:center} .cat-card__img img{width:100%;height:100%;object-fit:contain} .cat-card__name{padding:8px 8px 4px;font-size:13px;line-height:1.4;height:54px;overflow:hidden;color:#4d4d4d} .cat-card__price{padding:0 8px 10px;font-family:var(--font-price);font-size:17px;font-weight:700;color:#d62872;display:flex;align-items:baseline;gap:6px} .cat-card__price s{font-family:var(--font-price);font-size:11px;font-weight:400;color:#bbb} .cat-card__off{position:absolute;left:0;top:0;background:#dd2726;color:#fff;font-size:11px;font-weight:700;padding:2px 6px;border-radius:0 0 4px"
 }
