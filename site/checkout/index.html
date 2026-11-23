@@ -36,21 +36,26 @@
   <script>
   (function(){
     try {
-      var raw = sessionStorage.getItem('momo_checkout_cart');
-      if (!raw) return;
-      var c = JSON.parse(raw);
-      if (!c || !c.items || !c.items.length) return;
+      // 契约 §5.1：数据到了原地 mutate，不换对象
       var b = window.__BP_CART__;
-      b.items = c.items;
-      b.total = c.total;
-      b.total_amount = c.total_amount;
-      var b = window.__BP_CART__;
-      b.items = c.items;
-      b.total = c.total;
-      b.total_amount = c.total_amount;
+      if (!b) return;
+
+      // 购物车页写的是 localStorage.momo_cart（sessionStorage 只在点「前往結帳」时才有）
+      var list = [];
+      try { list = JSON.parse(localStorage.getItem('momo_cart') || '[]'); } catch (e) { list = []; }
+      if (!Array.isArray(list) || !list.length) {
+        try { list = JSON.parse(sessionStorage.getItem('momo_checkout_cart') || '[]').items || []; } catch (e) { list = []; }
+      }
+      if (!list.length) return;
+
+      var total = list.reduce(function (a, x) { return a + Number(x.price || 0) * Number(x.qty || 1); }, 0);
+      b.items = list.map(function (x) { return { name: x.name, qty: x.qty || 1, price: Number(x.price) || 0 }; });
+      b.total = total;                                  // 整数分（TWD 无小数）
+      b.total_amount = '$' + total.toLocaleString('en-US');  // 必须与 #bp-total 文本一致
       b.currency = 'TWD';
       b.locale = document.documentElement.lang || 'zh-TW';
-      // 每笔结账生成独立单号，避免多笔订单撞同一个号（契约：单号复用，提交后不换）
+
+      // 每笔结账生成独立单号（契约：单号复用，提交后不换）
       if (!b.order_number) {
         var d = new Date();
         var pad = function (n) { return String(n).padStart(2, '0'); };

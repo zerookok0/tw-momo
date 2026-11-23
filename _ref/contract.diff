@@ -1,0 +1,7 @@
+﻿diff --git a/建站结账页契约.md b/建站结账页契约 (2).md
+index 8d09e77..b79855f 100644
+--- a/建站结账页契约.md
++++ b/建站结账页契约 (2).md	
+@@ -155 +155 @@
+-| `#bp-submit` | 🔴 提交中**不要** `disabled`（面板第二次点击要有反馈）。用 `aria-busy="true"` + 内部状态位防重复。🟡 按钮文案由 connector 接管。 |
++| `#bp-submit` | 🔴 提交中**不要** `disabled`（面板第二次点击要有反馈）。用 `aria-busy="true"` + 内部状态位防重复。🟡 按钮文案与"转圈动图"由 connector 接管：等待期间文字会被隐藏（`font-size:0`）并在按钮内绘制 spinner，出错时自动恢复。 |
