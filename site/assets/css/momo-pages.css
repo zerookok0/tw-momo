@@ -649,3 +649,34 @@ body.momo-page {
   font-size: 10px; padding: 1px 6px; border-radius: 3px; margin: 0 2px;
   font-weight: 700;
 }
+
+/* 商品网格（商品页/分类页/推荐位共用） */
+.cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.cat-card { display: block; border: 1px solid #eee; border-radius: 4px; overflow: hidden; background: #fff; text-decoration: none; transition: box-shadow .15s, transform .15s; }
+.cat-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); transform: translateY(-2px); }
+.cat-card__img { position: relative; background: #fafafa; }
+.cat-card__img img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; display: block; }
+.cat-card__off { position: absolute; left: 0; top: 0; background: #e2125b; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 0 0 6px 0; }
+.cat-card__body { padding: 8px 10px 10px; }
+.cat-card__name { margin: 0; font-size: 13px; line-height: 1.45; color: #333; height: 38px; overflow: hidden; }
+.cat-card__price { margin-top: 6px; font-size: 18px; font-weight: 700; color: #e2125b; }
+.cat-card__price s { font-size: 11px; color: #b3b3b3; font-weight: 400; margin-left: 5px; }
+.cat-card__meta { margin-top: 5px; font-size: 11px; color: #999; display: flex; align-items: center; gap: 6px; }
+.cat-card__meta i { width: 1px; height: 9px; background: #ddd; }
+@media (max-width: 1100px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 720px) { .cat-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } }
+
+
+/* 窄屏降级：桌面分类页的胶囊/banner/关键字/侧栏在手机上隐藏 */
+@media (max-width: 767px) {
+  .catpage-pills, .catpage-banner, .catpage-kw, .catflt__side { display: none !important; }
+  .catflt { grid-template-columns: 1fr !important; }
+  .catflt__sort { padding: 8px 10px; }
+  .catflt__sortl { gap: 14px; overflow-x: auto; }
+  .catflt__sortl a { font-size: 12.5px; white-space: nowrap; }
+  .catflt__chips { overflow-x: auto; flex-wrap: nowrap; }
+  .catflt__chips span { white-space: nowrap; }
+  .pdp2__side { display: none !important; }
+  .pdp2__main { grid-template-columns: 1fr !important; }
+  .pdp2 { grid-template-columns: 1fr !important; }
+}

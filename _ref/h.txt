@@ -1,13 +1,13 @@
 HTTP/1.1 302 Found
-Date: Sun, 22 Nov 2026 19:23:23 GMT
+Date: Mon, 23 Nov 2026 04:13:03 GMT
 Content-Length: 0
 Connection: keep-alive
-Location: /m/product/1341656
+Location: /m/checkout
 Cache-Control: no-store
 Vary: User-Agent
-Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=YwtBCF%2BMTdYcborKQt6n8T1b%2BBkeTYPjk0JteDk7QK3I0lBK58ayHwiwg1okVcWNuftmeAcooSgMTZM%2Bzw58yMLc7dPiC0umBCJJfW3d8NAy3zfJS06KGb5TxTgZnind5F7E5u9snvSaZABnKCUwLg%3D%3D"}]}
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=7Tp8OfuelLN16m9xV9ktT8Nefx%2BE3Igow%2Bu0oRYQfxvy4D%2FpM%2FjoWj%2Fr5J9tMNWYIiyHMUV7PfiAV9e%2BpXGvhisx%2BOssMaVm5ylLi3e5yS0VHNK1J3r3ik4EYU017ULA2P2wuwSgZa%2FanFyl5Bbj3Q%3D%3D"}]}
 Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
 Server: cloudflare
-CF-RAY: a5ea4eed9e31d8fd-HKG
+CF-RAY: a5ed56cf5968714f-HKG
 alt-svc: h3=":443"; ma=86400
 
