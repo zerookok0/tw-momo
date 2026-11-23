@@ -612,3 +612,7 @@ body.momo-page {
   .catflt { grid-template-columns: 1fr; }
   .catflt__side { display: none; }
 }
+/* 分类页 4 列大卡（对齐真站比例） */
+.catflt__main .cat-card__img { aspect-ratio: 1/1; }
+.catflt__main .cat-card__name { font-size: 13px; line-height: 1.45; min-height: 38px; }
+.catflt__main .cat-card__price { font-size: 20px; }
