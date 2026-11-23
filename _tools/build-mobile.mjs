@@ -168,6 +168,7 @@ ${extraHead}
 </head>
 <body class="${bodyClass}">
 ${body}
+<script src="/assets/js/m-drawer.js" defer></script>
 </body>
 </html>`;
 }

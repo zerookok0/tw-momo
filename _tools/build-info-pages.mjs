@@ -511,6 +511,7 @@ ${UTM}
 <body class="m r-page">
 ${body}
 ${scriptHtml || ''}
+<script src="/assets/js/m-drawer.js" defer></script>
 </body>
 </html>`;
 }
