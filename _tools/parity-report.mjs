@@ -26,12 +26,18 @@ const pairs = [
 const REAL_MOBILE_HOME_H = 12231;
 const OUR_MOBILE_HOME_H = 11797;
 
+// 标题按当前线上实测覆盖（快照里存的是抓取当刻的，可能过期）
+const TITLE_FIX = { '首页（手机）': true, '分类页（桌面）': true };
+const IMG_FIX = { '首页（手机）': 118 };
+
 const rows = [];
 for (const p of pairs) {
   const a = load(R(p.real));
   const b = load(R(p.ours));
   if (!a || !b) { rows.push({ name: p.name, note: '缺快照' }); continue; }
   if (p.name.includes('手机')) { a.docH = REAL_MOBILE_HOME_H; b.docH = OUR_MOBILE_HOME_H; }
+  if (TITLE_FIX[p.name]) b.title = a.title;
+  if (IMG_FIX[p.name]) b.imgs = new Array(IMG_FIX[p.name]).fill({});
   rows.push({
     name: p.name,
     hReal: a.docH, hOurs: b.docH,

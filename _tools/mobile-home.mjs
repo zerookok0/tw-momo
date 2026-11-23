@@ -243,8 +243,8 @@ export function renderHome(deps) {
   <!-- 品牌專區 TOP10（真站首页同款品牌墙） -->
   <section class="r-sec">
     <div class="r-sec__hd"><h2>品牌專區 · 康寧餐具</h2><a href="/m/category?kw=${encodeURIComponent("康寧餐具")}">看更多 ${ICO.chev}</a></div>
-    <div class="r-wall__grid">
-      ${pick('餐廚', 10).map((p, i) => `
+    <div class="r-wall__grid r-wall__grid--3">
+      ${pick('餐廚', 20).map((p, i) => `
         <a class="r-wall__card" href="${P(p.code)}">
         <span class="r-wall__badge">TOP${i + 1}</span>
         <div class="r-wall__img"><img src="${p.img}" alt="" loading="lazy"></div>
