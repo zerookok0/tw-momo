@@ -783,3 +783,16 @@
   border-radius: 15px; padding: 7px 14px; text-decoration: none; white-space: nowrap;
 }
 .r-kwrow a:hover { background: #fdeef3; color: #e2125b; }
+/* 搜索框内嵌热词标（真站样式：灰词 + 粉色「新趨勢」胶囊） */
+.r-hd__search { position: relative; }
+.r-hd__hot {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  display: flex; align-items: center; gap: 4px;
+  pointer-events: none; font-size: 13px; color: #999;
+}
+.r-hd__hot em { font-style: normal; }
+.r-hd__hot i {
+  font-style: normal; font-size: 10px; color: #fff;
+  background: linear-gradient(90deg, #ff6b9d, #e2125b);
+  padding: 1px 6px; border-radius: 8px; font-weight: 700;
+}

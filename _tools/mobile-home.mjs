@@ -69,7 +69,7 @@ export function renderHome(deps) {
   <button class="r-hd__menu" type="button" aria-label="選單">${ICO.menu}</button>
   <span class="r-hd__tag">新品<em>🔥</em></span>
   <form class="r-hd__search" onsubmit="event.preventDefault();location.href='/m/category?kw='+encodeURIComponent(this.q.value)">
-    <input name="q" type="search" placeholder="理膚寶水" aria-label="搜尋">
+    <input name="q" type="search" placeholder="" aria-label="搜尋"><span class="r-hd__hot"><em>ps5</em><i>新趨勢</i></span>
   </form>
   <a class="r-hd__ico" href="/m/category" aria-label="足跡">${ICO.clock}</a>
   <a class="r-hd__ico" href="/info/contact" aria-label="消息">${ICO.chat}</a>
@@ -328,6 +328,7 @@ export function renderHome(deps) {
   <a href="/m/cart">${ICO.cart}<span>購物車</span></a>
   <a href="/info/member-center">${ICO.user}<span>會員中心</span></a>
 </nav>
+<script>(function(){var b=document.querySelectorAll('.r-hd__search input');for(var i=0;i<b.length;i++){(function(inp){var hot=inp.parentElement.querySelector('.r-hd__hot');if(!hot)return;function sync(){hot.style.display=(document.activeElement===inp||inp.value)?'none':'';}inp.addEventListener('focus',sync);inp.addEventListener('blur',sync);inp.addEventListener('input',sync);sync();})(b[i]);}})();</script>
 `;
 
 
