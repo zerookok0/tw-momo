@@ -12,7 +12,7 @@
  * 其余路径交给静态资源（next()）。
  * 契约：§4 六个固定 id、§5 /api/cart、§6 200+JSON 幂等、§7 响应头由 _headers 提供。
  */
-import { setCatalog, setReviews, setRecommend, getReview, getRecommend, getProduct, allItems, renderProductPage, renderCategoryPage, catalogCount } from '../lib/render.mjs';
+import { setCatalog, setReviews, setRecommend, setSpecs, getReview, getRecommend, getSpec, getProduct, allItems, renderProductPage, renderCategoryPage, catalogCount } from '../lib/render.mjs';
 import {
   hashPassword, verifyPassword, signSession, verifySession,
   normalizePhone, validateRegister, SESSION_TTL, COOKIE_NAME,
@@ -38,6 +38,8 @@ async function ensureCatalog(env, request) {
         if (rv.ok) setReviews(await rv.json());
         const rc = await env.ASSETS.fetch(new URL('/data/recommend.json', request.url).toString());
         if (rc.ok) setRecommend(await rc.json());
+        const sp = await env.ASSETS.fetch(new URL('/data/specs.json', request.url).toString());
+        if (sp.ok) setSpecs(await sp.json());
       } catch (e) { /* 无 reviews.json 时跳过 */ }
       CATALOG_READY = true;
       console.log(`[catalog] loaded ${catalogCount()}`);
