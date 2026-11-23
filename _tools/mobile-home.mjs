@@ -81,7 +81,41 @@ export function renderHome(deps) {
   <a href="/m/category">直播</a>
   <a href="/m/category">mo店+</a>
   <a href="/m/category">看看買</a>
-  <a class="r-nav__more" href="/m/category">${ICO.down}</a>
+  <a href="/m/category?cat=%E5%AE%B6%E9%9B%BB">家電</a>
+  <a href="/m/category?cat=%E9%9B%BB%E7%8E%A9">電玩</a>
+  <a href="/m/category?cat=%E6%89%8B%E6%A9%9F%2F%E7%9B%B8%E6%A9%9F">手機/相機</a>
+  <a href="/m/category?cat=%E9%9B%BB%E8%85%A6%2F%E7%B5%84%E4%BB%B6">電腦/組件</a>
+  <a href="/m/category?cat=3C%E9%80%B1%E9%82%8A">3C週邊</a>
+  <a href="/m/category?cat=%E4%BF%9D%E5%81%A5%2F%E9%86%AB%E7%99%82">保健/醫療</a>
+  <a href="/m/category?cat=%E9%A3%9F%E5%93%81%2F%E9%A3%B2%E6%96%99">食品/飲料</a>
+  <a href="/m/category?cat=%E7%94%9F%E9%AE%AE">生鮮</a>
+  <a href="/m/category?cat=%E5%A5%B3%E6%99%82%E5%B0%9A">女時尚</a>
+  <a href="/m/category?cat=%E7%94%B7%E6%99%82%E5%B0%9A">男時尚</a>
+  <a href="/m/category?cat=%E7%B2%BE%E5%93%81%2F%E9%A3%BE%E5%93%81">精品/飾品</a>
+  <a href="/m/category?cat=%E5%BD%A9%E5%A6%9D%E4%BF%9D%E9%A4%8A">彩妝保養</a>
+  <a href="/m/category?cat=%E5%80%8B%E4%BA%BA%E6%B8%85%E6%BD%94">個人清潔</a>
+  <a href="/m/category?cat=%E6%97%A5%E7%94%A8%2F%E7%B4%99%E5%93%81">日用/紙品</a>
+  <a href="/m/category?cat=%E6%AF%8D%E5%AC%B0%2F%E7%8E%A9%E5%85%B7">母嬰/玩具</a>
+  <a href="/m/category?cat=%E9%A4%90%E5%BB%9A">餐廚</a>
+  <a href="/m/category?cat=%E5%AE%B6%E5%85%B7%E6%94%B6%E7%B4%8D">家具收納</a>
+  <a href="/m/category?cat=%E4%BF%AE%E7%B9%95%E5%9C%92%E8%97%9D">修繕園藝</a>
+  <a href="/m/category?cat=%E5%82%A2%E9%A3%BE%E5%AF%A2%E5%85%B7">傢飾寢具</a>
+  <a href="/m/category?cat=%E5%AF%B5%E7%89%A9">寵物</a>
+  <a href="/m/category?cat=%E9%81%8B%E5%8B%95%2F%E6%8C%89%E6%91%A9">運動/按摩</a>
+  <a href="/m/category?cat=%E6%88%B6%E5%A4%96">戶外</a>
+  <a href="/m/category?cat=%E8%BB%8A%E9%A1%9E">車類</a>
+  <a href="/m/category?cat=%E5%9C%96%E6%9B%B8%E5%BD%B1%E9%9F%B3">圖書影音</a>
+  <a href="/m/category?cat=%E6%96%87%E5%85%B7%E6%A8%82%E5%99%A8">文具樂器</a>
+  <a href="/m/category?cat=%E8%97%9D%E8%A1%93%E5%AE%97%E6%95%99">藝術宗教</a>
+  <a href="/m/category?cat=%E6%97%85%E9%81%8A%2F%E4%BD%8F%E5%AE%BF">旅遊/住宿</a>
+  <a href="/m/category?cat=%E7%A5%A8%E5%88%B8">票券</a>
+  <a href="/m/category?cat=%E5%8A%A0%E5%80%BC%2F%E8%BB%9F%E9%AB%94">加值/軟體</a>
+  <a href="/m/category?cat=%E7%B6%A0%E8%89%B2%E7%94%9F%E6%B4%BB">綠色生活</a>
+  <a href="/m/category?cat=%E7%94%9F%E6%B4%BB%E8%B6%85%E5%B8%82">生活超市</a>
+  <a href="/m/category?cat=%E8%B7%A8%E5%A2%83%E5%A5%BD%E7%89%A9">跨境好物</a>
+  <a href="/info/insurance">momo富立保險</a>
+  <a href="/m/category?cat=%E6%A8%82%E5%85%AC%E7%9B%8A">樂公益</a>
+  <a href="/m/category?cat=%E5%93%81%E7%89%8C%E6%97%97%E8%89%A6%E9%A4%A8">品牌旗艦館</a>
 </nav>
 
 <main class="r-main">
@@ -206,6 +240,20 @@ export function renderHome(deps) {
     </div>
   </section>
 
+  <!-- 品牌專區 TOP10（真站首页同款品牌墙） -->
+  <section class="r-sec">
+    <div class="r-sec__hd"><h2>品牌專區 · 康寧餐具</h2><a href="/m/category?kw=${encodeURIComponent("康寧餐具")}">看更多 ${ICO.chev}</a></div>
+    <div class="r-wall__grid">
+      ${pick('餐廚', 10).map((p, i) => `
+        <a class="r-wall__card" href="${P(p.code)}">
+        <span class="r-wall__badge">TOP${i + 1}</span>
+        <div class="r-wall__img"><img src="${p.img}" alt="" loading="lazy"></div>
+        <b>${p.name.slice(0, 18)}</b>
+        <span class="r-wall__price"><em>${fmt(sale(p.price))}</em><s>${fmt(p.price)}</s></span>
+      </a>`).join('')}
+    </div>
+  </section>
+
   <!-- 11. 商品行：分次配限定 -->
   <section class="r-sec">
     <div class="r-sec__hd"><h2>分次配限定天天享優惠價</h2><a href="/m/category">看更多 ${ICO.chev}</a></div>
@@ -264,9 +312,7 @@ export function renderHome(deps) {
   <section class="r-sec">
     <div class="r-sec__hd"><h2>猜你想搜</h2><a href="/m/category">看更多 ${ICO.chev}</a></div>
     <div class="r-brands">
-      ${['LUSH 嵐舒', '歐舒丹護手霜', 'Aesop', '雅詩蘭黛', '蘭蔻', '資生堂'].map((t, i) => `
-        <a href="/m/category?kw=${encodeURIComponent(t)}"><i><img src="${img(['家電','3C週邊','食品/飲料'][i % 3], i + 1)}" alt=""></i><b>${t}</b></a>
-      `).join('')}
+      ${["康寧餐具","皮卡丘","iphone 17 pro max","牛爾京城之霜","愛馬仕","配方時代","無線吸塵器","阿瘦女鞋","森淨居所","新生兒禮盒"].map((t, i) => `<a href="/m/category?kw=${encodeURIComponent(t)}"><i><img src="${img(['家電','3C週邊','食品/飲料'][i % 3], i + 1)}" alt=""></i><b>${t}</b></a>`).join('')}
     </div>
   </section>
 
