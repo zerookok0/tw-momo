@@ -495,13 +495,11 @@ export async function onRequest(context) {
         const staticRes = await env.ASSETS.fetch(new URL(staticPath, url).toString());
         if (staticRes.ok) return staticRes;
 
-        // 都没有 → 404，不要拿别的商品糊弄
-        return html(`<!doctype html><html lang="zh-TW"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>商品已下架 - momo購物網</title>
-<style>body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:#f5f5f5;margin:0;padding:80px 20px;text-align:center;color:#4d4d4d}
-h1{color:#d62872;font-size:20px}p{font-size:14px;line-height:1.8}a{display:inline-block;margin-top:20px;padding:10px 26px;background:#d62872;color:#fff;border-radius:20px;text-decoration:none;font-size:14px}</style>
-</head><body><h1>此商品已下架</h1><p>商品編號 ${code}<br>可能已售完或停止販售</p>
-<a href="${isMobile ? '/m/category' : '/category'}">去看其他商品</a></body></html>`, 404);
+        // 都没有 → 302 回分类页（不出现 404 页面）
+        return new Response(null, {
+          status: 302,
+          headers: { Location: isMobile ? '/m/category' : '/category', 'Cache-Control': 'no-store' },
+        });
       }
       return next();
     }

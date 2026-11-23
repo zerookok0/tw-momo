@@ -2,7 +2,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getProduct, allItems, renderProductPage, renderCategoryPage } from './lib/render.mjs';
+import { setCatalog, setReviews, setRecommend, setSpecs, getProduct, allItems, renderProductPage, renderCategoryPage } from './lib/render.mjs';
 import { loadCatalogFromDisk } from './lib/load-node.mjs';
 import { hashPassword, verifyPassword, signSession, verifySession, normalizePhone, validateRegister, SESSION_TTL, COOKIE_NAME, sessionCookie, clearCookie, readCookie, newUserId } from './lib/auth.mjs';
 import { getUser, putUser, loadUsers } from './lib/users-node.mjs';
@@ -217,6 +217,22 @@ function notFound(res, msg) {
 </div>`, 404);
 }
 
+
+// ── 加载真站数据（评价 / 推荐 / 规格），与 Worker 行为一致 ──
+function loadJson(rel) {
+  try { return JSON.parse(fs.readFileSync(path.join(SITE, rel), 'utf8')); } catch (e) { return null; }
+}
+try {
+  const cat = loadJson('data/catalog.json');
+  if (cat) setCatalog(cat);
+  const rv = loadJson('data/reviews.json'); if (rv) setReviews(rv);
+  const rc = loadJson('data/recommend.json'); if (rc) setRecommend(rc);
+  const sp = loadJson('data/specs.json'); if (sp) setSpecs(sp);
+  console.log('[data] reviews/recommend/specs 已加载');
+} catch (e) {
+  console.warn('[data] 加载失败', e && e.message);
+}
+
 const PAGE_SIZE = 48;
 
 /** 分類 / 搜尋：分頁 + 關鍵字，從目錄動態渲染 */
@@ -243,7 +259,8 @@ function renderCategory(req, res, url, kind) {
   const total = items.length;
   const slice = items.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
-  // 未收录商品（不在 catalog.json 里）时回落到静态页
+  // 未收录商品（不在 catalog.json 里）时先试静态页，再 302 回分类页（未收录商品 → 302）
+  // 不再返回 404 页面
   if (!total && !kw && !cat && !l) {
     const f = path.join(SITE, kind === 'mobile' ? 'm' : '', 'category', 'index.html');
     if (fs.existsSync(f)) return serveFile(res, f);
@@ -397,7 +414,9 @@ const server = http.createServer(async (req, res) => {
       if (fs.existsSync(f)) return serveFile(res, f);
       const item = getProduct(code);
       if (item) return sendHtml(res, renderProductPage('mobile', item));
-      return notFound(res, `momo 查無此商品：${code}`);
+      // 未收录 / 已下架 → 302 回手机分类页，不返回 404 页面
+      res.writeHead(302, baseHeaders({ Location: '/m/category', 'Cache-Control': 'no-store' }));
+      return res.end();
     }
     const first = allItems()[0];
     if (first) return serveFile(res, path.join(SITE, 'm', 'product', first.code + '.html'));
@@ -447,7 +466,9 @@ const server = http.createServer(async (req, res) => {
       if (fs.existsSync(f)) return serveFile(res, f);
       const item = getProduct(code);
       if (item) return sendHtml(res, renderProductPage('desktop', item));
-      return notFound(res, `momo 查無此商品：${code}`);
+      // 未收录 / 已下架 → 302 回分类页，不返回 404 页面
+      res.writeHead(302, baseHeaders({ Location: '/category', 'Cache-Control': 'no-store' }));
+      return res.end();
     }
     const first = allItems()[0];
     if (first) return serveFile(res, path.join(SITE, 'product', first.code + '.html'));

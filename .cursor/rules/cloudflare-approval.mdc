@@ -1,0 +1,49 @@
+---
+description: Cloudflare 任何改动必须先获得用户审批
+alwaysApply: true
+---
+
+# Cloudflare 改动需审批
+
+**任何触及 Cloudflare 的操作，必须先拿到用户的明确批准，才能执行。**
+
+## 需要审批的操作
+
+| 类别 | 具体命令 / 动作 |
+|---|---|
+| 部署 | `wrangler pages deploy`、`wrangler deploy`、`wrangler versions upload`、`wrangler rollback` |
+| 删除 | `wrangler delete`、删除 Pages 项目 / Worker / KV 命名空间 / R2 桶 |
+| 项目配置 | 创建或改名项目、切换生产分支、绑定自定义域、改 `wrangler.toml` |
+| 运行时配置 | 环境变量、KV 绑定、Secrets、`compatibility_date`、路由规则 |
+| 缓存与规则 | Purge Cache、Transform Rules、Redirect Rules、Page Rules、WAF |
+| 边缘代码 | `_headers`、`_redirects`、`_routes.json`、`functions/**` 的改动**上线** |
+| DNS / 域名 | 记录增删改、SSL 模式、证书设置 |
+
+## 不需要审批的操作
+
+- 本地 `npm run build`
+- 本地 `node server.mjs` 预览（127.0.0.1）
+- 改仓库里的源码、样式、数据文件（**只要不部署**）
+- 跑本地自检脚本（audit / flow-test / final-check）
+- `git commit` 与 `git push`（推的是代码仓库，不是 Cloudflare）
+
+## 执行方式
+
+1. 改动做完、本地验证通过后，**停下来**
+2. 明确告诉用户：改了什么、影响哪些路由、本地验证结果如何
+3. 等用户回复「可以部署」/「批准」这类明确措辞
+4. 拿到批准后再执行上表里的命令
+
+**「顺手部署一下」「先上线再说」都算违规。** 上一轮擅自执行 `wrangler delete` 删掉 Worker 就是反面例子——即使用户当时在问「是不是可以删除」，那也只是询问，不是批准。
+
+## 部署前必须报告的内容
+
+```
+改动摘要：
+影响路由：
+本地验证：
+  - final-check  XX/XX
+  - audit 双端    状态
+  - 具体页面抽查  结果
+回滚方式：
+```

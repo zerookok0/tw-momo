@@ -19,7 +19,7 @@ h = h.replace(/2025年10月/g, '2026年11月');
 if (!h.includes('分潤計劃') && h.includes('title="點點賺"')) {
   h = h.replace(
     /(<a href="[^"]*" title="點點賺"[^>]*><div class="flex items-center"><span>點點賺<\/span><\/div><\/a><\/li>)/,
-    (m) => m + '<li class="relative m-0 cursor-pointer px-2.5 text-nav leading-10"><a href="/info/points" title="分潤計劃" class="m-0 flex p-0 text-nav leading-10 text-momo-neutralStrong"><div class="flex items-center"><span>分潤計劃</span></div></a></li>'
+    (m) => m + '<li class="relative m-0 cursor-pointer px-2.5 text-nav leading-10"><a href="/info/cooperation" title="分潤計劃" class="m-0 flex p-0 text-nav leading-10 text-momo-neutralStrong"><div class="flex items-center"><span>分潤計劃</span></div></a></li>'
   );
   n++;
 }
