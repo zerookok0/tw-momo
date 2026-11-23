@@ -816,3 +816,16 @@
 .pdp2__review .hd .date { font-size: 11.5px; color: #bbb; margin-left: auto; }
 .pdp2__review p { margin: 0; font-size: 13px; line-height: 1.75; color: #555; }
 .pdp2__norev { font-size: 13px; color: #999; padding: 14px 0; }
+/* 库存 / 活动进度条 */
+.r-stock { margin: 10px 0 2px; }
+.r-stock__bar { height: 8px; border-radius: 4px; background: #ffe3ee; overflow: hidden; }
+.r-stock__bar i { display: block; height: 100%; border-radius: 4px; background: linear-gradient(90deg, #ff7a3d, #e2125b); }
+.r-stock__txt { margin-top: 5px; font-size: 11.5px; color: #e2125b; display: flex; align-items: center; gap: 6px; }
+.r-stock__txt span { background: #e2125b; color: #fff; font-size: 9.5px; padding: 1px 6px; border-radius: 3px; }
+.pdp2__attrs + .r-stock, .r-stock + .r-pdp__discount { margin-top: 10px; }
+/* 當日送達 标记 */
+.r-fast {
+  display: inline-block; background: #00a651; color: #fff;
+  font-size: 10px; padding: 1px 6px; border-radius: 3px; margin: 0 2px;
+  font-weight: 700;
+}

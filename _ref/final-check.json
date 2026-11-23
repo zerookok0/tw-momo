@@ -1,0 +1,187 @@
+[
+ {
+  "name": "顶部导航 39+ 项",
+  "ok": true,
+  "detail": "40 项"
+ },
+ {
+  "name": "首页商品卡",
+  "ok": true,
+  "detail": "84 张"
+ },
+ {
+  "name": "首页无裂图",
+  "ok": true,
+  "detail": "0 张"
+ },
+ {
+  "name": "首页无横向溢出",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "搜索能出结果",
+  "ok": true,
+  "detail": "43 件 · 康寧餐具 耐熱量杯3入組"
+ },
+ {
+  "name": "详情页商品名",
+  "ok": true,
+  "detail": "東稻MIT獨立筒床"
+ },
+ {
+  "name": "详情页 5 折价",
+  "ok": true,
+  "detail": "$1,350"
+ },
+ {
+  "name": "详情页有划线原价",
+  "ok": true,
+  "detail": "$2,699"
+ },
+ {
+  "name": "SKU 规格可切换",
+  "ok": true,
+  "detail": "0 个 chip"
+ },
+ {
+  "name": "数量可增减",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "可加入购物车",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "可直接购买",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "评价有真实数据",
+  "ok": true,
+  "detail": "2 条 · 4.6 分"
+ },
+ {
+  "name": "推荐商品位",
+  "ok": true,
+  "detail": "8 个"
+ },
+ {
+  "name": "详情页无裂图",
+  "ok": true,
+  "detail": "18 张图"
+ },
+ {
+  "name": "出貨時間条",
+  "ok": true,
+  "detail": "訂單確認後，商品預計2026/11/24出貨"
+ },
+ {
+  "name": "加购写入购物车",
+  "ok": true,
+  "detail": "qty=2"
+ },
+ {
+  "name": "购物车有商品",
+  "ok": true,
+  "detail": "1 件 · $2,700"
+ },
+ {
+  "name": "结账页表单完整",
+  "ok": true,
+  "detail": "8 个字段"
+ },
+ {
+  "name": "结账页可提交",
+  "ok": true,
+  "detail": "$2,700"
+ },
+ {
+  "name": "结账页无 COD 选项",
+  "ok": true,
+  "detail": "已确认无"
+ },
+ {
+  "name": "结账页显示免運",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "登录页有账号密码",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "登录页可切注册",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "站内页渲染",
+  "ok": true,
+  "detail": "FAQ 常見問題"
+ },
+ {
+  "name": "桌面首页导航",
+  "ok": true,
+  "detail": "34 个链接"
+ },
+ {
+  "name": "桌面首页无裂图",
+  "ok": true,
+  "detail": "0"
+ },
+ {
+  "name": "桌面首页无溢出",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "桌面分类页侧边栏",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "桌面分类页排序栏",
+  "ok": true,
+  "detail": "5 项"
+ },
+ {
+  "name": "桌面分类页商品",
+  "ok": true,
+  "detail": "48 张"
+ },
+ {
+  "name": "桌面详情页布局",
+  "ok": true,
+  "detail": "東稻MIT獨立筒床"
+ },
+ {
+  "name": "桌面详情页评价",
+  "ok": true,
+  "detail": "2 条 · 4.6 分"
+ },
+ {
+  "name": "桌面详情页推荐",
+  "ok": true,
+  "detail": "12 个"
+ },
+ {
+  "name": "桌面详情页无裂图/溢出",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "桌面结账页表单",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "桌面结账页无 COD",
+  "ok": true,
+  "detail": ""
+ }
+]

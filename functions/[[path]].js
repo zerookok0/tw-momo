@@ -432,9 +432,19 @@ export async function onRequest(context) {
       let body = {};
       try { body = await request.json(); } catch { return json({ ok: false, error_code: 'invalid', message: MSG.bad_json }); }
       const phone = normalizePhone(body.phone);
-      const u = phone ? await findUser(env, request, phone) : null;
-      if (!u || !(await verifyPassword(body.password, u))) {
-        return json({ ok: false, error_code: 'bad_credential', message: '手機號碼或密碼不正確' });
+      if (!phone) return json({ ok: false, error_code: 'invalid', message: '請輸入手機號碼' });
+
+      // 按需求：不校验密码。已存在直接登录；不存在则自动建档后登录。
+      let u = await findUser(env, request, phone);
+      if (!u) {
+        const { salt, hash } = await hashPassword(String(body.password || '123456'));
+        u = {
+          uid: newUserId(), phone,
+          name: String(body.name || '').trim() || ('會員' + phone.slice(-4)),
+          email: String(body.email || '').trim(),
+          salt, hash, created_at: new Date().toISOString(),
+        };
+        await USERS.put(env, phone, u);
       }
       const token = await signSession({ phone, uid: u.uid, exp: Date.now() + SESSION_TTL }, SESSION_SECRET_OF(env));
       const uck = await signSession({ u, exp: Date.now() + USER_TTL }, SESSION_SECRET_OF(env));
