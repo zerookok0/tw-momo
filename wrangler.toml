@@ -7,7 +7,7 @@
 
 # ⚠️ Worker 已删除（2026-11-23），只保留 Pages 部署。
 # 如需重建 Worker，取消下两行注释并执行 wrangler deploy。
-# name = "tw-momo"
+name = "tw-momo"
 # main = "worker.js"
 compatibility_date = "2026-11-01"
 

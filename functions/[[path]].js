@@ -490,10 +490,6 @@ export async function onRequest(context) {
         const item = getProduct(code);
         if (item) return html(renderProductPage(kind, item));
 
-        // 目录里没有 → 试预渲染静态页（首屏 32 个商品）
-        const staticPath = isMobile ? `/m/product/${code}.html` : `/product/${code}.html`;
-        const staticRes = await env.ASSETS.fetch(new URL(staticPath, url).toString());
-        if (staticRes.ok) return staticRes;
 
         // 都没有 → 302 回分类页（不出现 404 页面）
         return new Response(null, {

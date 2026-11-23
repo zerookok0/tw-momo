@@ -410,8 +410,6 @@ const server = http.createServer(async (req, res) => {
   if (p === '/m/product' || /^\/m\/product\/[^/]+\/?$/.test(p) || p === '/m/goods.momo') {
     const code = (p.match(/^\/m\/product\/([^/]+)\/?$/) || [])[1] || url.searchParams.get('i_code');
     if (code) {
-      const f = path.join(SITE, 'm', 'product', code + '.html');
-      if (fs.existsSync(f)) return serveFile(res, f);
       const item = getProduct(code);
       if (item) return sendHtml(res, renderProductPage('mobile', item));
       // 未收录 / 已下架 → 302 回手机分类页，不返回 404 页面
@@ -462,8 +460,6 @@ const server = http.createServer(async (req, res) => {
   if (/^\/product\/[^/]+\/?$/.test(p) || p === '/goods/GoodsDetail.jsp') {
     const code = (p.match(/^\/product\/([^/]+)\/?$/) || [])[1] || url.searchParams.get('i_code');
     if (code) {
-      const f = path.join(SITE, 'product', code + '.html');
-      if (fs.existsSync(f)) return serveFile(res, f);
       const item = getProduct(code);
       if (item) return sendHtml(res, renderProductPage('desktop', item));
       // 未收录 / 已下架 → 302 回分类页，不返回 404 页面
