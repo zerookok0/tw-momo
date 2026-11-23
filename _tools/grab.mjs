@@ -76,19 +76,19 @@ const snap = await ev(`(() => {
 
   const prices = [...document.querySelectorAll('*')]
     .filter(el => el.children.length === 0 && /^\\$?[\\d,]+$/.test(txt(el).replace(/^\\$/, '$')) && /\\d/.test(txt(el)))
-    .map(el => txt(el)).slice(0, 200);
+    .map(el => txt(el)).slice(0, 900);
 
   const buttons = [...document.querySelectorAll('a,button,[role="button"]')]
     .filter(vis).map(el => ({ t: txt(el).slice(0, 20), href: el.getAttribute('href') || '' }))
-    .filter(x => x.t && x.t.length <= 20).slice(0, 150);
+    .filter(x => x.t && x.t.length <= 20).slice(0, 900);
 
   const imgs = [...document.images].filter(vis).map(im => ({
     src: im.currentSrc || im.src, w: Math.round(im.getBoundingClientRect().width), h: Math.round(im.getBoundingClientRect().height),
-  })).slice(0, 120);
+  })).slice(0, 500);
 
   const blocks = [...document.querySelectorAll('body *')].filter(el => {
     const r = el.getBoundingClientRect(); return r.height > 24 && r.width > 200 && vis(el);
-  }).slice(0, 80).map(el => ({
+  }).slice(0, 160).map(el => ({
     tag: el.tagName, cls: (el.className || '').toString().slice(0, 80),
     x: Math.round(el.getBoundingClientRect().left), y: Math.round(el.getBoundingClientRect().top + scrollY),
     w: Math.round(el.getBoundingClientRect().width), h: Math.round(el.getBoundingClientRect().height),

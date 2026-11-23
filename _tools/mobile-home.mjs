@@ -311,9 +311,7 @@ export function renderHome(deps) {
   <!-- 15. 猜你想搜 + 品牌词横滑 -->
   <section class="r-sec">
     <div class="r-sec__hd"><h2>猜你想搜</h2><a href="/m/category">看更多 ${ICO.chev}</a></div>
-    <div class="r-brands">
-      ${["康寧餐具","皮卡丘","iphone 17 pro max","牛爾京城之霜","愛馬仕","配方時代","無線吸塵器","阿瘦女鞋","森淨居所","新生兒禮盒"].map((t, i) => `<a href="/m/category?kw=${encodeURIComponent(t)}"><i><img src="${img(['家電','3C週邊','食品/飲料'][i % 3], i + 1)}" alt=""></i><b>${t}</b></a>`).join('')}
-    </div>
+    <div class="r-kwrow"><a href="/m/category?kw=%E5%BB%9A%E9%A4%98%E6%A9%9F">廚餘機</a><a href="/m/category?kw=%E5%BB%9A%E6%88%BF%E7%B4%99%E5%B7%BE">廚房紙巾</a><a href="/m/category?kw=%E8%99%8E%E7%89%8C%E4%BF%9D%E6%BA%AB%E7%93%B6">虎牌保溫瓶</a><a href="/m/category?kw=%E6%88%B0%E9%AC%A5%E9%99%80%E8%9E%BA%E7%9B%A4">戰鬥陀螺盤</a><a href="/m/category?kw=%E7%A6%8F%E5%88%A9%E5%93%81%E6%89%8B%E6%A9%9F">福利品手機</a><a href="/m/category?kw=%E9%99%B6%E7%93%B7%E4%BF%9D%E6%BA%AB%E6%9D%AF">陶瓷保溫杯</a><a href="/m/category?kw=%E4%B8%89%E8%8F%B1%E9%99%A4%E6%BF%95%E6%A9%9F">三菱除濕機</a><a href="/m/category?kw=%E5%96%AE%E4%BA%BA%E8%A2%AB%E5%A5%97">單人被套</a><a href="/m/category?kw=%E5%96%AE%E4%BA%BA%E6%B2%99%E7%99%BC">單人沙發</a><a href="/m/category?kw=%E6%99%82%E4%B9%8B%E7%AC%9B">時之笛</a></div>
   </section>
 
   ${seckillWall()}

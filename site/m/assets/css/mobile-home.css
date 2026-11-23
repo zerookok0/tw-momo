@@ -775,3 +775,11 @@
 .r-wall__grid--3 .r-wall__badge { font-size: 8px; padding: 2px 4px; }
 .r-wall__grid--3 .r-wall__card b { font-size: 10.5px; height: 28px; }
 .r-wall__grid--3 .r-wall__price em { font-size: 15px; }
+/* 猜你想搜：文字胶囊行（对齐真站，不用圆形图标） */
+.r-kwrow { display: flex; gap: 8px; overflow-x: auto; padding: 0 12px 2px; }
+.r-kwrow::-webkit-scrollbar { display: none; }
+.r-kwrow a {
+  flex: none; font-size: 12.5px; color: #555; background: #f5f5f5;
+  border-radius: 15px; padding: 7px 14px; text-decoration: none; white-space: nowrap;
+}
+.r-kwrow a:hover { background: #fdeef3; color: #e2125b; }
