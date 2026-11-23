@@ -3,7 +3,7 @@
  "url": "https://tw-momo.pages.dev/m/product/10978110",
  "vw": 402,
  "vh": 874,
- "docH": 3380,
+ "docH": 4140,
  "prices": [
   "$900",
   "$1,404",
@@ -16,7 +16,15 @@
   "264",
   "640",
   "552",
-  "1,790"
+  "1,790",
+  "1,350",
+  "1,115",
+  "1,593",
+  "15,000",
+  "53",
+  "1,800",
+  "68",
+  "192"
  ],
  "buttons": [
   {
@@ -89,6 +97,62 @@
   },
   {
    "t": "追蹤",
+   "href": "/m/category"
+  },
+  {
+   "t": "#礁溪溫泉住宿",
+   "href": "/m/category?kw=%E7%A4%81%E6%BA%AA%E6%BA%AB%E6%B3%89%E4%BD%8F%E5%AE%BF"
+  },
+  {
+   "t": "#宜蘭",
+   "href": "/m/category?kw=%E5%AE%9C%E8%98%AD"
+  },
+  {
+   "t": "#早餐",
+   "href": "/m/category?kw=%E6%97%A9%E9%A4%90"
+  },
+  {
+   "t": "#溫泉飯店",
+   "href": "/m/category?kw=%E6%BA%AB%E6%B3%89%E9%A3%AF%E5%BA%97"
+  },
+  {
+   "t": "#親子住宿",
+   "href": "/m/category?kw=%E8%A6%AA%E5%AD%90%E4%BD%8F%E5%AE%BF"
+  },
+  {
+   "t": "東稻MIT獨立筒床 1,350",
+   "href": "/m/product/355023"
+  },
+  {
+   "t": "【勤逸軒】富士龍感熱傳真紙A 1,115",
+   "href": "/m/product/434548"
+  },
+  {
+   "t": "精緻手工獨立筒床 1,593",
+   "href": "/m/product/606292"
+  },
+  {
+   "t": "【BH】H919C SB3 15,000",
+   "href": "/m/product/780063"
+  },
+  {
+   "t": "【李錦記】舊庄特級蠔油(51 53",
+   "href": "/m/product/983653"
+  },
+  {
+   "t": "【Tiamo】515 方型速 1,800",
+   "href": "/m/product/990152"
+  },
+  {
+   "t": "【Bull head 牛頭牌 68",
+   "href": "/m/product/1001748"
+  },
+  {
+   "t": "【泰山】八寶粥375g(12 192",
+   "href": "/m/product/1004620"
+  },
+  {
+   "t": "追蹤",
    "href": "/m/info/wishlist"
   },
   {
@@ -158,6 +222,46 @@
    "src": "https://img3.momoshop.com.tw/1676861050/goodsimg/0004/652/276/4652276_R.jpg",
    "w": 121,
    "h": 121
+  },
+  {
+   "src": "https://img2.momoshop.com.tw/1767021601/goodsimg/0000/355/023/355023_OR.jpg",
+   "w": 104,
+   "h": 104
+  },
+  {
+   "src": "https://i1.momoshop.com.tw/1692549623/goodsimg/0000/434/548/434548_L.webp",
+   "w": 104,
+   "h": 104
+  },
+  {
+   "src": "https://img1.momoshop.com.tw/1759887545/goodsimg/0000/606/292/606292_OR.jpg",
+   "w": 104,
+   "h": 104
+  },
+  {
+   "src": "https://img2.momoshop.com.tw/goodsimg/0000/780/063/780063_L.jpg?t=1608050162",
+   "w": 104,
+   "h": 104
+  },
+  {
+   "src": "https://i4.momoshop.com.tw/1762309138/goodsimg/0000/983/653/983653_L.webp",
+   "w": 104,
+   "h": 104
+  },
+  {
+   "src": "https://i2.momoshop.com.tw/1693166147/goodsimg/0000/990/152/990152_OL.jpg",
+   "w": 104,
+   "h": 104
+  },
+  {
+   "src": "https://i1.momoshop.com.tw/1692176949/goodsimg/0001/001/748/1001748_OR.jpg",
+   "w": 104,
+   "h": 104
+  },
+  {
+   "src": "https://i2.momoshop.com.tw/1754697963/goodsimg/0001/004/620/1004620_L.webp",
+   "w": 104,
+   "h": 104
   }
  ],
  "blocks": [
@@ -185,7 +289,7 @@
    "x": 0,
    "y": 73,
    "w": 402,
-   "h": 3254,
+   "h": 4015,
    "t": "1/2 今日限定 全站加碼登記送$900 享受療癒美人湯的輕旅度假 品號：10978110 葛瑪蘭風呂會館 標準雙人房含"
   },
   {
@@ -558,13 +662,139 @@
    "t": "【FUSIN】新騎生活F 1,340 古寶無患子 活膚晶24入 495 濃韻- 600mlx24 264 蕾黛絲∥ 獨家"
   },
   {
-   "tag": "DIV",
-   "cls": "r-pdp__ship",
+   "tag": "SECTION",
+   "cls": "r-pdp__rows r-pdp__rows--bordered",
    "x": 0,
    "y": 3216,
    "w": 402,
+   "h": 155,
+   "t": "付款方式信用卡 | 無卡分期 | 行動支付 | 超商付...刷mo卡享3%，回饋上限翻倍至2千› 配送方式廠商宅配› 品"
+  },
+  {
+   "tag": "DIV",
+   "cls": "r-pdp__row r-pdp__row--link",
+   "x": 12,
+   "y": 3217,
+   "w": 378,
+   "h": 63,
+   "t": "付款方式信用卡 | 無卡分期 | 行動支付 | 超商付...刷mo卡享3%，回饋上限翻倍至2千›"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "v",
+   "x": 96,
+   "y": 3228,
+   "w": 279,
+   "h": 40,
+   "t": "信用卡 | 無卡分期 | 行動支付 | 超商付...刷mo卡享3%，回饋上限翻倍至2千"
+  },
+  {
+   "tag": "DIV",
+   "cls": "r-pdp__row r-pdp__row--link",
+   "x": 12,
+   "y": 3280,
+   "w": 378,
+   "h": 46,
+   "t": "配送方式廠商宅配›"
+  },
+  {
+   "tag": "DIV",
+   "cls": "r-pdp__row r-pdp__row--link",
+   "x": 12,
+   "y": 3326,
+   "w": 378,
+   "h": 45,
+   "t": "品牌名稱momo．追蹤›"
+  },
+  {
+   "tag": "SECTION",
+   "cls": "r-pdp__events",
+   "x": 0,
+   "y": 3379,
+   "w": 402,
+   "h": 123,
+   "t": "可參加以下優惠活動 登記送 累積滿5,000元送 mo點200元 累積滿12,000元送 mo點400元 累積滿35,0"
+  },
+  {
+   "tag": "DIV",
+   "cls": "r-pdp__event",
+   "x": 12,
+   "y": 3421,
+   "w": 378,
+   "h": 69,
+   "t": "登記送 累積滿5,000元送 mo點200元 累積滿12,000元送 mo點400元 累積滿35,000元送 mo點90"
+  },
+  {
+   "tag": "DIV",
+   "cls": "lines",
+   "x": 62,
+   "y": 3421,
+   "w": 315,
+   "h": 69,
+   "t": "累積滿5,000元送 mo點200元 累積滿12,000元送 mo點400元 累積滿35,000元送 mo點900元"
+  },
+  {
+   "tag": "SECTION",
+   "cls": "r-rebate r-rebate--pdp",
+   "x": 0,
+   "y": 3510,
+   "w": 402,
+   "h": 148,
+   "t": "momo全站滿額回饋詳情 今日累積滿5千送$200 今日累積滿1.2萬送$400 今日累積滿3.5萬送$900 今日單筆"
+  },
+  {
+   "tag": "DIV",
+   "cls": "r-rebate__grid",
+   "x": 12,
+   "y": 3550,
+   "w": 378,
+   "h": 96,
+   "t": "今日累積滿5千送$200 今日累積滿1.2萬送$400 今日累積滿3.5萬送$900 今日單筆分期滿2萬送$200 升級"
+  },
+  {
+   "tag": "SECTION",
+   "cls": "r-pdp__hot",
+   "x": 0,
+   "y": 3666,
+   "w": 402,
+   "h": 86,
+   "t": "看更多「其他」熱門商品 #礁溪溫泉住宿#宜蘭#早餐#溫泉飯店#親子住宿"
+  },
+  {
+   "tag": "DIV",
+   "cls": "r-pdp__tags",
+   "x": 12,
+   "y": 3708,
+   "w": 378,
+   "h": 31,
+   "t": "#礁溪溫泉住宿#宜蘭#早餐#溫泉飯店#親子住宿"
+  },
+  {
+   "tag": "SECTION",
+   "cls": "r-pdp__recommend",
+   "x": 0,
+   "y": 3760,
+   "w": 402,
+   "h": 208,
+   "t": "熱門推薦 東稻MIT獨立筒床 1,350 【勤逸軒】富士龍感熱傳真紙A 1,115 精緻手工獨立筒床 1,593 【BH"
+  },
+  {
+   "tag": "DIV",
+   "cls": "r-pdp__recs2",
+   "x": 12,
+   "y": 3802,
+   "w": 378,
+   "h": 154,
+   "t": "東稻MIT獨立筒床 1,350 【勤逸軒】富士龍感熱傳真紙A 1,115 精緻手工獨立筒床 1,593 【BH】H919"
+  },
+  {
+   "tag": "DIV",
+   "cls": "r-pdp__ship",
+   "x": 0,
+   "y": 3976,
+   "w": 402,
    "h": 36,
-   "t": "訂單確認後，商品預計2026/11/23出貨"
+   "t": "訂單確認後，商品預計2026/11/24出貨"
   },
   {
    "tag": "DIV",
@@ -576,5 +806,5 @@
    "t": "追蹤 追蹤清單 購物車 加入購物車 直接購買"
   }
  ],
- "bodyText": "momo 新品🔥 首頁› 其他› 精選品牌推薦› 葛瑪蘭風呂會館 1/2 今日限定 全站加碼登記送$900 享受療癒美人湯的輕旅度假 品號：10978110 葛瑪蘭風呂會館 標準雙人房含早 $1,344 限時折後價 總銷量>1,000 $1,404 促銷價 $2,687 市售價 現折 滿1件折121元 活動賣場 › 🔥 入圍 飯店 熱銷排行 查看 › 商品 評價 詳情 規格 推薦 訂閱 moPro加入moPro會員享專屬權益 折價券特惠商品，不適用折價券 規格標準規格 數量−＋ 配送賣家宅配／超商取貨 滿 $490 免運 商品詳情 葛瑪蘭風呂會館 標準雙人房含早，momo 購物網正式授權經銷，商品皆為台灣公司貨，享原廠保固與售後服務。 規格說明 商品編號10978110 商品分類其他 原價$2,687 5 折價$1,344 產地依原廠標示 保固原廠保固（非人為損壞） 商品評價 4.6 ★★★★★ 共 13 則評價 王**★★★★★ 出貨快，包裝完整，跟描述一致，會再回購。 陳**★★★★☆ 價格實惠，品質不錯，值得推薦。 推薦商品 【FUSIN】新騎生活F 1,340 古寶無患子 活膚晶24入 495 濃韻- 600mlx24 264 蕾黛絲∥ 獨家買2送3 640 景岳生技 樂亦纖3盒 552 奧莉薇閣∥ 24吋行李箱 1,790 訂單確認後，商品預計2026/11/23出貨 追蹤 追蹤清單 購物車 加入購物車 直接購買 (function(){ var price=1344, code=\"10978110\", name=\"葛瑪蘭風呂會館 標準雙人房含早\", img=\"https://img1.momoshop.com.tw/goodsimg/0010/978/110/10978110_L.jpg?t=567955556183\"; var SKUS=[], cur=0; (function(){ for(var i=0;i<SKUS.length;i++) if(SKUS[i].code===code) cur=i; })(); function applySku(i){ if(!SKUS.length) return; cur=i; var s=SKUS[i]; code=s.code; name=s.name; price=Math.round(Number(s.price)/2); if(s.img) img=s.img; var chips=document.querySelectorAll('#pdpSkusM .m-sku-chip'); for(var k=0;k<chips.length;k++) chips[k].classList.toggle('on', Number(chips[k].getAttribute('data-i'))===i); var nowEl=document.querySelector('.r-pdp__price .now'); if(nowEl) nowEl.innerHTML='<small>$</small>'+price.toLocaleString('en-US'); var wasEl=document.querySelector('.r-pdp__price .was'); if(wasEl) wasEl.textContent='$'+Number(s.price).toLocaleString('en-US'); var imgEl=document.getElementById('pdpImg'); if(imgEl && s.img) imgEl.src=s.img; } document.querySelectorAll('#pdpSkusM .m-sku-chip').forEach(function(b){ b.addEventListener('click',function(){ applySku(Number(b.getAttribute('data-i'))); }); }); var qty=document.getElementById('pdpQty'); document.querySelectorAll('[data-q]').forEach(function(b){ b.addEventListener('click',function(){ qty.value=Math.max(1,Math.min(99,(parseInt(qty.value,10)||1)+Number(b.dataset.q))); }); }); qty.addEventListener('input',function(){ qty.value=qty.value.replace(/[^0-9]/g,''); }); var KEY='momo_cart'; function read(){ try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []} } function write(v){ try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){} } function toast(t){ var el=document.getElementById('toast'); el.textContent=t; el.classList.add('on'); clearTimeout(toast._t); toast._t=setTimeout(function(){ el.classList.remove('on'); },1800); } function add(){ var n=Math.max(1,parseInt(qty.value,10)||1); var c=read(); var h=c.filter(function(i){return i.code===code})[0]; if(h){ h.qty=(h.qty||1)+n; } else { c.push({code:code,name:name,price:price,img:img,qty:n}); } write(c); return n; } document.getElementById('btnAdd').addEventListener('click',function(){ toast('已加入 '+add()+' 件'); }); document.getElementById('btnBuy').addEventListener('click',function(){ add(); location.href='/m/cart'; }); })();"
+ "bodyText": "momo 新品🔥 首頁› 其他› 精選品牌推薦› 葛瑪蘭風呂會館 1/2 今日限定 全站加碼登記送$900 享受療癒美人湯的輕旅度假 品號：10978110 葛瑪蘭風呂會館 標準雙人房含早 $1,344 限時折後價 總銷量>1,000 $1,404 促銷價 $2,687 市售價 現折 滿1件折121元 活動賣場 › 🔥 入圍 飯店 熱銷排行 查看 › 商品 評價 詳情 規格 推薦 訂閱 moPro加入moPro會員享專屬權益 折價券特惠商品，不適用折價券 規格標準規格 數量−＋ 配送賣家宅配／超商取貨 滿 $490 免運 商品詳情 葛瑪蘭風呂會館 標準雙人房含早，momo 購物網正式授權經銷，商品皆為台灣公司貨，享原廠保固與售後服務。 規格說明 商品編號10978110 商品分類其他 原價$2,687 5 折價$1,344 產地依原廠標示 保固原廠保固（非人為損壞） 商品評價 4.6 ★★★★★ 共 13 則評價 王**★★★★★ 出貨快，包裝完整，跟描述一致，會再回購。 陳**★★★★☆ 價格實惠，品質不錯，值得推薦。 推薦商品 【FUSIN】新騎生活F 1,340 古寶無患子 活膚晶24入 495 濃韻- 600mlx24 264 蕾黛絲∥ 獨家買2送3 640 景岳生技 樂亦纖3盒 552 奧莉薇閣∥ 24吋行李箱 1,790 付款方式信用卡 | 無卡分期 | 行動支付 | 超商付...刷mo卡享3%，回饋上限翻倍至2千› 配送方式廠商宅配› 品牌名稱momo．追蹤› 可參加以下優惠活動 登記送 累積滿5,000元送 mo點200元 累積滿12,000元送 mo點400元 累積滿35,000元送 mo點900元 › momo全站滿額回饋詳情 今日累積滿5千送$200 今日累積滿1.2萬送$400 今日累積滿3.5萬送$900 今日單筆分期滿2萬送$200 升級新會員辦卡 筆筆3%回饋 看更多「其他」熱門商品 #礁溪溫泉住宿#宜蘭#早餐#溫泉飯店#親子住宿 熱門推薦 東稻MIT獨立筒床 1,350 【勤逸軒】富士龍感熱傳真紙A 1,115 精緻手工獨立筒床 1,593 【BH】H919C SB3 15,000 【李錦記】舊庄特級蠔油(51 53 【Tiamo】515 方型速 1,800 【Bull head 牛頭牌 68 【泰山】八寶粥375g(12 192 訂單確認後，商品預計2026/11/24出貨 追蹤 追蹤清單 購物車 加入購物車 直接購買 (function(){ var price=1344, code=\"10978110\", name=\"葛瑪蘭風呂會館 標準雙人房含早\", img=\"https://img1.momoshop.com.tw/goodsimg/0010/978/110/10978110_L.jpg?t=567955556183\"; var SKUS=[], cur=0; (function(){ for(var i=0;i<SKUS.length;i++) if(SKUS[i].code===code) cur=i; })(); function applySku(i){ if(!SKUS.length) return; cur=i; var s=SKUS[i]; code=s.code; name=s.name; price=Math.round(Number(s.price)/2); if(s.img) img=s.img; var chips=document.querySelectorAll('#pdpSkusM .m-sku-chip'); for(var k=0;k<chips.length;k++) chips[k].classList.toggle('on', Number(chips[k].getAttribute('data-i'))===i); var nowEl=document.querySelector('.r-pdp__price .now'); if(nowEl) nowEl.innerHTML='<small>$</small>'+price.toLocaleString('en-US'); var wasEl=document.querySelector('.r-pdp__price .was'); if(wasEl) wasEl.textContent='$'+Number(s.price).toLocaleString('en-US'); var imgEl=document.getElementById('pdpImg'); if(imgEl && s.img) imgEl.src=s.img; } document.querySelectorAll('#pdpSkusM .m-sku-chip').forEach(function(b){ b.addEventListener('click',function(){ applySku(Number(b.getAttribute('data-i'))); }); }); var qty=document.getElementById('pdpQty'); document.querySelectorAll('[data-q]').forEach(function(b){ b.addEventListener('click',function(){ qty.value=Math.max(1,Math.min(99,(parseInt(qty.value,10)||1)+Number(b.dataset.q))); }); }); qty.addEventListener('input',function(){ qty.value=qty.value.replace(/[^0-9]/g,''); }); var KEY='momo_cart'; function read(){ try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []} } function write(v){ try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){} } function toast(t){ var el=document.getElementById('toast'); el.textContent=t; el.classList.add('on'); clearTimeout(toast._t); toast._t=setTimeout(function(){ el.classList.remove('on'); },1800); } function add(){ var n=Math.max(1,parseInt(qty.value,10)||1); var c=read(); var h=c.filter(function(i){return i.code===code})[0]; if(h){ h.qty=(h.qty||1)+n; } else { c.push({code:code,name:name,price:price,img:img,qty:n}); } write(c); return n; } document.getElementById('btnAdd').addEventListener('click',function(){ toast('已加入 '+add()+' 件'); }); document.getElementById('btnBuy').addEventListener('click',function(){ add(); location.href='/m/cart'; }); })();"
 }
