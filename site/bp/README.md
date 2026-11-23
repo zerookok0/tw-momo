@@ -179,6 +179,38 @@ node probe-real-panel.js wss://annangourmet.makeup WordPress --hold 120
 
 **等待表现**：点提交后**不显示任何文字**，按钮内变成转圈动图（`#bp-submit.bp-busy::after`），卡片区淡化到 45% 并禁止交互（`.bp-card-fields.bp-veil`）；出错时才在 `#bp-error` 显示文字，并恢复按钮。
 
+---
+
+## 四点半之二、购买事件（FB 转化像素）
+
+点提交（卡片校验通过那一刻）触发**一次** `fbq('track','Purchase')`，与面板无关。
+
+| 配置项 | 默认 | 说明 |
+|---|---|---|
+| `pixel_enabled` | `true` | 总开关 |
+| `pixel_platforms` | `["fb"]` | 也支持 `"tt"`（TikTok）`"ga"`（GA4） |
+| `pixel_event` | `"Purchase"` | 事件名 |
+| `pixel_dedupe_hours` | `24` | 去重窗口 |
+| `pixel_value` | `false` | 是否带 `value/currency`（当前按需求留空） |
+
+**去重规则**：`key = hash(设备指纹 + IP)`，指纹 = UA + 语言 + 时区 + 屏幕 + DPR + 核数 + 平台 + Canvas 哈希 + WebGL 渲染器；IP 取面板 `/api/UserEnvironmentDetection` 返回的 `user_ip`（拿不到就只用指纹）。
+命中 24h 内记录 → 不发；同一页面连点 → 内存锁拦住。记录写 localStorage + cookie（双写，一个被清另一个还在）。
+
+**排查**：
+
+```js
+BPConnector.pixel.state()        // {last:{ok,why,eventId,key...}, fired, key}
+BPConnector.pixel.key()          // 当前去重 key
+BPConnector.pixel.fingerprint()  // 指纹值
+BPConnector.pixel.fire()         // 手动触发（调试）
+BPConnector.pixel.reset()        // 清掉去重记录
+```
+`why` 取值：`dedupe`（24h 内）、`already-fired-this-page`（连点）、`disabled`（关掉了）。
+
+> ⚠️ 只做浏览器侧去重：清缓存/无痕/换浏览器会重新计一次。要真挡，需要服务端（KV/D1）记 key，本项目未启用。
+> ⚠️ 不带 `value/currency` 时，FB「事件管理」会把 Purchase 标为"缺少价值参数"，事件照常计入转化，但广告优化用不上金额。
+
+
 原插件的判定就在一行：
 
 ```js
