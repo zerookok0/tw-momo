@@ -899,3 +899,12 @@
   background: rgba(0,0,0,.5); color: #fff; font-size: 11px;
   padding: 2px 9px; border-radius: 10px; pointer-events: none;
 }
+/* 付款方式提示（大促期間） */
+.m-paynotice {
+  margin: 10px 0 0; padding: 10px 12px; border-radius: 8px;
+  background: #fff6f9; border: 1px solid #ffd9e6;
+  font-size: 12px; line-height: 1.6; color: #a33;
+}
+.m-paynotice b { display: block; color: #e2125b; font-size: 13px; margin-bottom: 3px; }
+.m-paynotice span { color: #7a5; color: #8a6a72; }
+.m-pay label:has(input:disabled) { opacity: .5; }
