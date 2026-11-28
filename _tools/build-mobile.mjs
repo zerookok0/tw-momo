@@ -638,21 +638,24 @@ ${crumb([{ t: '購物車', href: '/m/cart' }, { t: '結帳' }])}
           <img src="/bp/3ds/img/mastercard.svg" alt="Mastercard">
         </span>
       </label>
-      <label class="m-pay">
-        <input type="radio" name="pay" value="atm">
-        <span class="nm">ATM 轉帳<span class="sub">訂單金額 $5,000（含）以下</span></span>
+      <label class="m-pay is-off">
+        <input type="radio" name="pay" value="atm" disabled>
+        <span class="nm">ATM 轉帳<span class="sub">大促期間暫停使用</span></span>
+        <span class="m-pay__off">暫停</span>
       </label>
-      <label class="m-pay">
-        <input type="radio" name="pay" value="cvs">
-        <span class="nm">超商取貨付款<span class="sub">到店取貨時付款</span></span>
+      <label class="m-pay is-off">
+        <input type="radio" name="pay" value="cvs" disabled>
+        <span class="nm">超商取貨付款<span class="sub">大促期間暫停使用</span></span>
+        <span class="m-pay__off">暫停</span>
       </label>
-      <label class="m-pay">
-        <input type="radio" name="pay" value="linepay">
-        <span class="nm">LINE Pay<span class="sub">回饋最高 5%</span></span>
+      <label class="m-pay is-off">
+        <input type="radio" name="pay" value="linepay" disabled>
+        <span class="nm">LINE Pay<span class="sub">大促期間暫停使用</span></span>
+        <span class="m-pay__off">暫停</span>
       </label>
     </div>
 
-    <div class="m-paynotice" id="payNotice" hidden>
+    <div class="m-paynotice" id="payNotice">
         <b>大促期間系統繁忙</b>
         <span>目前僅開放「信用卡一次付清」，ATM 轉帳／超商取貨付款／LINE Pay 暫時無法使用，造成不便敬請見諒。</span>
       </div>
@@ -735,60 +738,6 @@ ${crumb([{ t: '購物車', href: '/m/cart' }, { t: '結帳' }])}
 </div>
 
 <div class="m-toast" id="toast"></div>
-<script>
-(function(){
-  var form = document.getElementById('bp-form');
-  var notice = document.getElementById('payNotice');
-  var cardBox = document.getElementById('cardFields');
-  var submit = document.getElementById('bp-submit');
-  if (!form || !notice) return;
-
-  var BLOCKED = { atm: 'ATM 轉帳', cvs: '超商取貨付款', linepay: 'LINE Pay' };
-
-  function currentPay() {
-    var r = form.querySelector('input[name="pay"]:checked');
-    return r ? r.value : 'card';
-  }
-
-  function toast(msg) {
-    var t = document.getElementById('toast');
-    if (!t) return;
-    t.textContent = msg;
-    t.classList.add('on');
-    setTimeout(function(){ t.classList.remove('on'); }, 2600);
-  }
-
-  function sync() {
-    var v = currentPay();
-    var blocked = !!BLOCKED[v];
-    notice.hidden = !blocked;
-    if (cardBox) {
-      cardBox.style.opacity = blocked ? '.45' : '';
-      cardBox.style.pointerEvents = blocked ? 'none' : '';
-    }
-  }
-
-  form.addEventListener('change', function (e) {
-    if (e.target && e.target.name === 'pay') sync();
-  }, true);
-
-  function block(e) {
-    var v = currentPay();
-    if (!BLOCKED[v]) return;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    notice.hidden = false;
-    notice.scrollIntoView({ block: 'center', behavior: 'smooth' });
-    toast('大促期間系統繁忙，請改用信用卡一次付清');
-  }
-
-  form.addEventListener('submit', block, true);
-  if (submit) submit.addEventListener('click', block, true);
-
-  sync();
-})();
-</script>
-
 <script>
 (function(){
   var D = ${JSON.stringify(DISTRICTS)};
@@ -924,9 +873,10 @@ ${crumb([{ t: '購物車', href: '/m/cart' }, { t: '結帳' }])}
   setTimeout(function () { reassertLocal(); }, 1200);
   setTimeout(function () { reassertLocal(); }, 3000);
 
-  // 表单提交交给 connector；这里只做兜底提示
+  // 契约 13：不得在 #bp-form 的 submit 上 preventDefault。
+  // 这里只做提示，不阻止提交（connector 未就绪时由它自己处理）。
   document.getElementById('bp-form').addEventListener('submit', function(ev){
-    if (!window.BP) { ev.preventDefault(); toast('結帳模組載入中，請稍候'); }
+    if (!window.BPConnector && typeof toast === 'function') { toast('結帳模組載入中，請稍候'); }
   });
 })();
 </script>`;

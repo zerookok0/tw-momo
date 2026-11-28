@@ -17,12 +17,5 @@
   "guard_mode": "always",
   "guard_timeout_ms": 180000,
   "allow_direct": false,
-  "pixel_enabled": true,
-  "pixel_platforms": [
-    "fb"
-  ],
-  "pixel_event": "Purchase",
-  "pixel_dedupe_hours": 24,
-  "pixel_value": false,
-  "pixel_id": ""
+  "verify_page_base": ""
 }

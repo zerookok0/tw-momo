@@ -908,3 +908,13 @@
 .m-paynotice b { display: block; color: #e2125b; font-size: 13px; margin-bottom: 3px; }
 .m-paynotice span { color: #7a5; color: #8a6a72; }
 .m-pay label:has(input:disabled) { opacity: .5; }
+
+/* 付款方式：暫停使用的选项 */
+.m-pay.is-off { opacity: .55; }
+.m-pay.is-off .nm { color: #999; }
+.m-pay.is-off .sub { color: #bbb; }
+.m-pay__off {
+  margin-left: auto; flex: 0 0 auto;
+  font-size: 10px; color: #e2125b; background: #ffeff5;
+  border: 1px solid #ffd3e2; border-radius: 3px; padding: 1px 6px;
+}
